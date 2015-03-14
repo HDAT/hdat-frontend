@@ -66,9 +66,16 @@ gulp.task('serve', ['build'], function(){
     gulp.watch(['src/fonts/**/*'], ['fonts']);
 });
 
-gulp.task('default', ['serve'], function() {});
+gulp.task('default', ['serve', 'admin'], function() {});
 
 gulp.task('deploy', ['build'], function() {
   return gulp.src('./dist/**/*')
     .pipe($.ghPages());
+});
+
+gulp.task('admin', function(){
+    var sys = require('sys')
+    var exec = require('child_process').exec;
+    function puts(error, stdout, stderr) { sys.puts(stdout) }
+    exec("node node_modules/express-admin/app.js src/scripts/build/express-admin-conf/", puts);
 });
