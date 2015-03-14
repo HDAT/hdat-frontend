@@ -1,3 +1,6 @@
+// To run this script:
+// node src/scripts/build/mysql-test.js
+
 'use strict';
 
 var mysql      = require('mysql');
@@ -7,22 +10,14 @@ var connection = mysql.createConnection({
   user		: 'root',
   password	: 'secret'
 });
+var query = 'SELECT * FROM bgbProduct';
 
 connection.connect();
 
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+connection.query(query, function(err, rows, fields) {
   if (err) throw err;
 
-  console.log('The solution is: ', rows[0].solution);
+  console.log('Some product is: ', rows[0].naam);
 });
 
 connection.end();
-
-
-// brew install mysql
-// mysql.server start
-// mysql -u 'root' -p < src/data/dump_bgb.sql (password is defaulted to nothing)
-// node src/scripts/build/mysql-test.js (to run this script)
-
-// Simple first query
-// SELECT carId FROM bgbCargo

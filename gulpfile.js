@@ -3,6 +3,24 @@ var $ = require('gulp-load-plugins')();
 var del = require('del');
 var runSync = require('run-sequence');
 
+// execute bash tasks
+var sys = require('sys')
+var exec = require('child_process').exec;
+function puts(error, stdout, stderr) { sys.puts(stdout) }
+
+// MySQL tasks
+gulp.task('admin', function(){
+    exec("mysql.server start", puts);
+    console.log('express-admin server running on port: 7070');
+    console.log('express-admin server running on port: 7070');
+    console.log('express-admin server running on port: 7070');
+    console.log('username: admin, password: HDat13');
+    console.log('username: admin, password: HDat13');
+    console.log('username: admin, password: HDat13');
+    exec("node node_modules/express-admin/app.js src/scripts/build/express-admin-conf/", puts);
+});
+
+// Normal tasks
 gulp.task('clean', function(cb) {
     return del('dist', cb);
 });
@@ -16,6 +34,7 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('vendor', function () {
+    exec("bower install", puts);
     return gulp.src([
                 'bower_components/leaflet/dist/leaflet.js'
             ])
@@ -73,9 +92,4 @@ gulp.task('deploy', ['build'], function() {
     .pipe($.ghPages());
 });
 
-gulp.task('admin', function(){
-    var sys = require('sys')
-    var exec = require('child_process').exec;
-    function puts(error, stdout, stderr) { sys.puts(stdout) }
-    exec("node node_modules/express-admin/app.js src/scripts/build/express-admin-conf/", puts);
-});
+
