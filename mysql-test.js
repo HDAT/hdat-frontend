@@ -23,3 +23,6 @@ connection.end();
 // mysql.server start
 // mysql -u 'root' -p < src/data/dump_bgb.sql (password is defaulted to nothing)
 // node src/scripts/build/mysql-test.js (to run this script)
+
+
+// SELECT carId FROM bgbCargo

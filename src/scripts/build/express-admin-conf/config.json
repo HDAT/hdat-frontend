@@ -1,0 +1,15 @@
+{
+    "mysql": {
+        "database": "bgb",
+        "user": "root",
+        "password": "secret"
+    },
+    "server": {
+        "port": 7070
+    },
+    "app": {
+        "layouts": true,
+        "themes": true,
+        "languages": true
+    }
+}
