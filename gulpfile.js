@@ -8,7 +8,7 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('scripts', function () {
-    return gulp.src(['src/scripts/**/*.js', '!src/scripts/vendor/**/*'])
+    return gulp.src(['src/scripts/client/**/*.js'])
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'))
         .pipe(gulp.dest('dist/scripts'))
@@ -61,7 +61,7 @@ gulp.task('serve', ['build'], function(){
 
     gulp.watch(['src/**/*.html'], ['html']);
     gulp.watch(['src/styles/**/*.{scss,css}'], ['styles']);
-    gulp.watch(['src/scripts/**/*.js'], ['scripts']);
+    gulp.watch(['src/scripts/client/**/*.js'], ['scripts']);
     gulp.watch(['src/images/**/*', '!src/images/tiles/**/*'], ['images']);
     gulp.watch(['src/fonts/**/*'], ['fonts']);
 });
