@@ -20,4 +20,4 @@ connection.end();
 
 // brew install mysql
 // mysql.server start
-// mysql -u 'root' -p < src/data/dump_bgb.sql
+// mysql -u 'root' -p < src/data/dump_bgb.sql (password is defaulted to nothing)
