@@ -3,6 +3,7 @@
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     	: 'localhost',
+  database	: 'bgb',
   user		: 'root',
   password	: ''
 });
@@ -21,3 +22,4 @@ connection.end();
 // brew install mysql
 // mysql.server start
 // mysql -u 'root' -p < src/data/dump_bgb.sql (password is defaulted to nothing)
+// node src/scripts/build/mysql-test.js (to run this script)
