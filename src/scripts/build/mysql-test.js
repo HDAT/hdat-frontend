@@ -16,6 +16,5 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 connection.end();
 
 
-
 // brew install mysql
 // mysql.server start
