@@ -14,12 +14,15 @@ pg.connect(conString, function(err, client, done) {
   client.query(query, function(err, result) {
     //call `done()` to release the client back to the pool
     done();
-
     if(err) {
       return console.error('error running query', err);
     }
-    console.log(result);
-    //output: 1
+
+    // Logging out results
+    result.rows.forEach(function(value, index, array){
+    	console.log(value.naam);
+    });
+
     client.end();
   });
 });
