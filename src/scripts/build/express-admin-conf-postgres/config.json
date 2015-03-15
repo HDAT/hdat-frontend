@@ -1,8 +1,8 @@
 {
     "pg": {
         "database": "bgb",
-        "user": "Robert-Jan",
-        "password": "postgres"
+        "user": "root",
+        "password": "secret"
     },
     "server": {
         "port": 6060
