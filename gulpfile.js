@@ -28,8 +28,8 @@ gulp.task('vendor', function () {
                 'bower_components/underscore/underscore.js',
                 'bower_components/jquery/dist/jquery.min.js',
                 'bower_components/jquery-ui/jquery-ui.min.js',
-                'src/scripts/client/vendor/torque.js',
-                'src/scripts/client/vendor/carto.js'
+                'src/scripts/client/vendor/carto.js',
+                'src/scripts/client/vendor/torque.js'
             ])
         .pipe($.concat('vendor.js'))
         .pipe(gulp.dest('dist/scripts/'))
