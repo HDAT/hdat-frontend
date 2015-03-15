@@ -24,6 +24,10 @@ var CARTOCSS = [
     '  [frame-offset = 2] { marker-width: 1; marker-fill-opacity: 0.05;}',
     '}'
 ].join('\n');
+
+var southWest = L.latLng(-70, 179),
+    northEast = L.latLng(70, -179),
+    bounds = L.latLngBounds(southWest, northEast);
   
 var map = new L.Map('map', {
   zoomControl: true,
@@ -32,6 +36,7 @@ var map = new L.Map('map', {
   maxZoom: 6,
   zoom: 3,
   noWrap: false,
+  maxBounds: bounds,
   attributionControl: false,
 });
 L.tileLayer('images/tiles/{z}/{x}/{y}.png', {
