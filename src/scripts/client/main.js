@@ -45,7 +45,7 @@ L.tileLayer('images/tiles/{z}/{x}/{y}.png', {
 var torqueLayer = new L.TorqueLayer({
       provider: 'sql_api',
       user       : 'ervazu',
-      table      : 'testdata',
+      table      : 'allvoyages',
       column     : 'date',
       countby    : 'count(cartodb_id)',
       loop       : true,
