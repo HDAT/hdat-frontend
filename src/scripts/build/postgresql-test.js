@@ -4,7 +4,7 @@
 'use strict';
 
 var pg = require('pg');
-var conString = "postgres://Robert-Jan:postgres@localhost/bgb";
+var conString = "postgres://root:secret@localhost/bgb";
 var query = 'SELECT * FROM "bgbProduct"';
 
 pg.connect(conString, function(err, client, done) {
