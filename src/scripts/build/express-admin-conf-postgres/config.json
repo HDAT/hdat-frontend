@@ -1,0 +1,15 @@
+{
+    "pg": {
+        "database": "bgb",
+        "user": "Robert-Jan",
+        "password": "postgres"
+    },
+    "server": {
+        "port": 6060
+    },
+    "app": {
+        "layouts": true,
+        "themes": true,
+        "languages": true
+    }
+}

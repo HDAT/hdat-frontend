@@ -9,13 +9,10 @@ var exec = require('child_process').exec;
 function puts(error, stdout, stderr) { sys.puts(stdout) }
 
 // MySQL tasks
-gulp.task('admin', function(){
+
+gulp.task('myAdmin', function(){
     exec("mysql.server start", puts);
     console.log('express-admin server running on port: 7070');
-    console.log('express-admin server running on port: 7070');
-    console.log('express-admin server running on port: 7070');
-    console.log('username: admin, password: HDat13');
-    console.log('username: admin, password: HDat13');
     console.log('username: admin, password: HDat13');
     exec("node node_modules/express-admin/app.js src/scripts/build/express-admin-conf/", puts);
 });
@@ -73,11 +70,27 @@ gulp.task('build', ['clean'], function(cb){
 });
 
 gulp.task('serve', ['build'], function(){
+    // Start live-reload server
     $.connect.server({
         root: 'dist',
         livereload: true
     });
 
+    // Start mysql Server
+    exec("mysql.server start", puts);
+    console.log('MySQL-server started');
+    exec("node node_modules/express-admin/app.js src/scripts/build/express-admin-conf/", puts);
+    console.log('express-admin server running on port: 7070');
+    console.log('username: admin, password: HDat13');
+
+    // Start postgres Server
+    exec("postgres -D /usr/local/var/postgres", puts);
+    console.log('Postgres-server started');
+    exec("node node_modules/express-admin/app.js src/scripts/build/express-admin-conf-postgres/", puts);
+    console.log('express-admin server running on port: 6060');
+    console.log('username: admin, password: HDat13');
+
+    // Watches
     gulp.watch(['src/**/*.html'], ['html']);
     gulp.watch(['src/styles/**/*.{scss,css}'], ['styles']);
     gulp.watch(['src/scripts/client/**/*.js'], ['scripts']);
@@ -85,7 +98,7 @@ gulp.task('serve', ['build'], function(){
     gulp.watch(['src/fonts/**/*'], ['fonts']);
 });
 
-gulp.task('default', ['serve', 'admin'], function() {});
+gulp.task('default', ['serve'], function() {});
 
 gulp.task('deploy', ['build'], function() {
   return gulp.src('./dist/**/*')
