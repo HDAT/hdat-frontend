@@ -2302,5 +2302,813 @@
         "editview": {
             "readonly": false
         }
+    },
+    "geography_columns": {
+        "slug": "geography_columns",
+        "table": {
+            "name": "geography_columns",
+            "pk": "",
+            "verbose": "geography_columns",
+            "view": true
+        },
+        "columns": [
+            {
+                "name": "f_table_catalog",
+                "verbose": "f_table_catalog",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "f_table_schema",
+                "verbose": "f_table_schema",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "f_table_name",
+                "verbose": "f_table_name",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "f_geography_column",
+                "verbose": "f_geography_column",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "coord_dimension",
+                "verbose": "coord_dimension",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "srid",
+                "verbose": "srid",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "type",
+                "verbose": "type",
+                "control": {
+                    "text": true
+                },
+                "type": "text",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            }
+        ],
+        "mainview": {
+            "show": true
+        },
+        "listview": {
+            "order": {},
+            "page": 25
+        },
+        "editview": {
+            "readonly": false
+        }
+    },
+    "geometry_columns": {
+        "slug": "geometry_columns",
+        "table": {
+            "name": "geometry_columns",
+            "pk": "",
+            "verbose": "geometry_columns",
+            "view": true
+        },
+        "columns": [
+            {
+                "name": "f_table_catalog",
+                "verbose": "f_table_catalog",
+                "control": {
+                    "text": true
+                },
+                "type": "varchar(256)",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "f_table_schema",
+                "verbose": "f_table_schema",
+                "control": {
+                    "text": true
+                },
+                "type": "varchar(256)",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "f_table_name",
+                "verbose": "f_table_name",
+                "control": {
+                    "text": true
+                },
+                "type": "varchar(256)",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "f_geometry_column",
+                "verbose": "f_geometry_column",
+                "control": {
+                    "text": true
+                },
+                "type": "varchar(256)",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "coord_dimension",
+                "verbose": "coord_dimension",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "srid",
+                "verbose": "srid",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "type",
+                "verbose": "type",
+                "control": {
+                    "text": true
+                },
+                "type": "varchar(30)",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            }
+        ],
+        "mainview": {
+            "show": true
+        },
+        "listview": {
+            "order": {},
+            "page": 25
+        },
+        "editview": {
+            "readonly": false
+        }
+    },
+    "spatial_ref_sys": {
+        "slug": "spatial_ref_sys",
+        "table": {
+            "name": "spatial_ref_sys",
+            "pk": "srid",
+            "verbose": "spatial_ref_sys"
+        },
+        "columns": [
+            {
+                "name": "srid",
+                "verbose": "srid",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": false,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "auth_name",
+                "verbose": "auth_name",
+                "control": {
+                    "text": true
+                },
+                "type": "varchar(256)",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "auth_srid",
+                "verbose": "auth_srid",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "srtext",
+                "verbose": "srtext",
+                "control": {
+                    "text": true
+                },
+                "type": "varchar(2048)",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "proj4text",
+                "verbose": "proj4text",
+                "control": {
+                    "text": true
+                },
+                "type": "varchar(2048)",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            }
+        ],
+        "mainview": {
+            "show": true
+        },
+        "listview": {
+            "order": {},
+            "page": 25
+        },
+        "editview": {
+            "readonly": false
+        }
+    },
+    "raster_columns": {
+        "slug": "raster_columns",
+        "table": {
+            "name": "raster_columns",
+            "pk": "",
+            "verbose": "raster_columns",
+            "view": true
+        },
+        "columns": [
+            {
+                "name": "r_table_catalog",
+                "verbose": "r_table_catalog",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "r_table_schema",
+                "verbose": "r_table_schema",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "r_table_name",
+                "verbose": "r_table_name",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "r_raster_column",
+                "verbose": "r_raster_column",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "srid",
+                "verbose": "srid",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "scale_x",
+                "verbose": "scale_x",
+                "control": {
+                    "text": true
+                },
+                "type": "double",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "scale_y",
+                "verbose": "scale_y",
+                "control": {
+                    "text": true
+                },
+                "type": "double",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "blocksize_x",
+                "verbose": "blocksize_x",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "blocksize_y",
+                "verbose": "blocksize_y",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "same_alignment",
+                "verbose": "same_alignment",
+                "control": {
+                    "text": true
+                },
+                "type": "char",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "regular_blocking",
+                "verbose": "regular_blocking",
+                "control": {
+                    "text": true
+                },
+                "type": "char",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "num_bands",
+                "verbose": "num_bands",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "pixel_types",
+                "verbose": "pixel_types",
+                "control": {
+                    "text": true
+                },
+                "type": "ARRAY",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "nodata_values",
+                "verbose": "nodata_values",
+                "control": {
+                    "text": true
+                },
+                "type": "ARRAY",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "out_db",
+                "verbose": "out_db",
+                "control": {
+                    "text": true
+                },
+                "type": "ARRAY",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "extent",
+                "verbose": "extent",
+                "control": {
+                    "text": true
+                },
+                "type": "USER-DEFINED",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            }
+        ],
+        "mainview": {
+            "show": true
+        },
+        "listview": {
+            "order": {},
+            "page": 25
+        },
+        "editview": {
+            "readonly": false
+        }
+    },
+    "raster_overviews": {
+        "slug": "raster_overviews",
+        "table": {
+            "name": "raster_overviews",
+            "pk": "",
+            "verbose": "raster_overviews",
+            "view": true
+        },
+        "columns": [
+            {
+                "name": "o_table_catalog",
+                "verbose": "o_table_catalog",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "o_table_schema",
+                "verbose": "o_table_schema",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "o_table_name",
+                "verbose": "o_table_name",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "o_raster_column",
+                "verbose": "o_raster_column",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "r_table_catalog",
+                "verbose": "r_table_catalog",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "r_table_schema",
+                "verbose": "r_table_schema",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "r_table_name",
+                "verbose": "r_table_name",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "r_raster_column",
+                "verbose": "r_raster_column",
+                "control": {
+                    "text": true
+                },
+                "type": "name",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            },
+            {
+                "name": "overview_factor",
+                "verbose": "overview_factor",
+                "control": {
+                    "text": true
+                },
+                "type": "integer",
+                "allowNull": true,
+                "defaultValue": null,
+                "listview": {
+                    "show": true
+                },
+                "editview": {
+                    "show": true
+                }
+            }
+        ],
+        "mainview": {
+            "show": true
+        },
+        "listview": {
+            "order": {},
+            "page": 25
+        },
+        "editview": {
+            "readonly": false
+        }
     }
 }
