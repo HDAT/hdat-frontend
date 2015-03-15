@@ -6,7 +6,7 @@ var CARTOCSS = [
     '-torque-time-attribute: "date";',
     '-torque-aggregation-function: "count(cartodb_id)";',
     '-torque-frame-count: 8000;',
-    '-torque-animation-duration: 700;',
+    '-torque-animation-duration: 1800;',
     '-torque-resolution: 2',
     '}',
     '#layer {',
