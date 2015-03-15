@@ -8,15 +8,6 @@ var sys = require('sys')
 var exec = require('child_process').exec;
 function puts(error, stdout, stderr) { sys.puts(stdout) }
 
-// MySQL tasks
-
-gulp.task('myAdmin', function(){
-    exec("mysql.server start", puts);
-    console.log('express-admin server running on port: 7070');
-    console.log('username: admin, password: HDat13');
-    exec("node node_modules/express-admin/app.js src/scripts/build/express-admin-conf/", puts);
-});
-
 // Normal tasks
 gulp.task('clean', function(cb) {
     return del('dist', cb);
@@ -104,5 +95,6 @@ gulp.task('deploy', ['build'], function() {
   return gulp.src('./dist/**/*')
     .pipe($.ghPages());
 });
+
 
 
