@@ -56,29 +56,30 @@ torqueLayer.play();
 
 /* Test*/
 
-  init_slider(torqueLayer);
-    if(ui_enabled) {
-      init_ui(map, torqueLayer);
-    } else {
-      var textarea = document.getElementById('code')
-      textarea.parentNode.removeChild(textarea);
-    }
-    /* Dit werkt volgens mij nog niet */
-    torqueLayer.on('change:bounds', function(changes) {
-        var bounds = changes.bounds;
-        var b = new L.Map.LatLngBounds(
-          new L.Map.LatLng(
-              bounds[0][0],
-              bounds[0][1]
-          ),
-          new L.Map.LatLng(
-            bounds[1][0],
-            bounds[1][1]
-          )
-        )
-        map.fitBounds(b);
-    });
-    torqueLayer.play();
+init_slider(torqueLayer);
+
+if(ui_enabled) {
+  init_ui(map, torqueLayer);
+} else {
+  var textarea = document.getElementById('code')
+  textarea.parentNode.removeChild(textarea);
+}
+  /* Dit werkt volgens mij nog niet */
+torqueLayer.on('change:bounds', function(changes) {
+  var bounds = changes.bounds;
+  var b = new L.Map.LatLngBounds(
+    new L.Map.LatLng(
+        bounds[0][0],
+        bounds[0][1]
+    ),
+    new L.Map.LatLng(
+      bounds[1][0],
+      bounds[1][1]
+    )
+  )
+  map.fitBounds(b);
+});
+torqueLayer.play();
   
  /**
  * inits slider and a small play/pause button
