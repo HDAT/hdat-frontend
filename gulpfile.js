@@ -14,7 +14,7 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('scripts', function () {
-    return gulp.src(['src/scripts/client/**/*.js'])
+    return gulp.src(['src/scripts/client/**/*.js', '!src/scripts/client/vendor/**/*'])
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'))
         .pipe(gulp.dest('dist/scripts'))
@@ -27,7 +27,9 @@ gulp.task('vendor', function () {
                 'bower_components/leaflet/dist/leaflet.js',
                 'bower_components/underscore/underscore.js',
                 'bower_components/jquery/dist/jquery.min.js',
-                'bower_components/jquery-ui/jquery-ui.min.js'
+                'bower_components/jquery-ui/jquery-ui.min.js',
+                'src/scripts/client/vendor/torque.js',
+                'src/scripts/client/vendor/carto.js'
             ])
         .pipe($.concat('vendor.js'))
         .pipe(gulp.dest('dist/scripts/'))
