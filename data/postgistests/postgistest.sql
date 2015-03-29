@@ -25,7 +25,7 @@ UPDATE testlines SET ArrCood = ST_SetSRID(ST_MakePoint(LonArr, LatArr),4326);
 ALTER TABLE testlines ADD COLUMN lineline geometry(GEOMETRY,4326);
 UPDATE testlines SET lineline = ST_SetSRID(ST_MakeLine(DepCood,ArrCood),4326);
 
-
+-- Lengte van een lijn
 -- SELECT ST_Length(
 --    ST_Transform(
 --       ST_GeomFromEWKT(lineline),
@@ -34,5 +34,9 @@ UPDATE testlines SET lineline = ST_SetSRID(ST_MakeLine(DepCood,ArrCood),4326);
 -- )
 -- FROM testlines;
 
+-- Pak punt uit lijn
+-- SELECT ST_AsEWKT(ST_Line_Interpolate_Point(lineline, 0.20))
+--    FROM testlines As linelinetwnet;
 
--- http://gis.stackexchange.com/questions/33503/why-does-st-transform-fail
+-- http://postgis.net/docs/manual-1.5/ST_Line_Interpolate_Point.html
+
