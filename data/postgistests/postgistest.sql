@@ -34,6 +34,10 @@ UPDATE testlines SET lineline = ST_SetSRID(ST_MakeLine(DepCood,ArrCood),4326);
 -- )
 -- FROM testlines;
 
+--12187201 m / 1000 = km
+--12187km 10km/h 1218.7 uur
+-- date + 1218.7 = einddate
+
 -- Pak punt uit lijn
 -- SELECT ST_AsEWKT(ST_Line_Interpolate_Point(lineline, 0.20))
 --    FROM testlines As linelinetwnet;
