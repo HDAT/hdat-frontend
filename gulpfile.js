@@ -73,20 +73,6 @@ gulp.task('serve', ['build'], function(){
         livereload: true
     });
 
-    // Start mysql Server
-    exec("mysql.server start", puts);
-    console.log('MySQL-server started');
-    exec("node node_modules/express-admin/app.js src/scripts/build/express-admin-conf/", puts);
-    console.log('express-admin server running on port: 7070');
-    console.log('username: admin, password: HDat13');
-
-    // Start postgres Server
-    exec("postgres -D /usr/local/var/postgres", puts);
-    console.log('Postgres-server started');
-    exec("node node_modules/express-admin/app.js src/scripts/build/express-admin-conf-postgres/", puts);
-    console.log('express-admin server running on port: 6060');
-    console.log('username: admin, password: HDat13');
-
     // Watches
     gulp.watch(['src/**/*.html'], ['html']);
     gulp.watch(['src/styles/**/*.{scss,css}'], ['styles']);
