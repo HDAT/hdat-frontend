@@ -2,47 +2,44 @@
 
 -- Load id geodata.csv
 
-DROP TABLE IF EXISTS "cliwocPlaces";
-CREATE TABLE "cliwocPlaces" (
-  id integer PRIMARY KEY,
+DROP TABLE IF EXISTS "cliwocPlacesAtlas";
+CREATE TABLE "cliwocPlacesAtlas" (
   place varchar(255),
-  decLatitude float,
-  decLongitude float,
-  modernName varchar(255),
-  dutch varchar(255)
+  coordinated varchar(255)
 );
 
-COPY "cliwocPlaces" FROM '/Users/Robert-Jan/Desktop/HDAT/src/data/geodata.csv' DELIMITER ';' CSV;
+COPY "cliwocPlacesAtlas" FROM '/Users/Robert-Jan/Desktop/HDAT/src/data/geodataAtlas.html' DELIMITER ',' CSV;
 
 -- Patternmatch a single place
 
 -- Create testing table - to be removed soon
 
-DROP TABLE IF EXISTS "testTable";
-CREATE TABLE "testTable" (
-  place varchar(255),
-  "placeBGB" varchar(255)
-);
+-- DROP TABLE IF EXISTS "testTable";
+-- CREATE TABLE "testTable" (
+--   place varchar(255),
+--   "placeBGB" varchar(255)
+-- );
 
--- Patternmatch
-
--- INSERT INTO "testTable" (id, place)
--- SELECT
--- 	id,
--- 	place LIKE 'Muscat'
--- FROM "cliwocPlaces";
-
-
--- WHEN "place" IS "Muscat"
-
+DROP TABLE IF EXISTS "bgbPlaceGeo";
+CREATE TABLE "bgbPlaceGeo" AS
+  TABLE "bgbPlace";
+ALTER TABLE "bgbPlaceGeo" ADD COLUMN "coordinate" varchar;
 
 -- INNER JOIN approach
 
-INSERT INTO "testTable" (place, "placeBGB")
-SELECT 
-	place,
-	naam
-FROM "cliwocPlaces", "bgbPlace"
-WHERE place = naam;
+-- INSERT INTO "testTable" (place, "placeBGB")
+-- SELECT 
+-- 	place,
+-- 	naam
+-- FROM "cliwocPlacesAtlas", "bgbPlace"
+-- WHERE naam = place;
+
+UPDATE "bgbPlaceGeo"
+SET coordinate = coordinated
+FROM "cliwocPlacesAtlas"
+WHERE naam = place;
 
 
+
+-- FROM "cliwocPlacesAtlas", "bgbPlace"
+-- WHERE naam = place;

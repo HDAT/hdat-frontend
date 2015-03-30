@@ -20,3 +20,5 @@ SELECT
 	CASE WHEN "voyDepartureYear" IS NOT NULL THEN to_timestamp(CONCAT_WS(' ', "voyDepartureDay", "voyDepartureMonth", "voyDepartureYear"),  'DD MM YYYY')
 	END
 FROM "bgbVoyage";
+
+
