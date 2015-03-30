@@ -9,6 +9,7 @@ CREATE TABLE "allVoyagePoints" (
 	"voyArrivalPlaceCoord" geometry(POINT,4326),
 	"voyDeparturePlaceCoord" geometry(POINT,4326),
 	"route" geometry(GEOMETRY,4326),
+	"interpolatedPoint" geometry(GEOMETRY,4326),
 	"voyArrTimeStamp" timeStamp,
 	"voyDepTimeStamp" timeStamp,
 	"readableVoyDeparturePlaceCoord" varchar(255),
@@ -49,7 +50,7 @@ SET "route" = ST_SetSRID(ST_MakeLine("voyDeparturePlaceCoord", "voyArrivalPlaceC
 -- Updating line to interpolated point
 
 UPDATE "allVoyagePoints"
-SET "route" = ST_SetSRID(ST_Line_Interpolate_Point("route", '0.5'), 4326);
+SET "interpolatedPoint" = ST_SetSRID(ST_Line_Interpolate_Point("route", '0.5'), 4326);
 
 -- Making readable
 
@@ -60,5 +61,5 @@ UPDATE "allVoyagePoints"
 SET "readableVoyDeparturePlaceCoord" = ST_asText("voyDeparturePlaceCoord");
 
 UPDATE "allVoyagePoints"
-SET "readableVoyInterpolatedPlaceCoord" = ST_asText("route");
+SET "readableVoyInterpolatedPlaceCoord" = ST_asText("interpolatedPoint");
 
