@@ -10,14 +10,15 @@ var connection = mysql.createConnection({
   user		: 'root',
   password	: 'secret'
 });
-var query = 'SELECT * FROM bgbProduct';
+
+var query = 'SELECT * FROM tempCargoSumYear';
 
 connection.connect();
 
 connection.query(query, function(err, rows, fields) {
   if (err) throw err;
 
-  console.log('Some product is: ', rows[0].naam);
+  console.log('Some product is: ', rows);
 });
 
 connection.end();
