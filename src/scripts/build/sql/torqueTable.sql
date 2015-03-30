@@ -6,8 +6,9 @@ CREATE TABLE "allVoyagePoints" (
 	"voyId" integer,
 	"voyArrivalPlaceId" integer,
 	"voyDeparturePlaceId" integer,
-	"voyArrivalPlaceCoord" float,
-	"voyDeparturePlaceCoord" float,
+	"voyArrivalPlaceCoord" geometry(POINT,4326),
+	"voyDeparturePlaceCoord" geometry(POINT,4326),
+	"route" geometry(GEOMETRY,4326),
 	"voyArrTimeStamp" timeStamp,
 	"voyDepTimeStamp" timeStamp
 );
@@ -28,11 +29,22 @@ FROM "bgbVoyage";
 -- Converting places to points
 
 UPDATE "allVoyagePoints"
-SET "voyDeparturePlaceCoord" = '1';
--- FROM "bgbPlaceGeo" geo
--- WHERE "voyDeparturePlaceId" = geo.id; 
+SET "voyDeparturePlaceCoord" = ST_SetSRID(ST_MakePoint(geo.lat, geo.lng),4326)
+FROM "bgbPlaceGeo" geo
+WHERE "voyDeparturePlaceId" = geo.id; 
 
+UPDATE "allVoyagePoints"
+SET "voyArrivalPlaceCoord" = ST_SetSRID(ST_MakePoint(geo.lat, geo.lng),4326)
+FROM "bgbPlaceGeo" geo
+WHERE "voyArrivalPlaceId" = geo.id;
 
+-- Coverting coordinate to line
 
+UPDATE "allVoyagePoints"
+SET "route" = ST_SetSRID(ST_MakeLine("voyDeparturePlaceCoord", "voyArrivalPlaceCoord"),4326);
 
--- ST_SetSRID(ST_MakeLine(ST_MakePoint(geo.lat, geo.lng), ST_MakePoint(geo.lat, geo.lng)),4326)
+-- Updating line to interpolated point
+
+-- UPDATE "allVoyagePoints"
+-- SET "route" = ST_SetSRID(ST_Line_Interpolate_Point,4326);
+
