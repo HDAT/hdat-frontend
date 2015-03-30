@@ -10,36 +10,16 @@ CREATE TABLE "cliwocPlacesAtlas" (
 
 COPY "cliwocPlacesAtlas" FROM '/Users/Robert-Jan/Desktop/HDAT/src/data/geodataAtlas.html' DELIMITER ',' CSV;
 
--- Patternmatch a single place
-
--- Create testing table - to be removed soon
-
--- DROP TABLE IF EXISTS "testTable";
--- CREATE TABLE "testTable" (
---   place varchar(255),
---   "placeBGB" varchar(255)
--- );
+-- Create table bgbPlaceGEO
 
 DROP TABLE IF EXISTS "bgbPlaceGeo";
 CREATE TABLE "bgbPlaceGeo" AS
   TABLE "bgbPlace";
 ALTER TABLE "bgbPlaceGeo" ADD COLUMN "coordinate" varchar;
 
--- INNER JOIN approach
-
--- INSERT INTO "testTable" (place, "placeBGB")
--- SELECT 
--- 	place,
--- 	naam
--- FROM "cliwocPlacesAtlas", "bgbPlace"
--- WHERE naam = place;
+-- Patternmatch places
 
 UPDATE "bgbPlaceGeo"
 SET coordinate = coordinated
 FROM "cliwocPlacesAtlas"
 WHERE naam = place;
-
-
-
--- FROM "cliwocPlacesAtlas", "bgbPlace"
--- WHERE naam = place;
