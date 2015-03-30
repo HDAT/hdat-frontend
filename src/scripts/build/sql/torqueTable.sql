@@ -11,7 +11,9 @@ CREATE TABLE "allVoyagePoints" (
 	"route" geometry(GEOMETRY,4326),
 	"voyArrTimeStamp" timeStamp,
 	"voyDepTimeStamp" timeStamp,
-	"geom" varchar(255)
+	"readableVoyDeparturePlaceCoord" varchar(255),
+	"readableVoyArrivalPlaceCoord" varchar(255),
+	"readableVoyInterpolatedPlaceCoord" varchar(255)
 );
 
 -- Selecting the required data
@@ -52,5 +54,11 @@ SET "route" = ST_SetSRID(ST_Line_Interpolate_Point("route", '0.5'), 4326);
 -- Making readable
 
 UPDATE "allVoyagePoints"
-SET "geom" = ST_asText("route");
+SET "readableVoyArrivalPlaceCoord" = ST_asText("voyArrivalPlaceCoord");
+
+UPDATE "allVoyagePoints"
+SET "readableVoyDeparturePlaceCoord" = ST_asText("voyDeparturePlaceCoord");
+
+UPDATE "allVoyagePoints"
+SET "readableVoyInterpolatedPlaceCoord" = ST_asText("route");
 
