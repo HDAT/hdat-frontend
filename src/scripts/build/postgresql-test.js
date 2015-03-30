@@ -24,7 +24,7 @@ pg.connect(conString, function(err, client, done) {
 
 
 
-
+  for
 
 
   client.query(query, function(err, result) {
