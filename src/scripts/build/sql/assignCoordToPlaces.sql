@@ -5,7 +5,7 @@
 DROP TABLE IF EXISTS "placesAtlas";
 CREATE TABLE "placesAtlas" (
   place varchar(255),
-  coordinated varchar(255)
+  coordinate varchar(255)
 );
 
 COPY "placesAtlas" FROM '/Users/Robert-Jan/Desktop/HDAT/src/data/geodataAtlas.html' DELIMITER ',' CSV;
@@ -15,13 +15,14 @@ COPY "placesAtlas" FROM '/Users/Robert-Jan/Desktop/HDAT/src/data/geodataAtlas.ht
 DROP TABLE IF EXISTS "bgbPlaceGeo";
 CREATE TABLE "bgbPlaceGeo" AS
   TABLE "bgbPlace";
-ALTER TABLE "bgbPlaceGeo" ADD COLUMN "lng" float;
 ALTER TABLE "bgbPlaceGeo" ADD COLUMN "lat" float;
+ALTER TABLE "bgbPlaceGeo" ADD COLUMN "lng" float;
+
 -- Patternmatch places
 
 UPDATE "bgbPlaceGeo"
 SET 
-	lng = to_number(split_part('-3.55,128.3', ',', 1),'MI9.9'),
-	lat = to_number(split_part('-3.55,128.3', ',', 2),'MI9.9')
+	lat = CAST(split_part("coordinate", ',', 1) as FLOAT),
+	lng = CAST(split_part("coordinate", ',', 2) as FLOAT)
 FROM "placesAtlas"
 WHERE naam = place;
