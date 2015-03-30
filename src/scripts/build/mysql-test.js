@@ -15,10 +15,20 @@ var query = 'SELECT * FROM tempCargoSumYear';
 
 connection.connect();
 
+
+
+
+
 connection.query(query, function(err, rows, fields) {
   if (err) throw err;
 
   console.log('Some product is: ', rows);
 });
 
+
+
+
+
 connection.end();
+
+
