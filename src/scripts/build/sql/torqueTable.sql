@@ -1,6 +1,5 @@
 -- Create table for use by Torque
-
-DROP TABLE IF EXISTS "allVoyagePoints";
+DROP TABLE IF EXISTS "allVoyagePoints" CASCADE;
 CREATE TABLE "allVoyagePoints" (
 	"id" SERIAL PRIMARY KEY,
 	"voyId" integer,
@@ -48,8 +47,8 @@ SET "route" = ST_SetSRID(ST_MakeLine("voyDeparturePlaceCoord", "voyArrivalPlaceC
 
 -- Updating line to interpolated point
 
-UPDATE "allVoyagePoints"
-SET "route" = ST_SetSRID(ST_Line_Interpolate_Point("route", '0.5'), 4326);
+-- UPDATE "allVoyagePoints"
+-- SET "route" = ST_SetSRID(ST_Line_Interpolate_Point("route", '0.5'), 4326);
 
 -- Making readable
 
@@ -61,4 +60,39 @@ SET "readableVoyDeparturePlaceCoord" = ST_asText("voyDeparturePlaceCoord");
 
 UPDATE "allVoyagePoints"
 SET "readableVoyInterpolatedPlaceCoord" = ST_asText("route");
+
+
+-- Loop function
+DROP FUNCTION IF EXISTS insertpoints(geometry,timestamp without time zone);
+
+CREATE OR REPLACE FUNCTION insertPoints(geometry,timestamp) RETURNS void AS 
+$$
+DECLARE
+   iterator 	float4 := 1; 
+   steps 		integer:= 5;
+   -- steps		float4:= ST_Length_Spheroid($1,'SPHEROID["WGS 84",6378137,298.257223563]')/40; -- iedere 40 km een stap
+   speed		integer:= 10; -- km/h
+   -- increment	integer:= 0;
+
+BEGIN
+   WHILE iterator < steps
+   LOOP
+      -- increment := (iterator*((((ST_Length_Spheroid($1,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps));
+      INSERT INTO "allVoyagePoints" (
+      	"route",
+      	"readableVoyInterpolatedPlaceCoord",
+      	"readableVoyArrivalPlaceCoord"
+      	-- "voyDepTimeStamp"
+      ) 
+      VALUES (
+      	ST_Line_Interpolate_Point($1, iterator/steps),
+      	(ST_Length_Spheroid($1,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000,
+      	iterator*((((ST_Length_Spheroid($1,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps)
+      	-- date $2 + interval increment hour
+      );
+      iterator := iterator + 1;
+   END LOOP;
+   RETURN;
+END 
+$$ LANGUAGE 'plpgsql' ;
 

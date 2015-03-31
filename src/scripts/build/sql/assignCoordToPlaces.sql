@@ -8,7 +8,7 @@ CREATE TABLE "placesAtlas" (
   coordinate varchar(255)
 );
 
-COPY "placesAtlas" FROM '/Users/Robert-Jan/Desktop/HDAT/src/data/geodataAtlas.html' DELIMITER ',' CSV;
+COPY "placesAtlas" FROM '/Users/Erik/Desktop/HDAT/src/data/geodataAtlas.html' DELIMITER ',' CSV;
 
 -- Create table bgbPlaceGEO
 
