@@ -1,6 +1,6 @@
 -- Create table for use by Torque
-DROP TABLE IF EXISTS "allVoyagePoints" CASCADE;
-CREATE TABLE "allVoyagePoints" (
+DROP TABLE IF EXISTS "voyagePoints" CASCADE;
+CREATE TABLE "voyagePoints" (
 	"id" SERIAL PRIMARY KEY,
 	"voyId" integer,
 	"voyArrivalPlaceId" integer,
@@ -8,18 +8,13 @@ CREATE TABLE "allVoyagePoints" (
 	"voyArrivalPlaceCoord" geometry(POINT,4326),
 	"voyDeparturePlaceCoord" geometry(POINT,4326),
 	"route" geometry(GEOMETRY,4326),
-	"segmentisedRoute" geometry(GEOMETRY,4326),
-	"segmentisedRouteDump" geometry_dump,
-	"segmentisedRouteDumpReadable" varchar(2000),
-	"readableVoyArrivalPlaceCoord" varchar(255),
-	"readableVoyDeparturePlaceCoord" varchar(255),
 	"voyArrTimeStamp" timeStamp,
 	"voyDepTimeStamp" timeStamp
 );
 
 -- Selecting the required data
 
-INSERT INTO "allVoyagePoints" (
+INSERT INTO "voyagePoints" (
 		"voyId", 
 		"voyDeparturePlaceId", 
 		"voyArrivalPlaceId", 
@@ -38,112 +33,73 @@ FROM "bgbVoyage";
 
 -- Converting places to points
 
-UPDATE "allVoyagePoints"
+UPDATE "voyagePoints"
 SET "voyDeparturePlaceCoord" = ST_SetSRID(ST_MakePoint(geo.lat, geo.lng),4326)
 FROM "bgbPlaceGeo" geo
 WHERE "voyDeparturePlaceId" = geo.id; 
 
-UPDATE "allVoyagePoints"
+UPDATE "voyagePoints"
 SET "voyArrivalPlaceCoord" = ST_SetSRID(ST_MakePoint(geo.lat, geo.lng),4326)
 FROM "bgbPlaceGeo" geo
 WHERE "voyArrivalPlaceId" = geo.id;
 
 -- Coverting coordinate to line
 
-UPDATE "allVoyagePoints"
+UPDATE "voyagePoints"
 SET "route" = ST_SetSRID(ST_MakeLine("voyDeparturePlaceCoord", "voyArrivalPlaceCoord"),4326);
 
--- Segmentising a linestring
-
--- UPDATE "allVoyagePoints"
--- SET "route" = ST_SetSRID(ST_Line_Interpolate_Point("route", '0.5'), 4326);
--- UPDATE "allVoyagePoints"
--- SET "segmentisedRoute" = ST_Segmentize("route", '10');
-
--- -- CREATE Dump
-
--- UPDATE "allVoyagePoints"
--- SET "segmentisedRouteDump" = ST_DumpPoints("segmentisedRoute");
-
--- Making readable
-
--- UPDATE "allVoyagePoints"
--- SET "segmentisedRouteDumpReadable" = ST_asText("segmentisedRouteDump");
-
-UPDATE "allVoyagePoints"
-SET "readableVoyArrivalPlaceCoord" = ST_asText("voyArrivalPlaceCoord");
-
-UPDATE "allVoyagePoints"
-SET "readableVoyDeparturePlaceCoord" = ST_asText("voyDeparturePlaceCoord");
-
-
--- Create function that drops points
--- Should take two arguments, the amount of points we want, and the linestring
-
--- DROP FUNCTION createPoints(geometry(GEOMETRY,4326), integer);
-
--- CREATE FUNCTION createPoints(geometry(GEOMETRY,4326), integer) RETURNS integer AS $$
--- << outerblock >>
--- DECLARE
---     quantity integer := 30;
--- BEGIN
---     RAISE NOTICE 'Quantity here is %', quantity;  -- Prints 30
---     quantity := 50;
---     --
---     -- Create a subblock
---     --
---     DECLARE
---         quantity integer := 80;
---     BEGIN
---         RAISE NOTICE 'Quantity here is %', quantity;  -- Prints 80
---         RAISE NOTICE 'Outer quantity here is %', outerblock.quantity;  -- Prints 50
---     END;
-
---     RAISE NOTICE 'Quantity here is %', quantity;  -- Prints 50
-
---     RETURN quantity;
--- END;
--- $$ LANGUAGE plpgsql;
-
-
--- Updating line to interpolated point
-
--- UPDATE "allVoyagePoints"
--- SET "interpolatedPoint" = ST_SetSRID(ST_Line_Interpolate_Point("route", '0.5'), 4326);
-
-
-
 -- Loop function
-DROP FUNCTION IF EXISTS insertpoints(geometry,timestamp without time zone);
 
-CREATE OR REPLACE FUNCTION insertPoints(geometry,timestamp) RETURNS void AS 
+DROP TABLE "allVoyagePoints";
+CREATE TABLE "allVoyagePoints" (
+	"id" SERIAL PRIMARY KEY,
+	"voyId" integer,
+	"the_geom" geometry(POINT,4326),
+	"stampertje" timeStamp
+);
+
+DROP FUNCTION IF EXISTS insertpoints(integer, geometry, timestamp);
+CREATE OR REPLACE FUNCTION insertPoints(integer, geometry, timestamp) RETURNS void AS 
 $$
 DECLARE
-   iterator 	float4 := 1; 
-   steps 		integer:= 5;
-   -- steps		float4:= ST_Length_Spheroid($1,'SPHEROID["WGS 84",6378137,298.257223563]')/40; -- iedere 40 km een stap
-   speed		integer:= 10; -- km/h
-   -- increment	integer:= 0;
+   iterator 	float 	:= 1; 
+   steps 		integer	:= 5;
+   speed		integer	:= 10; -- km/h
 
 BEGIN
    WHILE iterator < steps
    LOOP
-      -- increment := (iterator*((((ST_Length_Spheroid($1,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps));
       INSERT INTO "allVoyagePoints" (
-      	"route",
-      	"readableVoyInterpolatedPlaceCoord",
-      	"readableVoyArrivalPlaceCoord"
-      	-- "voyDepTimeStamp"
+      	"voyId",
+      	"the_geom",
+      	"stampertje"
       ) 
       VALUES (
-      	ST_Line_Interpolate_Point($1, iterator/steps),
-      	(ST_Length_Spheroid($1,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000,
-      	iterator*((((ST_Length_Spheroid($1,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps)
-      	-- date $2 + interval increment hour
+      	$1,
+      	ST_Line_Interpolate_Point($2, iterator/steps),
+      	$3
       );
       iterator := iterator + 1;
    END LOOP;
    RETURN;
 END 
 $$ LANGUAGE 'plpgsql' ;
+
+-- Run function
+
+SELECT 
+	insertPoints("voyId", "route", "voyDepTimeStamp")
+FROM "voyagePoints";
+
+
+
+-- steps		float	:= ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]') / 40; -- iedere 40 km een stap
+-- increment	integer:= 0;
+
+-- increment := (iterator*((((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps));
+-- (ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000,
+-- date $3 + interval increment hour
+-- iterator*((((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps)
+
+
 
