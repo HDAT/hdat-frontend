@@ -64,8 +64,8 @@ $$
 DECLARE
    	iterator 	float 	:= 1; 
    	steps    	float	:= round(((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/50); -- iedere 50 km een stap
-   	speed		integer	:= 10; -- km/h
-	increment	float 	:= 0;
+   	speed			integer	:= 10; -- km/h
+	increment		float 	:= 0;
 
 BEGIN
    	WHILE iterator < steps
@@ -83,7 +83,7 @@ BEGIN
       	$1,
       	ST_Line_Interpolate_Point($2, iterator/steps),
       	CASE WHEN $3 IS NOT NULL THEN $3 + interval '1h' * increment
-			 WHEN $4 IS NOT NULL THEN $4 - interval '1h' * increment
+				WHEN $4 IS NOT NULL THEN $4 - interval '1h' * increment
 		END
       );
 
