@@ -55,7 +55,7 @@ CREATE TABLE "allVoyagePoints" (
 	"id" SERIAL PRIMARY KEY,
 	"voyId" integer,
 	"the_geom" geometry(POINT,4326),
-	"stampertje" timeStamp
+	"date" timeStamp
 );
 
 DROP FUNCTION IF EXISTS insertpoints(integer, geometry, timestamp);
@@ -64,8 +64,6 @@ $$
 DECLARE
    	iterator 	float 	:= 1; 
    	steps    	float	:= round(((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/50); -- iedere 50 km een stap
-
-   	-- steps 		integer	:= 5;
    	speed		integer	:= 10; -- km/h
 	increment	float 	:= 0;
 
@@ -79,7 +77,7 @@ BEGIN
       INSERT INTO "allVoyagePoints" (
       	"voyId",
       	"the_geom",
-      	"stampertje"
+      	"date"
       ) 
       VALUES (
       	$1,
