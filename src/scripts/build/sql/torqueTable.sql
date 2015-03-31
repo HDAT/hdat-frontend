@@ -62,18 +62,19 @@ DROP FUNCTION IF EXISTS insertpoints(integer, geometry, timestamp);
 CREATE OR REPLACE FUNCTION insertPoints(integer, geometry, timestamp) RETURNS void AS 
 $$
 DECLARE
-   	iterator 		float 	:= 1; 
-   	steps 			integer	:= 5;
-   	speed				integer	:= 10; -- km/h
-		increment		float := 0;
+   	iterator 	float 	:= 1; 
+   	steps    	float	:= round(((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/50); -- iedere 50 km een stap
+
+   	-- steps 		integer	:= 5;
+   	speed		integer	:= 10; -- km/h
+	increment	float 	:= 0;
 
 BEGIN
    	WHILE iterator < steps
    	LOOP
 	
-			increment := iterator*((((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps);
-
-			RAISE NOTICE 'time is incremented by %', increment;
+		increment := iterator*((((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps);
+		RAISE NOTICE 'check %', steps;
 
       INSERT INTO "allVoyagePoints" (
       	"voyId",
@@ -97,7 +98,6 @@ $$ LANGUAGE 'plpgsql' ;
 SELECT 
 	insertPoints("voyId", "route", "voyDepTimeStamp")
 FROM "voyagePoints";
-
 
 
 -- steps		float	:= ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]') / 40; -- iedere 40 km een stap
