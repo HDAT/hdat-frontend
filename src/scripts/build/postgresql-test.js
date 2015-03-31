@@ -5,13 +5,7 @@
 
 var pg = require('pg');
 var conString = "postgres://root:secret@localhost/bgb";
-
-// You can type a single query here. Chaining multiple is more interesting however.
-var query = [
-  'SELECT * FROM "bgbPlace"',
-  'SELECT * FROM "bgbCargo"'
-];
-
+var query = '';
 
 //The code that does the connecting to the DB
 pg.connect(conString, function(err, client, done) {
@@ -19,20 +13,65 @@ pg.connect(conString, function(err, client, done) {
     return console.error('error fetching client from pool', err);
   }
 
-  query.forEach(function(ArrValue, Arrkey, ArrWhatever){
-    client.query(ArrValue, function(err, result) {
-      //call `done()` to release the client back to the pool
-      done();
-      if(err) {
-        return console.error('error running query', err);
-      }
 
-      // Logging out results
-      result.rows.forEach(function(value, index, array){
-      	console.log(value);
-      });
-    });
+
+
+
+
+
+
+
+
+
+
+  for
+
+
+  client.query(query, function(err, result) {
+    //call `done()` to release the client back to the pool
+    done();
+    if(err) {
+      return console.error('error running query', err);
+    }
+
+    console.log(result);
+
+
   });
+
+
+
+
+
+
+
+
+
+
+
 
   client.end();
 });
+
+// Howmany points on line
+// var amountOfPoints = 100;
+
+// Creating table and loading all voyages
+// CREATE TABLE
+
+// SELECT * FROM "allVoyages" WHERE "id"="'id'";
+
+// result.forEach(function(){
+//  for(i < amountOfPoints){
+//    mutatedResult.push()
+//  }
+// });
+
+// Entering the shit back into SQL
+// INSERT INTO "reallyAllVoyagePoints"
+// SELECT 
+//  "voyID",
+//  "coord",
+//  "timeStamp";
+
+// Done
