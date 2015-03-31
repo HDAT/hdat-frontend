@@ -62,13 +62,19 @@ DROP FUNCTION IF EXISTS insertpoints(integer, geometry, timestamp);
 CREATE OR REPLACE FUNCTION insertPoints(integer, geometry, timestamp) RETURNS void AS 
 $$
 DECLARE
-   iterator 	float 	:= 1; 
-   steps 		integer	:= 5;
-   speed		integer	:= 10; -- km/h
+   	iterator 		float 	:= 1; 
+   	steps 			integer	:= 5;
+   	speed				integer	:= 10; -- km/h
+		increment		float := 0;
 
 BEGIN
-   WHILE iterator < steps
-   LOOP
+   	WHILE iterator < steps
+   	LOOP
+	
+			increment := iterator*((((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps);
+
+			RAISE NOTICE 'time is incremented by %', increment;
+
       INSERT INTO "allVoyagePoints" (
       	"voyId",
       	"the_geom",
@@ -77,8 +83,9 @@ BEGIN
       VALUES (
       	$1,
       	ST_Line_Interpolate_Point($2, iterator/steps),
-      	$3
+      	$3 + interval '1h' * increment
       );
+
       iterator := iterator + 1;
    END LOOP;
    RETURN;
@@ -94,9 +101,7 @@ FROM "voyagePoints";
 
 
 -- steps		float	:= ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]') / 40; -- iedere 40 km een stap
--- increment	integer:= 0;
 
--- increment := (iterator*((((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps));
 -- (ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000,
 -- date $3 + interval increment hour
 -- iterator*((((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps)
