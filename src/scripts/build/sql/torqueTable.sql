@@ -9,12 +9,8 @@ CREATE TABLE "allVoyagePoints" (
 	"voyArrivalPlaceCoord" geometry(POINT,4326),
 	"voyDeparturePlaceCoord" geometry(POINT,4326),
 	"route" geometry(GEOMETRY,4326),
-	"interpolatedPoint" geometry(GEOMETRY,4326),
 	"voyArrTimeStamp" timeStamp,
-	"voyDepTimeStamp" timeStamp,
-	"readableVoyDeparturePlaceCoord" varchar(255),
-	"readableVoyArrivalPlaceCoord" varchar(255),
-	"readableVoyInterpolatedPlaceCoord" varchar(255)
+	"voyDepTimeStamp" timeStamp
 );
 
 -- Selecting the required data
@@ -47,19 +43,47 @@ WHERE "voyArrivalPlaceId" = geo.id;
 UPDATE "allVoyagePoints"
 SET "route" = ST_SetSRID(ST_MakeLine("voyDeparturePlaceCoord", "voyArrivalPlaceCoord"),4326);
 
+-- Create function that drops points
+
+DROP FUNCTION createPoints(float, float);
+
+CREATE FUNCTION createPoints(float, float) RETURNS integer AS $$
+<< outerblock >>
+DECLARE
+    quantity integer := 30;
+BEGIN
+    RAISE NOTICE 'Quantity here is %', quantity;  -- Prints 30
+    quantity := 50;
+    --
+    -- Create a subblock
+    --
+    DECLARE
+        quantity integer := 80;
+    BEGIN
+        RAISE NOTICE 'Quantity here is %', quantity;  -- Prints 80
+        RAISE NOTICE 'Outer quantity here is %', outerblock.quantity;  -- Prints 50
+    END;
+
+    RAISE NOTICE 'Quantity here is %', quantity;  -- Prints 50
+
+    RETURN quantity;
+END;
+$$ LANGUAGE plpgsql;
+
+
 -- Updating line to interpolated point
 
-UPDATE "allVoyagePoints"
-SET "interpolatedPoint" = ST_SetSRID(ST_Line_Interpolate_Point("route", '0.5'), 4326);
+-- UPDATE "allVoyagePoints"
+-- SET "interpolatedPoint" = ST_SetSRID(ST_Line_Interpolate_Point("route", '0.5'), 4326);
 
 -- Making readable
 
-UPDATE "allVoyagePoints"
-SET "readableVoyArrivalPlaceCoord" = ST_asText("voyArrivalPlaceCoord");
+-- UPDATE "allVoyagePoints"
+-- SET "readableVoyArrivalPlaceCoord" = ST_asText("voyArrivalPlaceCoord");
 
-UPDATE "allVoyagePoints"
-SET "readableVoyDeparturePlaceCoord" = ST_asText("voyDeparturePlaceCoord");
+-- UPDATE "allVoyagePoints"
+-- SET "readableVoyDeparturePlaceCoord" = ST_asText("voyDeparturePlaceCoord");
 
-UPDATE "allVoyagePoints"
-SET "readableVoyInterpolatedPlaceCoord" = ST_asText("interpolatedPoint");
+-- UPDATE "allVoyagePoints"
+-- SET "readableVoyInterpolatedPlaceCoord" = ST_asText("interpolatedPoint");
 
