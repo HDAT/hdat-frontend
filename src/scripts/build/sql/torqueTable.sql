@@ -72,7 +72,7 @@ BEGIN
    	LOOP
 	
 		increment := iterator*((((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps);
-		RAISE NOTICE 'check %', steps;
+		-- RAISE NOTICE 'check %', steps;
 
       INSERT INTO "allVoyagePoints" (
       	"voyId",
