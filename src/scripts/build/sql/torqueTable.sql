@@ -10,7 +10,7 @@ CREATE TABLE "allVoyagePoints" (
 	"voyDeparturePlaceCoord" geometry(POINT,4326),
 	"route" geometry(GEOMETRY,4326),
 	"segmentisedRoute" geometry(GEOMETRY,4326),
-	"segmentisedRouteDump" geometry(GEOMETRY,4326),
+	"segmentisedRouteDump" geometry_dump,
 	"segmentisedRouteDumpReadable" varchar(2000),
 	"readableVoyArrivalPlaceCoord" varchar(255),
 	"readableVoyDeparturePlaceCoord" varchar(255),
@@ -20,7 +20,13 @@ CREATE TABLE "allVoyagePoints" (
 
 -- Selecting the required data
 
-INSERT INTO "allVoyagePoints" ("voyId", "voyDeparturePlaceId", "voyArrivalPlaceId", "voyArrTimeStamp", "voyDepTimeStamp")
+INSERT INTO "allVoyagePoints" (
+		"voyId", 
+		"voyDeparturePlaceId", 
+		"voyArrivalPlaceId", 
+		"voyArrTimeStamp", 
+		"voyDepTimeStamp"
+	)
 SELECT 
 	"voyId",
 	"voyDeparturePlaceId",
@@ -53,15 +59,15 @@ SET "route" = ST_SetSRID(ST_MakeLine("voyDeparturePlaceCoord", "voyArrivalPlaceC
 UPDATE "allVoyagePoints"
 SET "segmentisedRoute" = ST_Segmentize("route", '10');
 
--- Selects only one point of the geom! There are more!
+-- CREATE Dump
 
 UPDATE "allVoyagePoints"
-SET "segmentisedRouteDump" = (ST_DumpPoints("segmentisedRoute")).geom;
+SET "segmentisedRouteDump" = ST_DumpPoints("segmentisedRoute");
 
 -- Making readable
 
-UPDATE "allVoyagePoints"
-SET "segmentisedRouteDumpReadable" = ST_asText("segmentisedRouteDump");
+-- UPDATE "allVoyagePoints"
+-- SET "segmentisedRouteDumpReadable" = ST_asText("segmentisedRouteDump");
 
 UPDATE "allVoyagePoints"
 SET "readableVoyArrivalPlaceCoord" = ST_asText("voyArrivalPlaceCoord");

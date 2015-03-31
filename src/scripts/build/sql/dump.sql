@@ -5,15 +5,15 @@ CREATE TABLE "lotOfPoints" (
 	"points" geometry(POINT,4326)
 );
 
-SELECT edge_id, (dp).path[1] As index, ST_AsText((dp).geom) As wktnode
-FROM (
+-- SELECT edge_id, (dp).path[1] As index, ST_AsText((dp).geom) As wktnode
+-- FROM (
 
-	SELECT 1 As edge_id, ST_DumpPoints("segmentisedRoute") AS dp
+-- 	SELECT 1 As edge_id, "segmentisedRouteDump" AS dp FROM "allVoyagePoints"
 
-    UNION ALL
-    
-    SELECT 2 As edge_id, ST_DumpPoints(ST_GeomFromText('LINESTRING(3 5, 5 6, 9 10)')) AS dp
-   
-   )
+-- 	)
 
-As foo;
+-- As foo;
+
+SELECT 1,
+	"id" AS dp
+FROM "allVoyagePoints";
