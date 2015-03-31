@@ -58,8 +58,8 @@ CREATE TABLE "allVoyagePoints" (
 	"date" timeStamp
 );
 
-DROP FUNCTION IF EXISTS insertpoints(integer, geometry, timestamp);
-CREATE OR REPLACE FUNCTION insertPoints(integer, geometry, timestamp) RETURNS void AS 
+DROP FUNCTION IF EXISTS insertpoints(integer, geometry, timestamp, timestamp);
+CREATE OR REPLACE FUNCTION insertPoints(integer, geometry, timestamp, timestamp) RETURNS void AS 
 $$
 DECLARE
    	iterator 	float 	:= 1; 
@@ -82,7 +82,9 @@ BEGIN
       VALUES (
       	$1,
       	ST_Line_Interpolate_Point($2, iterator/steps),
-      	$3 + interval '1h' * increment
+      	CASE WHEN $3 IS NOT NULL THEN $3 + interval '1h' * increment
+			 WHEN $4 IS NOT NULL THEN $4 - interval '1h' * increment
+		END
       );
 
       iterator := iterator + 1;
@@ -93,5 +95,5 @@ $$ LANGUAGE 'plpgsql' ;
 
 -- Run function
 SELECT 
-	insertPoints("voyId", "route", "voyDepTimeStamp")
+	insertPoints("voyId", "route", "voyDepTimeStamp", "voyArrTimeStamp")
 FROM "voyagePoints";
