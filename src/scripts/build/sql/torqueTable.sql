@@ -9,6 +9,11 @@ CREATE TABLE "allVoyagePoints" (
 	"voyArrivalPlaceCoord" geometry(POINT,4326),
 	"voyDeparturePlaceCoord" geometry(POINT,4326),
 	"route" geometry(GEOMETRY,4326),
+	"segmentisedRoute" geometry(GEOMETRY,4326),
+	"segmentisedRouteDump" geometry(GEOMETRY,4326),
+	"segmentisedRouteDumpReadable" varchar(2000),
+	"readableVoyArrivalPlaceCoord" varchar(255),
+	"readableVoyDeparturePlaceCoord" varchar(255),
 	"voyArrTimeStamp" timeStamp,
 	"voyDepTimeStamp" timeStamp
 );
@@ -43,32 +48,55 @@ WHERE "voyArrivalPlaceId" = geo.id;
 UPDATE "allVoyagePoints"
 SET "route" = ST_SetSRID(ST_MakeLine("voyDeparturePlaceCoord", "voyArrivalPlaceCoord"),4326);
 
+-- Segmentising a linestring
+
+UPDATE "allVoyagePoints"
+SET "segmentisedRoute" = ST_Segmentize("route", '10');
+
+-- Selects only one point of the geom! There are more!
+
+UPDATE "allVoyagePoints"
+SET "segmentisedRouteDump" = (ST_DumpPoints("segmentisedRoute")).geom;
+
+-- Making readable
+
+UPDATE "allVoyagePoints"
+SET "segmentisedRouteDumpReadable" = ST_asText("segmentisedRouteDump");
+
+UPDATE "allVoyagePoints"
+SET "readableVoyArrivalPlaceCoord" = ST_asText("voyArrivalPlaceCoord");
+
+UPDATE "allVoyagePoints"
+SET "readableVoyDeparturePlaceCoord" = ST_asText("voyDeparturePlaceCoord");
+
+
 -- Create function that drops points
+-- Should take two arguments, the amount of points we want, and the linestring
 
-DROP FUNCTION createPoints(float, float);
+-- DROP FUNCTION createPoints(geometry(GEOMETRY,4326), integer);
 
-CREATE FUNCTION createPoints(float, float) RETURNS integer AS $$
-<< outerblock >>
-DECLARE
-    quantity integer := 30;
-BEGIN
-    RAISE NOTICE 'Quantity here is %', quantity;  -- Prints 30
-    quantity := 50;
-    --
-    -- Create a subblock
-    --
-    DECLARE
-        quantity integer := 80;
-    BEGIN
-        RAISE NOTICE 'Quantity here is %', quantity;  -- Prints 80
-        RAISE NOTICE 'Outer quantity here is %', outerblock.quantity;  -- Prints 50
-    END;
+-- CREATE FUNCTION createPoints(geometry(GEOMETRY,4326), integer) RETURNS integer AS $$
+-- << outerblock >>
+-- DECLARE
+--     quantity integer := 30;
+-- BEGIN
+--     RAISE NOTICE 'Quantity here is %', quantity;  -- Prints 30
+--     quantity := 50;
+--     --
+--     -- Create a subblock
+--     --
+--     DECLARE
+--         quantity integer := 80;
+--     BEGIN
+--         RAISE NOTICE 'Quantity here is %', quantity;  -- Prints 80
+--         RAISE NOTICE 'Outer quantity here is %', outerblock.quantity;  -- Prints 50
+--     END;
 
-    RAISE NOTICE 'Quantity here is %', quantity;  -- Prints 50
+--     RAISE NOTICE 'Quantity here is %', quantity;  -- Prints 50
 
-    RETURN quantity;
-END;
-$$ LANGUAGE plpgsql;
+--     RETURN quantity;
+-- END;
+-- $$ LANGUAGE plpgsql;
 
 
 -- Updating line to interpolated point
@@ -76,14 +104,4 @@ $$ LANGUAGE plpgsql;
 -- UPDATE "allVoyagePoints"
 -- SET "interpolatedPoint" = ST_SetSRID(ST_Line_Interpolate_Point("route", '0.5'), 4326);
 
--- Making readable
-
--- UPDATE "allVoyagePoints"
--- SET "readableVoyArrivalPlaceCoord" = ST_asText("voyArrivalPlaceCoord");
-
--- UPDATE "allVoyagePoints"
--- SET "readableVoyDeparturePlaceCoord" = ST_asText("voyDeparturePlaceCoord");
-
--- UPDATE "allVoyagePoints"
--- SET "readableVoyInterpolatedPlaceCoord" = ST_asText("interpolatedPoint");
 
