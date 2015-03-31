@@ -92,17 +92,6 @@ END
 $$ LANGUAGE 'plpgsql' ;
 
 -- Run function
-
 SELECT 
 	insertPoints("voyId", "route", "voyDepTimeStamp")
 FROM "voyagePoints";
-
-
--- steps		float	:= ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]') / 40; -- iedere 40 km een stap
-
--- (ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000,
--- date $3 + interval increment hour
--- iterator*((((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps)
-
-
-
