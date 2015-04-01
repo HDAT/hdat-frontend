@@ -3,10 +3,10 @@ DROP TABLE IF EXISTS "voyagePoints" CASCADE;
 CREATE TABLE "voyagePoints" (
 	"id" SERIAL PRIMARY KEY,
 	"voyId" integer,
-	"voyArrivalPlaceId" integer,
-	"voyDeparturePlaceId" integer,
-	"voyArrivalPlaceCoord" geometry(POINT,4326),
-	"voyDeparturePlaceCoord" geometry(POINT,4326),
+	"voyArrivalId" integer,
+	"voyDepartureId" integer,
+	"voyArrivalCoord" geometry(POINT,4326),
+	"voyDepartureCoord" geometry(POINT,4326),
 	"route" geometry(GEOMETRY,4326),
 	"voyArrTimeStamp" timeStamp,
 	"voyDepTimeStamp" timeStamp
@@ -16,8 +16,8 @@ CREATE TABLE "voyagePoints" (
 
 INSERT INTO "voyagePoints" (
 		"voyId", 
-		"voyDeparturePlaceId", 
-		"voyArrivalPlaceId", 
+		"voyDepartureId", 
+		"voyArrivalId", 
 		"voyArrTimeStamp", 
 		"voyDepTimeStamp"
 	)
@@ -38,19 +38,19 @@ FROM "bgbVoyage";
 -- Converting places to points
 
 UPDATE "voyagePoints"
-SET "voyDeparturePlaceCoord" = ST_SetSRID(ST_MakePoint(geo.lat, geo.lng),4326)
+SET "voyDepartureCoord" = ST_SetSRID(ST_MakePoint(geo.lat, geo.lng),4326)
 FROM "bgbPlaceGeo" geo
-WHERE "voyDeparturePlaceId" = geo.id; 
+WHERE "voyDepartureId" = geo.id; 
 
 UPDATE "voyagePoints"
-SET "voyArrivalPlaceCoord" = ST_SetSRID(ST_MakePoint(geo.lat, geo.lng),4326)
+SET "voyArrivalCoord" = ST_SetSRID(ST_MakePoint(geo.lat, geo.lng),4326)
 FROM "bgbPlaceGeo" geo
-WHERE "voyArrivalPlaceId" = geo.id;
+WHERE "voyArrivalId" = geo.id;
 
 -- Coverting coordinate to line
 
 UPDATE "voyagePoints"
-SET "route" = ST_SetSRID(ST_MakeLine("voyDeparturePlaceCoord", "voyArrivalPlaceCoord"),4326);
+SET "route" = ST_SetSRID(ST_MakeLine("voyDepartureCoord", "voyArrivalCoord"),4326);
 
 -- Loop function
 
@@ -67,7 +67,7 @@ CREATE OR REPLACE FUNCTION insertPoints(integer, geometry, timestamp, timestamp)
 $$
 DECLARE
    	iterator 	float 	:= 1; 
-   	steps    	float		:= round(((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/40); -- iedere xx km een stap
+   	steps    	float		:= round(((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/100); -- iedere xx km een stap
    	speed			integer	:= 10; -- km/h
 		increment	float 	:= 0;
 
