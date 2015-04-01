@@ -18,6 +18,14 @@ CREATE TABLE "bgbPlaceGeo" AS
 ALTER TABLE "bgbPlaceGeo" ADD COLUMN "lat" float;
 ALTER TABLE "bgbPlaceGeo" ADD COLUMN "lng" float;
 
+-- Add 30 regios to bgbPlaceGeo
+
+INSERT INTO "bgbPlaceGeo" 
+SELECT 	"id",
+				"naam"
+FROM "bgbRegio";
+	
+
 -- Patternmatch places
 
 UPDATE "bgbPlaceGeo"
