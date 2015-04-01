@@ -23,15 +23,19 @@ INSERT INTO "voyagePoints" (
 	)
 SELECT 
 	"voyId",
-	CASE WHEN "voyDeparturePlaceId" IS NOT NULL THEN "voyDeparturePlaceId"
-			 WHEN "voyDeparturePlaceId" IS NULL THEN "voyDepartureRegioId"
+	CASE 	
+		WHEN "voyDeparturePlaceId" IS NOT NULL THEN "voyDeparturePlaceId"
+		WHEN "voyDeparturePlaceId" IS NULL THEN "voyDepartureRegioId"
 	END,
-	CASE WHEN "voyArrivalPlaceId" IS NOT NULL THEN "voyArrivalPlaceId"
-			 WHEN "voyArrivalPlaceId" IS NULL THEN "voyArrivalRegioId"
+	CASE 	
+		WHEN "voyArrivalPlaceId" IS NOT NULL THEN "voyArrivalPlaceId"
+		WHEN "voyArrivalPlaceId" IS NULL THEN "voyArrivalRegioId"
 	END,
-	CASE WHEN "voyArrivalYear" IS NOT NULL THEN to_timestamp(CONCAT_WS(' ', "voyArrivalDay", "voyArrivalMonth", "voyArrivalYear"),  'DD MM YYYY')
+	CASE 
+		WHEN "voyArrivalYear" IS NOT NULL THEN to_timestamp(CONCAT_WS(' ', "voyArrivalDay", "voyArrivalMonth", "voyArrivalYear"),  'DD MM YYYY')
 	END,
-	CASE WHEN "voyDepartureYear" IS NOT NULL THEN to_timestamp(CONCAT_WS(' ', "voyDepartureDay", "voyDepartureMonth", "voyDepartureYear"),  'DD MM YYYY')
+	CASE 
+		WHEN "voyDepartureYear" IS NOT NULL THEN to_timestamp(CONCAT_WS(' ', "voyDepartureDay", "voyDepartureMonth", "voyDepartureYear"),  'DD MM YYYY')
 	END
 FROM "bgbVoyage";
 
@@ -67,9 +71,9 @@ CREATE OR REPLACE FUNCTION insertPoints(integer, geometry, timestamp, timestamp)
 $$
 DECLARE
    	iterator 	float 	:= 1; 
-   	steps    	float		:= round(((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/100); -- iedere xx km een stap
-   	speed			integer	:= 10; -- km/h
-		increment	float 	:= 0;
+   	steps    	float	:= round(((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/40); -- iedere xx km een stap
+   	speed		integer	:= 10; -- km/h
+	increment	float 	:= 0;
 
 BEGIN
    	WHILE iterator < steps
@@ -78,20 +82,23 @@ BEGIN
 		increment := iterator*((((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps);
 		RAISE NOTICE 'check %', steps;
 
-      INSERT INTO "allVoyagePoints" (
-      	"voyId",
-      	"the_geom",
-      	"date"
-      ) 
-      VALUES (
-      	$1,
-      	ST_Line_Interpolate_Point($2, iterator/steps),
-      	CASE 	WHEN $3 IS NOT NULL THEN $3 + interval '1h' * increment
-							WHEN $4 IS NOT NULL THEN $4 - interval '1h' * increment
-				END
-      );
+      	INSERT INTO "allVoyagePoints" (
+      		"voyId",
+      		"the_geom",
+      		"date"
+      	)
 
-      iterator := iterator + 1;
+      	VALUES (
+	      	$1,
+	      	ST_Line_Interpolate_Point($2, iterator/steps),
+	      	CASE 	
+	      		WHEN $3 IS NOT NULL THEN $3 + interval '1h' * increment
+				WHEN $4 IS NOT NULL THEN $4 - interval '1h' * increment
+			END
+      	);
+
+    	iterator := iterator + 1;
+
    END LOOP;
    RETURN;
 END 
