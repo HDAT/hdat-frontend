@@ -78,9 +78,8 @@ DECLARE
 BEGIN
    	WHILE iterator < steps
    	LOOP
-	
 		increment := iterator*((((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps);
-		RAISE NOTICE 'check %', steps;
+		-- RAISE NOTICE 'check %', steps;
 
       	INSERT INTO "allVoyagePoints" (
       		"voyId",
@@ -90,7 +89,11 @@ BEGIN
 
       	VALUES (
 	      	$1,
-	      	ST_Line_Interpolate_Point($2, iterator/steps),
+	      	CASE 	
+	      		WHEN $3 IS NOT NULL THEN ST_Line_Interpolate_Point($2, iterator/steps)
+				WHEN $4 IS NOT NULL THEN ST_Line_Interpolate_Point($2, 1-(iterator/steps))
+			END
+	      	,
 	      	CASE 	
 	      		WHEN $3 IS NOT NULL THEN $3 + interval '1h' * increment
 				WHEN $4 IS NOT NULL THEN $4 - interval '1h' * increment

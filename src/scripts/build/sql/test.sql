@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM "voyagePoints" WHERE "route" IS NOT NULL;
