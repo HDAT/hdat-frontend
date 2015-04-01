@@ -63,6 +63,7 @@ CREATE TABLE "allVoyagePoints" (
 	"id" SERIAL PRIMARY KEY,
 	"voyId" integer,
 	"the_geom" geometry(POINT,4326),
+	"the_geom_webmercator" geometry(POINT,3857),
 	"date" timeStamp
 );
 
@@ -71,7 +72,7 @@ CREATE OR REPLACE FUNCTION insertPoints(integer, geometry, timestamp, timestamp)
 $$
 DECLARE
    	iterator 	float 	:= 1; 
-   	steps    	float	:= round(((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/40); -- iedere xx km een stap
+   	steps    	float	:= round(((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/100); -- iedere xx km een stap
    	speed		integer	:= 10; -- km/h
 	increment	float 	:= 0;
 
@@ -79,7 +80,7 @@ BEGIN
    	WHILE iterator < steps
    	LOOP
 		increment := iterator*((((ST_Length_Spheroid($2,'SPHEROID["WGS 84",6378137,298.257223563]'))/1000)/speed)/steps);
-		-- RAISE NOTICE 'check %', steps;
+		RAISE NOTICE 'check %', steps;
 
       	INSERT INTO "allVoyagePoints" (
       		"voyId",
@@ -111,3 +112,6 @@ $$ LANGUAGE 'plpgsql' ;
 SELECT 
 	insertPoints("voyId", "route", "voyDepTimeStamp", "voyArrTimeStamp")
 FROM "voyagePoints";
+
+-- Torque only > Add the_geom_webmercator
+UPDATE "allVoyagePoints" SET the_geom_webmercator = CDB_TransformToWebmercator(the_geom);
