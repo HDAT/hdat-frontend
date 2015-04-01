@@ -112,6 +112,3 @@ $$ LANGUAGE 'plpgsql' ;
 SELECT 
 	insertPoints("voyId", "route", "voyDepTimeStamp", "voyArrTimeStamp")
 FROM "voyagePoints";
-
--- Torque only > Add the_geom_webmercator
-UPDATE "allVoyagePoints" SET the_geom_webmercator = CDB_TransformToWebmercator(the_geom);
