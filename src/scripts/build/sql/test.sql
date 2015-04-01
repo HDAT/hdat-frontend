@@ -1,1 +1,1 @@
-SELECT COUNT(*) FROM "voyagePoints" WHERE "route" IS NOT NULL;
+SELECT COUNT(*) FROM "allVoyagePoints"; -- WHERE "the_geom" IS NOT NULL;
