@@ -12,10 +12,11 @@ CREATE TABLE "bgbVoyageRoute" (
 	"voyArrivalRegioNode" int,
 	"voyDepartureRegioNode" int,
 	"routeTemp" geometry(linestring, 4326),
-	"route" varchar(456837),
+	"route" geometry(linestring, 4326),
 	"voyArrTimeStamp" timeStamp,
 	"voyDepTimeStamp" timeStamp,
-	"test" varchar(23333)
+	"test" geometry(geometry, 4326),
+	"test2" geometry(geometry, 4326)
 );
 
 -- Selecting the required data
@@ -97,9 +98,12 @@ SET
 WHERE
 	ST_StartPoint("routeTemp") = (SELECT ST_SetSRID(ST_MakePoint(lat, lng),4326) FROM "bgbPlaceGeo" WHERE "voyDeparturePlaceId" = "id");
 
+
 UPDATE "bgbVoyageRoute" 
 SET
 	"test" = (SELECT ST_SetSRID(ST_MakePoint(lat, lng),4326) FROM "bgbPlaceGeo" WHERE "voyDeparturePlaceId" = "id");
 
-
+UPDATE "bgbVoyageRoute" 
+SET
+	"test2" = ST_StartPoint("routeTemp");
 
