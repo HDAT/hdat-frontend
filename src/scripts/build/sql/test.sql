@@ -1,1 +1,0 @@
-SELECT COUNT(*) FROM "allVoyagePoints"; -- WHERE "the_geom" IS NOT NULL;

@@ -1,1 +1,0 @@
-UPDATE "allVoyagePoints" SET the_geom_webmercator = CDB_TransformToWebmercator(the_geom);

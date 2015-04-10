@@ -56,5 +56,8 @@ WHERE "voyArrivalId" = geo.id;
 INSERT INTO "voyagePoints" (
 	"route"
 	)
-	SELECT ST_Linemerge(ST_Union(pgr_dijkstra_hdat('dasbgbroute',"voydeparturenode","voyarrivalnode")))
-	FROM "voyagePoints";
+SELECT ST_Linemerge(ST_Union(pgr_dijkstra_hdat('dasbgbroute',"voydeparturenode","voyarrivalnode")))
+FROM "voyagePoints";
+
+
+
