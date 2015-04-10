@@ -12,6 +12,7 @@ CREATE TABLE "amhPlaces" (
 
 COPY "amhPlaces" FROM '/Users/Robert-Jan/Desktop/HDAT/src/data/amh_location.csv' DELIMITER ',' CSV;
 
+-- PLACES
 -- Create table bgbPlaceGeo
 
 DROP TABLE IF EXISTS "bgbPlaceGeo";
@@ -24,11 +25,28 @@ ALTER TABLE "bgbPlaceGeo" ADD COLUMN "lng" float;
 
 UPDATE "bgbPlaceGeo"
 SET 
-	lat = latitude,
-	lng = longitude
+	lat = CAST(latitude as FLOAT),
+	lng = CAST(longitude as FLOAT)
 FROM "amhPlaces"
 WHERE naam = title;
 
+-- REGIONS
+-- Create table bgbRegionsGeo
+
+DROP TABLE IF EXISTS "bgbRegioGeo";
+CREATE TABLE "bgbRegioGeo" AS
+  TABLE "bgbRegio";
+ALTER TABLE "bgbRegioGeo" ADD COLUMN "lat" float;
+ALTER TABLE "bgbRegioGeo" ADD COLUMN "lng" float;
+
+-- Patternmatch regio
+
+UPDATE "bgbRegioGeo"
+SET 
+	lat = CAST(latitude as FLOAT),
+	lng = CAST(longitude as FLOAT)
+FROM "amhPlaces"
+WHERE naam = title;
 
 
 
