@@ -11,7 +11,7 @@ CREATE TABLE "bgbVoyageRoute" (
 	"voyDeparturePlaceNode" int,
 	"voyArrivalRegioNode" int,
 	"voyDepartureRegioNode" int,
-	"routeTemp" varchar(3333),
+	"routeTemp" geometry(linestring, 4326),
 	"route" varchar(456837),
 	"voyArrTimeStamp" timeStamp,
 	"voyDepTimeStamp" timeStamp
@@ -79,13 +79,13 @@ SET
 	"routeTemp" = 	CASE 
 						WHEN "voyDeparturePlaceNode" IS NOT NULL OR "voyArrivalPlaceNode" IS NOT NULL THEN
 						(SELECT 
-							ST_asText(
+							-- ST_asText(
 								ST_LineMerge(
 									ST_CollectionExtract(
 										ST_Collect(pgr_dijkstra_hdat)::geometry(geometryCollection, 4326)
 									, 2)
 								)
-							) 
+							-- ) 
 						FROM pgr_dijkstra_hdat('routingMod',"voyDeparturePlaceNode","voyArrivalPlaceNode"))
 					END;
 
