@@ -13,6 +13,8 @@ var map = new L.Map('map', {
   noWrap: false,
   maxBounds: bounds,
   attributionControl: false,
+  inertia: true,
+  worldCopyJump: true,
 });
 L.tileLayer('images/tiles/{z}/{x}/{y}.png', {
   tms: true
