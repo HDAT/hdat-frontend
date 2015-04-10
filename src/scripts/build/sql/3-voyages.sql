@@ -11,6 +11,7 @@ CREATE TABLE "bgbVoyageRoute" (
 	"voyDeparturePlaceNode" int,
 	"voyArrivalRegioNode" int,
 	"voyDepartureRegioNode" int,
+	"routeTemp" geometry(geometry, 4326),
 	"route" geometry(linestring, 4326),
 	"voyArrTimeStamp" timeStamp,
 	"voyDepTimeStamp" timeStamp
@@ -75,13 +76,17 @@ WHERE "voyArrivalRegioId" = geo.id;
 
 UPDATE "bgbVoyageRoute" 
 SET 
-	"route" = CASE 
-		WHEN "voyDeparturePlaceNode" IS NOT NULL OR "voyArrivalPlaceNode" IS NOT NULL THEN
-			pgr_dijkstra_hdat('routingMod',"voyDeparturePlaceNode","voyArrivalPlaceNode")
-		END;
+	"routeTemp" = 	CASE 
+						WHEN "voyDeparturePlaceNode" IS NOT NULL OR "voyArrivalPlaceNode" IS NOT NULL THEN
+							(SELECT ST_Collect(pgr_dijkstra_hdat) FROM pgr_dijkstra_hdat('routingMod',"voyDeparturePlaceNode","voyArrivalPlaceNode"))
+					END;
 
-
-
+UPDATE "bgbVoyageRoute" 
+SET 
+	"route" = 	CASE 
+					WHEN "voyDeparturePlaceNode" IS NOT NULL OR "voyArrivalPlaceNode" IS NOT NULL THEN
+						(SELECT  FROM )
+				END;
 
 
 
