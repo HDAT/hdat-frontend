@@ -14,7 +14,8 @@ CREATE TABLE "bgbVoyageRoute" (
 	"routeTemp" geometry(linestring, 4326),
 	"route" varchar(456837),
 	"voyArrTimeStamp" timeStamp,
-	"voyDepTimeStamp" timeStamp
+	"voyDepTimeStamp" timeStamp,
+	"test" varchar(23333)
 );
 
 -- Selecting the required data
@@ -90,33 +91,15 @@ SET
 					END;
 
 
+UPDATE "bgbVoyageRoute" 
+SET
+	"route" = "routeTemp"
+WHERE
+	ST_StartPoint("routeTemp") = (SELECT ST_SetSRID(ST_MakePoint(lat, lng),4326) FROM "bgbPlaceGeo" WHERE "voyDeparturePlaceId" = "id");
 
--- UPDATE "bgbVoyageRoute" 
--- SET 
--- 	"route" = 	CASE 
--- 					WHEN "voyDeparturePlaceNode" IS NOT NULL OR "voyArrivalPlaceNode" IS NOT NULL THEN
-						-- (
-							-- SELECT ST_makeLine("routeTemp") FROM "bgbVoyageRoute";
-						-- )
-				-- END;
-
-
+UPDATE "bgbVoyageRoute" 
+SET
+	"test" = (SELECT ST_SetSRID(ST_MakePoint(lat, lng),4326) FROM "bgbPlaceGeo" WHERE "voyDeparturePlaceId" = "id");
 
 
-
-
-
-
-
--- Converting places to points
-
--- UPDATE "bgbVoyageRoute"
--- SET "voydeparturenode" = findNearestNode(geo.lng, geo.lat)
--- FROM "bgbPlaceGeo" geo
--- WHERE "voyDepartureId" = geo.id; 
-
--- UPDATE "bgbVoyageRoute"
--- SET "voyarrivalnode" = findNearestNode(geo.lng, geo.lat)
--- FROM "bgbPlaceGeo" geo
--- WHERE "voyArrivalId" = geo.id;
 
