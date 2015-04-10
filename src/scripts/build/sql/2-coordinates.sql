@@ -10,7 +10,7 @@ CREATE TABLE "amhPlaces" (
 	longitude varchar(255)
 );
 
-COPY "amhPlaces" FROM '/Users/Robert-Jan/Desktop/HDAT/src/data/amh_location.csv' DELIMITER ',' CSV;
+COPY "amhPlaces" FROM '/Users/Robert-Jan/Desktop/HDAT/src/data/amh_location_mod.csv' DELIMITER ',' CSV;
 
 -- PLACES
 -- Create table bgbPlaceGeo
@@ -30,6 +30,13 @@ SET
 FROM "amhPlaces"
 WHERE naam = title;
 
+-- Run Nearest Node
+
+ALTER TABLE "bgbPlaceGeo" 
+    ADD COLUMN node int; 
+
+UPDATE "bgbPlaceGeo" SET node = findNearestNode(lat, lng);
+
 -- REGIONS
 -- Create table bgbRegionsGeo
 
@@ -48,18 +55,10 @@ SET
 FROM "amhPlaces"
 WHERE naam = title;
 
+-- Run Nearest Node
 
+ALTER TABLE "bgbRegioGeo" 
+    ADD COLUMN node int; 
 
+UPDATE "bgbRegioGeo" SET node = findNearestNode(lat, lng);
 
-
-
-
-
-
-
-
--- Add 30 regios to bgbPlaceGeo
-
--- INSERT INTO "bgbPlaceGeo" 
--- SELECT 	"id", "naam"
--- FROM "bgbRegio";

@@ -1,0 +1,1 @@
+SELECT * FROM "bgbVoyageRoute" WHERE "voyArrivalPlaceNode" IS NOT NULL AND "voyDeparturePlaceNode" IS NOT NULL;
