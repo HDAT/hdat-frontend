@@ -58,21 +58,28 @@ UPDATE "routingMod" SET
 -- Create Nearestnode Function
 
 DROP FUNCTION findNearestNode(double precision, double precision);
-CREATE OR REPLACE FUNCTION findNearestNode(lat double precision, long double precision)
-    RETURNS TABLE (
-        node integer
-    ) AS
-    $func$
+CREATE OR REPLACE FUNCTION findNearestNode(
+        lat double precision, 
+        long double precision
+    )
+    RETURNS integer AS
+$func$
+
+DECLARE
+    returnValue    integer; 
+
 BEGIN
-    RAISE NOTICE 'something %', ST_Distance(ST_SetSrid(ST_Makepoint('25.55', '45.54'),4326), ST_SetSrid(ST_Makepoint(lat, long),4326));
-    
     IF (lat IS NOT NULL OR long IS NOT NULL) THEN
-        RETURN QUERY
         SELECT id 
+        INTO returnValue
         FROM "routingMod_vertices_pgr"
-        ORDER BY ST_Distance(the_geom, ST_SetSrid(ST_Makepoint(lat, long),4326))
+        ORDER BY CAST(ST_Distance(the_geom, ST_SetSrid(ST_Makepoint(lat, long),4326)) AS integer)
         LIMIT 1;
     END IF;
+
+    RAISE NOTICE 'the value is %', returnValue;
+    
+    RETURN returnValue;
 END
 $func$  LANGUAGE plpgsql;
 

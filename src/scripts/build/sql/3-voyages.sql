@@ -7,8 +7,8 @@ CREATE TABLE "bgbVoyageRoute" (
 	"voyArrivalPlaceId" integer,
 	"voyDepartureRegioId" integer,
 	"voyArrivalRegioId" integer,
-	"voyArrivalPlaceNode" bigint,
-	"voyDeparturePlaceNode" bigint,
+	"voyArrivalPlaceNode" int,
+	"voyDeparturePlaceNode" int,
 	"voyArrivalRegioNode" int,
 	"voyDepartureRegioNode" int,
 	"route" geometry(linestring, 4326),
@@ -71,14 +71,14 @@ WHERE "voyArrivalRegioId" = geo.id;
 
 -- Attach route
 		
-SELECT pgr_dijkstra_hdat('routingMod',"voyDeparturePlaceNode",23) FROM "bgbVoyageRoute";
+-- SELECT pgr_dijkstra_hdat('routingMod',"voyDeparturePlaceNode",23) FROM "bgbVoyageRoute";
 
--- UPDATE "bgbVoyageRoute" 
--- SET 
--- 	"route" = CASE 
--- 		WHEN "voyDeparturePlaceNode" IS NOT NULL OR "voyArrivalPlaceNode" IS NOT NULL THEN
--- 			pgr_dijkstra_hdat('routingMod',"voyDeparturePlaceNode","voyArrivalPlaceNode")
--- 		END;
+UPDATE "bgbVoyageRoute" 
+SET 
+	"route" = CASE 
+		WHEN "voyDeparturePlaceNode" IS NOT NULL OR "voyArrivalPlaceNode" IS NOT NULL THEN
+			pgr_dijkstra_hdat('routingMod',"voyDeparturePlaceNode","voyArrivalPlaceNode")
+		END;
 
 
 
