@@ -11,12 +11,12 @@ CREATE TABLE "bgbVoyageRoute" (
 	"voyDeparturePlaceNode" int,
 	"voyArrivalRegioNode" int,
 	"voyDepartureRegioNode" int,
-	"routeTemp" geometry(linestring, 4326),
+	"routeTemp" varchar(4444),
 	"route" geometry(linestring, 4326),
 	"voyArrTimeStamp" timeStamp,
 	"voyDepTimeStamp" timeStamp,
 	"test" geometry(geometry, 4326),
-	"test2" geometry(geometry, 4326)
+	"test2" varchar(255)
 );
 
 -- Selecting the required data
@@ -81,29 +81,30 @@ SET
 	"routeTemp" = 	CASE 
 						WHEN "voyDeparturePlaceNode" IS NOT NULL OR "voyArrivalPlaceNode" IS NOT NULL THEN
 						(SELECT 
-							-- ST_asText(
-								ST_LineMerge(
-									ST_CollectionExtract(
+							ST_asText(
+								-- ST_LineMerge(
+									-- ST_CollectionExtract(
 										ST_Collect(pgr_dijkstra_hdat)::geometry(geometryCollection, 4326)
-									, 2)
-								)
-							-- ) 
+									-- , 2)
+								-- )
+							) 
 						FROM pgr_dijkstra_hdat('routingMod',"voyDeparturePlaceNode","voyArrivalPlaceNode"))
 					END;
 
 
-UPDATE "bgbVoyageRoute" 
-SET
-	"route" = "routeTemp"
-WHERE
-	ST_StartPoint("routeTemp") = (SELECT ST_SetSRID(ST_MakePoint(lat, lng),4326) FROM "bgbPlaceGeo" WHERE "voyDeparturePlaceId" = "id");
+-- UPDATE "bgbVoyageRoute" 
+-- SET
+-- 	"route" = "routeTemp"
+-- WHERE
+-- 	ST_StartPoint("routeTemp") = (SELECT ST_Translate(ST_SetSRID(ST_MakePoint(lat, lng),4326), 10, 0) FROM "bgbPlaceGeo" WHERE "voyDeparturePlaceId" = "id")
+-- 	;
 
 
-UPDATE "bgbVoyageRoute" 
-SET
-	"test" = (SELECT ST_SetSRID(ST_MakePoint(lat, lng),4326) FROM "bgbPlaceGeo" WHERE "voyDeparturePlaceId" = "id");
+-- UPDATE "bgbVoyageRoute" 
+-- SET
+-- 	"test" = (SELECT ST_SetSRID(ST_MakePoint(lat, lng),4326) FROM "bgbPlaceGeo" WHERE "voyDeparturePlaceId" = "id");
 
-UPDATE "bgbVoyageRoute" 
-SET
-	"test2" = ST_StartPoint("routeTemp");
+-- UPDATE "bgbVoyageRoute" 
+-- SET
+-- 	"test2" = ST_asText(ST_StartPoint("routeTemp"));
 
