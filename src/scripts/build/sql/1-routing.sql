@@ -60,7 +60,7 @@ UPDATE "routingMod" SET
 DROP FUNCTION findNearestNode(double precision, double precision);
 CREATE OR REPLACE FUNCTION findNearestNode(
         lat double precision, 
-        long double precision
+        lng double precision
     )
     RETURNS integer AS
 $func$
@@ -69,11 +69,11 @@ DECLARE
     returnValue    integer; 
 
 BEGIN
-    IF (lat IS NOT NULL OR long IS NOT NULL) THEN
+    IF (lat IS NOT NULL OR lng IS NOT NULL) THEN
         SELECT id 
         INTO returnValue
         FROM "routingMod_vertices_pgr"
-        ORDER BY CAST(ST_Distance(the_geom, ST_SetSrid(ST_Makepoint(lat, long),4326)) AS integer)
+        ORDER BY CAST(ST_Distance(the_geom, ST_SetSrid(ST_Makepoint(lng, lat),4326)) AS integer)
         LIMIT 1;
     END IF;
 

@@ -13,10 +13,9 @@ CREATE TABLE "bgbVoyageRoute" (
 	"voyDepartureRegioNode" int,
 	"routeTemp" geometry(linestring, 4326),
 	"route" geometry(linestring, 4326),
+	"routeGeoJSON" text,
 	"voyArrTimeStamp" timeStamp,
-	"voyDepTimeStamp" timeStamp,
-	"test" geometry(geometry, 4326),
-	"test2" varchar(255)
+	"voyDepTimeStamp" timeStamp
 );
 
 -- Selecting the required data
@@ -91,7 +90,24 @@ SET
 
 UPDATE "bgbVoyageRoute" 
 SET
-	"route" = ST_Reverse("routeTemp")
-WHERE
-	ST_StartPoint("routeTemp") = (SELECT the_geom FROM "routingMod_vertices_pgr" WHERE "voyDeparturePlaceNode" = "id")
-	;
+	"route" = CASE
+		WHEN (ST_EndPoint("routeTemp") = (SELECT the_geom FROM "routingMod_vertices_pgr" WHERE "voyDeparturePlaceNode" = "id")) THEN
+		 	ST_Reverse("routeTemp")
+		ELSE
+			"routeTemp"
+		END;
+
+ALTER TABLE "bgbVoyageRoute" DROP COLUMN "routeTemp";
+
+UPDATE "bgbVoyageRoute" 
+SET
+	"routeGeoJSON" = ST_AsGeoJSON("route")
+
+
+
+
+
+
+
+
+
