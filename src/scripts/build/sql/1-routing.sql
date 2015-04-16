@@ -77,7 +77,7 @@ BEGIN
         LIMIT 1;
     END IF;
 
-    RAISE NOTICE 'the value is %', returnValue;
+    -- RAISE NOTICE 'the value is %', returnValue;
     
     RETURN returnValue;
 END
