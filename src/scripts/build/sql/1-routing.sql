@@ -1,10 +1,4 @@
--- Create changed Routing table
-
-DROP TABLE IF EXISTS "routingMod";
-CREATE TABLE "routingMod" AS
-  TABLE "routing";
-
--- Feed it to pgRouting
+-- Feed the routing-segments table to pgRouting
 
 -- Create required columns
 ALTER TABLE "routingMod" 

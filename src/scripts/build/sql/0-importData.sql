@@ -10,3 +10,14 @@ CREATE TABLE "amhPlaces" (
 	longitude varchar(255)
 );
 
+DROP TABLE IF EXISTS "routingMod";
+CREATE TABLE "routingMod" AS
+  TABLE "routing";
+
+DROP TABLE IF EXISTS "bgbPlaceGeo";
+CREATE TABLE "bgbPlaceGeo" AS
+  TABLE "bgbPlace";
+
+DROP TABLE IF EXISTS "bgbVoyageRoute";
+CREATE TABLE "bgbVoyageRoute" AS
+  TABLE "bgbVoyage";

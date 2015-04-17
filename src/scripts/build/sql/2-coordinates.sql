@@ -1,10 +1,3 @@
--- PLACES
--- Setup
-
-DROP TABLE IF EXISTS "bgbPlaceGeo";
-CREATE TABLE "bgbPlaceGeo" AS
-  TABLE "bgbPlace";
-
 ALTER TABLE "bgbPlaceGeo" 
 	ADD COLUMN "geom" geometry(geometry, 4326),
 	ADD COLUMN "node" int;

@@ -1,12 +1,6 @@
-DROP TABLE IF EXISTS "bgbVoyageRoute";
-CREATE TABLE "bgbVoyageRoute" AS
-  TABLE "bgbVoyage";
-
 ALTER TABLE "bgbVoyageRoute" 
 	ADD COLUMN "voyDeparturePlaceNode" int,
 	ADD COLUMN "voyArrivalPlaceNode" int,
-	ADD COLUMN "voyDepartureRegioNode" int,
-	ADD COLUMN "voyArrivalRegioNode" int,
 	ADD COLUMN "routeTemp" geometry(linestring, 4326),
 	ADD COLUMN "route" geometry(linestring, 4326),
 	ADD COLUMN "routeGeoJSON" text,
