@@ -13,7 +13,7 @@ CREATE TABLE "amhPlaces" (
 COPY "amhPlaces" FROM '/Users/Robert-Jan/Desktop/HDAT/src/data/amh_location_mod.csv' DELIMITER ',' CSV;
 
 -- PLACES
--- Create table bgbPlaceGeo
+-- Setup
 
 DROP TABLE IF EXISTS "bgbPlaceGeo";
 CREATE TABLE "bgbPlaceGeo" AS
@@ -37,7 +37,7 @@ SET
 FROM "amhPlaces"
 WHERE naam = title;
 
--- Run Nearest Node
+-- Connect the place to the nearest node in the route system. 
 
-UPDATE "bgbPlaceGeo" SET node = findNearestNode(geom);
+UPDATE "bgbPlaceGeo" SET node = findNearestNode("geom");
 

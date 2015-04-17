@@ -1,5 +1,5 @@
-DROP FUNCTION IF EXISTS pgr_dijkstra_hdat(varchar, integer, integer);
-CREATE OR REPLACE FUNCTION pgr_dijkstra_hdat(
+DROP FUNCTION IF EXISTS determineRoute(varchar, integer, integer);
+CREATE OR REPLACE FUNCTION determineRoute(
         IN tbl varchar,
         IN source integer,
         IN target integer,

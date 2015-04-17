@@ -57,20 +57,6 @@ SET
 FROM "bgbPlaceGeo" AS geo
 WHERE "voyArrivalPlaceId" = geo.id;
 
--- Add nodes to region
-
-UPDATE "bgbVoyageRoute" 
-SET
-	"voyDepartureRegioNode" = "node"
-FROM "bgbRegioGeo" AS geo
-WHERE "voyDepartureRegioId" = geo.id;
-
-UPDATE "bgbVoyageRoute" 
-SET
-	"voyArrivalRegioNode" = "node"
-FROM "bgbRegioGeo" AS geo
-WHERE "voyArrivalRegioId" = geo.id;
-
 -- Attach route
 		
 UPDATE "bgbVoyageRoute" 
@@ -81,11 +67,11 @@ SET
 							-- ST_asText(
 								ST_LineMerge(
 									ST_CollectionExtract(
-										ST_Collect(pgr_dijkstra_hdat)::geometry(geometryCollection, 4326)
+										ST_Collect(determineRoute)::geometry(geometryCollection, 4326)
 									, 2)
 								)
 							-- ) 
-						FROM pgr_dijkstra_hdat('routingMod',"voyDeparturePlaceNode","voyArrivalPlaceNode"))
+						FROM determineRoute('routingMod',"voyDeparturePlaceNode","voyArrivalPlaceNode"))
 					END;
 
 UPDATE "bgbVoyageRoute" 
