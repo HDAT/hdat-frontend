@@ -1,1 +1,0 @@
-SELECT COUNT(*) FROM "bgbVoyageRoute" WHERE "voyArrivalPlaceNode" IS NOT NULL AND "voyDeparturePlaceNode" IS NOT NULL;
