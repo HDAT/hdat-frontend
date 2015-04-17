@@ -1,47 +1,17 @@
--- Create table for use by Torque
 DROP TABLE IF EXISTS "bgbVoyageRoute";
-CREATE TABLE "bgbVoyageRoute" (
-	"id" SERIAL PRIMARY KEY,
-	"voyId" integer,
-	"voyDeparturePlaceId" integer,
-	"voyArrivalPlaceId" integer,
-	"voyDepartureRegioId" integer,
-	"voyArrivalRegioId" integer,
-	"voyArrivalPlaceNode" int,
-	"voyDeparturePlaceNode" int,
-	"voyArrivalRegioNode" int,
-	"voyDepartureRegioNode" int,
-	"routeTemp" geometry(linestring, 4326),
-	"route" geometry(linestring, 4326),
-	"routeGeoJSON" text,
-	"voyArrTimeStamp" timeStamp,
-	"voyDepTimeStamp" timeStamp
-);
+CREATE TABLE "bgbVoyageRoute" AS
+  TABLE "bgbVoyage";
 
--- Selecting the required data
-
-INSERT INTO "bgbVoyageRoute" (
-		"voyId", 
-		"voyDeparturePlaceId",
-		"voyArrivalPlaceId",
-		"voyDepartureRegioId",
-		"voyArrivalRegioId",		
-		"voyArrTimeStamp", 
-		"voyDepTimeStamp"
-	)
-SELECT 
-	"voyId",
-	"voyDeparturePlaceId",
-	"voyArrivalPlaceId",
-	"voyDepartureRegioId",
-	"voyArrivalRegioId",
-	CASE 
-		WHEN "voyArrivalYear" IS NOT NULL THEN to_timestamp(CONCAT_WS(' ', "voyArrivalDay", "voyArrivalMonth", "voyArrivalYear"),  'DD MM YYYY')
-	END,
-	CASE 
-		WHEN "voyDepartureYear" IS NOT NULL THEN to_timestamp(CONCAT_WS(' ', "voyDepartureDay", "voyDepartureMonth", "voyDepartureYear"),  'DD MM YYYY')
-	END
-FROM "bgbVoyage";
+ALTER TABLE "bgbVoyageRoute" 
+	ADD COLUMN "voyDeparturePlaceNode" int,
+	ADD COLUMN "voyArrivalPlaceNode" int,
+	ADD COLUMN "voyDepartureRegioNode" int,
+	ADD COLUMN "voyArrivalRegioNode" int,
+	ADD COLUMN "routeTemp" geometry(linestring, 4326),
+	ADD COLUMN "route" geometry(linestring, 4326),
+	ADD COLUMN "routeGeoJSON" text,
+	ADD COLUMN "voyDepTimeStamp" timeStamp,
+	ADD COLUMN "voyArrTimeStamp" timeStamp;
 
 -- Add route to places
 
@@ -74,6 +44,8 @@ SET
 						FROM determineRoute('routingMod',"voyDeparturePlaceNode","voyArrivalPlaceNode"))
 					END;
 
+-- Make sure the directionality of the route is correct
+
 UPDATE "bgbVoyageRoute" 
 SET
 	"route" = CASE
@@ -85,13 +57,22 @@ SET
 
 ALTER TABLE "bgbVoyageRoute" DROP COLUMN "routeTemp";
 
+-- Transform the route to valid GeoJSON
+
 UPDATE "bgbVoyageRoute" 
 SET
-	"routeGeoJSON" = ST_AsGeoJSON("route")
+	"routeGeoJSON" = ST_AsGeoJSON("route");
 
 
+-- TEMPORAL CONCATENATION
 
 
+	-- CASE 
+	-- 	WHEN "voyArrivalYear" IS NOT NULL THEN to_timestamp(CONCAT_WS(' ', "voyArrivalDay", "voyArrivalMonth", "voyArrivalYear"),  'DD MM YYYY')
+	-- END,
+	-- CASE 
+	-- 	WHEN "voyDepartureYear" IS NOT NULL THEN to_timestamp(CONCAT_WS(' ', "voyDepartureDay", "voyDepartureMonth", "voyDepartureYear"),  'DD MM YYYY')
+	-- END
 
 
 
