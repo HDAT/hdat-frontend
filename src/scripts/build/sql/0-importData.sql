@@ -10,4 +10,3 @@ CREATE TABLE "amhPlaces" (
 	longitude varchar(255)
 );
 
-COPY "amhPlaces" FROM '/Users/Robert-Jan/Desktop/HDAT/src/data/amh_location_mod.csv' DELIMITER ',' CSV;
