@@ -10,7 +10,7 @@ CREATE TABLE "amhPlaces" (
 	longitude varchar(255)
 );
 
-COPY "amhPlaces" FROM '/Users/Erik/Desktop/HDAT/src/data/amh_location_mod.csv' DELIMITER ',' CSV;
+COPY "amhPlaces" FROM '/Users/Robert-Jan/Desktop/HDAT/src/data/amh_location_mod.csv' DELIMITER ',' CSV;
 
 -- PLACES
 -- Create table bgbPlaceGeo
@@ -18,47 +18,26 @@ COPY "amhPlaces" FROM '/Users/Erik/Desktop/HDAT/src/data/amh_location_mod.csv' D
 DROP TABLE IF EXISTS "bgbPlaceGeo";
 CREATE TABLE "bgbPlaceGeo" AS
   TABLE "bgbPlace";
-ALTER TABLE "bgbPlaceGeo" ADD COLUMN "lat" float;
-ALTER TABLE "bgbPlaceGeo" ADD COLUMN "lng" float;
 
--- Patternmatch places
+ALTER TABLE "bgbPlaceGeo" 
+	ADD COLUMN "geom" geometry(geometry, 4326),
+	ADD COLUMN "node" int;
+
+-- Match places to AMHplaces
 
 UPDATE "bgbPlaceGeo"
 SET 
-	lat = CAST(latitude as FLOAT),
-	lng = CAST(longitude as FLOAT)
+	geom = 	St_SetSRID(	
+				ST_MakePoint(
+					CAST("longitude" as FLOAT), 
+					CAST("latitude" as FLOAT)
+				),
+				4326
+			)
 FROM "amhPlaces"
 WHERE naam = title;
 
 -- Run Nearest Node
 
-ALTER TABLE "bgbPlaceGeo" 
-    ADD COLUMN node int; 
-
-UPDATE "bgbPlaceGeo" SET node = findNearestNode(lat, lng);
-
--- REGIONS
--- Create table bgbRegionsGeo
-
-DROP TABLE IF EXISTS "bgbRegioGeo";
-CREATE TABLE "bgbRegioGeo" AS
-  TABLE "bgbRegio";
-ALTER TABLE "bgbRegioGeo" ADD COLUMN "lat" float;
-ALTER TABLE "bgbRegioGeo" ADD COLUMN "lng" float;
-
--- Patternmatch regio
-
-UPDATE "bgbRegioGeo"
-SET 
-	lat = CAST(latitude as FLOAT),
-	lng = CAST(longitude as FLOAT)
-FROM "amhPlaces"
-WHERE naam = title;
-
--- Run Nearest Node
-
-ALTER TABLE "bgbRegioGeo" 
-    ADD COLUMN node int; 
-
-UPDATE "bgbRegioGeo" SET node = findNearestNode(lat, lng);
+UPDATE "bgbPlaceGeo" SET node = findNearestNode(geom);
 
