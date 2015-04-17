@@ -1,7 +1,7 @@
 ALTER TABLE "bgbVoyageRoute" 
 	ADD COLUMN "voyDeparturePlaceNode" int,
 	ADD COLUMN "voyArrivalPlaceNode" int,
-	ADD COLUMN "routeTemp" varchar(3333),
+	ADD COLUMN "routeTemp" geometry(linestring, 4326),
 	ADD COLUMN "route" geometry(linestring, 4326),
 	ADD COLUMN "routeGeoJSON" text;
 
@@ -26,36 +26,43 @@ SET
 	"routeTemp" = 	CASE 
 						WHEN "voyDeparturePlaceNode" IS NOT NULL OR "voyArrivalPlaceNode" IS NOT NULL THEN
 						(SELECT 
-							ST_asText(
-								ST_LineMerge(
-									ST_CollectionExtract(
-											ST_Collect(
-												determineRoute
-											)::geometry(geometryCollection, 4326)
-									, 2)
-								)
-							) 
+							-- ST_asText(
+								ST_SetSRID(
+									ST_LineMerge(
+										-- DIRTY AS HELL THIS IS A SIMPLE SRID // TRANSFORM ISSUE // THIS SHIT COST AT LEAST 400 BUCKS, PLUS COFFEE
+										ST_geomfromtext(
+											ST_AsText(
+												ST_CollectionExtract(
+														ST_Collect(
+															determineRoute
+														)::geometry(geometryCollection, 4326)
+												, 2)
+											)
+										)
+									)
+								,4326)
+							-- ) 
 						FROM determineRoute('routingMod',"voyDeparturePlaceNode","voyArrivalPlaceNode"))
 					END;
 
 -- Make sure the directionality of the route is correct
 
--- UPDATE "bgbVoyageRoute" 
--- SET
--- 	"route" = CASE
--- 		WHEN (ST_EndPoint("routeTemp") = (SELECT the_geom FROM "routingMod_vertices_pgr" WHERE "voyDeparturePlaceNode" = "id")) THEN
--- 		 	ST_Reverse("routeTemp")
--- 		ELSE
--- 			"routeTemp"
--- 		END;
+UPDATE "bgbVoyageRoute" 
+SET
+	"route" = CASE
+		WHEN (ST_EndPoint("routeTemp") = (SELECT the_geom FROM "routingMod_vertices_pgr" WHERE "voyDeparturePlaceNode" = "id")) THEN
+		 	ST_Reverse("routeTemp")
+		ELSE
+			"routeTemp"
+		END;
 
--- ALTER TABLE "bgbVoyageRoute" DROP COLUMN "routeTemp";
+ALTER TABLE "bgbVoyageRoute" DROP COLUMN "routeTemp";
 
--- -- Transform the route to valid GeoJSON
+-- Transform the route to valid GeoJSON
 
--- UPDATE "bgbVoyageRoute" 
--- SET
--- 	"routeGeoJSON" = ST_AsGeoJSON("route");
+UPDATE "bgbVoyageRoute" 
+SET
+	"routeGeoJSON" = ST_AsGeoJSON("route");
 
 
 

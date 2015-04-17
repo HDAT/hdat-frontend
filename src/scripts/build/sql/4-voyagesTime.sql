@@ -1,6 +1,6 @@
--- ALTER TABLE "bgbVoyageRoute" 
--- 	ADD COLUMN "voyDepTimeStamp" timeStamp,
--- 	ADD COLUMN "voyArrTimeStamp" timeStamp;
+ALTER TABLE "bgbVoyageRoute" 
+	ADD COLUMN "voyDepTimeStamp" timeStamp,
+	ADD COLUMN "voyArrTimeStamp" timeStamp;
 
 -- TEMPORAL CONCATENATION
 
