@@ -40,22 +40,22 @@ SET
 
 -- Make sure the directionality of the route is correct
 
-UPDATE "bgbVoyageRoute" 
-SET
-	"route" = CASE
-		WHEN (ST_EndPoint("routeTemp") = (SELECT the_geom FROM "routingMod_vertices_pgr" WHERE "voyDeparturePlaceNode" = "id")) THEN
-		 	ST_Reverse("routeTemp")
-		ELSE
-			"routeTemp"
-		END;
+-- UPDATE "bgbVoyageRoute" 
+-- SET
+-- 	"route" = CASE
+-- 		WHEN (ST_EndPoint("routeTemp") = (SELECT the_geom FROM "routingMod_vertices_pgr" WHERE "voyDeparturePlaceNode" = "id")) THEN
+-- 		 	ST_Reverse("routeTemp")
+-- 		ELSE
+-- 			"routeTemp"
+-- 		END;
 
-ALTER TABLE "bgbVoyageRoute" DROP COLUMN "routeTemp";
+-- ALTER TABLE "bgbVoyageRoute" DROP COLUMN "routeTemp";
 
--- Transform the route to valid GeoJSON
+-- -- Transform the route to valid GeoJSON
 
-UPDATE "bgbVoyageRoute" 
-SET
-	"routeGeoJSON" = ST_AsGeoJSON("route");
+-- UPDATE "bgbVoyageRoute" 
+-- SET
+-- 	"routeGeoJSON" = ST_AsGeoJSON("route");
 
 
 
