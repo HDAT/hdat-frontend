@@ -58,11 +58,12 @@ SET
 
 ALTER TABLE "bgbVoyageRoute" DROP COLUMN "routeTemp";
 
+
 -- Transform the route to valid GeoJSON
 
 UPDATE "bgbVoyageRoute" 
 SET
-	"routeGeoJSON" = ST_AsGeoJSON("route");
+	"routeGeoJSON" = regexp_replace((ST_AsGeoJSON("route")), 'LineString', 'MultiPoint');
 
 
 
