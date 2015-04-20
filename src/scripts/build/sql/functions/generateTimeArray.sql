@@ -1,11 +1,3 @@
--- Generate timearray from! depature time AND arrival time. 
--- Were going to get cases where this is true by comparison with DAS
--- This function is more or less academically sound like this
--- The bad things happen in determineMissingDate (speed calulation things)
-
--- INPUT -> Depature time / Arrival time
--- OUTPUT -> Timearray (sting or array, but should fit the single field that the voyage offers it)
-
 DROP FUNCTION genTimeArray(timestamp, geometry, integer);
 CREATE OR REPLACE FUNCTION genTimeArray(
 		IN voyDepTimeStamp timestamp,
@@ -23,18 +15,26 @@ DECLARE
 
 BEGIN
 	WHILE iterator < points
-	LOOP	
+	LOOP
+		-- We don't need to measure the distance for the first point
+		-- Because we already have it's departure timestamp
 		IF (iterator = 1) THEN
 			RETURN QUERY
+			-- Convert to unix timestamp
 			SELECT  extract(epoch FROM ($1));
 		ELSE
 			RETURN QUERY
 			SELECT 	extract(epoch FROM (time + interval '1h' * 
 						((ST_Length_Spheroid(
 							(ST_Makeline(
+								-- Iterator minus one because it got +1 in the if-block
 								ST_PointN(ST_setSRID($2,4326), iterator-1), 
 								ST_PointN(ST_setSRID($2,4326), (iterator))))
 						,'SPHEROID["WGS84",6378137,298.257223563]')/1000)/$3)));
+			-- There might be a better solution for this, something like
+			-- return the previous timestamp + new timestamp, but I couldn't really find it
+			-- Now I think about it, it wouldn't work anyways because the unix timestamp
+			-- has the data type double precision.
 			time := time + interval '1h' * ((ST_Length_Spheroid(
 						(ST_Makeline(
 							ST_PointN(ST_setSRID($2,4326), iterator-1), 

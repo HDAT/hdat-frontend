@@ -25,8 +25,6 @@ BEGIN
 
     FOR rec IN EXECUTE SQL
     LOOP
-        -- seq     := seq + 1;
-        -- gid     := rec.gid;
         geom    := rec.geom;
         RETURN NEXT;
     END LOOP;

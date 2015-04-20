@@ -24,4 +24,5 @@ INSERT INTO "bgbVoyageRouteJSON"
 	  	FROM "bgbVoyageRoute" WHERE "geometry" IS NOT NULL) 
 	AS t;
 
--- Eventueel nog de type = Feature weghalen in bgbVoyageRoute
+-- Remove temporary type column 
+ALTER TABLE "bgbVoyageRoute" DROP COLUMN "type";
