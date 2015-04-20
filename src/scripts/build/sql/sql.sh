@@ -18,3 +18,4 @@ psql -d bgb -f 1-routing.sql
 psql -d bgb -f 2-coordinates.sql
 psql -d bgb -f 3-voyagesGeo.sql
 psql -d bgb -f 4-voyagesTime.sql
+psql -d bgb -f 5-exportJSON.sql

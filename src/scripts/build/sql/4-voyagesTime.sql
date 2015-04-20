@@ -3,7 +3,7 @@ ALTER TABLE "bgbVoyageRoute"
 	ADD COLUMN "voyArrTimeStamp" timeStamp,
 	ADD COLUMN "speed" integer, -- km/h
 	ADD COLUMN "length" float, -- km
-	ADD COLUMN "timeArray" json;
+	ADD COLUMN "time" json;
 
 UPDATE "bgbVoyageRoute" SET 
 	"voyDepTimeStamp" 	= CASE WHEN "voyDepartureYear" IS NOT NULL AND "voyDepartureMonth" IS NOT NULL AND "voyDepartureDay" IS NOT NULL THEN to_timestamp(CONCAT_WS(' ', "voyDepartureDay", "voyDepartureMonth", "voyDepartureYear"),  'DD MM YYYY') END,
@@ -19,7 +19,7 @@ UPDATE "bgbVoyageRoute" SET
 
 -- Create array around the generate time array function
 UPDATE "bgbVoyageRoute" SET
-	"timeArray"			= 	CASE WHEN "voyDepTimeStamp" IS NOT NULL
+	"time"				= 	CASE WHEN "voyDepTimeStamp" IS NOT NULL
 								THEN (SELECT json_agg(times) FROM genTimeArray("voyDepTimeStamp","route","speed"))
 							END;
 
