@@ -11,9 +11,9 @@ CREATE OR REPLACE FUNCTION genTimeArray(
 		IN voyDepTimeStamp timestamp,
         IN route geometry(geometry, 4326),
         IN speed integer,
-        OUT times timestamp
+        OUT times double precision
     )
-    RETURNS SETOF timestamp AS
+    RETURNS SETOF double precision AS
 $$
 
 DECLARE
@@ -26,15 +26,15 @@ BEGIN
 	LOOP	
 		IF (iterator = 1) THEN
 			RETURN QUERY
-			SELECT  ($1);
+			SELECT  extract(epoch FROM ($1));
 		ELSE
 			RETURN QUERY
-			SELECT 	(time + interval '1h' * 
+			SELECT 	extract(epoch FROM (time + interval '1h' * 
 						((ST_Length_Spheroid(
 							(ST_Makeline(
 								ST_PointN(ST_setSRID($2,4326), iterator-1), 
 								ST_PointN(ST_setSRID($2,4326), (iterator))))
-						,'SPHEROID["WGS84",6378137,298.257223563]')/1000)/$3));
+						,'SPHEROID["WGS84",6378137,298.257223563]')/1000)/$3)));
 			time := time + interval '1h' * ((ST_Length_Spheroid(
 						(ST_Makeline(
 							ST_PointN(ST_setSRID($2,4326), iterator-1), 
