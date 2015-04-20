@@ -1,6 +1,5 @@
 ALTER TABLE "bgbVoyageRoute" 
 	ADD COLUMN "voyDepTimeStamp" timeStamp,
-	ADD COLUMN "voyDepTimeStampUnix" double precision,
 	ADD COLUMN "voyArrTimeStamp" timeStamp,
 	ADD COLUMN "speed" integer, -- km/h
 	ADD COLUMN "length" float, -- km
@@ -17,10 +16,6 @@ UPDATE "bgbVoyageRoute" SET
 	"voyDepTimeStamp"	= 	CASE WHEN "voyArrTimeStamp" IS NOT NULL AND "voyDepTimeStamp" IS NULL 
 								THEN ("voyArrTimeStamp"::timestamp - interval '1h' * ("length"/"speed"))
 							ELSE "voyDepTimeStamp" END;
-
--- Convert to departure timestamp to unix 'timestamp'
-UPDATE "bgbVoyageRoute" SET 
-	"voyDepTimeStampUnix"	= (SELECT extract(epoch FROM "voyDepTimeStamp"));
 
 -- Create array around the generate time array function
 UPDATE "bgbVoyageRoute" SET
