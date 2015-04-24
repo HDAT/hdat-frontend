@@ -1,30 +1,5 @@
 'use strict';
 
-// define the torque layer style using cartocss
-var CARTOCSS = [
-    'Map {',
-    '-torque-time-attribute: "date";',
-    '-torque-aggregation-function: "count(cartodb_id)";',
-    '-torque-frame-count: 8000;',
-    '-torque-animation-duration: 1800;',
-    '-torque-resolution: 2',
-    '}',
-    '#layer {',
-    '  marker-width: 1;',
-    '  marker-fill-opacity: 0.8;',
-    '  marker-fill: #afb1f9; ',
-    '  comp-op: "lighten";',
-    '  [value > 2] { marker-fill: #FEC44F; }',
-    '  [value > 3] { marker-fill: #FE9929; }',
-    '  [value > 4] { marker-fill: #EC7014; }',
-    '  [value > 5] { marker-fill: #CC4C02; }',
-    '  [value > 6] { marker-fill: #993404; }',
-    '  [value > 7] { marker-fill: #662506; }',
-    '  [frame-offset = 1] { marker-width: 1; marker-fill-opacity: 0.5;}',
-    '  [frame-offset = 2] { marker-width: 1; marker-fill-opacity: 0.05;}',
-    '}'
-].join('\n');
-
 var southWest = L.latLng(-70, 179),
     northEast = L.latLng(70, -179),
     bounds = L.latLngBounds(southWest, northEast);
@@ -38,81 +13,95 @@ var map = new L.Map('map', {
   noWrap: false,
   maxBounds: bounds,
   attributionControl: false,
+  inertia: true,
+  worldCopyJump: true,
+  layers:[
+    L.tileLayer('https://{s}.tiles.mapbox.com/v4/erva.33c59435/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZXJ2YSIsImEiOiJUNy1GUV84In0.YTqElwgLmBOW8higJ-9GIw')
+  ]
 });
-L.tileLayer('images/tiles/{z}/{x}/{y}.png', {
-  tms: true
-}).addTo(map);
-var torqueLayer = new L.TorqueLayer({
-      provider: 'sql_api',
-      user       : 'ervazu',
-      table      : 'allvoyages',
-      column     : 'date',
-      countby    : 'count(cartodb_id)',
-      loop       : true,
-      resolution: 1,
-      steps: 9600,
-      blendmode  : 'multiply',
-      animationDuration: 800,
-      map: map,
-      cartocss: CARTOCSS
-});
-torqueLayer.addTo(map);
-torqueLayer.play();
 
-/* Test*/
+L.Icon.Default.imagePath = 'images/leaflet/';
 
-init_slider(torqueLayer);
+var theData =  
+        {
+        "type": "Feature",
+        "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+                [-4.59240906784311, 49.7593481485726],
+                [-7.74334157494906, 48.5575971458624],
+                [-10.6817693315758, 46.4618606411361],
+                [-13.6385164632438, 43.0691123834848],
+                [-15.510756592466, 38.8483283739662],
+                [-17.1375170961347, 34.7447883647119],
+                [-18.2366795986135, 31.1322076065649],
+                [-19.4823971014228, 25.0648305928818],
+                [-21.3986037307442, 17.5245758258771],
+                [-21.2520487304137, 12.446445064425],
+                [-18.4125455990101, 4.78894629715591],
+                [-20.919221122431, 0.873150917348737],
+                [-19.1163500603541, -0.768811307133922],
+                [-10.6630469281444, -9.17925262064511],
+                [-2.42405288942735, -16.1228672498067],
+                [2.70507808149652, -20.4900103327567],
+                [9.72012907515562, -26.5478140421487],
+                [14.5444648908899, -30.6482613643079],
+                [18.4249830635265, -33.9015193872029],
+                [18.3091729524126, -33.9150118060562],
+                [18.2270983014336, -34.186031355559],
+                [18.7225978622165, -34.7426639790358],
+                [20.594726239179, -35.1617971977587],
+                [28.6281129313688, -34.4632418332205],
+                [36.340164155871, -31.7528470188121],
+                [36.7875658603713, -31.6536783059658],
+                [38.1328657654914, -30.5348447170922],
+                [36.9081922589137, -23.9554817296267],
+                [36.8300216095576, -21.7927604307766],
+                [38.9927429084077, -18.9004464046037],
+                [42.4387657008525, -14.3535203003948],
+                [43.3246997268875, -10.4710447157122],
+                [44.8164562854316, -5.18149744262105],
+                [48.1777942077408, -1.88530172810861],
+                [55.3238944030375, 3.88629788267799],
+                [63.0171891438264, 7.15643671407175],
+                [70.658370118378, 9.1758451557691],
+                [74.2086204432975, 9.07161762329439],
+                [75.037387759704, 7.61123238300322],
+                [76.6160287954004, 6.00388878302145],
+                [79.5149877882247, 5.31502724017214],
+                [80.7922518989244, 5.6307554473114],
+                [81.8255442131984, 6.27656314373264],
+                [82.126921138195, 7.19504520086508],
+                [81.6963826739141, 8.11352725799752],
+                [81.3663031846322, 8.63017341513451],
+                [80.7348467703536, 9.56300675440965],
+                [80.2899570239301, 10.5819477865409],
+                [80.6487390774975, 11.9022657436688],
+                [82.0838672917669, 14.3850375543549],
+                [83.9889999962096, 16.6453644918293],
+                [85.5927557756557, 18.891340147161],
+                [86.7516218086782, 19.8600516917928],
+                [87.325673094386, 20.8215875953534],
+                [87.4404833515276, 21.3238824703477]
+            ]
+        },
+        "properties": {
+            "time": [8968320000, 8968511397.43192, 8968742759.40716, 8969062225.86949, 8969418255.12311, 8969762374.97483, 8970060177.30352, 8970552247.44078, 8971170133.38797, 8971574853.97765, 8972224776.38782, 8972595512.14662, 8972790363.92099, 8973740738.05991, 8974589598.49588, 8975112520.1732, 8975818904.08338, 8976290485.16916, 8976660221.60353, 8976668008.1391, 8976690330.1368, 8976745565.70678, 8976873155.65706, 8977405156.05549, 8977966604.20685, 8977998150.433, 8978126668.47506, 8978658782.73211, 8978831322.88606, 8979113422.40779, 8979562074.23364, 8979878995.49616, 8980316524.62329, 8980692236.25881, 8981426280.78681, 8982092917.70942, 8982720111.97804, 8983001209.60093, 8983134789.0461, 8983314134.57961, 8983551775.65785, 8983656739.44948, 8983753845.49338, 8983830813.2053, 8983911551.84517, 8983960313.82631, 8984049846.26781, 8984138263.16738, 8984247136.01295, 8984474423.92961, 8984706984.02299, 8984923833.63531, 8985040641.79353, 8985128601.62624, 8985169554.14271]
+        }
+    }
+;
 
-if(ui_enabled) {
-  init_ui(map, torqueLayer);
-} else {
-  var textarea = document.getElementById('code')
-  textarea.parentNode.removeChild(textarea);
-}
-  /* Dit werkt volgens mij nog niet */
-torqueLayer.on('change:bounds', function(changes) {
-  var bounds = changes.bounds;
-  var b = new L.Map.LatLngBounds(
-    new L.Map.LatLng(
-        bounds[0][0],
-        bounds[0][1]
-    ),
-    new L.Map.LatLng(
-      bounds[1][0],
-      bounds[1][1]
-    )
-  )
-  map.fitBounds(b);
-});
-torqueLayer.play();
-  
- /**
- * inits slider and a small play/pause button
- */
-function init_slider(torqueLayer) {
-  var torqueTime = $('#torque-time');
-  $("#torque-slider").slider({
-      min: 0,
-      max: torqueLayer.options.steps,
-      value: 0,
-      step: 1,
-      slide: function(event, ui){
-        var step = ui.value;
-        torqueLayer.setStep(step);
-      }
-  });
-
-  // each time time changes, move the slider
-  torqueLayer.on('change:time', function(changes) {
-    $("#torque-slider" ).slider({ value: changes.step });
-    var month_year = changes.time.toString().substr(4).split(' ');
-    console.log(month_year);
-    torqueTime.text(month_year[0] + " - " + month_year[2]);
-  });
-
-  // play-pause toggle
-  $("#torque-pause").click(function(){
-    torqueLayer.toggle();
-    $(this).toggleClass('playing');
-  });
+var playbackOptions = {
+    playControl: true,
+    dateControl: true,
+    sliderControl: true,
+    tickLen: 4000,
+    maxInterpolationTime: 46464646464646     
 };
+        
+
+
+var playback = new L.Playback(map, theData, null, playbackOptions);
+
+
+
