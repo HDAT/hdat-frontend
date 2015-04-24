@@ -13,9 +13,10 @@ UPDATE "bgbVoyageRoute" SET
 
 -- Generate missing departure times by using the arrival time
 UPDATE "bgbVoyageRoute" SET 
-	"voyDepTimeStamp"	= 	CASE WHEN "voyArrTimeStamp" IS NOT NULL AND "voyDepTimeStamp" IS NULL 
-								THEN ("voyArrTimeStamp"::timestamp - interval '1h' * ("length"/"speed"))
-							ELSE "voyDepTimeStamp" END;
+	"voyDepTimeStamp"	= 	CASE 	WHEN ("voyArrTimeStamp" IS NOT NULL AND "voyDepTimeStamp" IS NULL) 
+									THEN ("voyArrTimeStamp" - interval '1h' * ("length"/"speed"))
+									ELSE "voyDepTimeStamp" 
+							END;
 
 -- Create array around the generate time array function
 UPDATE "bgbVoyageRoute" SET
@@ -23,12 +24,4 @@ UPDATE "bgbVoyageRoute" SET
 								THEN (SELECT json_agg(times) FROM genTimeArray("voyDepTimeStamp","route","speed"))
 							END;
 
-
--- TEMPORAL CONCATENATION
-
--- UPDATE "bgbVoyageRoute" 
--- SET
--- 	"voyDeparturePlaceNode" = "node"
--- FROM "bgbPlaceGeo" AS geo
--- WHERE "voyDeparturePlaceId" = geo.id;
 

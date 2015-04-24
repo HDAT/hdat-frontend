@@ -1,7 +1,5 @@
 -- Assign Coordinates to places in bgbPlaces
 
--- Load amh_location.csv
-
 DROP TABLE IF EXISTS "amhPlaces";
 CREATE TABLE "amhPlaces" (
 	title varchar(255),

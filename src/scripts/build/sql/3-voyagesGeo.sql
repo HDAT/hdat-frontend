@@ -3,7 +3,6 @@ ALTER TABLE "bgbVoyageRoute"
 	ADD COLUMN "voyArrivalPlaceNode" int,
 	ADD COLUMN "routeTemp" geometry(linestring, 4326),
 	ADD COLUMN "route" geometry(linestring, 4326),
-	ADD COLUMN "routeGeoJSON" text,
 	ADD COLUMN "geometry" json;
 
 -- Add route to places
@@ -64,8 +63,7 @@ ALTER TABLE "bgbVoyageRoute" DROP COLUMN "routeTemp";
 
 UPDATE "bgbVoyageRoute" 
 SET
-	"routeGeoJSON" = ST_AsGeoJSON("route"), -- Deze kan denk ik weg
-	geometry = to_json(regexp_replace((ST_AsGeoJSON("route")), 'LineString', 'MultiPoint')::json);
+	geometry = regexp_replace((ST_AsGeoJSON("route")), 'LineString', 'MultiPoint')::json;
 
 
 
