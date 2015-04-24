@@ -217,7 +217,6 @@ L.Playback.Track = L.Class.extend({
             // the last t in the while would be past bounds
             this._endTime = t - tickLen;
             this._lastTick = this._ticks[this._endTime];
-
         },
 
         _interpolatePoint : function (start, end, ratio) {
