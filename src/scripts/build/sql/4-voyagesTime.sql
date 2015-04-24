@@ -18,6 +18,12 @@ UPDATE "bgbVoyageRoute" SET
 									ELSE "voyDepTimeStamp" 
 							END;
 
+UPDATE "bgbVoyageRoute" SET
+	"voyDepTimeStamp"	=	CASE 	WHEN ("voyDepTimeStamp" IS NOT NULL)
+									THEN ("voyArrTimeStamp" + interval '1h' * 24 * 365 * 500)
+							END;
+
+
 -- Create array around the generate time array function
 UPDATE "bgbVoyageRoute" SET
 	"time"				= 	CASE WHEN "voyDepTimeStamp" IS NOT NULL
