@@ -22,7 +22,7 @@ L.Playback.Util = L.Class.extend({
   statics: {
 
     DateStr: function(time) {
-      return new Date(time).toDateString();
+      return new Date(time * 1000).toDateString();
     },
 
     TimeStr: function(time) {
