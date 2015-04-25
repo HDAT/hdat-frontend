@@ -21,10 +21,10 @@ BEGIN
 		IF (iterator = 1) THEN
 			RETURN QUERY
 			-- Convert to unix timestamp
-			SELECT  extract(epoch FROM ($1));
+			SELECT  extract(epoch FROM ($1)) + 15768000000;
 		ELSE
 			RETURN QUERY
-			SELECT 	extract(epoch FROM (time + interval '1h' * 
+			SELECT 	15768000000 + extract(epoch FROM (time + interval '1h' * 
 						((ST_Length_Spheroid(
 							(ST_Makeline(
 								-- Iterator minus one because it got +1 in the if-block
