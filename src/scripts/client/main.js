@@ -3,6 +3,17 @@
 var southWest = L.latLng(-70, 179),
     northEast = L.latLng(70, -179),
     bounds = L.latLngBounds(southWest, northEast);
+
+var satellite = L.tileLayer('https://{s}.tiles.mapbox.com/v4/erva.33c59435/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZXJ2YSIsImEiOiJUNy1GUV84In0.YTqElwgLmBOW8higJ-9GIw', {id: 'satellite'}),
+    geography   = L.tileLayer('images/tilesoverlay/{z}/{x}/{y}.png', {id: 'geography'});
+
+var baseMaps = {
+    "Satellite": satellite,
+};
+
+var overlayMaps = {
+    "Geography": geography
+};
   
 var map = new L.Map('map', {
   zoomControl: true,
@@ -16,9 +27,11 @@ var map = new L.Map('map', {
   inertia: true,
   worldCopyJump: true,
   layers:[
-    L.tileLayer('https://{s}.tiles.mapbox.com/v4/erva.33c59435/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZXJ2YSIsImEiOiJUNy1GUV84In0.YTqElwgLmBOW8higJ-9GIw')
+    satellite
   ]
 });
+
+L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 L.Icon.Default.imagePath = 'images/leaflet/';
 
