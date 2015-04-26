@@ -43,9 +43,10 @@ var data =
 
 var customIcon = L.icon({
     iconUrl:                'images/leaflet/customIcon.png',
+    className:              'customIcon',
     iconSize:               [70, 70], // size of the icon
     iconAnchor:             [35, 35], // icon center point
-    popupAnchor:            [-3, -76] // point from which the popup should open relative to the iconAnchor
+    popupAnchor:            [70, 70] // point from which the popup should open relative to the iconAnchor
 });
 
 var playbackOptions = {
