@@ -733,7 +733,7 @@ body {
   position: absolute; }
 
 #overlay {
-  background-image: url('../images/overlay.png');
+  background-image: url('images/overlay.png');
   position: absolute;
   left: 0;
   top: 0;
