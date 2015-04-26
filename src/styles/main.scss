@@ -9,6 +9,14 @@ body {
 	position: absolute;
 }
 
+#overlay {
+	background-image: url('../images/overlay.png');
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1000;
+	pointer-events: none;
+}
 
 /* Marker animation */
 @-webkit-keyframes 'blink' {

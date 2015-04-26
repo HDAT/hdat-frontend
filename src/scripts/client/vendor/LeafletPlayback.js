@@ -40,7 +40,6 @@ L.Playback.Util = L.Class.extend({
       if (h === 0) h = 12;
       if (m < 10) m = '0' + m;
       if (s < 10) s = '0' + s;
-      console.log(h + ' ' + m);
       return h + ':' + m + ':' + s + dec + ' ' + mer;
     },
 
@@ -52,7 +51,6 @@ L.Playback.Util = L.Class.extend({
       if ((m >= 3) && (m <= 5)) { m = 'Spring'; };
       if ((m >= 6) && (m <= 8)) { m = 'Summer'; };
       if ((m >= 9) && (m <= 11)) { m = 'Autumn'; }; /* Nog even checken */
-      // console.log(m + ' ' + y);
       return m + ' ' + y;
     },
 
@@ -85,6 +83,7 @@ L.Playback.Util = L.Class.extend({
         var props = geojson.properties;
         var time = props.time;
         var altitude = geojson.properties.altitude;
+        console.log(L.Playback.Util.ParseGPX.geojson.type);
 
         coords.push([lng,lat]);
         time.push(t);
@@ -95,6 +94,7 @@ L.Playback.Util = L.Class.extend({
   }
 
 });
+
 
 L.Playback = L.Playback || {};
 
@@ -156,7 +156,6 @@ L.Playback.Track = L.Class.extend({
             this._tickLen = tickLen;
             this._ticks = [];
             this._marker = null;
-            console.log(this._marker)
 
             var sampleTimes = geoJSON.properties.time;
             var samples = geoJSON.geometry.coordinates;
@@ -381,7 +380,7 @@ L.Playback.TrackController = L.Class.extend({
         var marker = track.setMarker(timestamp, this.options);
 
         if (marker) {
-            marker.addTo(this._map);
+            marker.addTo(this._map).on('click', onClick);
             
             this._tracks.push(track);
         }            
