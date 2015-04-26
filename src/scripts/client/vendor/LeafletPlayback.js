@@ -156,6 +156,7 @@ L.Playback.Track = L.Class.extend({
             this._tickLen = tickLen;
             this._ticks = [];
             this._marker = null;
+            console.log(this._marker)
 
             var sampleTimes = geoJSON.properties.time;
             var samples = geoJSON.geometry.coordinates;
