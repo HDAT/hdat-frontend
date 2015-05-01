@@ -58,14 +58,75 @@ var playbackOptions = {
                             }     
 };
         
-var playback = new L.Playback(map, data, null, playbackOptions);
 
 
 // Slider shit
 
 var slider = document.querySelector('.slider').addEventListener('input', function(e){
   console.log(e.target.value);
+  if (e.target.value == 1755){
+    var playback = new L.Playback(map, data, null, playbackOptions);
+    console.log('1755');
+  }
 });
+
+
+/*
+
+var HDAT.initialise = function(){
+
+  this.compareVoyages = function(activeVoyages, newVoyages){
+  
+  };
+
+  this.getActiveVoyages = function(){
+  
+  };
+
+  this.getVoyages = function(){
+  
+  };
+
+  this.onChangeCallBack = function(){
+    var toBeAppendedVoyages = this.getVoyages();    
+  }
+
+  this.getStartTime = function(voyages){
+    start = somecalucaltion(voyages);
+    return start;
+  };
+
+  this.getEndTime = function(voyages){
+    end = somecalculation(voyages);
+    return end;
+  };
+
+  this.appendSlider = function(start, end, onChangeCallBack){
+    L.layer.append(input, range, min, max).on('input', onchangeCallback)
+  };
+
+  this.initialiseInterface = function(){
+    start = this.getStarttime();
+    end = this.getEndtime();
+    appendSlider(start, end, this.onchangeCallback)
+  };
+
+  this.getData = function(){
+    // ajax asynchronous.
+
+  };
+
+  this.initialiseApp = function(){
+    this.getData(initialiseInterface);
+  };
+
+  this.initialiseApp();
+
+}
+
+var HDAT-1 = new HDAT();
+
+*/
 
 
 

@@ -497,6 +497,7 @@ L.Playback.Clock = L.Class.extend({
   },
 
   setCursor: function (ms) {
+    console.log(ms);
     var time = parseInt(ms);
     if (!time) return;
     var mod = time % this._tickLen;
@@ -696,7 +697,9 @@ L.Playback.SliderControl = L.Control.extend({
 
         function onSliderChange(e) {
             var val = Number(e.target.value);
-            playback.setCursor(val);
+            // if (e.target.value >= startTime && e.target.value >= starttime) {
+                playback.setCursor(val);   
+            // }
         }
 
         playback.addCallback(function (ms) {
