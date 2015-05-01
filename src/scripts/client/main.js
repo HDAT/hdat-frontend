@@ -59,3 +59,17 @@ var playbackOptions = {
 };
         
 var playback = new L.Playback(map, data, null, playbackOptions);
+
+
+// Slider shit
+
+var slider = document.querySelector('.slider').addEventListener('input', function(e){
+  console.log(e.target.value);
+});
+
+
+
+
+
+
+

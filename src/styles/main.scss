@@ -44,12 +44,18 @@ body {
     -webkit-animation-timing-function: ease-in-out;   
 }
 
-#slider {
+.sliderContainer {
     height: 50px;
     width: 100%;
     background-color: white;
     position: absolute;
-    bottom: 0;
+    top: 100px;
     left: 0;
     z-index: 2000;
+}
+
+.slider {
+    width: 80%;
+    margin: 15px 10%;
+
 }
