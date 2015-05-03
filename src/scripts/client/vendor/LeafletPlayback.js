@@ -492,7 +492,6 @@ L.Playback.Clock = L.Class.extend({
   },
 
   setCursor: function (ms) {
-    console.log(ms);
     var time = parseInt(ms);
     if (!time) return;
     var mod = time % this._tickLen;

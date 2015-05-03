@@ -48,11 +48,6 @@ $(document).ready(function(){
     });
 });
 
-$(document).ajaxComplete(function(){            
-    data = $.parseJSON(data.responseText); //Takes AJAX Reponse Text and parses it to JSON
-    console.log(data[0].properties.time);
-});
-
 var customIcon = L.icon({
     iconUrl:                'images/leaflet/customIcon.png',
     className:              'customIcon',
@@ -61,90 +56,103 @@ var customIcon = L.icon({
     popupAnchor:            [70, 70] // point from which the popup should open relative to the iconAnchor
 });
 
-var playbackOptions = {
-    playControl:            true,
-    dateControl:            false,
-    sliderControl:          false,
-    tickLen:                4000,
-    maxInterpolationTime:   46464646464646,
-    marker:                 function(){
-                                return { icon: customIcon }      
-                            }     
-};
-        
+$(document).ajaxComplete(function(){            
+    data = $.parseJSON(data.responseText); //Takes AJAX Reponse Text and parses it to JSON
+    console.log(data[0].properties.time);
+
+
+    var playbackOptions = {
+        playControl:            true,
+        dateControl:            true,
+        sliderControl:          true,
+        tickLen:                4000,
+        maxInterpolationTime:   46464646464646,
+        marker:                 function(){
+                                    return { icon: customIcon }      
+                                }     
+    };
+           
+    var playback = new L.Playback(map, data, null, playbackOptions);
+}); 
 
 
 // Slider shit
 
-var slider = document.querySelector('.slider').addEventListener('input', function(e){
-  console.log(e.target.value);
-  if (e.target.value == 1755){
-    var playback = new L.Playback(map, data, null, playbackOptions);
-    console.log('1755');
-  }
-});
+// var slider = document.querySelector('.slider').addEventListener('input', function(e){
+//   console.log(e.target.value);
+//   if (e.target.value == 1755){
+//     console.log('1755');
+//   }
+// });
 
 
 
 
-// ajax(get file, HDAT(data))
 
-var PlotJourneys = function(name, data){
-  this.name = name;
-  this.data = data;
-};
 
-PlotJourneys.prototype.timeChanged = {
-  setCursors: function(){
 
-  },
-  addJourneys: function(){
 
-  },
-  destroyJourneys: function(){
 
-  },
-  compareJourneys: function(activeJourneys, newJourneys){  
+
+
+
+
+// var PlotJourneys = function(name, data){
+//   this.name = name;
+//   this.data = data;
+// };
+
+// PlotJourneys.prototype.timeChanged = {
+//   setCursors: function(){
+
+//   },
+//   addJourneys: function(){
+
+//   },
+//   destroyJourneys: function(){
+
+//   },
+//   compareJourneys: function(activeJourneys, newJourneys){  
   
-  },
-  getActiveJourneys: function(){
+//   },
+//   getActiveJourneys: function(){
   
-  },
-  getJourneys: function(){
+//   },
+//   getJourneys: function(){
   
-  },
-  onChangeCallBack: function(){
-    var toBeAppendedJourneys = this.getJourney();    
-  }
-};
+//   },
+//   onChangeCallBack: function(){
+//     var toBeAppendedJourneys = this.getJourney();    
+//   }
+// };
 
-PlotJourneys.prototype.initialise = {
-  getStartTime: function(journeys){
-    // start = somecalucaltion(journeys);
-    // return start;
-  },
+// PlotJourneys.prototype.initialise = {
+//   getStartTime: function(journeys){
+//     // start = somecalucaltion(journeys);
+//     // return start;
+//   },
 
-  getEndTime: function(journeys){
-    // end = somecalculation(journeys);
-    // return end;
-  },
+//   getEndTime: function(journeys){
+//     // end = somecalculation(journeys);
+//     // return end;
+//   },
 
-  appendSlider: function(start, end, onChangeCallBack){
-    // append(input, range, min, max).on('input', onchangeCallback)
-  },
+//   appendSlider: function(start, end, onChangeCallBack){
+//     // append(input, range, min, max).on('input', onchangeCallback)
+//   },
 
-  initialiseInterface: function(){
-    // start = this.getStarttime();
-    // end = this.getEndtime();
-    // appendSlider(start, end, this.onchangeCallback)
-  },
+//   initialiseInterface: function(){
+//     // start = this.getStarttime();
+//     // end = this.getEndtime();
+//     // appendSlider(start, end, this.onchangeCallback)
+//   },
 
-  initialiseApp: function(){
-    this.getData(initialiseInterface);
-  }
-};
+//   initialiseApp: function(){
+//     this.getData(initialiseInterface);
+//   }
+// };
 
-var BGB = new PlotJourneys();
+// var BGB = new PlotJourneys();
 
 
 
