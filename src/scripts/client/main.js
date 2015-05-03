@@ -63,8 +63,8 @@ var customIcon = L.icon({
 
 var playbackOptions = {
     playControl:            true,
-    dateControl:            true,
-    sliderControl:          true,
+    dateControl:            false,
+    sliderControl:          false,
     tickLen:                4000,
     maxInterpolationTime:   46464646464646,
     marker:                 function(){
@@ -85,62 +85,68 @@ var slider = document.querySelector('.slider').addEventListener('input', functio
 });
 
 
-/*
 
-var HDAT.initialise = function(){
 
-  this.compareVoyages = function(activeVoyages, newVoyages){
+// ajax(get file, HDAT(data))
+
+var PlotJourneys = function(name, data){
+  this.name = name;
+  this.data = data;
+};
+
+PlotJourneys.prototype.timeChanged = {
+  setCursors: function(){
+
+  },
+  addJourneys: function(){
+
+  },
+  destroyJourneys: function(){
+
+  },
+  compareJourneys: function(activeJourneys, newJourneys){  
   
-  };
-
-  this.getActiveVoyages = function(){
+  },
+  getActiveJourneys: function(){
   
-  };
-
-  this.getVoyages = function(){
+  },
+  getJourneys: function(){
   
-  };
-
-  this.onChangeCallBack = function(){
-    var toBeAppendedVoyages = this.getVoyages();    
+  },
+  onChangeCallBack: function(){
+    var toBeAppendedJourneys = this.getJourney();    
   }
+};
 
-  this.getStartTime = function(voyages){
-    start = somecalucaltion(voyages);
-    return start;
-  };
+PlotJourneys.prototype.initialise = {
+  getStartTime: function(journeys){
+    // start = somecalucaltion(journeys);
+    // return start;
+  },
 
-  this.getEndTime = function(voyages){
-    end = somecalculation(voyages);
-    return end;
-  };
+  getEndTime: function(journeys){
+    // end = somecalculation(journeys);
+    // return end;
+  },
 
-  this.appendSlider = function(start, end, onChangeCallBack){
-    L.layer.append(input, range, min, max).on('input', onchangeCallback)
-  };
+  appendSlider: function(start, end, onChangeCallBack){
+    // append(input, range, min, max).on('input', onchangeCallback)
+  },
 
-  this.initialiseInterface = function(){
-    start = this.getStarttime();
-    end = this.getEndtime();
-    appendSlider(start, end, this.onchangeCallback)
-  };
+  initialiseInterface: function(){
+    // start = this.getStarttime();
+    // end = this.getEndtime();
+    // appendSlider(start, end, this.onchangeCallback)
+  },
 
-  this.getData = function(){
-    // ajax asynchronous.
-
-  };
-
-  this.initialiseApp = function(){
+  initialiseApp: function(){
     this.getData(initialiseInterface);
-  };
+  }
+};
 
-  this.initialiseApp();
+var BGB = new PlotJourneys();
 
-}
 
-var HDAT-1 = new HDAT();
-
-*/
 
 
 
