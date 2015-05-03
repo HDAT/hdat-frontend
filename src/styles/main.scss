@@ -10,7 +10,14 @@ body {
 	position: absolute;
 }
 
+#map {
+    width: 100%; 
+    height: 100%;
+}
+
 #overlay {
+    width: 100%;
+    height: 100%;
 	background-image: url('images/overlay.png');
 	position: absolute;
 	left: 0;
@@ -43,20 +50,4 @@ body {
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-name: blink;
     -webkit-animation-timing-function: ease-in-out;   
-}
-
-.sliderContainer {
-    height: 50px;
-    width: 100%;
-    background-color: white;
-    position: absolute;
-    top: 100px;
-    left: 0;
-    z-index: 2000;
-}
-
-.slider {
-    width: 80%;
-    margin: 15px 10%;
-
 }

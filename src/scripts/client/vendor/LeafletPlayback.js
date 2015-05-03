@@ -64,6 +64,7 @@ L.Playback.Util = L.Class.extend({
         properties: {
           time: [],
           speed: [],
+          id: [],
           altitude: []
         },
         bbox: []
@@ -79,15 +80,9 @@ L.Playback.Util = L.Class.extend({
         var t = new Date(timeStr).getTime();
         var ele = parseFloat(eleStr);
 
-        var coords = geojson.geometry.coordinates;
-        var props = geojson.properties;
-        var time = props.time;
-        var altitude = geojson.properties.altitude;
-        console.log(L.Playback.Util.ParseGPX.geojson.type);
-
-        coords.push([lng,lat]);
-        time.push(t);
-        altitude.push(ele);
+        geojson.geometry.coordinates.push([lng,lat]);
+        geojson.properties.time.push(t);
+        geojson.properties.altitude.push(ele);
       }
       return geojson;
     }

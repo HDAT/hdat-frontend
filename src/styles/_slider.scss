@@ -1,3 +1,13 @@
+.sliderContainer {
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    z-index: 2000;
+}
+
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;
