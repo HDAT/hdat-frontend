@@ -65,7 +65,7 @@ $(document).ajaxComplete(function(){
         playControl:            true,
         dateControl:            true,
         sliderControl:          true,
-        tickLen:                360000,
+        tickLen:                (3600*24),
         tracksLayer:            false,
         maxInterpolationTime:   46464646464646,
         marker:                 function(){
