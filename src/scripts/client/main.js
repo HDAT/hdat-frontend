@@ -49,10 +49,10 @@ $(document).ready(function(){
 });
 
 var customIcon = L.icon({
-    iconUrl:                'images/leaflet/customIcon.png',
+    iconUrl:                'images/leaflet/testIcon.gif',
     className:              'customIcon',
-    iconSize:               [40, 40], // size of the icon
-    iconAnchor:             [20, 20], // icon center point
+    iconSize:               [1, 1], // size of the icon
+    iconAnchor:             [1, 1], // icon center point
     popupAnchor:            [70, 70] // point from which the popup should open relative to the iconAnchor
 });
 
