@@ -1640,6 +1640,7 @@ L.Playback.Util = L.Class.extend({
         properties: {
           time: [],
           speed: [],
+          id: [],
           altitude: []
         },
         bbox: []
@@ -1655,15 +1656,9 @@ L.Playback.Util = L.Class.extend({
         var t = new Date(timeStr).getTime();
         var ele = parseFloat(eleStr);
 
-        var coords = geojson.geometry.coordinates;
-        var props = geojson.properties;
-        var time = props.time;
-        var altitude = geojson.properties.altitude;
-        console.log(L.Playback.Util.ParseGPX.geojson.type);
-
-        coords.push([lng,lat]);
-        time.push(t);
-        altitude.push(ele);
+        geojson.geometry.coordinates.push([lng,lat]);
+        geojson.properties.time.push(t);
+        geojson.properties.altitude.push(ele);
       }
       return geojson;
     }
@@ -1956,8 +1951,7 @@ L.Playback.TrackController = L.Class.extend({
         var marker = track.setMarker(timestamp, this.options);
 
         if (marker) {
-            marker.addTo(this._map).on('click', onClick);
-            
+            marker.addTo(this._map);
             this._tracks.push(track);
         }            
     },
@@ -2273,7 +2267,9 @@ L.Playback.SliderControl = L.Control.extend({
 
         function onSliderChange(e) {
             var val = Number(e.target.value);
-            playback.setCursor(val);
+            // if (e.target.value >= startTime && e.target.value >= starttime) {
+                playback.setCursor(val);   
+            // }
         }
 
         playback.addCallback(function (ms) {
@@ -2369,8 +2365,11 @@ L.Playback = L.Playback.Clock.extend({
             this.clearData();
         
             this.addData(geoJSON, this.getTime());
+            console.log('tracks added');
             
             this.setCursor(this.getStartTime());
+            console.log('cursor set');
+
         },
 
         // bad implementation
@@ -2392,7 +2391,7 @@ L.Playback = L.Playback.Clock.extend({
             
             if (this.options.tracksLayer) {
                 this._tracksLayer.addLayer(geoJSON);
-            }                  
+            }
         },
 
         destroy: function() {
