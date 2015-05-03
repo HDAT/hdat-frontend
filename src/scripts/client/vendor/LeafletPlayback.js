@@ -789,8 +789,11 @@ L.Playback = L.Playback.Clock.extend({
             this.clearData();
         
             this.addData(geoJSON, this.getTime());
+            console.log('tracks added');
             
             this.setCursor(this.getStartTime());
+            console.log('cursor set');
+
         },
 
         // bad implementation
@@ -812,7 +815,7 @@ L.Playback = L.Playback.Clock.extend({
             
             if (this.options.tracksLayer) {
                 this._tracksLayer.addLayer(geoJSON);
-            }                  
+            }
         },
 
         destroy: function() {

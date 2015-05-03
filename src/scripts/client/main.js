@@ -63,9 +63,10 @@ $(document).ajaxComplete(function(){
 
     var playbackOptions = {
         playControl:            true,
-        dateControl:            true,
+        dateControl:            false,
         sliderControl:          true,
-        tickLen:                4000,
+        tickLen:                360000,
+        tracksLayer:            false,
         maxInterpolationTime:   46464646464646,
         marker:                 function(){
                                     return { icon: customIcon }      
