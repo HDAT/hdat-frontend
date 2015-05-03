@@ -109,7 +109,7 @@ L.Playback.MoveableMarker = L.Marker.extend({
             this.popupContent = marker_options.getPopup(feature);            
         }
         
-        this.bindPopup(this.getPopupContent() + startLatLng.toString());
+        // this.bindPopup(this.getPopupContent() + startLatLng.toString());
     },
     
     getPopupContent: function() {
@@ -440,6 +440,7 @@ L.Playback.Clock = L.Class.extend({
   },
 
   _tick: function (self) {
+    console.log('tick, tock');
     if (self._cursor > self._trackController.getEndTime()) {
       clearInterval(self._intervalID);
       return;

@@ -63,7 +63,7 @@ $(document).ajaxComplete(function(){
 
     var playbackOptions = {
         playControl:            true,
-        dateControl:            false,
+        dateControl:            true,
         sliderControl:          true,
         tickLen:                360000,
         tracksLayer:            false,

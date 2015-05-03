@@ -51,3 +51,7 @@ body {
 //     -webkit-animation-name: blink;
 //     -webkit-animation-timing-function: ease-in-out;   
 // }
+
+.leaflet-marker-pane img:nth-of-type(odd) {
+    display:none;
+}
