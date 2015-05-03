@@ -21,8 +21,9 @@ INSERT INTO "bgbVoyageRouteJSON"
 		        SELECT time
 		      ) d
 		    ) AS properties
-	  	FROM "bgbVoyageRoute" WHERE "geometry" IS NOT NULL) 
-	AS t LIMIT 300;
+	  	FROM "bgbVoyageRoute" WHERE "geometry" IS NOT NULL AND "time" IS NOT NULL) 
+	-- AS t LIMIT 2000;
+	AS t;
 
 -- Remove temporary type column 
 ALTER TABLE "bgbVoyageRoute" DROP COLUMN "type";
