@@ -52,10 +52,6 @@ body {
 //     -webkit-animation-timing-function: ease-in-out;   
 // }
 
-// .leaflet-marker-pane img {
-//     display: none;
-// }
-
-// .leaflet-marker-pane img:nth-of-type(1000n) {
-//     display: block;
-// }
+.customIcon {
+	opacity: 0.5;
+}
