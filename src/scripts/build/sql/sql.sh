@@ -6,7 +6,7 @@ echo ""
 echo ""
 
 psql -d bgb -c "drop table if exists routing;"
-shp2pgsql -c -D -s 4326 -I /Users/$USER/Desktop/HDAT/src/data/map/map.shp routing | psql bgb
+shp2pgsql -c -D -s 4326 -I /Users/$USER/Desktop/HDAT/src/data/map/mapmay.shp routing | psql bgb
 
 echo ""
 echo ""

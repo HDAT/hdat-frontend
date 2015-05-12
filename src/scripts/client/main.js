@@ -28,7 +28,7 @@ var map = new L.Map('map', {
   attributionControl:   false,
   inertia:              true,
   worldCopyJump:        true,
-  layers:               [satellite]
+  layers:               [satellite, geography]
 });
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
