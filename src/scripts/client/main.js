@@ -51,8 +51,8 @@ $(document).ready(function(){
 var customIcon = L.icon({
     iconUrl:                'images/leaflet/customIcon.png',
     className:              'customIcon',
-    iconSize:               [40, 40],   // size of the icon
-    iconAnchor:             [20, 20],   // icon center point
+    iconSize:               [20, 20],   // size of the icon
+    iconAnchor:             [10, 10],   // icon center point
     popupAnchor:            [70, 70]    // point from which the popup should open relative to the iconAnchor
 });
 
