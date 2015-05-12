@@ -272,6 +272,9 @@
 
 /* layers control */
 .leaflet-control-layers {
+/*	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+	background: #fff;
+	border-radius: 5px;*/
 	}
 .leaflet-control-layers-toggle {
 	background-image: url(images/layers.png);
@@ -295,6 +298,9 @@
 	position: relative;
 	}
 .leaflet-control-layers-expanded {
+/*	padding: 6px 10px 6px 6px;
+	color: #333;
+	background: #fff;*/
 	}
 .leaflet-control-layers-selector {
 	margin-top: 2px;
