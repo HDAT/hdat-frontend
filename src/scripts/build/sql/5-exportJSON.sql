@@ -21,7 +21,7 @@ INSERT INTO "bgbVoyageRouteJSON"
 		        SELECT time
 		      ) d
 		    ) AS properties
-	  	FROM "bgbVoyageRoute" WHERE "geometry" IS NOT NULL AND "time" IS NOT NULL) 
+	  	FROM "bgbVoyageRoute" WHERE "geometry" IS NOT NULL AND "time" IS NOT NULL ORDER BY "voyDepTimeStamp" ASC) 
 	-- AS t LIMIT 100;
 	AS t;
 

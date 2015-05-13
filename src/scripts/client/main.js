@@ -53,7 +53,7 @@ var customIcon = L.icon({
     className:              'customIcon',
     iconSize:               [20, 20],   // size of the icon
     iconAnchor:             [10, 10],   // icon center point
-    popupAnchor:            [70, 70]    // point from which the popup should open relative to the iconAnchor
+    popupAnchor:            [10, 10]    // point from which the popup should open relative to the iconAnchor
 });
 
 $(document).ajaxComplete(function(){            
