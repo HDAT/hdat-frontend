@@ -29,8 +29,6 @@ gulp.task('vendor', function () {
                 'bower_components/jquery/dist/jquery.min.js',
                 'bower_components/jquery-ui/jquery-ui.min.js',
                 'src/scripts/client/vendor/LeafletPlayback.js'
-                // 'bower_components/jquery-ui/demo-tracks.js',
-                // 'bower_components/jquery-ui/example_0.js'
             ])
         .pipe($.concat('vendor.js'))
         .pipe(gulp.dest('dist/scripts/'))
@@ -85,7 +83,7 @@ gulp.task('serve', ['build'], function(){
     gulp.watch(['src/**/*.html'], ['html']);
     gulp.watch(['src/styles/**/*.{scss,css}'], ['styles']);
     gulp.watch(['src/scripts/client/**/*.js'], ['scripts']);
-    gulp.watch(['src/images/**/*', '!src/images/tiles/**/*'], ['images']);
+    // gulp.watch(['src/images/**/*', '!src/images/tiles/**/*'], ['images']);
     gulp.watch(['src/fonts/**/*'], ['fonts']);
 });
 
