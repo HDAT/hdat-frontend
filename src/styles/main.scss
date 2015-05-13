@@ -54,6 +54,10 @@ body {
     margin-left: 60px; /* Temp fix */
  }
 
+ .season:before {
+   content: "N-Hemisphere: ";
+}
+
  /* Slider */
  .leaflet-control-layers-expanded {
     width: 100%;
