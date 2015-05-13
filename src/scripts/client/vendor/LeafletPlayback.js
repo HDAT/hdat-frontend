@@ -98,7 +98,7 @@ L.Playback.Util = L.Class.extend({
 L.Playback = L.Playback || {};
 
 L.Playback.MoveableMarker = L.Marker.extend({    
-    initialize: function (startLatLng, options, feature) {    
+    initialize: function (startLatLng, options, feature, geoJSON) {    
         var marker_options = options.marker || {};
 
         if (jQuery.isFunction(marker_options)){        
@@ -107,7 +107,8 @@ L.Playback.MoveableMarker = L.Marker.extend({
         
         L.Marker.prototype.initialize.call(this, startLatLng, marker_options);
         
-        this.popupContent = '';
+        this.popupContent = 'bla';
+        // this.popupContent = this.geoJSON.voyagedetails.first_ship_name;
 
         if (marker_options.getPopup){
             this.popupContent = marker_options.getPopup(feature);            
@@ -155,6 +156,8 @@ L.Playback.Track = L.Class.extend({
         this._ticks = [];
         this._marker = null;
         this._map = map;
+
+        // console.log(geoJSON.voyagedetails.first_ship_name);
 
         var sampleTimes = geoJSON.properties.time;
         var samples = geoJSON.geometry.coordinates;

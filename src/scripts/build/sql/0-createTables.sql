@@ -16,6 +16,10 @@ DROP TABLE IF EXISTS "bgbPlaceGeo";
 CREATE TABLE "bgbPlaceGeo" AS
   TABLE "bgbPlace";
 
+DROP TABLE IF EXISTS "bgbRegioGeo";
+CREATE TABLE "bgbRegioGeo" AS
+  TABLE "bgbRegio";  
+
 DROP TABLE IF EXISTS "bgbVoyageRoute";
 CREATE TABLE "bgbVoyageRoute" AS
   TABLE "bgbVoyage";
