@@ -64,7 +64,7 @@ body {
  }
 
 /* Marker animation */
-/*@-webkit-keyframes 'blink' {
+@-webkit-keyframes 'blink' {
     0% {
         opacity:1;
     }
@@ -75,20 +75,21 @@ body {
         opacity:1;
     }
 }
-.customIcon {
-	-webkit-transition: all 2s ease-in-out;
-    -moz-transition: all 2s ease-in-out;
-    -o-transition: all 2s ease-in-out;
-    -ms-transition: all 2s ease-in-out;
-    transition: all 2s ease-in-out;
+.customIcon:hover {
+	-webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
     
     -webkit-animation-direction: normal;
-    -webkit-animation-duration: 4s;
+    -webkit-animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-name: blink;
 	-webkit-animation-timing-function: ease-in-out;   
 }
-*/
-/*.customIcon {
+
+/*.customIcon:hover {
 	opacity: 0.5;
-}*/
+}
+*/
