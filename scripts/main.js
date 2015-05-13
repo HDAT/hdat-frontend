@@ -28,7 +28,7 @@ var map = new L.Map('map', {
   attributionControl:   false,
   inertia:              true,
   worldCopyJump:        true,
-  layers:               [satellite]
+  layers:               [satellite, geography]
 });
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
@@ -49,23 +49,22 @@ $(document).ready(function(){
 });
 
 var customIcon = L.icon({
-    iconUrl:                'images/leaflet/testIcon.gif',
+    iconUrl:                'images/leaflet/customIcon.png',
     className:              'customIcon',
-    iconSize:               [1, 1], // size of the icon
-    iconAnchor:             [1, 1], // icon center point
-    popupAnchor:            [70, 70] // point from which the popup should open relative to the iconAnchor
+    iconSize:               [20, 20],   // size of the icon
+    iconAnchor:             [10, 10],   // icon center point
+    popupAnchor:            [10, 10]    // point from which the popup should open relative to the iconAnchor
 });
 
 $(document).ajaxComplete(function(){            
     data = $.parseJSON(data.responseText); //Takes AJAX Reponse Text and parses it to JSON
     console.log(data[0].properties.time);
 
-
     var playbackOptions = {
         playControl:            true,
-        dateControl:            false,
+        dateControl:            true,
         sliderControl:          true,
-        tickLen:                360000,
+        tickLen:                (3600*24),
         tracksLayer:            false,
         maxInterpolationTime:   46464646464646,
         marker:                 function(){
@@ -75,91 +74,3 @@ $(document).ajaxComplete(function(){
            
     var playback = new L.Playback(map, data, null, playbackOptions);
 }); 
-
-
-// Slider shit
-
-// var slider = document.querySelector('.slider').addEventListener('input', function(e){
-//   console.log(e.target.value);
-//   if (e.target.value == 1755){
-//     console.log('1755');
-//   }
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var PlotJourneys = function(name, data){
-//   this.name = name;
-//   this.data = data;
-// };
-
-// PlotJourneys.prototype.timeChanged = {
-//   setCursors: function(){
-
-//   },
-//   addJourneys: function(){
-
-//   },
-//   destroyJourneys: function(){
-
-//   },
-//   compareJourneys: function(activeJourneys, newJourneys){  
-  
-//   },
-//   getActiveJourneys: function(){
-  
-//   },
-//   getJourneys: function(){
-  
-//   },
-//   onChangeCallBack: function(){
-//     var toBeAppendedJourneys = this.getJourney();    
-//   }
-// };
-
-// PlotJourneys.prototype.initialise = {
-//   getStartTime: function(journeys){
-//     // start = somecalucaltion(journeys);
-//     // return start;
-//   },
-
-//   getEndTime: function(journeys){
-//     // end = somecalculation(journeys);
-//     // return end;
-//   },
-
-//   appendSlider: function(start, end, onChangeCallBack){
-//     // append(input, range, min, max).on('input', onchangeCallback)
-//   },
-
-//   initialiseInterface: function(){
-//     // start = this.getStarttime();
-//     // end = this.getEndtime();
-//     // appendSlider(start, end, this.onchangeCallback)
-//   },
-
-//   initialiseApp: function(){
-//     this.getData(initialiseInterface);
-//   }
-// };
-
-// var BGB = new PlotJourneys();
-
-
-
-
-
-
-
-
-

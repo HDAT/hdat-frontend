@@ -1627,6 +1627,7 @@ L.Playback.Util = L.Class.extend({
       if ((m >= 3) && (m <= 5)) { m = 'Spring'; };
       if ((m >= 6) && (m <= 8)) { m = 'Summer'; };
       if ((m >= 9) && (m <= 11)) { m = 'Autumn'; }; /* Nog even checken */
+      // console.log(m + ' ' + y);
       return m + ' ' + y;
     },
 
@@ -1640,7 +1641,6 @@ L.Playback.Util = L.Class.extend({
         properties: {
           time: [],
           speed: [],
-          id: [],
           altitude: []
         },
         bbox: []
@@ -1656,16 +1656,20 @@ L.Playback.Util = L.Class.extend({
         var t = new Date(timeStr).getTime();
         var ele = parseFloat(eleStr);
 
-        geojson.geometry.coordinates.push([lng,lat]);
-        geojson.properties.time.push(t);
-        geojson.properties.altitude.push(ele);
+        var coords = geojson.geometry.coordinates;
+        var props = geojson.properties;
+        var time = props.time;
+        var altitude = geojson.properties.altitude;
+
+        coords.push([lng,lat]);
+        time.push(t);
+        altitude.push(ele);
       }
       return geojson;
     }
   }
 
 });
-
 
 L.Playback = L.Playback || {};
 
@@ -1718,38 +1722,64 @@ L.Playback.MoveableMarker = L.Marker.extend({
 L.Playback = L.Playback || {};
 
 L.Playback.Track = L.Class.extend({
+    initialize : function (map, geoJSON, options) {
+        options = options || {};
+        var tickLen = options.tickLen || 250;
+        
+        this._geoJSON = geoJSON;
+        this._tickLen = tickLen;
+        this._ticks = [];
+        this._marker = null;
+        this._map = map;
 
-        initialize : function (geoJSON, options) {
-            options = options || {};
-            var tickLen = options.tickLen || 250;
-            
-            this._geoJSON = geoJSON;
-            this._tickLen = tickLen;
-            this._ticks = [];
-            this._marker = null;
+        var sampleTimes = geoJSON.properties.time;
+        var samples = geoJSON.geometry.coordinates;
+        var currSample = samples[0];
+        var nextSample = samples[1];
+        var currSampleTime = sampleTimes[0];
+        var t = currSampleTime;  // t is used to iterate through tick times
+        var nextSampleTime = sampleTimes[1];
+        var tmod = t % tickLen; // ms past a tick time
+        var rem,
+        ratio;
 
-            var sampleTimes = geoJSON.properties.time;
-            var samples = geoJSON.geometry.coordinates;
-            var currSample = samples[0];
-            var nextSample = samples[1];
-            var t = currSampleTime = sampleTimes[0]; // t is used to iterate through tick times
-            var nextSampleTime = sampleTimes[1];
-            var tmod = t % tickLen; // ms past a tick time
-            var rem,
-            ratio;
+        // handle edge case of only one t sample
+        if (sampleTimes.length === 1) {
+            if (tmod !== 0)
+                t += tickLen - tmod;
+            this._ticks[t] = samples[0];
+            this._startTime = t;
+            this._endTime = t;
+            return;
+        }
 
-            // handle edge case of only one t sample
-            if (sampleTimes.length === 1) {
-                if (tmod !== 0)
-                    t += tickLen - tmod;
-                this._ticks[t] = samples[0];
-                this._startTime = t;
-                this._endTime = t;
-                return;
-            }
+        // interpolate first tick if t not a tick time
+        if (tmod !== 0) {
+            rem = tickLen - tmod;
+            ratio = rem / (nextSampleTime - currSampleTime);
+            t += rem;
+            this._ticks[t] = this._interpolatePoint(currSample, nextSample, ratio);
+        } else {
+            this._ticks[t] = currSample;
+        }
 
-            // interpolate first tick if t not a tick time
-            if (tmod !== 0) {
+        this._startTime = t;
+        t += tickLen;
+        while (t < nextSampleTime) {
+            ratio = (t - currSampleTime) / (nextSampleTime - currSampleTime);
+            this._ticks[t] = this._interpolatePoint(currSample, nextSample, ratio);
+            t += tickLen;
+        }
+
+        // iterating through the rest of the samples
+        for (var i = 1, len = samples.length; i < len; i++) {
+            currSample = samples[i];
+            nextSample = samples[i + 1];
+            t = currSampleTime = sampleTimes[i];
+            nextSampleTime = sampleTimes[i + 1];
+
+            tmod = t % tickLen;
+            if (tmod !== 0 && nextSampleTime) {
                 rem = tickLen - tmod;
                 ratio = rem / (nextSampleTime - currSampleTime);
                 t += rem;
@@ -1758,141 +1788,104 @@ L.Playback.Track = L.Class.extend({
                 this._ticks[t] = currSample;
             }
 
-            this._startTime = t;
             t += tickLen;
             while (t < nextSampleTime) {
                 ratio = (t - currSampleTime) / (nextSampleTime - currSampleTime);
-                this._ticks[t] = this._interpolatePoint(currSample, nextSample, ratio);
-                t += tickLen;
-            }
-
-            // iterating through the rest of the samples
-            for (var i = 1, len = samples.length; i < len; i++) {
-                currSample = samples[i];
-                nextSample = samples[i + 1];
-                t = currSampleTime = sampleTimes[i];
-                nextSampleTime = sampleTimes[i + 1];
-
-                tmod = t % tickLen;
-                if (tmod !== 0 && nextSampleTime) {
-                    rem = tickLen - tmod;
-                    ratio = rem / (nextSampleTime - currSampleTime);
-                    t += rem;
-                    this._ticks[t] = this._interpolatePoint(currSample, nextSample, ratio);
-                } else {
+                
+                if (nextSampleTime - currSampleTime > options.maxInterpolationTime){
                     this._ticks[t] = currSample;
                 }
-
+                else {
+                    this._ticks[t] = this._interpolatePoint(currSample, nextSample, ratio);
+                }
+                
                 t += tickLen;
-                while (t < nextSampleTime) {
-                    ratio = (t - currSampleTime) / (nextSampleTime - currSampleTime);
-                    
-                    if (nextSampleTime - currSampleTime > options.maxInterpolationTime){
-                        this._ticks[t] = currSample;
-                    }
-                    else {
-                        this._ticks[t] = this._interpolatePoint(currSample, nextSample, ratio);
-                    }
-                    
-                    t += tickLen;
-                }
             }
-
-            // the last t in the while would be past bounds
-            this._endTime = t - tickLen;
-            this._lastTick = this._ticks[this._endTime];
-        },
-
-        _interpolatePoint : function (start, end, ratio) {
-            try {
-                var delta = [end[0] - start[0], end[1] - start[1]];
-                var offset = [delta[0] * ratio, delta[1] * ratio];
-                return [start[0] + offset[0], start[1] + offset[1]];
-            } catch (e) {
-                console.log('err: cant interpolate a point');
-                console.log(['start', start]);
-                console.log(['end', end]);
-                console.log(['ratio', ratio]);
-            }
-        },
-
-        getFirstTick : function () {
-            return this._ticks[this._startTime];
-        },
-
-        getLastTick : function () {
-            return this._ticks[this._endTime];
-        },
-
-        getStartTime : function () {
-            return this._startTime;
-        },
-
-        getEndTime : function () {
-            return this._endTime;
-        },
-
-        getTickMultiPoint : function () {
-            var t = this.getStartTime();
-            var endT = this.getEndTime();
-            var coordinates = [];
-            var time = [];
-            while (t <= endT) {
-                time.push(t);
-                coordinates.push(this.tick(t));
-                t += this._tickLen;
-            }
-
-            return {
-                type : 'Feature',
-                geometry : {
-                    type : 'MultiPoint',
-                    coordinates : coordinates
-                },
-                properties : {
-                    time : time
-                }
-            };
-        },
-        
-        tick : function (timestamp) {
-            if (timestamp > this._endTime)
-                timestamp = this._endTime;
-            if (timestamp < this._startTime)
-                timestamp = this._startTime;
-            return this._ticks[timestamp];
-        },
-        
-        setMarker : function(timestamp, options){
-            var lngLat = null;
-            
-            // if time stamp is not set, then get first tick
-            if (timestamp) {
-                lngLat = this.tick(timestamp);
-            }
-            else {
-                lngLat = this.getFirstTick();
-            }        
-        
-            if (lngLat) {
-                var latLng = new L.LatLng(lngLat[1], lngLat[0]);
-                this._marker = new L.Playback.MoveableMarker(latLng, options, this._geoJSON);                
-            }
-            
-            return this._marker;
-        },
-        
-        moveMarker : function(latLng, transitionTime) {
-            if (this._marker) {
-                this._marker.move(latLng, transitionTime);
-            }
-        },
-        
-        getMarker : function() {
-            return this._marker;
         }
 
-    });
+        // the last t in the while would be past bounds
+        this._endTime = t - tickLen;
+        this._lastTick = this._ticks[this._endTime];
+
+    },
+
+    _interpolatePoint : function (start, end, ratio) {
+        try {
+            var delta = [end[0] - start[0], end[1] - start[1]];
+            var offset = [delta[0] * ratio, delta[1] * ratio];
+            return [start[0] + offset[0], start[1] + offset[1]];
+        } catch (e) {
+            console.log('err: cant interpolate a point');
+            console.log(['start', start]);
+            console.log(['end', end]);
+            console.log(['ratio', ratio]);
+        }
+    },
+
+    getFirstTick : function () {
+        return this._ticks[this._startTime];
+    },
+
+    getLastTick : function () {
+        return this._ticks[this._endTime];
+    },
+
+    getStartTime : function () {
+        return this._startTime;
+    },
+
+    getEndTime : function () {
+        return this._endTime;
+    },
+    
+    tick : function (timestamp) {
+        // This is interesting. If outside of timebound it sets the track to the
+        // last or first tick. We dont want that. Or we do, but we want it to 
+        // toggle the marker here.
+
+        if (timestamp > this._endTime){
+            timestamp = this._endTime;
+            this._map.removeLayer(this._marker);
+        } else if (timestamp < this._startTime){
+            timestamp = this._startTime;
+            this._map.removeLayer(this._marker);
+        } else {
+            this._marker.addTo(this._map);   
+        }
+
+        return this._ticks[timestamp];
+    },
+    
+    setMarker : function(timestamp, options){
+        var lngLat = null;
+        
+        // if time stamp is not set, then get first tick
+        if (timestamp) {
+            lngLat = this.tick(timestamp);
+        }
+        else {
+            lngLat = this.getFirstTick();
+        }        
+    
+        if (lngLat) {
+            var latLng = new L.LatLng(lngLat[1], lngLat[0]);
+            this._marker = new L.Playback.MoveableMarker(latLng, options, this._geoJSON);                
+        }
+        
+        return this._marker;
+    },
+    
+    moveMarker : function(latLng, transitionTime) {
+        if (this._marker) {
+            this._marker.move(latLng, transitionTime);
+        }
+    },
+    
+    getMarker : function() {
+        return this._marker;
+    }
+});
+
 L.Playback = L.Playback || {};
 
 L.Playback.TrackController = L.Class.extend({
@@ -1903,12 +1896,10 @@ L.Playback.TrackController = L.Class.extend({
         this._map = map;
 
         this._tracks = [];
-
-        // initialize tick points
-        this.setTracks(tracks);
     },
     
     clearTracks: function(){
+        // called by setData, does what is expected of it.
         while (this._tracks.length > 0) {
             var track = this._tracks.pop();
             var marker = track.getMarker();
@@ -1918,32 +1909,14 @@ L.Playback.TrackController = L.Class.extend({
             }
         }            
     },
-
-    setTracks : function (tracks) {
-        // reset current tracks
-        this.clearTracks();
-        
-        this.addTracks(tracks);
-    },
     
-    addTracks : function (tracks) {
-        // return if nothing is set
-        if (!tracks) {
-            return;
-        }
-        
-        if (tracks instanceof Array) {            
-            for (var i = 0, len = tracks.length; i < len; i++) {
-                this.addTrack(tracks[i]);
-            }
-        } else {
-            this.addTrack(tracks);
-        }            
-    },
-    
-    // add single track
     addTrack : function (track, timestamp) {
         // return if nothing is set
+
+        // FIRST REAL EDIT SHOULD BE HERE. 
+        // point where marker is added should change. it should not be here.
+        // As far as I see now, the track is no problem. 
+
         if (!track) {
             return;
         }
@@ -1951,12 +1924,45 @@ L.Playback.TrackController = L.Class.extend({
         var marker = track.setMarker(timestamp, this.options);
 
         if (marker) {
-            marker.addTo(this._map);
+            // marker.addTo(this._map);
+            
             this._tracks.push(track);
-        }            
+        }
+    },
+
+    removeTrack : function(trackID){
+        //!!! FUNCTION MOCKED !!! WILL NOT WORK PROBABLY !!!
+
+        // Not neccecairy right now, will need to be written in the future I
+        // suspect.
+
+        var trackID = trackID;
+
+        this._tracks.map(function(track, index){
+            if (track.id == trackID) {
+                // remove track without leaving hole in array
+                _tracks.splice(index, 1);
+            }
+        });
+    },
+
+    isTrack : function(isTrackID){
+        //!!! FUNCTION MOCKED !!! WILL NOT WORK PROBABLY !!!
+        // Check if track is available
+        return this._tracks.map(function(track, index){
+            if (track.id == isTrackID){
+                return true;
+            }
+        });
     },
 
     tock : function (timestamp, transitionTime) {
+        // For each track determine new position and move the markers.
+        // This function is a central cog in the playback wheel
+
+        // Reponse to the clock's ticks. It checks all the possible ticks for 
+        // a givens track, selects the right one, and moves the marker.
+
         for (var i = 0, len = this._tracks.length; i < len; i++) {
             var lngLat = this._tracks[i].tick(timestamp);
             var latLng = new L.LatLng(lngLat[1], lngLat[0]);
@@ -1965,6 +1971,8 @@ L.Playback.TrackController = L.Class.extend({
     },
 
     getStartTime : function () {
+        // Oke as it is. To trackscontrol there is no time outside the tracks.
+
         var earliestTime = 0;
 
         if (this._tracks.length > 0) {
@@ -1981,6 +1989,8 @@ L.Playback.TrackController = L.Class.extend({
     },
 
     getEndTime : function () {
+        // idem as start
+
         var latestTime = 0;
     
         if (this._tracks.length > 0){
@@ -2000,7 +2010,7 @@ L.Playback.TrackController = L.Class.extend({
         return this._tracks;
     }
 });
-L.Playback = L.Playback || {};
+ L.Playback = L.Playback || {};
 
 L.Playback.Clock = L.Class.extend({
 
@@ -2016,6 +2026,9 @@ L.Playback.Clock = L.Class.extend({
   },
 
   _tick: function (self) {
+    // This is the callback for the interval. What should happen if the clock
+    // ticks? The tick generates tock as a response. Which is on the trackControl.
+
     if (self._cursor > self._trackController.getEndTime()) {
       clearInterval(self._intervalID);
       return;
@@ -2037,6 +2050,7 @@ L.Playback.Clock = L.Class.extend({
   },
 
   start: function () {
+    // ENGINE. setInverval powers the whole code to continually run. 
     if (this._intervalID) return;
     this._intervalID = window.setInterval(
       this._tick, 
@@ -2068,6 +2082,8 @@ L.Playback.Clock = L.Class.extend({
   },
 
   setCursor: function (ms) {
+    // Called by outside, ie. the controls. They can influence the code trough this.
+
     var time = parseInt(ms);
     if (!time) return;
     var mod = time % this._tickLen;
@@ -2084,10 +2100,20 @@ L.Playback.Clock = L.Class.extend({
   },
 
   getStartTime: function() {
+    // This should contain a simple conditional to check the options a given
+    // start. If so that should be the start time, wether or not the rest of the
+    // code agrees with it. The clock is lord and master, tracksControl and tracks
+    // just have to submit to father time. 
+
+    // Also trackcontrol 
+
     return this._trackController.getStartTime();
   },
 
   getEndTime: function() {
+
+    // Idem as getStartTime
+
     return this._trackController.getEndTime();
   },
 
@@ -2143,10 +2169,10 @@ L.Playback = L.Playback || {};
 
 L.Playback.DateControl = L.Control.extend({
     options : {
-        position : 'bottomleft',
+        position: 'topleft',
         dateFormatFn: L.Playback.Util.DateStr,
         seasonFormatFn: L.Playback.Util.SeasonStr,
-        timeFormatFn: L.Playback.Util.TimeStr
+        // timeFormatFn: L.Playback.Util.TimeStr
     },
 
     initialize : function (playback, options) {
@@ -2155,7 +2181,7 @@ L.Playback.DateControl = L.Control.extend({
     },
 
     onAdd : function (map) {
-        this._container = L.DomUtil.create('div', 'leaflet-control-layers leaflet-control-layers-expanded');
+        this._container = L.DomUtil.create('div', 'timebar');
 
         var self = this;
         var playback = this.playback;
@@ -2164,20 +2190,19 @@ L.Playback.DateControl = L.Control.extend({
         var datetime = L.DomUtil.create('div', 'datetimeControl', this._container);
 
         // date time
-        this._date = L.DomUtil.create('p', '', datetime);
-        this._time = L.DomUtil.create('p', '', datetime);
         this._season = L.DomUtil.create('p', '', datetime);
+            this._date = L.DomUtil.create('p', '', datetime);
+            // this._time = L.DomUtil.create('p', '', datetime);
 
-        this._date.innerHTML = this.options.dateFormatFn(time);
-        this._time.innerHTML = this.options.timeFormatFn(time);
         this._season.innerHTML = this.options.seasonFormatFn(time);
+            this._date.innerHTML = this.options.dateFormatFn(time);
+            // this._time.innerHTML = this.options.timeFormatFn(time);
 
         // setup callback
         playback.addCallback(function (ms) {
-            self._date.innerHTML = self.options.dateFormatFn(ms);
-            self._time.innerHTML = self.options.timeFormatFn(ms);
             self._season.innerHTML = self.options.seasonFormatFn(ms);
-
+            self._date.innerHTML = self.options.dateFormatFn(ms);
+            // self._time.innerHTML = self.options.timeFormatFn(ms);
         });
 
         return this._container;
@@ -2267,9 +2292,7 @@ L.Playback.SliderControl = L.Control.extend({
 
         function onSliderChange(e) {
             var val = Number(e.target.value);
-            // if (e.target.value >= startTime && e.target.value >= starttime) {
-                playback.setCursor(val);   
-            // }
+            playback.setCursor(val);
         }
 
         playback.addCallback(function (ms) {
@@ -2286,8 +2309,80 @@ L.Playback.SliderControl = L.Control.extend({
         return this._container;
     }
 });      
+L.Playback = L.Playback || {};
+
+L.Playback.DataStream = L.Class.extend({
+    //!!! ENTIRE CLASS MOCKED !!! WILL NOT WORK PROBABLY !!!
+
+    getDataLight : function() {
+        // this contruct an lightweight array without the actual data, 
+        // only voyID, start and end time. It should derive this from the arraykeys
+
+        // We could do this with two methods: 
+        // One is by creating a indexed view beforehand.
+        // The other is by constucting a indexed view on the fly.
+        // Both have their advantages and disadvantages. It all depends on how
+        // firebase really is when dealing with large ammounts of data.
+
+        return dataRange;
+    },
+
+    getDataFull : function(trackID, addData) {
+        // some firebase or socket code, for now window with 
+        // mocking asynchronicity (for latency) with timeout
+        var asyncMock = function (trackID){
+            var track = window.allTracks[trackID];
+            addData(track, this.getTime());
+        };
+
+        window.setTimeout(asyncMock, 10, trackID, addtrack);
+
+        return track;
+    },
+
+    appropriateTracks : function(dataLight, previousData, timestamp){
+        // Check dataLight for suitable tracks
+        var appropriateTracks = dataRange.map(function(track, index){
+            if (    timestamp > track.startTime 
+                &&  timestamp < track.endTime) {
+                return track;
+            }
+        });
+        return appropriateTracks;
+    },
+
+    addKeepOrRemoveTracks : function(appropriateTracks){
+
+        var toBeAddedTracks = [];
+
+        if (appropriateTracks.length != 0) {
+            toBeAddedTracks = appropriateTracks.map(function(track, index){
+                // Check if track is already available,
+                // If not return the it to be queued for adding
+                if (!this._trackController.isTrack(track.id)){
+                    return track;
+                } 
+            })
+        }
+
+        // Still needs something for removal of tracks! Although that might not
+        // be need at all. Only if memory gets overloaded, but I suppose that 
+        // should take a while. Bandwidth and response time worry me more.
+
+        toBeAddedTracks.map(function(track, index){
+            // get full data, and use vendor addData to add it to the tracks
+            var fullTrack = getFullData(track.trackID, this.addData);
+
+            // from playback
+            this._trackController.addTrack(new L.Playback.Track(fullTrack, this.options), ms);
+        })
+    }
+});
 
 L.Playback = L.Playback.Clock.extend({
+
+        //? Statics are simply setting the methods to constants for the app. But in the case of this app, it also prevents them from being destroyed.
+
         statics : {
             MoveableMarker : L.Playback.MoveableMarker,
             Track : L.Playback.Track,
@@ -2300,6 +2395,8 @@ L.Playback = L.Playback.Clock.extend({
             DateControl : L.Playback.DateControl,
             SliderControl : L.Playback.SliderControl
         },
+
+        //? Also a convenience method from leaflet. Makes merging options a little bit easier as can be seen in the initialise below. L.setOptions() uses these defaults and merges them with the arguments it is given
 
         options : {
             tickLen: 250,
@@ -2322,18 +2419,29 @@ L.Playback = L.Playback.Clock.extend({
             }
         },
 
+        //? The constructor functions for the class. This is called when the new statement is run (which is internally done by leaflet)
+
         initialize : function (map, geoJSON, callback, options) {
+            //? see options above, merges defaults with arguments
             L.setOptions(this, options);
             
             this._map = map;
+
+            //? Creates stuff, trackController. 
             this._trackController = new L.Playback.TrackController(map, null, this.options);
+
+            //? Clock is a bit more complicated. The call method set the 'this' value to this 'this'. Basicly equalising the scope of the Playback class to that of the Clock class even more. Playback is an extention of Clock in the first place, so Playback has access to everything Clock is. But I suppose he wanted Clock to have access to everything that Playbck has too. 
+
             L.Playback.Clock.prototype.initialize.call(this, this._trackController, callback, this.options);
             
+            //? Simple enough: creates every controller if options have them specified to true.
+
             if (this.options.tracksLayer) {
                 this._tracksLayer = new L.Playback.TracksLayer(map, options);
             }
 
-            this.setData(geoJSON);            
+            //? Bit more interesting function. I think this starts up the entire machine.
+            this.setData(map, geoJSON);            
             
 
             if (this.options.playControl) {
@@ -2354,6 +2462,8 @@ L.Playback = L.Playback.Clock.extend({
         },
         
         clearData : function(){
+            //? Clear enough: tells the trackscontroller to erase everything. We need less violent delete. removeTrack or smthing. Also clears out the tracksLayer. A utility we don't really need if we're doing it with tiles.
+
             this._trackController.clearTracks();
             
             if (this._tracksLayer) {
@@ -2361,40 +2471,60 @@ L.Playback = L.Playback.Clock.extend({
             }
         },
         
-        setData : function (geoJSON) {
+        setData : function (map, geoJSON) {
+
+            //? Called by initialize. It's weird. It removes everything first, while everything should be empty on load. But who knows their evil motives.   
+
             this.clearData();
         
-            this.addData(geoJSON, this.getTime());
-            console.log('tracks added');
-            
-            this.setCursor(this.getStartTime());
-            console.log('cursor set');
+            //? This function appends the tracks given to options. Highly interesting function. I suppose this will do. 
 
+            //?? Note: It trows in time which is a function on Clock (that's where the prototype.call() came in, this refers to Playback aswell as Clock)
+            
+            //??? Missing its opposite, removeData. But perhaps that's not needed. We need to determine somekind of dataflow architecture.
+
+
+            this.addData(map, geoJSON, this.getTime());
+
+            //? Set the (time) cursor to the start of the show.
+            //!!! getStarttime needs editting.
+
+            this.setCursor(this.getStartTime());
         },
 
         // bad implementation
-        addData : function (geoJSON, ms) {
+        addData : function (map, geoJSON, ms) {
+
             // return if data not set
             if (!geoJSON) {
                 return;
             }
-        
+            
+            //? Loops over the GeoJSON and adds each single track in it. Don't really know (yet) why time is trown into addTrack() too.
             if (geoJSON instanceof Array) {
                 for (var i = 0, len = geoJSON.length; i < len; i++) {
-                    this._trackController.addTrack(new L.Playback.Track(geoJSON[i], this.options), ms);
+                    this._trackController.addTrack(new L.Playback.Track(map, geoJSON[i], this.options), ms);
                 }
             } else {
-                this._trackController.addTrack(new L.Playback.Track(geoJSON, this.options), ms);
+                this._trackController.addTrack(new L.Playback.Track(map, geoJSON, this.options), ms);
             }
 
+            //? This fire's a custom event of somekind, seems important but has no connection to the internal working of the code.
             this._map.fire('playback:set:data');
             
+            //? Trivial - tracksLayer is disconnected from the main functionality.
             if (this.options.tracksLayer) {
                 this._tracksLayer.addLayer(geoJSON);
-            }
+            }                  
+        },
+
+        addDataStream: function(){
+            //!!! FUNCTION MOCKED !!! WILL NOT WORK PROBABLY !!!
+            this.dataStream = new L.Playback.DataStream(this);
         },
 
         destroy: function() {
+            // Never called. Leaving it in because it might be usefull someday.
             this.clearData();
             if (this.playControl) {
                 this._map.removeControl(this.playControl);
@@ -2408,11 +2538,9 @@ L.Playback = L.Playback.Clock.extend({
         }
     });
 
-L.Map.addInitHook(function () {
-    if (this.options.playback) {
-        this.playback = new L.Playback(this);
-    }
-});
+//? This factory method is because of the way Leaflet Classes function. Because leaflet classes could be created without a new statement, it implements the new here. 
+
+//? ENTRY!!!
 
 L.playback = function (map, geoJSON, callback, options) {
     return new L.Playback(map, geoJSON, callback, options);
