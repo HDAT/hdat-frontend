@@ -7,6 +7,7 @@ ALTER TABLE "bgbVoyageRoute"
 	ADD COLUMN "placeregio" 		varchar(255);
 
 -- Determine whether it goes from a place to regio, regio to regio etc.
+
 UPDATE "bgbVoyageRoute"
 SET "placeregio" = 	CASE 
 						WHEN "voyDeparturePlaceId" IS NOT NULL AND "voyArrivalPlaceId" IS NOT NULL THEN
@@ -23,15 +24,25 @@ SET "placeregio" = 	CASE
 
 UPDATE "bgbVoyageRoute" 
 SET
-	"voyDepartureNode" = "node"
-FROM "bgbPlaceGeo" AS geo
-WHERE "voyDeparturePlaceId" = geo.id;
+	"voyDepartureNode" = CASE 
+							WHEN "voyDeparturePlaceId" IS NOT NULL THEN
+								placegeo.node
+							WHEN "voyDeparturePlaceId" IS NULL AND "voyDepartureRegioId" IS NOT NULL THEN
+								regiogeo.node	
+						END
+FROM "bgbPlaceGeo" AS placegeo, "bgbRegioGeo" AS regiogeo
+WHERE "voyDeparturePlaceId" = placegeo.id OR "voyDepartureRegioId" = regiogeo.id;
 
 UPDATE "bgbVoyageRoute" 
 SET
-	"voyArrivalNode" = "node"
-FROM "bgbPlaceGeo" AS geo
-WHERE "voyArrivalPlaceId" = geo.id;
+	"voyArrivalNode" = CASE 
+							WHEN "voyArrivalPlaceId" IS NOT NULL THEN
+								placegeo.node
+							WHEN "voyArrivalPlaceId" IS NULL AND "voyArrivalRegioId" IS NOT NULL THEN
+								regiogeo.node	
+						END
+FROM "bgbPlaceGeo" AS placegeo, "bgbRegioGeo" AS regiogeo
+WHERE "voyArrivalPlaceId" = placegeo.id OR "voyArrivalRegioId" = regiogeo.id;
 
 -- Attach route
 		
