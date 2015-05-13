@@ -21,7 +21,8 @@ INSERT INTO "bgbVoyageRouteJSON"
 		        SELECT time
 		      ) d
 		    ) AS properties
-	  	FROM "bgbVoyageRoute" WHERE "geometry" IS NOT NULL AND "time" IS NOT NULL AND "voyDepTimeStamp" BETWEEN '1742-01-01 00:00:00'::timestamp AND '1742-01-10 00:00:00'::timestamp ORDER BY "voyDepTimeStamp" ASC) 
+	  	FROM "bgbVoyageRoute" WHERE "geometry" IS NOT NULL AND "time" IS NOT NULL ORDER BY "voyDepTimeStamp" ASC) 
+	  	-- FROM "bgbVoyageRoute" WHERE "geometry" IS NOT NULL AND "time" IS NOT NULL AND "voyDepTimeStamp" BETWEEN '1742-01-01 00:00:00'::timestamp AND '1742-01-10 00:00:00'::timestamp ORDER BY "voyDepTimeStamp" ASC) 
 	-- AS t LIMIT 100;
 	AS t;
 

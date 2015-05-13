@@ -596,7 +596,7 @@ L.Playback.DateControl = L.Control.extend({
         position: 'topleft',
         dateFormatFn: L.Playback.Util.DateStr,
         seasonFormatFn: L.Playback.Util.SeasonStr,
-        timeFormatFn: L.Playback.Util.TimeStr
+        // timeFormatFn: L.Playback.Util.TimeStr
     },
 
     initialize : function (playback, options) {
