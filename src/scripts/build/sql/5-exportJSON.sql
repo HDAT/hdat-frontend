@@ -24,13 +24,13 @@ INSERT INTO "bgbVoyageRouteJSON"
 		    (
 		      SELECT row_to_json(d)
 		      FROM (
-		        SELECT first_ship_name
+		        SELECT first_ship_name, placeregio
 		      ) d
 		    ) AS voyagedetails
 	  	FROM "bgbVoyageRoute" WHERE "geometry" IS NOT NULL AND "time" IS NOT NULL ORDER BY "voyDepTimeStamp" ASC) 
 	  	-- FROM "bgbVoyageRoute" WHERE "geometry" IS NOT NULL AND "time" IS NOT NULL AND "voyDepTimeStamp" BETWEEN '1742-01-01 00:00:00'::timestamp AND '1742-01-10 00:00:00'::timestamp ORDER BY "voyDepTimeStamp" ASC) 
-	-- AS t LIMIT 100;
-	AS t;
+	AS t LIMIT 100;
+	-- AS t;
 
 -- Remove temporary type column 
 ALTER TABLE "bgbVoyageRoute" DROP COLUMN "type";

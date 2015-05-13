@@ -63,3 +63,10 @@ echo "Running SQL 5"
 echo ""
 echo ""
 psql -d bgb -f 5-exportJSON.sql
+
+echo ""
+echo ""
+echo "Export JSON"
+echo ""
+echo ""
+psql -d bgb -c "copy (SELECT array_to_json(array_agg(route::json)) from \"bgbVoyageRouteJSON\") to '/Users/$USER/Desktop/HDAT/src/data/json/voyages.json';"
