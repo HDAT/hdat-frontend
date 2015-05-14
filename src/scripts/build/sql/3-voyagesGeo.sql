@@ -44,6 +44,18 @@ SET
 FROM "bgbPlaceGeo" AS placegeo, "bgbRegioGeo" AS regiogeo
 WHERE "voyArrivalPlaceId" = placegeo.id OR "voyArrivalRegioId" = regiogeo.id;
 
+-- Tijdelijke en slechte fix voor Kaap de Goede Hoop probleem
+-- Het probleem is dat Kaap de Goede Hoop zowel in places als regios voorkomt
+-- Blijkbaar geeft dat ergens bij de bovenstaande code niet goed
+-- Vandaar dus dit ding hieronder
+
+UPDATE "bgbVoyageRoute"
+SET "voyDepartureNode" = 123
+WHERE "voyDeparturePlaceId" = 791;
+
+UPDATE "bgbVoyageRoute"
+SET "voyArrivalNode" = 123
+WHERE "voyArrivalPlaceId" = 791;
 
 -- Attach route
 		
