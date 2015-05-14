@@ -44,6 +44,7 @@ SET
 FROM "bgbPlaceGeo" AS placegeo, "bgbRegioGeo" AS regiogeo
 WHERE "voyArrivalPlaceId" = placegeo.id OR "voyArrivalRegioId" = regiogeo.id;
 
+
 -- Attach route
 		
 UPDATE "bgbVoyageRoute" 
@@ -88,7 +89,6 @@ ALTER TABLE "bgbVoyageRoute" DROP COLUMN "routeTemp";
 UPDATE "bgbVoyageRoute" 
 SET
 	geometry = regexp_replace((ST_AsGeoJSON("route")), 'LineString', 'MultiPoint')::json;
-
 
 
 
