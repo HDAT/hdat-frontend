@@ -150,7 +150,7 @@ L.Playback.Track = L.Class.extend({
     initialize : function (map, geoJSON, options) {
         options = options || {};
         var tickLen = options.tickLen || 250;
-        
+
         this._geoJSON = geoJSON;
         this._tickLen = tickLen;
         this._ticks = [];
@@ -234,6 +234,14 @@ L.Playback.Track = L.Class.extend({
         this._endTime = t - tickLen;
         this._lastTick = this._ticks[this._endTime];
 
+
+        if (this._ticks[this._endTime] == undefined){
+            console.log(this._endTime, t, tickLen);
+        }
+
+        // if (this._geoJSON.voyagedetails.first_ship_name == "Maarsseveen"){
+        //     console.log(this._geoJSON, this._ticks, this._ticks[this._endTime], this._endTime);
+        // }
     },
 
     _interpolatePoint : function (start, end, ratio) {
@@ -392,6 +400,14 @@ L.Playback.TrackController = L.Class.extend({
 
         for (var i = 0, len = this._tracks.length; i < len; i++) {
             var lngLat = this._tracks[i].tick(timestamp);
+
+            if (lngLat == undefined){
+                console.log(this, i, timestamp);
+                console.log(this._tracks[i]._ticks);
+            }
+
+
+
             var latLng = new L.LatLng(lngLat[1], lngLat[0]);
             this._tracks[i].moveMarker(latLng, transitionTime);
         }

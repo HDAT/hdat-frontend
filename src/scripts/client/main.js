@@ -35,6 +35,14 @@ L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 L.Icon.Default.imagePath = 'images/leaflet/';
 
+var customIcon = L.icon({
+    iconUrl:                'images/leaflet/customIcon.png',
+    className:              'customIcon',
+    iconSize:               [20, 20],   // size of the icon
+    iconAnchor:             [10, 10],   // icon center point
+    popupAnchor:            [10, 10]    // point from which the popup should open relative to the iconAnchor
+});
+
 var data;           
 $(document).ready(function(){       
     $.ajax({
@@ -48,18 +56,8 @@ $(document).ready(function(){
     });
 });
 
-var customIcon = L.icon({
-    iconUrl:                'images/leaflet/customIcon.png',
-    className:              'customIcon',
-    iconSize:               [20, 20],   // size of the icon
-    iconAnchor:             [10, 10],   // icon center point
-    popupAnchor:            [10, 10]    // point from which the popup should open relative to the iconAnchor
-});
-
 $(document).ajaxComplete(function(){            
     data = $.parseJSON(data.responseText); //Takes AJAX Reponse Text and parses it to JSON
-    console.log(data[0].properties.time);
-
     var playbackOptions = {
         playControl:            true,
         dateControl:            true,
