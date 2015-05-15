@@ -39,7 +39,7 @@ var data;
 $(document).ready(function(){       
     $.ajax({
         type: 'GET',
-        url: 'data/json/voyageshuygens.json',
+        url: 'data/json/voyages.json',
         data: { get_param: 'value'},
         dataType: 'json',
         complete: function(gotdata){
