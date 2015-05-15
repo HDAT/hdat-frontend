@@ -655,9 +655,8 @@ L.Playback.PlayControl = L.Control.extend({
 
         var playControl = L.DomUtil.create('div', 'playControl', this._container);
 
-        this._button = L.DomUtil.create('button', '', playControl);
+        this._button = L.DomUtil.create('button', 'sliderbutton', playControl);
         self._button.classList.add('playbutton');
-
 
         var stop = L.DomEvent.stopPropagation;
 
