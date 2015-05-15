@@ -1,19 +1,19 @@
 // UMD initialization to work with CommonJS, AMD and basic browser script include
 (function (factory) {
-	var L;
-	if (typeof define === 'function' && define.amd) {
-		// AMD
-		define(['leaflet'], factory);
-	} else if (typeof module === 'object' && typeof module.exports === "object") {
-		// Node/CommonJS
-		L = require('leaflet');
-		module.exports = factory(L);
-	} else {
-		// Browser globals
-		if (typeof window.L === 'undefined')
-			throw 'Leaflet must be loaded first';
-		factory(window.L);
-	}
+    var L;
+    if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(['leaflet'], factory);
+    } else if (typeof module === 'object' && typeof module.exports === "object") {
+        // Node/CommonJS
+        L = require('leaflet');
+        module.exports = factory(L);
+    } else {
+        // Browser globals
+        if (typeof window.L === 'undefined')
+            throw 'Leaflet must be loaded first';
+        factory(window.L);
+    }
 }(function (L) {
 
 L.Playback = L.Playback || {};
@@ -100,6 +100,7 @@ L.Playback = L.Playback || {};
 L.Playback.MoveableMarker = L.Marker.extend({    
     initialize: function (startLatLng, options, feature) {    
         var marker_options = options.marker || {};
+        this._feature =  feature;
 
         if (jQuery.isFunction(marker_options)){        
             marker_options = marker_options(feature);
@@ -107,14 +108,15 @@ L.Playback.MoveableMarker = L.Marker.extend({
         
         L.Marker.prototype.initialize.call(this, startLatLng, marker_options);
         
-        this.popupContent = 'bla';
-        // this.popupContent = this.geoJSON.voyagedetails.first_ship_name;
+        this.popupContent = '';
+        this.popupContent = feature.voyagedetails.first_ship_name;
 
         if (marker_options.getPopup){
             this.popupContent = marker_options.getPopup(feature);            
         }
         
-        this.bindPopup(this.getPopupContent() + startLatLng.toString());
+        this.bindPopup(this.getPopupContent());
+        // this.bindPopup(this.getPopupContent() + startLatLng.toString());
     },
     
     getPopupContent: function() {
@@ -138,11 +140,12 @@ L.Playback.MoveableMarker = L.Marker.extend({
             }
         }
         this.setLatLng(latLng);
-        if (this._popup) {
-            this._popup.setContent(this.getPopupContent() + this._latlng.toString());
-        }    
+        // if (this._popup) {
+        //     this._popup.setContent(this.getPopupContent() + this._latlng.toString());
+        // }    
     }
 });
+
 
 L.Playback = L.Playback || {};
 
@@ -150,14 +153,12 @@ L.Playback.Track = L.Class.extend({
     initialize : function (map, geoJSON, options) {
         options = options || {};
         var tickLen = options.tickLen || 250;
-
+        
         this._geoJSON = geoJSON;
         this._tickLen = tickLen;
         this._ticks = [];
         this._marker = null;
         this._map = map;
-
-        // console.log(geoJSON.voyagedetails.first_ship_name);
 
         var sampleTimes = geoJSON.properties.time;
         var samples = geoJSON.geometry.coordinates;
@@ -234,14 +235,6 @@ L.Playback.Track = L.Class.extend({
         this._endTime = t - tickLen;
         this._lastTick = this._ticks[this._endTime];
 
-
-        if (this._ticks[this._endTime] == undefined){
-            console.log(this._endTime, t, tickLen);
-        }
-
-        // if (this._geoJSON.voyagedetails.first_ship_name == "Maarsseveen"){
-        //     console.log(this._geoJSON, this._ticks, this._ticks[this._endTime], this._endTime);
-        // }
     },
 
     _interpolatePoint : function (start, end, ratio) {
@@ -329,7 +322,7 @@ L.Playback.TrackController = L.Class.extend({
         this.options = options || {};
     
         this._map = map;
-
+        
         this._tracks = [];
     },
     
@@ -400,14 +393,6 @@ L.Playback.TrackController = L.Class.extend({
 
         for (var i = 0, len = this._tracks.length; i < len; i++) {
             var lngLat = this._tracks[i].tick(timestamp);
-
-            if (lngLat == undefined){
-                console.log(this, i, timestamp);
-                console.log(this._tracks[i]._ticks);
-            }
-
-
-
             var latLng = new L.LatLng(lngLat[1], lngLat[0]);
             this._tracks[i].moveMarker(latLng, transitionTime);
         }
@@ -615,7 +600,7 @@ L.Playback.DateControl = L.Control.extend({
         position: 'topleft',
         dateFormatFn: L.Playback.Util.DateStr,
         seasonFormatFn: L.Playback.Util.SeasonStr,
-        // timeFormatFn: L.Playback.Util.TimeStr
+        timeFormatFn: L.Playback.Util.TimeStr
     },
 
     initialize : function (playback, options) {
@@ -670,9 +655,8 @@ L.Playback.PlayControl = L.Control.extend({
 
         var playControl = L.DomUtil.create('div', 'playControl', this._container);
 
-
         this._button = L.DomUtil.create('button', '', playControl);
-        this._button.innerHTML = 'Play';
+        self._button.classList.add('playbutton');
 
 
         var stop = L.DomEvent.stopPropagation;
@@ -687,11 +671,15 @@ L.Playback.PlayControl = L.Control.extend({
         function play(){
             if (playback.isPlaying()) {
                 playback.stop();
-                self._button.innerHTML = 'Play';
+                self._button.classList.remove('pausebutton')
+                self._button.classList.add('playbutton');
+                // self._button.innerHTML = 'Play';
             }
             else {
                 playback.start();
-                self._button.innerHTML = 'Stop';
+                self._button.classList.remove('playbutton')
+                self._button.classList.add('pausebutton');
+                // self._button.innerHTML = 'Stop';
             }                
         }
 
@@ -953,7 +941,7 @@ L.Playback = L.Playback.Clock.extend({
             }
 
             //? This fire's a custom event of somekind, seems important but has no connection to the internal working of the code.
-            this._map.fire('playback:set:data');
+            // this._map.fire('playback:set:data');
             
             //? Trivial - tracksLayer is disconnected from the main functionality.
             if (this.options.tracksLayer) {

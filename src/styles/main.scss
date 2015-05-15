@@ -58,6 +58,28 @@ body {
    content: "";
 }
 
+/* Playbutton */
+.playbutton {
+    height: 40px;
+    width: 40px;
+    background-image: url('../images/play.svg');
+    background-size: contain;
+    color: transparent !important;
+    outline: 0; 
+    background-color: transparent !important;
+    border: 0;
+}
+.pausebutton {
+    height: 40px;
+    width: 40px;
+    background-image: url('../images/pause.svg');
+    background-size: contain;
+    color: transparent !important;
+    outline: 0; 
+    background-color: transparent !important;
+    border: 0;
+}
+
  /* Slider */
  .leaflet-control-layers-expanded {
     width: 100%;
