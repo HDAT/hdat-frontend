@@ -257,6 +257,10 @@
 	background-image: url('../images/minzoom.svg');
 	background-size: contain;
 	color: transparent !important;
+	opacity: 1;
+	-webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
 }
 .leaflet-control-zoom-in {
 	height: 40px;
@@ -265,6 +269,10 @@
 	background-size: contain;
 	color: transparent !important;
 	margin-left: -5px;
+	opacity: 1;
+	-webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
 }
 .leaflet-control-zoom-out:hover {
 	opacity: 0.8;
