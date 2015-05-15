@@ -21,7 +21,7 @@ var map = new L.Map('map', {
   zoomControl:          true,
   center:               [10, 35],
   minZoom:              3,
-  maxZoom:              5,
+  maxZoom:              6,
   zoom:                 3,
   noWrap:               false,
   maxBounds:            bounds,
