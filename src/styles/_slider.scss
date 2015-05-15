@@ -12,13 +12,11 @@ input[type=range] {
   -webkit-appearance: none;
   width: 100%;
   margin: 15px 0;
-}
-input[type=range]:focus {
-  outline: none;
+   background-color: transparent;
 }
 
-input, input[type="password"], input[type="search"], input[type=range] {
-   background-color: transparent;
+input[type=range]:focus {
+  outline: none;
 }
 
 /* Chrome */
@@ -83,3 +81,9 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
 /*  background: #ababab;
 */}
+
+.small {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAMCAMAAACdvocfAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRFzMzM////040VdgAAAAJ0Uk5T/wDltzBKAAAAEklEQVR42mJgYAQCBopJgAADAAbwADHy2qHzAAAAAElFTkSuQmCC)
+}
+
+
