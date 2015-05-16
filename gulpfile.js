@@ -94,9 +94,17 @@ gulp.task('serve', ['build'], function(){
 gulp.task('default', ['serve'], function() {});
 
 gulp.task('deploy', ['build'], function() {
-  return gulp.src('./dist/**/*')
-    .pipe($.ghPages());
+    return gulp.src('./dist/**/*')
+        .pipe($.ghPages());
 });
 
+gulp.task('production', ['build'], function() {
+    var options = {
+        remoteUrl: 'https://github.com/HDAT/HDAT.github.io',
+        branch: 'master'
+    };
+    return gulp.src('./dist/**/*')
+        .pipe($.ghPages([options]));
+});
 
 
