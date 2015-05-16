@@ -17,32 +17,7 @@ body {
     height: 100%;
 }
 
-/* Time top */
-.hdat-control-season {
-    width: 10em;
-    // background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C */
-    color: rgb(181, 181, 181);
-}
 
-.hdat-control-season p {
-    margin: 9px 0 0 10px;
-}
-
-.hdat-control-play button {
-    height: 40px;
-    width: 40px;
-    outline: 0; 
-    background-color: transparent;
-    border: 0;
-    background-image: url('../images/play.svg');
-}
-
-.hdat-control-play .pause {
-    background-image: url('../images/pause.svg');
-}
-
-
-/* Marker animation */
 @-webkit-keyframes 'blink' {
     0% {
         opacity:1;
@@ -55,16 +30,54 @@ body {
     }
 }
 
-.customIcon:hover {
-	-webkit-transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
-    -o-transition: all 1s ease-in-out;
-    -ms-transition: all 1s ease-in-out;
-    transition: all 1s ease-in-out;
-    
-    -webkit-animation-direction: normal;
-    -webkit-animation-duration: 2s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-name: blink;
-	-webkit-animation-timing-function: ease-in-out;   
+.hdat-shipicon:hover {
+    animation-name: blink;
+    animation-direction: normal;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;   
 }
+
+/* Time top */
+.hdat-control-season {
+    width: 10em;
+    // background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C */
+}
+
+.hdat-control-season p {
+    margin: 6px 0 0 10px;
+}
+
+.hdat-control-play button {
+    height: 40px;
+    width: 40px;
+    border: 0;
+    outline: 0; 
+    background-color: transparent;
+    background-image: url('../images/play.svg');
+}
+
+.hdat-control-play .pause {
+    background-image: url('../images/pause.svg');
+}
+
+.hdat-control-timeline {
+    width: 70%;
+    padding: 0 0 10px 0;
+}
+
+.hdat-control-timeline input{
+    width: 100%;
+}
+
+.hdat-control-timeline p{
+    margin:0;
+    font-size: 0.8em;
+    float: right;
+}
+
+.hdat-control-timeline p:nth-child(2){
+    float: left;
+}
+
+

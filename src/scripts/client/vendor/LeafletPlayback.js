@@ -600,44 +600,6 @@ L.Playback.TracksLayer = L.Class.extend({
 });
 L.Playback = L.Playback || {};
 
-L.Playback.DateControl = L.Control.extend({
-    options : {
-        position: 'topleft',
-        dateFormatFn: L.Playback.Util.DateStr,
-        seasonFormatFn: L.Playback.Util.SeasonStr,
-        timeFormatFn: L.Playback.Util.TimeStr,
-        yearFormatFn: L.Playback.Util.YearStr
-    },
-
-    initialize : function (playback, options) {
-        L.setOptions(this, options);
-        this.playback = playback;
-    },
-
-    onAdd : function (map) {
-        // this._container = L.DomUtil.create('div', 'timebar');
-        this._container = L.DomUtil.create('div', 'hdat-control-season');
-
-        var self = this;
-        var playback = this.playback;
-        var time = playback.getTime();
-
-        var datetime = L.DomUtil.create('div', '', this._container);
-
-        // date time
-        this._season = L.DomUtil.create('p', '', datetime);
-
-        this._season.innerHTML = this.options.seasonFormatFn(time) + ' ' + this.options.yearFormatFn(time);
-       
-        // setup callback
-        playback.addCallback(function (ms) {
-            self._season.innerHTML = self.options.seasonFormatFn(ms) + ' ' + self.options.yearFormatFn(ms);
-        });
-
-        return this._container;
-    }
-});
-    
 L.Playback.PlayControl = L.Control.extend({
     options : {
         position : 'bottomleft'
@@ -680,11 +642,50 @@ L.Playback.PlayControl = L.Control.extend({
 
         return this._container;
     }
-});    
+}); 
+
+L.Playback.DateControl = L.Control.extend({
+    options : {
+        position: 'bottomleft',
+        dateFormatFn: L.Playback.Util.DateStr,
+        seasonFormatFn: L.Playback.Util.SeasonStr,
+        timeFormatFn: L.Playback.Util.TimeStr,
+        yearFormatFn: L.Playback.Util.YearStr
+    },
+
+    initialize : function (playback, options) {
+        L.setOptions(this, options);
+        this.playback = playback;
+    },
+
+    onAdd : function (map) {
+        // this._container = L.DomUtil.create('div', 'timebar');
+        this._container = L.DomUtil.create('div', 'hdat-control-season');
+
+        var self = this;
+        var playback = this.playback;
+        var time = playback.getTime();
+
+        var datetime = L.DomUtil.create('div', '', this._container);
+
+        // date time
+        this._season = L.DomUtil.create('p', '', datetime);
+
+        this._season.innerHTML = this.options.seasonFormatFn(time) + ' ' + this.options.yearFormatFn(time);
+       
+        // setup callback
+        playback.addCallback(function (ms) {
+            self._season.innerHTML = self.options.seasonFormatFn(ms) + ' ' + self.options.yearFormatFn(ms);
+        });
+
+        return this._container;
+    }
+});   
     
 L.Playback.SliderControl = L.Control.extend({
     options : {
-        position : 'bottomright'
+        position : 'bottomleft',
+        yearFormatFn: L.Playback.Util.YearStr
     },
 
     initialize : function (playback) {
@@ -697,6 +698,12 @@ L.Playback.SliderControl = L.Control.extend({
         var self = this;
         var playback = this.playback;
 
+        //timeline dates
+        this._sliderStartTime = L.DomUtil.create('p', '', this._container);
+        this._sliderStartTime.innerHTML = this.options.yearFormatFn(playback.getStartTime());
+        this._sliderEndTime = L.DomUtil.create('p', '', this._container);
+        this._sliderEndTime.innerHTML = this.options.yearFormatFn(playback.getEndTime());
+
         // slider
         this._slider = L.DomUtil.create('input', '', this._container);
         this._slider.type = 'range';
@@ -704,6 +711,7 @@ L.Playback.SliderControl = L.Control.extend({
         this._slider.max = playback.getEndTime();
         this._slider.value = playback.getTime();
 
+   
         var stop = L.DomEvent.stopPropagation;
 
         L.DomEvent
@@ -858,24 +866,22 @@ L.Playback = L.Playback.Clock.extend({
             }
 
             //? Bit more interesting function. I think this starts up the entire machine.
-            this.setData(map, geoJSON);            
-            
-
-            if (this.options.playControl) {
-                this.playControl = new L.Playback.PlayControl(this);
-                this.playControl.addTo(map);
-            }
+            this.setData(map, geoJSON);       
 
             if (this.options.sliderControl) {
                 this.sliderControl = new L.Playback.SliderControl(this);
                 this.sliderControl.addTo(map);
-            }
-
+            }     
+            
             if (this.options.dateControl) {
                 this.dateControl = new L.Playback.DateControl(this, options);
                 this.dateControl.addTo(map);
             }
 
+            if (this.options.playControl) {
+                this.playControl = new L.Playback.PlayControl(this);
+                this.playControl.addTo(map);
+            }
         },
         
         clearData : function(){

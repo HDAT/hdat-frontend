@@ -1,5 +1,6 @@
 .leaflet-container {
     font: 18px/1.5 "Arapey", serif;
+    color: rgb(181, 181, 181);
 }
 
 // Leaflet bar
@@ -22,7 +23,7 @@
 }
 
 .leaflet-bar a.leaflet-disabled {
-    opacity: 1;
+    opacity: 0.5;
     color: transparent;
     background-color: transparent;
 }

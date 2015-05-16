@@ -1,7 +1,7 @@
 'use strict';
 
-var southWest   = L.latLng(-70, 179),
-    northEast   = L.latLng(70, -179),
+var southWest   = L.latLng(-75, 179),
+    northEast   = L.latLng(75, -179),
     bounds      = L.latLngBounds(southWest, northEast);
 
 var satellite   = L.tileLayer('https://{s}.tiles.mapbox.com/v4/erva.33c59435/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZXJ2YSIsImEiOiJUNy1GUV84In0.YTqElwgLmBOW8higJ-9GIw', {id: 'satellite'}),
@@ -9,44 +9,34 @@ var satellite   = L.tileLayer('https://{s}.tiles.mapbox.com/v4/erva.33c59435/{z}
   
 var map = new L.Map('map', {
   zoomControl:          true,
-  center:               [10, 35],
+  center:               [10, 45],
   minZoom:              3,
   maxZoom:              6,
   zoom:                 3,
-  noWrap:               false,
-  // maxBounds:            bounds,
+  maxBounds:            bounds,
   attributionControl:   false,
   inertia:              true,
-  worldCopyJump:        true,
   layers:               [satellite, geography]
 });
 
-L.Icon.Default.imagePath = 'images/leaflet/';
+// L.Icon.Default.imagePath = 'images/leaflet/';
   
 var customIcon = L.icon({
-    iconUrl:                'images/leaflet/customIcon.png',
-    className:              'customIcon',
+    iconUrl:                'images/hdat-shipicon.png',
+    className:              'hdat-shipicon',
     iconSize:               [20, 20],   // size of the icon
-    iconAnchor:             [10, 10],   // icon center point
-    popupAnchor:            [10, 10]    // point from which the popup should open relative to the iconAnchor
+    iconAnchor:             [10, 10]   // icon center point
 });
 
 var data;           
-$(document).ready(function(){       
-    $.ajax({
-        type: 'GET',
-        url: 'data/json/voyages.json',
-        data: { get_param: 'value'},
-        dataType: 'json',
-        complete: function(gotdata){
-            data = gotdata;
-        }
-    });
-});
-
-$(document).ajaxComplete(function(){            
-    data = $.parseJSON(data.responseText); //Takes AJAX Reponse Text and parses it to JSON
-    var playbackOptions = {
+$.ajax({
+    type: 'GET',
+    url: 'data/json/voyageshuygens.json',
+    data: { get_param: 'value'},
+    dataType: 'json',
+    complete: function(data){
+        data = $.parseJSON(data.responseText);
+        var playbackOptions = {
         playControl:            true,
         dateControl:            true,
         sliderControl:          true,
@@ -56,7 +46,7 @@ $(document).ajaxComplete(function(){
         marker:                 function(){
                                     return { icon: customIcon }      
                                 }     
-    };
-           
+      };
     var playback = new L.Playback(map, data, null, playbackOptions);
-}); 
+  }
+});
