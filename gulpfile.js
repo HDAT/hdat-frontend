@@ -14,7 +14,22 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('scripts', function () {
-    return gulp.src(['src/scripts/client/**/*.js', '!src/scripts/client/vendor/**/*'])
+    return gulp.src([
+            'src/scripts/client/playback/prologue.js',
+            'src/scripts/client/playback/Util.js', 
+            'src/scripts/client/playback/MoveableMarker.js',
+            'src/scripts/client/playback/Track.js',
+            'src/scripts/client/playback/TrackController.js',
+            'src/scripts/client/playback/Clock.js',
+            'src/scripts/client/playback/TracksLayer.js',
+            'src/scripts/client/playback/Control.js',
+            'src/scripts/client/playback/DataStream.js',
+            'src/scripts/client/playback/Playback.js',
+            'src/scripts/client/playback/epilogue.js',
+            'src/scripts/client/main.js'
+        ])
+        .pipe($.concat('main.js'))
+        // .pipe($.babel())
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'))
         .pipe(gulp.dest('dist/scripts'))
@@ -24,8 +39,7 @@ gulp.task('scripts', function () {
 gulp.task('vendor', function () {
     exec("bower install", puts);
     return gulp.src([
-                'bower_components/leaflet/dist/leaflet.js',
-                'src/scripts/client/vendor/LeafletPlayback.js'
+                'bower_components/leaflet/dist/leaflet.js'
             ])
         .pipe($.concat('vendor.js'))
         .pipe(gulp.dest('dist/scripts/'))
