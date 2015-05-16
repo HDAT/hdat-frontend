@@ -107,9 +107,7 @@ L.Playback.MoveableMarker = L.Marker.extend({
         var marker_options = options.marker || {};
         this._feature =  feature;
 
-        if (jQuery.isFunction(marker_options)){        
-            marker_options = marker_options(feature);
-        }
+        marker_options = marker_options(feature);
         
         L.Marker.prototype.initialize.call(this, startLatLng, marker_options);
         
@@ -565,9 +563,7 @@ L.Playback.TracksLayer = L.Class.extend({
     initialize : function (map, options) {
         var layer_options = options.layer || {};
         
-        if (jQuery.isFunction(layer_options)){
-            layer_options = layer_options(feature);
-        }
+        layer_options = layer_options(feature);
         
         if (!layer_options.pointToLayer) {
             layer_options.pointToLayer = function (featureData, latlng) {

@@ -25,9 +25,6 @@ gulp.task('vendor', function () {
     exec("bower install", puts);
     return gulp.src([
                 'bower_components/leaflet/dist/leaflet.js',
-                'bower_components/underscore/underscore.js',
-                'bower_components/jquery/dist/jquery.min.js',
-                'bower_components/jquery-ui/jquery-ui.min.js',
                 'src/scripts/client/vendor/LeafletPlayback.js'
             ])
         .pipe($.concat('vendor.js'))

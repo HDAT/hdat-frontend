@@ -28,25 +28,23 @@ var customIcon = L.icon({
     iconAnchor:             [10, 10]   // icon center point
 });
 
-var data;           
-$.ajax({
-    type: 'GET',
-    url: 'data/json/voyageshuygens.json',
-    data: { get_param: 'value'},
-    dataType: 'json',
-    complete: function(data){
-        data = $.parseJSON(data.responseText);
-        var playbackOptions = {
-        playControl:            true,
-        dateControl:            true,
-        sliderControl:          true,
-        tickLen:                (3600*24),
-        tracksLayer:            false,
-        maxInterpolationTime:   46464646464646,
-        marker:                 function(){
-                                    return { icon: customIcon }      
-                                }     
-      };
-    var playback = new L.Playback(map, data, null, playbackOptions);
-  }
-});
+var data;
+var ajax = new XMLHttpRequest(); 
+ajax.open('GET', 'data/json/voyageshuygens.json', true);
+ajax.onreadystatechange = function () {
+  if (ajax.readyState != 4 || ajax.status != 200) return; 
+  data = JSON.parse(ajax.responseText);
+  var playbackOptions = {
+    playControl:            true,
+    dateControl:            true,
+    sliderControl:          true,
+    tickLen:                (3600*24),
+    tracksLayer:            false,
+    maxInterpolationTime:   46464646464646,
+    marker:                 function(){
+                                return { icon: customIcon }      
+                            }     
+  };
+  var playback = new L.Playback(map, data, null, playbackOptions);
+};
+ajax.send();
