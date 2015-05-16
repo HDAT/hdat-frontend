@@ -1,3 +1,7 @@
+.leaflet-container {
+    font: 18px/1.5 "Arapey", serif;
+}
+
 // Leaflet bar
 
 .leaflet-bar {
@@ -18,9 +22,15 @@
 }
 
 .leaflet-bar a.leaflet-disabled {
-    opacity: .5;
+    opacity: 1;
     color: transparent;
     background-color: transparent;
+}
+
+// Controls
+
+.leaflet-control {
+    clear: none;
 }
 
 // Specific zoom classes

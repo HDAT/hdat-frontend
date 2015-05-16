@@ -631,7 +631,7 @@ L.Playback.DateControl = L.Control.extend({
        
         // setup callback
         playback.addCallback(function (ms) {
-            self._season.innerHTML = self.options.seasonFormatFn(ms);
+            self._season.innerHTML = self.options.seasonFormatFn(ms) + ' ' + self.options.yearFormatFn(ms);
         });
 
         return this._container;
