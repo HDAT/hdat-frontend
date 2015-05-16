@@ -31,7 +31,17 @@
 // Controls
 
 .leaflet-control {
+    float: left;
     clear: none;
+}
+
+.leaflet-left {
+    width: 100%;
+}
+
+.leaflet-left .leaflet-control {
+    margin-left: 0;
+    padding-left: 10px;
 }
 
 // Specific zoom classes

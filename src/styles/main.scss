@@ -5,6 +5,10 @@
 /* normal */
 @import "leafletChanges";
 
+* {
+    box-sizing: border-box;
+}
+
 body {
 	width: 100%;
 	height: 100%;
@@ -40,12 +44,17 @@ body {
 
 /* Time top */
 .hdat-control-season {
-    width: 10em;
+    width: 20%;
     // background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C */
 }
 
 .hdat-control-season p {
     margin: 6px 0 0 10px;
+}
+
+.hdat-control-play {
+    margin: 0;
+    width: 10%;
 }
 
 .hdat-control-play button {
@@ -63,21 +72,22 @@ body {
 
 .hdat-control-timeline {
     width: 70%;
-    padding: 0 0 10px 0;
+    padding-right: 40px;
 }
 
-.hdat-control-timeline input{
+.hdat-control-timeline input {
     width: 100%;
 }
 
-.hdat-control-timeline p{
-    margin:0;
+.hdat-control-timeline p {
+    margin: 0;
     font-size: 0.8em;
-    float: right;
+    float: left;
+    margin-top: -12px;
 }
 
 .hdat-control-timeline p:nth-child(2){
-    float: left;
+    float: right;
 }
 
 
