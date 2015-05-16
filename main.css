@@ -1,3 +1,4 @@
+/* vendor */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -26,14 +27,29 @@ body {
  * and Firefox.
  * Correct `block` display not defined for `main` in IE 11.
  */
-article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
   display: block; }
 
 /**
  * 1. Correct `inline-block` display not defined in IE 8/9.
  * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
  */
-audio, canvas, progress, video {
+audio,
+canvas,
+progress,
+video {
   display: inline-block;
   /* 1 */
   vertical-align: baseline;
@@ -51,7 +67,8 @@ audio:not([controls]) {
  * Address `[hidden]` styling not present in IE 8/9/10.
  * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
  */
-[hidden], template {
+[hidden],
+template {
   display: none; }
 
 /* Links
@@ -65,7 +82,8 @@ a {
 /**
  * Improve readability when focused and also mouse hovered in all browsers.
  */
-a:active, a:hover {
+a:active,
+a:hover {
   outline: 0; }
 
 /* Text-level semantics
@@ -79,7 +97,8 @@ abbr[title] {
 /**
  * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
  */
-b, strong {
+b,
+strong {
   font-weight: bold; }
 
 /**
@@ -112,7 +131,8 @@ small {
 /**
  * Prevent `sub` and `sup` affecting `line-height` in all browsers.
  */
-sub, sup {
+sub,
+sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
@@ -150,7 +170,6 @@ figure {
  * Address differences between Firefox and other browsers.
  */
 hr {
-  -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0; }
 
@@ -163,7 +182,10 @@ pre {
 /**
  * Address odd `em`-unit font size rendering in all browsers.
  */
-code, kbd, pre, samp {
+code,
+kbd,
+pre,
+samp {
   font-family: monospace, monospace;
   font-size: 1em; }
 
@@ -179,7 +201,11 @@ code, kbd, pre, samp {
  * 2. Correct font properties not being inherited.
  * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
  */
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
   color: inherit;
   /* 1 */
   font: inherit;
@@ -199,7 +225,8 @@ button {
  * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
  * Correct `select` style inheritance in Firefox.
  */
-button, select {
+button,
+select {
   text-transform: none; }
 
 /**
@@ -209,7 +236,9 @@ button, select {
  * 3. Improve usability and consistency of cursor style between image-type
  *    `input` and others.
  */
-button, html input[type="button"], input[type="reset"], input[type="submit"] {
+button,
+html input[type="button"], input[type="reset"],
+input[type="submit"] {
   -webkit-appearance: button;
   /* 2 */
   cursor: pointer;
@@ -218,13 +247,15 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
 /**
  * Re-set default cursor for disabled elements.
  */
-button[disabled], html input[disabled] {
+button[disabled],
+html input[disabled] {
   cursor: default; }
 
 /**
  * Remove inner padding and border in Firefox 4+.
  */
-button::-moz-focus-inner, input::-moz-focus-inner {
+button::-moz-focus-inner,
+input::-moz-focus-inner {
   border: 0;
   padding: 0; }
 
@@ -242,7 +273,8 @@ input {
  * 1. Address box sizing set to `content-box` in IE 8/9/10.
  * 2. Remove excess padding in IE 8/9/10.
  */
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
   box-sizing: border-box;
   /* 1 */
   padding: 0;
@@ -253,7 +285,8 @@ input[type="checkbox"], input[type="radio"] {
  * `font-size` values of the `input`, it causes the cursor style of the
  * decrement button to change from `default` to `text`.
  */
-input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   height: auto; }
 
 /**
@@ -264,8 +297,6 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
   /* 2 */
   box-sizing: content-box; }
 
@@ -274,7 +305,8 @@ input[type="search"] {
  * Safari (but not Chrome) clips the cancel button when the search input has
  * padding (and `textfield` appearance).
  */
-input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none; }
 
 /**
@@ -317,11 +349,25 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-td, th {
+td,
+th {
   padding: 0; }
 
 /* required styles */
-.leaflet-map-pane, .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-tile-pane, .leaflet-tile-container, .leaflet-overlay-pane, .leaflet-shadow-pane, .leaflet-marker-pane, .leaflet-popup-pane, .leaflet-overlay-pane svg, .leaflet-zoom-box, .leaflet-image-layer, .leaflet-layer {
+.leaflet-map-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-pane,
+.leaflet-tile-container,
+.leaflet-overlay-pane,
+.leaflet-shadow-pane,
+.leaflet-marker-pane,
+.leaflet-popup-pane,
+.leaflet-overlay-pane svg,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
   position: absolute;
   left: 0;
   top: 0; }
@@ -330,13 +376,17 @@ td, th {
   overflow: hidden;
   -ms-touch-action: none; }
 
-.leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow {
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
   -webkit-user-select: none;
   -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   -webkit-user-drag: none; }
 
-.leaflet-marker-icon, .leaflet-marker-shadow {
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
   display: block; }
 
 /* map is broken in FF if you have max-width: 100% on tiles */
@@ -348,6 +398,7 @@ td, th {
   max-width: 15000px !important; }
 
 .leaflet-tile {
+  -webkit-filter: inherit;
   filter: inherit;
   visibility: hidden; }
 
@@ -395,7 +446,8 @@ td, th {
   z-index: 7;
   pointer-events: auto; }
 
-.leaflet-top, .leaflet-bottom {
+.leaflet-top,
+.leaflet-bottom {
   position: absolute;
   z-index: 1000;
   pointer-events: none; }
@@ -432,26 +484,22 @@ td, th {
   margin-right: 10px; }
 
 /* zoom and fade animations */
-.leaflet-fade-anim .leaflet-tile, .leaflet-fade-anim .leaflet-popup {
+.leaflet-fade-anim .leaflet-tile,
+.leaflet-fade-anim .leaflet-popup {
   opacity: 0;
-  -webkit-transition: opacity 0.2s linear;
-  -moz-transition: opacity 0.2s linear;
-  -o-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear; }
 
-.leaflet-fade-anim .leaflet-tile-loaded, .leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+.leaflet-fade-anim .leaflet-tile-loaded,
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
   opacity: 1; }
 
 .leaflet-zoom-anim .leaflet-zoom-animated {
-  -webkit-transition: -webkit-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
-  -moz-transition: -moz-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
-  -o-transition: -o-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
+  transition: -webkit-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
   transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1); }
 
-.leaflet-zoom-anim .leaflet-tile, .leaflet-pan-anim .leaflet-tile, .leaflet-touching .leaflet-zoom-animated {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile,
+.leaflet-touching .leaflet-zoom-animated {
   transition: none; }
 
 .leaflet-zoom-anim .leaflet-zoom-hide {
@@ -465,17 +513,19 @@ td, th {
   cursor: -webkit-grab;
   cursor: -moz-grab; }
 
-.leaflet-popup-pane, .leaflet-control {
+.leaflet-popup-pane,
+.leaflet-control {
   cursor: auto; }
 
-.leaflet-dragging .leaflet-container, .leaflet-dragging .leaflet-clickable {
+.leaflet-dragging .leaflet-container,
+.leaflet-dragging .leaflet-clickable {
   cursor: move;
   cursor: -webkit-grabbing;
   cursor: -moz-grabbing; }
 
 /* visual tweaks */
 .leaflet-container {
-  background: black;
+  background: #ddd;
   outline: 0; }
 
 .leaflet-container a {
@@ -497,7 +547,8 @@ td, th {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
   border-radius: 4px; }
 
-.leaflet-bar a, .leaflet-bar a:hover {
+.leaflet-bar a,
+.leaflet-bar a:hover {
   background-color: #fff;
   border-bottom: 1px solid #ccc;
   width: 26px;
@@ -508,7 +559,8 @@ td, th {
   text-decoration: none;
   color: black; }
 
-.leaflet-bar a, .leaflet-control-layers-toggle {
+.leaflet-bar a,
+.leaflet-control-layers-toggle {
   background-position: 50% 50%;
   background-repeat: no-repeat;
   display: block; }
@@ -536,8 +588,9 @@ td, th {
   line-height: 30px; }
 
 /* zoom control */
-.leaflet-control-zoom-in, .leaflet-control-zoom-out {
-  font: bold 18px 'Lucida Console', Monaco, monospace;
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  font: bold 18px "Lucida Console", Monaco, monospace;
   text-indent: 1px; }
 
 .leaflet-control-zoom-out {
@@ -551,9 +604,9 @@ td, th {
 
 /* layers control */
 .leaflet-control-layers {
-  /*	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
-	background: #fff;
-	border-radius: 5px;*/ }
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+  background: #fff;
+  border-radius: 5px; }
 
 .leaflet-control-layers-toggle {
   background-image: url(images/layers.png);
@@ -568,7 +621,8 @@ td, th {
   width: 44px;
   height: 44px; }
 
-.leaflet-control-layers .leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
   display: none; }
 
 .leaflet-control-layers-expanded .leaflet-control-layers-list {
@@ -576,9 +630,9 @@ td, th {
   position: relative; }
 
 .leaflet-control-layers-expanded {
-  /*	padding: 6px 10px 6px 6px;
-	color: #333;
-	background: #fff;*/ }
+  padding: 6px 10px 6px 6px;
+  color: #333;
+  background: #fff; }
 
 .leaflet-control-layers-selector {
   margin-top: 2px;
@@ -599,7 +653,8 @@ td, th {
   background: rgba(255, 255, 255, 0.7);
   margin: 0; }
 
-.leaflet-control-attribution, .leaflet-control-scale-line {
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
   padding: 0 5px;
   color: #333; }
 
@@ -609,7 +664,8 @@ td, th {
 .leaflet-control-attribution a:hover {
   text-decoration: underline; }
 
-.leaflet-container .leaflet-control-attribution, .leaflet-container .leaflet-control-scale {
+.leaflet-container .leaflet-control-attribution,
+.leaflet-container .leaflet-control-scale {
   font-size: 11px; }
 
 .leaflet-left .leaflet-control-scale {
@@ -626,7 +682,6 @@ td, th {
   font-size: 11px;
   white-space: nowrap;
   overflow: hidden;
-  -moz-box-sizing: content-box;
   box-sizing: content-box;
   background: #fff;
   background: rgba(255, 255, 255, 0.5); }
@@ -639,10 +694,13 @@ td, th {
 .leaflet-control-scale-line:not(:first-child):not(:last-child) {
   border-bottom: 2px solid #777; }
 
-.leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
   box-shadow: none; }
 
-.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
   border: 2px solid rgba(0, 0, 0, 0.2);
   background-clip: padding-box; }
 
@@ -676,12 +734,10 @@ td, th {
   padding: 1px;
   margin: -10px auto 0;
   -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
   transform: rotate(45deg); }
 
-.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
   background: white;
   box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4); }
 
@@ -719,7 +775,10 @@ td, th {
 .leaflet-oldie .leaflet-popup-tip-container {
   margin-top: -1px; }
 
-.leaflet-oldie .leaflet-control-zoom, .leaflet-oldie .leaflet-control-layers, .leaflet-oldie .leaflet-popup-content-wrapper, .leaflet-oldie .leaflet-popup-tip {
+.leaflet-oldie .leaflet-control-zoom,
+.leaflet-oldie .leaflet-control-layers,
+.leaflet-oldie .leaflet-popup-content-wrapper,
+.leaflet-oldie .leaflet-popup-tip {
   border: 1px solid #999; }
 
 /* div icon */
@@ -727,170 +786,126 @@ td, th {
   background: #fff;
   border: 1px solid #666; }
 
-.sliderContainer {
-  height: 50px;
-  width: 100%;
+/* normal */
+.leaflet-container {
+  font: 18px/1.5 "Arapey", serif;
+  color: #b5b5b5; }
+
+.leaflet-bar {
   background-color: transparent;
-  position: absolute;
-  top: 100px;
-  left: 0;
-  z-index: 2000; }
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  z-index: 1000; }
 
-input[type=range] {
-  -webkit-appearance: none;
-  width: 100%;
-  margin: 15px 0; }
-
-input[type=range]:focus {
-  outline: none; }
-
-input, input[type="password"], input[type="search"], input[type=range] {
-  background-color: transparent; }
-
-/* Chrome */
-input[type=range]::-webkit-slider-runnable-track {
-  width: 1000px;
-  height: 50px;
-  cursor: pointer; }
-
-input[type=range]::-webkit-slider-thumb {
-  border: 1px solid #000000;
-  height: 80px;
-  width: 0px;
-  background: rgba(105, 24, 42, 0);
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -15px; }
-
-/* Mozilla */
-input[type=range]::-moz-range-track {
-  width: 100%;
-  height: 50px;
-  cursor: pointer;
-  /*  background: #929291;
-*/ }
-
-input[type=range]::-moz-range-thumb {
-  border: 1px solid #000000;
-  height: 80px;
-  width: 0px;
-  background: rgba(105, 24, 42, 0);
-  cursor: pointer; }
-
-/* IE */
-input[type=range]::-ms-track {
-  width: 100%;
-  height: 50px;
-  cursor: pointer;
-  background: transparent;
-  border-color: transparent;
+.leaflet-bar a,
+.leaflet-bar a:hover {
+  background-color: transparent;
+  border-bottom: 0;
+  width: 40px;
+  height: 40px;
   color: transparent; }
 
-input[type=range]::-ms-fill-lower {
-  background: #797977; }
+.leaflet-bar a.leaflet-disabled {
+  opacity: 0.5;
+  color: transparent;
+  background-color: transparent; }
 
-input[type=range]::-ms-fill-upper {
-  background: #929291; }
+.leaflet-control {
+  float: left;
+  clear: none; }
 
-input[type=range]::-ms-thumb {
-  border: 1px solid #000000;
-  height: 80px;
-  width: 0px;
-  background: rgba(105, 24, 42, 0);
-  cursor: pointer;
-  height: 50px; }
+.leaflet-left {
+  width: 100%; }
 
-input[type=range]:focus::-ms-fill-lower {
-  /*  background: #929291;
-*/ }
+.leaflet-left .leaflet-control {
+  margin-left: 0;
+  padding-left: 10px; }
 
-input[type=range]:focus::-ms-fill-upper {
-  /*  background: #ababab;
-*/ }
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  float: right;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out; }
+
+.leaflet-control-zoom-out {
+  background-image: url("../images/minzoom.svg"); }
+
+.leaflet-control-zoom-in {
+  background-image: url("../images/pluszoom.svg");
+  margin-left: -6px; }
+
+.leaflet-control-zoom-out:hover,
+.leaflet-control-zoom-in:hover {
+  opacity: 1; }
+
+* {
+  box-sizing: border-box; }
 
 body {
   width: 100%;
   height: 100%;
-  position: absolute; }
+  position: absolute;
+  background: black; }
 
 #map {
   width: 100%;
   height: 100%; }
 
-#overlay {
-  width: 100%;
-  height: 100%;
-  background-image: url('images/overlay.png');
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1000;
-  pointer-events: none; }
+@-webkit-keyframes 'blink' {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 
-/* Leaflet overrides */
-.leaflet-top, .leaflet-left {
-  width: 100%; }
+.hdat-shipicon:hover {
+  -webkit-animation-name: blink;
+  animation-name: blink;
+  -webkit-animation-direction: normal;
+  animation-direction: normal;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out; }
 
 /* Time top */
-.timebar {
-  margin-left: -10px !important;
-  margin-top: -10px !important;
-  width: calc(100% + 10px);
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.65)), color-stop(100%, transparent));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
-  /* IE10+ */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 );
-  /* IE6-9 */
-  position: absolute;
-  display: block;
-  /* Font */
-  font-family: 'Arapey', serif;
-  font-size: 18px;
-  color: #b5b5b5; }
+.hdat-control-season {
+  width: 20%; }
 
-.datetimeControl {
-  margin-left: 60px;
-  /* Temp fix */ }
+.hdat-control-season p {
+  margin: 6px 0 0 10px; }
 
-/* Slider */
-.leaflet-control-layers-expanded {
+.hdat-control-play {
+  margin: 0;
+  width: 10%; }
+
+.hdat-control-play button {
+  height: 40px;
+  width: 40px;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  background-image: url("../images/play.svg"); }
+
+.hdat-control-play .pause {
+  background-image: url("../images/pause.svg"); }
+
+.hdat-control-timeline {
+  width: 70%;
+  padding-right: 40px; }
+
+.hdat-control-timeline input {
   width: 100%; }
 
-/* Marker animation */
-/*@-webkit-keyframes 'blink' {
-    0% {
-        opacity:1;
-    }
-    50% {
-        opacity:0;
-    }
-    100% {
-        opacity:1;
-    }
-}
-.customIcon {
-	-webkit-transition: all 2s ease-in-out;
-    -moz-transition: all 2s ease-in-out;
-    -o-transition: all 2s ease-in-out;
-    -ms-transition: all 2s ease-in-out;
-    transition: all 2s ease-in-out;
-    
-    -webkit-animation-direction: normal;
-    -webkit-animation-duration: 4s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-name: blink;
-	-webkit-animation-timing-function: ease-in-out;   
-}
-*/
-/*.customIcon {
-	opacity: 0.5;
-}*/
+.hdat-control-timeline p {
+  margin: 0;
+  font-size: 0.8em;
+  float: left;
+  margin-top: -12px; }
+
+.hdat-control-timeline p:nth-child(2) {
+  float: right; }
