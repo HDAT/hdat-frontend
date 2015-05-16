@@ -1,13 +1,4 @@
-.leaflet-control-layers {
-    box-shadow: none;
-    background: tranparent;
-    border-radius: 0;
-}
-
-.leaflet-control-layers-expanded {
-    padding: 0;
-    background: transparent;
-}
+// Leaflet bar
 
 .leaflet-bar {
     background-color: transparent;
@@ -31,6 +22,8 @@
     color: transparent;
     background-color: transparent;
 }
+
+// Specific zoom classes
 
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out {
