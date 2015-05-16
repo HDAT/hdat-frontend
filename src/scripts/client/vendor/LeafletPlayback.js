@@ -46,13 +46,18 @@ L.Playback.Util = L.Class.extend({
     SeasonStr: function(time) {
       var d = new Date((time - 15768000000) * 1000 );
       var m = d.getMonth();
+      var season = '';
+      if ((m >= 12) || (m <= 2)) { season = 'Winter'; };
+      if ((m >= 3) && (m <= 5)) { season = 'Spring'; };
+      if ((m >= 6) && (m <= 8)) { season = 'Summer'; };
+      if ((m >= 9) && (m <= 11)) { season = 'Autumn'; };
+      return season;
+    },
+
+    YearStr: function(time){
+      var d = new Date((time - 15768000000) * 1000 );
       var y = d.getFullYear();
-      if ((m >= 12) || (m <= 2)) { m = 'Winter'; };
-      if ((m >= 3) && (m <= 5)) { m = 'Spring'; };
-      if ((m >= 6) && (m <= 8)) { m = 'Summer'; };
-      if ((m >= 9) && (m <= 11)) { m = 'Autumn'; }; /* Nog even checken */
-      // console.log(m + ' ' + y);
-      return m + ' ' + y;
+      return y;
     },
 
     ParseGPX: function(gpx) {
@@ -600,7 +605,8 @@ L.Playback.DateControl = L.Control.extend({
         position: 'topleft',
         dateFormatFn: L.Playback.Util.DateStr,
         seasonFormatFn: L.Playback.Util.SeasonStr,
-        timeFormatFn: L.Playback.Util.TimeStr
+        timeFormatFn: L.Playback.Util.TimeStr,
+        yearFormatFn: L.Playback.Util.YearStr
     },
 
     initialize : function (playback, options) {
@@ -609,7 +615,8 @@ L.Playback.DateControl = L.Control.extend({
     },
 
     onAdd : function (map) {
-        this._container = L.DomUtil.create('div', 'timebar');
+        // this._container = L.DomUtil.create('div', 'timebar');
+        this._container = L.DomUtil.create('div', 'leaflet-control-layers leaflet-control-layers-expanded');
 
         var self = this;
         var playback = this.playback;
@@ -619,18 +626,12 @@ L.Playback.DateControl = L.Control.extend({
 
         // date time
         this._season = L.DomUtil.create('p', 'season', datetime);
-            // this._date = L.DomUtil.create('p', '', datetime);
-            // this._time = L.DomUtil.create('p', '', datetime);
 
-        this._season.innerHTML = this.options.seasonFormatFn(time);
-            // this._date.innerHTML = this.options.dateFormatFn(time);
-            // this._time.innerHTML = this.options.timeFormatFn(time);
-
+        this._season.innerHTML = this.options.seasonFormatFn(time) + ' ' + this.options.yearFormatFn(time);
+       
         // setup callback
         playback.addCallback(function (ms) {
             self._season.innerHTML = self.options.seasonFormatFn(ms);
-            // self._date.innerHTML = self.options.dateFormatFn(ms);
-            // self._time.innerHTML = self.options.timeFormatFn(ms);
         });
 
         return this._container;

@@ -1,5 +1,12 @@
-.leaflet-top, .leaflet-left {
-    width: 100%;
+.leaflet-control-layers {
+    box-shadow: none;
+    background: tranparent;
+    border-radius: 0;
+}
+
+.leaflet-control-layers-expanded {
+    padding: 0;
+    background: transparent;
 }
 
 .leaflet-bar {
@@ -41,23 +48,7 @@
     margin-left: -6px;
 }
 
-.leaflet-control-zoom-out:hover {
-    opacity: 1;
-}
-
+.leaflet-control-zoom-out:hover,
 .leaflet-control-zoom-in:hover {
     opacity: 1;
 }
-
-.leaflet-control-layers {
-    box-shadow: 0;
-    background: tranparent;
-    border-radius: 0;
-}
-
-.leaflet-control-layers-expanded {
-    padding: 0;
-    background: transparent;
-    width: 100%;
-}
-
