@@ -5,7 +5,7 @@ L.Playback.Clock = L.Class.extend({
   initialize: function (trackController, callback, options) {
     this._trackController = trackController;
     this._callbacksArry = [];
-    if (callback) this.addCallback(callback);
+    if (callback) {this.addCallback(callback);}
     L.setOptions(this, options);
     this._speed = this.options.speed;
     this._tickLen = this.options.tickLen;
@@ -39,7 +39,7 @@ L.Playback.Clock = L.Class.extend({
 
   start: function () {
     // ENGINE. setInverval powers the whole code to continually run. 
-    if (this._intervalID) return;
+    if (this._intervalID) {return;}
     this._intervalID = window.setInterval(
       this._tick, 
       this._transitionTime, 
@@ -47,7 +47,7 @@ L.Playback.Clock = L.Class.extend({
   },
 
   stop: function () {
-    if (!this._intervalID) return;
+    if (!this._intervalID) {return;}
     clearInterval(this._intervalID);
     this._intervalID = null;
   },
@@ -73,7 +73,7 @@ L.Playback.Clock = L.Class.extend({
     // Called by outside, ie. the controls. They can influence the code trough this.
 
     var time = parseInt(ms);
-    if (!time) return;
+    if (!time) {return;}
     var mod = time % this._tickLen;
     if (mod !== 0) {
       time += this._tickLen - mod;

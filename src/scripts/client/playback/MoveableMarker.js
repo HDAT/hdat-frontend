@@ -2,20 +2,20 @@ L.Playback = L.Playback || {};
 
 L.Playback.MoveableMarker = L.Marker.extend({    
     initialize: function (startLatLng, options, feature) {    
-        var marker_options = options.marker || {};
+        var markerOptions = options.marker || {};
         this._feature =  feature;
         
-        if (typeof(jQuery) !== undefined){
-            marker_options = marker_options(feature);
+        if (typeof jQuery !== undefined){
+            markerOptions = markerOptions(feature);
         }
 
-        L.Marker.prototype.initialize.call(this, startLatLng, marker_options);
+        L.Marker.prototype.initialize.call(this, startLatLng, markerOptions);
         
         this.popupContent = '';
         this.popupContent = feature.voyagedetails.first_ship_name;
 
-        if (marker_options.getPopup){
-            this.popupContent = marker_options.getPopup(feature);            
+        if (markerOptions.getPopup){
+            this.popupContent = markerOptions.getPopup(feature);            
         }
         
         this.bindPopup(this.getPopupContent());
@@ -35,8 +35,9 @@ L.Playback.MoveableMarker = L.Marker.extend({
         if (L.DomUtil.TRANSITION) {
             if (this._icon) { 
                 this._icon.style[L.DomUtil.TRANSITION] = 'all ' + transitionTime + 'ms linear'; 
-                if (this._popup && this._popup._wrapper)
+                if (this._popup && this._popup._wrapper){
                     this._popup._wrapper.style[L.DomUtil.TRANSITION] = 'all ' + transitionTime + 'ms linear'; 
+                }
             }
             if (this._shadow) { 
                 this._shadow.style[L.DomUtil.TRANSITION] = 'all ' + transitionTime + 'ms linear'; 

@@ -9,7 +9,7 @@ L.Playback.PlayControl = L.Control.extend({
         this.playback = playback;
     },
 
-    onAdd : function (map) {
+    onAdd : function () {
         this._container = L.DomUtil.create('div', 'hdat-control-play');
 
         var self = this;
@@ -20,6 +20,17 @@ L.Playback.PlayControl = L.Control.extend({
 
         this._button = L.DomUtil.create('button', '', playControl);
 
+        function play(){
+            if (playback.isPlaying()) {
+                playback.stop();
+                self._button.classList.toggle('pause');
+            }
+            else {
+                playback.start();
+                self._button.classList.toggle('pause');
+            }                
+        }
+
         var stop = L.DomEvent.stopPropagation;
 
         L.DomEvent
@@ -28,17 +39,6 @@ L.Playback.PlayControl = L.Control.extend({
         .on(this._button, 'dblclick', stop)
         .on(this._button, 'click', L.DomEvent.preventDefault)
         .on(this._button, 'click', play, this);
-        
-        function play(){
-            if (playback.isPlaying()) {
-                playback.stop();
-                self._button.classList.toggle('pause')
-            }
-            else {
-                playback.start();
-                self._button.classList.toggle('pause')
-            }                
-        }
 
         return this._container;
     }
@@ -58,7 +58,7 @@ L.Playback.DateControl = L.Control.extend({
         this.playback = playback;
     },
 
-    onAdd : function (map) {
+    onAdd : function () {
         // this._container = L.DomUtil.create('div', 'timebar');
         this._container = L.DomUtil.create('div', 'hdat-control-season');
 
@@ -111,6 +111,14 @@ L.Playback.SliderControl = L.Control.extend({
         this._slider.max = playback.getEndTime();
         this._slider.value = playback.getTime();
 
+        function onSliderChange(e) {
+            var val = Number(e.target.value);
+            playback.setCursor(val);
+        }
+
+        playback.addCallback(function (ms) {
+            self._slider.value = ms;
+        });
    
         var stop = L.DomEvent.stopPropagation;
 
@@ -122,17 +130,6 @@ L.Playback.SliderControl = L.Control.extend({
         //.on(this._slider, 'mousemove', L.DomEvent.preventDefault)
         .on(this._slider, 'change', onSliderChange, this)
         .on(this._slider, 'mousemove', onSliderChange, this);           
-
-
-        function onSliderChange(e) {
-            var val = Number(e.target.value);
-            playback.setCursor(val);
-        }
-
-        playback.addCallback(function (ms) {
-            self._slider.value = ms;
-        });
-        
         
         map.on('playback:add_tracks', function() {
             self._slider.min = playback.getStartTime();

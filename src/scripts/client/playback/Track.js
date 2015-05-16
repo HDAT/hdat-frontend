@@ -24,8 +24,9 @@ L.Playback.Track = L.Class.extend({
 
         // handle edge case of only one t sample
         if (sampleTimes.length === 1) {
-            if (tmod !== 0)
+            if (tmod !== 0){
                 t += tickLen - tmod;
+            }
             this._ticks[t] = samples[0];
             this._startTime = t;
             this._endTime = t;

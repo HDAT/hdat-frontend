@@ -1,4 +1,3 @@
-'use strict';
 (function(L){
 
 var southWest   = L.latLng(-75, 179),
@@ -40,8 +39,10 @@ var data;
 var ajax = new XMLHttpRequest(); 
 ajax.open('GET', 'data/json/voyageshuygens.json', true);
 ajax.onreadystatechange = function () {
-  if (ajax.readyState !== 4 || ajax.status !== 200) {return}; 
+  if (ajax.readyState !== 4 || ajax.status !== 200) {return;}
+
   data = JSON.parse(ajax.responseText);
+
   var playbackOptions = {
     playControl:            true,
     dateControl:            true,
@@ -49,11 +50,12 @@ ajax.onreadystatechange = function () {
     tickLen:                (3600*24),
     tracksLayer:            false,
     maxInterpolationTime:   46464646464646,
-    marker:                 function(){ return { icon: customIcon } }  
+    marker:                 function(){ return { icon: customIcon }; }  
 // ,bluemarker:             function(){ return { icon: blueIcon } }              
   };
-  var playback = new L.Playback(map, data, null, playbackOptions);
+
+  new L.Playback(map, data, null, playbackOptions);
 };
 ajax.send();
 
-})(L)
+})(L);

@@ -4,20 +4,20 @@
 L.Playback = L.Playback || {};
 
 L.Playback.TracksLayer = L.Class.extend({
-    initialize : function (map, options) {
-        var layer_options = options.layer || {};
+    initialize : function (map, options, feature) {
+        var layerOptions = options.layer || {};
         
         if (typeof jQuery !== undefined) {
-            layer_options = layer_options(feature);
+            layerOptions = layerOptions(feature);
         }
 
-        if (!layer_options.pointToLayer) {
-            layer_options.pointToLayer = function (featureData, latlng) {
+        if (!layerOptions.pointToLayer) {
+            layerOptions.pointToLayer = function (featureData, latlng) {
                 return new L.CircleMarker(latlng, { radius : 5 });
             };
         }
     
-        this.layer = new L.GeoJSON(null, layer_options);
+        this.layer = new L.GeoJSON(null, layerOptions);
 
         var overlayControl = {
             'GPS Tracks' : this.layer

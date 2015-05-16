@@ -23,7 +23,7 @@ gulp.task('scripts', function () {
             'src/scripts/client/playback/Clock.js',
             'src/scripts/client/playback/TracksLayer.js',
             'src/scripts/client/playback/Control.js',
-            'src/scripts/client/playback/DataStream.js',
+            // 'src/scripts/client/playback/DataStream.js',
             'src/scripts/client/playback/Playback.js',
             'src/scripts/client/playback/epilogue.js',
             'src/scripts/client/main.js'

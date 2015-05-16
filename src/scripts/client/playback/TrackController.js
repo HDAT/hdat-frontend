@@ -48,25 +48,25 @@ L.Playback.TrackController = L.Class.extend({
         // Not neccecairy right now, will need to be written in the future I
         // suspect.
 
-        var trackID = trackID;
-
         this._tracks.map(function(track, index){
-            if (track.id == trackID) {
+            if (track.id === trackID) {
                 // remove track without leaving hole in array
-                _tracks.splice(index, 1);
+                this._tracks.splice(index, 1);
             }
         });
     },
-
+/*
     isTrack : function(isTrackID){
         //!!! FUNCTION MOCKED !!! WILL NOT WORK PROBABLY !!!
         // Check if track is available
+
         return this._tracks.map(function(track, index){
-            if (track.id == isTrackID){
+            if (track.id === isTrackID){
                 return true;
             }
         });
     },
+*/
 
     tock : function (timestamp, transitionTime) {
         // For each track determine new position and move the markers.
