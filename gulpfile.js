@@ -14,6 +14,7 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('scripts', function () {
+
     return gulp.src([
             'src/scripts/client/playback/prologue.js',
             'src/scripts/client/playback/Util.js', 
@@ -30,7 +31,12 @@ gulp.task('scripts', function () {
         ])
         .pipe($.concat('main.js'))
         // .pipe($.babel())
-        .pipe($.jshint())
+        .pipe($.jshint({
+            globals: {
+                "L": false,
+                "define": false
+            }
+        }))
         .pipe($.jshint.reporter('jshint-stylish'))
         .pipe(gulp.dest('dist/scripts'))
         .pipe($.connect.reload());

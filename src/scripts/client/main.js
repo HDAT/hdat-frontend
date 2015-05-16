@@ -1,5 +1,7 @@
 (function(L){
 
+
+
 var southWest   = L.latLng(-75, 179),
     northEast   = L.latLng(75, -179),
     bounds      = L.latLngBounds(southWest, northEast);
@@ -57,5 +59,7 @@ ajax.onreadystatechange = function () {
   new L.Playback(map, data, null, playbackOptions);
 };
 ajax.send();
+
+
 
 })(L);
