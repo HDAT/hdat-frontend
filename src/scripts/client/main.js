@@ -28,7 +28,13 @@ var customIcon = L.icon({
     iconAnchor:             [10, 10]   // icon center point
 });
 
-<<<<<<< HEAD
+// var blueIcon = L.icon({
+//     iconUrl:                'images/hdat-shipicon-blue.png',
+//     className:              'hdat-shipicon',
+//     iconSize:               [20, 20],   // size of the icon
+//     iconAnchor:             [10, 10]   // icon center point
+// });
+
 var data;
 var ajax = new XMLHttpRequest(); 
 ajax.open('GET', 'data/json/voyageshuygens.json', true);
@@ -44,42 +50,11 @@ ajax.onreadystatechange = function () {
     maxInterpolationTime:   46464646464646,
     marker:                 function(){
                                 return { icon: customIcon }      
-                            }     
+                            }  
+                   // ,bluemarker:             function(){
+        //                             return { icon: blueIcon }      
+        //                         }              
   };
   var playback = new L.Playback(map, data, null, playbackOptions);
 };
 ajax.send();
-=======
-// var blueIcon = L.icon({
-//     iconUrl:                'images/hdat-shipicon-blue.png',
-//     className:              'hdat-shipicon',
-//     iconSize:               [20, 20],   // size of the icon
-//     iconAnchor:             [10, 10]   // icon center point
-// });
-
-var data;           
-$.ajax({
-    type: 'GET',
-    url: 'data/json/voyageshuygens.json',
-    data: { get_param: 'value'},
-    dataType: 'json',
-    complete: function(data){
-        data = $.parseJSON(data.responseText);
-        var playbackOptions = {
-        playControl:            true,
-        dateControl:            true,
-        sliderControl:          true,
-        tickLen:                (3600*24),
-        tracksLayer:            false,
-        maxInterpolationTime:   46464646464646,
-        marker:                 function(){
-                                    return { icon: customIcon }      
-                                },
-        // bluemarker:             function(){
-        //                             return { icon: blueIcon }      
-        //                         }  
-      };
-    var playback = new L.Playback(map, data, null, playbackOptions);
-  }
-});
->>>>>>> working blue marker test
