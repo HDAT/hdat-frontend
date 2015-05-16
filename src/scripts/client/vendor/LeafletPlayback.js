@@ -105,22 +105,16 @@ L.Playback = L.Playback || {};
 L.Playback.MoveableMarker = L.Marker.extend({    
     initialize: function (startLatLng, options, feature) {    
         var marker_options = options.marker || {};
-        // var blue_icon = options.bluemarker || {};
 
         marker_options = marker_options(feature);
 
         this._feature =  feature;
-        // console.log(marker_options(feature));
-
-            marker_options = marker_options(feature);
-
-        // blue_icon test
-        //  blue_icon = blue_icon(feature);
         
         L.Marker.prototype.initialize.call(this, startLatLng, marker_options);
 
-        // console.log(blue_icon);
         // if (feature.voyagedetails.first_ship_name == 'Blijdorp'){
+        //     var blue_icon = options.bluemarker || {};
+        //     blue_icon = blue_icon(feature);
         //     L.Marker.prototype.initialize.call(this, startLatLng, blue_icon);
         // }
         
