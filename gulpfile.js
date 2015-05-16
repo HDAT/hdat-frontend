@@ -98,13 +98,11 @@ gulp.task('deploy', ['build'], function() {
         .pipe($.ghPages());
 });
 
-gulp.task('production', ['build'], function() {
-    var options = {
-        remoteUrl: 'https://github.com/HDAT/HDAT.github.io',
-        branch: 'master'
-    };
+gulp.task('production', function() {
     return gulp.src('./dist/**/*')
-        .pipe($.ghPages([options]));
+        .pipe($.ghPages({
+            remoteUrl: 'https://github.com/HDAT/HDAT.github.io'
+    }));
 });
 
 
