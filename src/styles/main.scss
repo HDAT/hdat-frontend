@@ -1,5 +1,8 @@
-@import "normalize";
-@import "leaflet";
+/* vendor */
+@import "../../bower_components/normalize.css/normalize";
+@import "../../bower_components/leaflet/dist/leaflet";
+
+/* normal */
 @import "slider";
 
 body {
