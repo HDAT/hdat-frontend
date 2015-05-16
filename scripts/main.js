@@ -5,7 +5,7 @@ var southWest   = L.latLng(-75, 179),
     bounds      = L.latLngBounds(southWest, northEast);
 
 var satellite   = L.tileLayer('https://{s}.tiles.mapbox.com/v4/erva.33c59435/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZXJ2YSIsImEiOiJUNy1GUV84In0.YTqElwgLmBOW8higJ-9GIw', {id: 'satellite'}),
-    geography   = L.tileLayer('images/tilesoverlay/{z}/{x}/{y}.png', {id: 'geography'});
+    geography   = L.tileLayer('images/tilesoverlay2/{z}/{x}/{y}.png', {id: 'geography'});
   
 var map = new L.Map('map', {
   zoomControl:          true,
@@ -28,25 +28,29 @@ var customIcon = L.icon({
     iconAnchor:             [10, 10]   // icon center point
 });
 
-var data;           
-$.ajax({
-    type: 'GET',
-    url: 'data/json/voyageshuygens.json',
-    data: { get_param: 'value'},
-    dataType: 'json',
-    complete: function(data){
-        data = $.parseJSON(data.responseText);
-        var playbackOptions = {
-        playControl:            true,
-        dateControl:            true,
-        sliderControl:          true,
-        tickLen:                (3600*24),
-        tracksLayer:            false,
-        maxInterpolationTime:   46464646464646,
-        marker:                 function(){
-                                    return { icon: customIcon }      
-                                }     
-      };
-    var playback = new L.Playback(map, data, null, playbackOptions);
-  }
-});
+// var blueIcon = L.icon({
+//     iconUrl:                'images/hdat-shipicon-blue.png',
+//     className:              'hdat-shipicon',
+//     iconSize:               [20, 20],   // size of the icon
+//     iconAnchor:             [10, 10]   // icon center point
+// });
+
+var data;
+var ajax = new XMLHttpRequest(); 
+ajax.open('GET', 'data/json/voyageshuygens.json', true);
+ajax.onreadystatechange = function () {
+  if (ajax.readyState != 4 || ajax.status != 200) return; 
+  data = JSON.parse(ajax.responseText);
+  var playbackOptions = {
+    playControl:            true,
+    dateControl:            true,
+    sliderControl:          true,
+    tickLen:                (3600*24),
+    tracksLayer:            false,
+    maxInterpolationTime:   46464646464646,
+    marker:                 function(){ return { icon: customIcon } }  
+// ,bluemarker:             function(){ return { icon: blueIcon } }              
+  };
+  var playback = new L.Playback(map, data, null, playbackOptions);
+};
+ajax.send();
