@@ -6,16 +6,6 @@ var southWest   = L.latLng(-70, 179),
 
 var satellite   = L.tileLayer('https://{s}.tiles.mapbox.com/v4/erva.33c59435/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZXJ2YSIsImEiOiJUNy1GUV84In0.YTqElwgLmBOW8higJ-9GIw', {id: 'satellite'}),
     geography   = L.tileLayer('images/tilesoverlay/{z}/{x}/{y}.png', {id: 'geography'});
-
-/* Basiskaart */
-var baseMaps = {
-    "Satellite": satellite,
-};
-
-/* Optionele kaart, hier moet later routing network in */
-var overlayMaps = {
-    "Geography": geography
-};
   
 var map = new L.Map('map', {
   zoomControl:          true,
@@ -24,17 +14,15 @@ var map = new L.Map('map', {
   maxZoom:              6,
   zoom:                 3,
   noWrap:               false,
-  maxBounds:            bounds,
+  // maxBounds:            bounds,
   attributionControl:   false,
   inertia:              true,
   worldCopyJump:        true,
   layers:               [satellite, geography]
 });
 
-L.control.layers(baseMaps, overlayMaps).addTo(map);
-
 L.Icon.Default.imagePath = 'images/leaflet/';
-
+  
 var customIcon = L.icon({
     iconUrl:                'images/leaflet/customIcon.png',
     className:              'customIcon',

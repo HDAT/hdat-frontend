@@ -2,8 +2,6 @@
 @import "leaflet";
 @import "slider";
 
-// Write your styles below
-
 body {
 	width: 100%;
 	height: 100%;
@@ -14,17 +12,6 @@ body {
     width: 100%; 
     height: 100%;
 }
-
-// #overlay {
-//     width: 100%;
-//     height: 100%;
-//  	background-image: url('images/overlay.png');
-// 	position: absolute;
-// 	left: 0;
-//  	top: 0;
-//  	z-index: 1000;
-//  	pointer-events: none;
-// }
 
 /* Time top */
 .timebar {
@@ -55,19 +42,18 @@ body {
 }
 
 /* Playbutton */
-.sliderbutton {
+.playControl button {
     height: 40px;
     width: 40px;
-    color: transparent !important;
+    color: transparent;
     outline: 0; 
-    background-color: transparent !important;
+    background-color: transparent;
     border: 0;
-}
-.playbutton {
     background-image: url('../images/play.svg');
     background-size: contain;
 }
-.pausebutton {
+
+.playControl .pause {
     background-image: url('../images/pause.svg');
     background-size: contain;
 }
