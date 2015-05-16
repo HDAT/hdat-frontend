@@ -1,0 +1,75 @@
+.leaflet-bar {
+    background-color: transparent;
+	border: 0;
+    box-shadow: 0;
+   	border-radius: 0;
+    z-index: 1000;
+    box-shadow: 0;
+}
+
+.leaflet-bar a,
+.leaflet-bar a:hover {
+    background-color: transparent;
+    border-bottom: 0;
+    width: 28px;
+    height: 28px;
+    text-align: left;
+    color: white;
+}
+
+.leaflet-bar a.leaflet-disabled {
+    opacity: .5;
+   	transition: opacity 0.5s ease-in-out;
+    background-color: transparent;
+    color: white;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	z-index: 3000;
+	text-indent: 1px;
+	float: right;
+}
+
+.leaflet-control-zoom-out {
+    height: 40px;
+    width: 40px;
+  	background-image: url('../images/minzoom.svg');
+    background-size: contain;
+    color: transparent !important;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    float: right;
+}
+
+.leaflet-control-zoom-in {
+    height: 40px;
+    width: 40px;
+    background-image: url('../images/pluszoom.svg');
+    background-size: contain;
+    color: transparent !important;
+    margin-left: -5px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.leaflet-control-zoom-out:hover {
+    opacity: 0.8;
+}
+
+.leaflet-control-zoom-in:hover {
+    opacity: 0.8;
+}
+
+.leaflet-control-layers {
+    box-shadow: 0;
+    background: tranparent;
+    border-radius: 0;
+}
+
+.leaflet-control-layers-expanded {
+    padding: 0;
+    color: white;
+    background: transparent;
+}
+

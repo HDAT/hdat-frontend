@@ -4,6 +4,8 @@
 
 /* normal */
 @import "slider";
+@import "leafletChanges";
+
 
 body {
 	width: 100%;
@@ -96,8 +98,3 @@ body {
     -webkit-animation-name: blink;
 	-webkit-animation-timing-function: ease-in-out;   
 }
-
-/*.customIcon:hover {
-	opacity: 0.5;
-}
-*/
