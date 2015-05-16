@@ -48,12 +48,8 @@ ajax.onreadystatechange = function () {
     tickLen:                (3600*24),
     tracksLayer:            false,
     maxInterpolationTime:   46464646464646,
-    marker:                 function(){
-                                return { icon: customIcon }      
-                            }  
-                   // ,bluemarker:             function(){
-        //                             return { icon: blueIcon }      
-        //                         }              
+    marker:                 function(){ return { icon: customIcon } }  
+// ,bluemarker:             function(){ return { icon: blueIcon } }              
   };
   var playback = new L.Playback(map, data, null, playbackOptions);
 };
