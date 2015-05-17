@@ -40,10 +40,18 @@ var markerOptions = function(feature){
   // You can decide which marker should be assigned here.
   
   // console.log(feature)
-  console.log(feature.voyagedetails.inventory == '1235');
+  // console.log(feature.voyagedetails.inventory);
 
   var nr = Math.round(Math.random());
-  if (feature.voyagedetails.inventory == '1235'){
+
+  var silverOnboard = false;
+  feature.voyagedetails.inventory.map(function(singleItem){
+     if (feature.voyagedetails.inventory == '1235'){
+        silverOnboard = true;
+        console.log('jaaa');
+     }
+  }) 
+  if (silverOnboard){
     return {
       icon: blueIcon,
       getPopup: function(feature){
