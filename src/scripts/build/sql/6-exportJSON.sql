@@ -24,7 +24,7 @@ INSERT INTO "bgbVoyageRouteJSON"
 		    (
 		      SELECT row_to_json(d)
 		      FROM (
-		        SELECT first_ship_name, placeregio
+		        SELECT first_ship_name, placeregio, inventory
 		      ) d
 		    ) AS voyageDetails
 	  	-- FROM "bgbVoyageRoute" WHERE "geometry" IS NOT NULL AND "time" IS NOT NULL ORDER BY "voyDepTimeStamp" ASC) 
