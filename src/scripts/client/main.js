@@ -21,42 +21,48 @@ var map = new L.Map('map', {
   layers:               [satellite, geography]
 });
 
-// L.Icon.Default.imagePath = 'images/leaflet/';
+L.Icon.Default.imagePath = 'images/leaflet';
   
-var customIcon = L.icon({
+var shipIcon = L.icon({
     iconUrl:                'images/hdat-shipicon.png',
     className:              'hdat-shipicon',
     iconSize:               [20, 20],   // size of the icon
     iconAnchor:             [10, 10]   // icon center point
 });
 
-// var blueIcon = L.icon({
-//     iconUrl:                'images/hdat-shipicon-blue.png',
-//     className:              'hdat-shipicon',
-//     iconSize:               [20, 20],   // size of the icon
-//     iconAnchor:             [10, 10]   // icon center point
-// });
+var blueIcon = L.icon({
+    iconUrl:                'images/hdat-shipicon-blue.png',
+    className:              'hdat-shipicon',
+    iconSize:               [20, 20],   // size of the icon
+    iconAnchor:             [10, 10]   // icon center point
+});
 
 var data;
 
-var onDataCB = function () {
-  if (ajax.readyState !== 4 || ajax.status !== 200) {
-    return;
-  }
+var markerOptions = function(feature){
+  // do something. I broke this thing, works now though
+  // You can decide which marker should be assigned here.
 
-  data = JSON.parse(ajax.responseText);
+  // console.log(feature)
+  console.log(shipIcon);
+  return {icon: shipIcon}; 
+}
 
-  var playbackOptions = {
+var playbackOptions = {
     playControl:            true,
     dateControl:            true,
     sliderControl:          true,
     tickLen:                (3600*24),
     tracksLayer:            false,
     maxInterpolationTime:   46464646464646,
-    marker:                 function(){ return { icon: customIcon }; }  
-// ,bluemarker:             function(){ return { icon: blueIcon } }              
-  };
+    marker:                 markerOptions
+};
 
+var onDataCB = function () {
+  if (ajax.readyState !== 4 || ajax.status !== 200) {
+    return;
+  }
+  data = JSON.parse(ajax.responseText);
   new L.Playback(map, data, null, playbackOptions);
 };
 
