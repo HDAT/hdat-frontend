@@ -37,14 +37,11 @@ var blueIcon = L.icon({
     iconAnchor:             [10, 10]   // icon center point
 });
 
-var data;
-
 var markerOptions = function(feature){
   // do something. I broke this thing, works now though
   // You can decide which marker should be assigned here.
 
   // console.log(feature)
-  console.log(shipIcon);
   return {icon: shipIcon}; 
 }
 
@@ -58,12 +55,13 @@ var playbackOptions = {
     marker:                 markerOptions
 };
 
+var data, playback;
 var onDataCB = function () {
   if (ajax.readyState !== 4 || ajax.status !== 200) {
     return;
   }
   data = JSON.parse(ajax.responseText);
-  new L.Playback(map, data, null, playbackOptions);
+  playback = new L.Playback(map, data, null, playbackOptions);
 };
 
 // Ajax shit 
