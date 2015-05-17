@@ -38,9 +38,15 @@ var blueIcon = L.icon({
 var markerOptions = function(feature){
   // do something. I broke this thing, works now though
   // You can decide which marker should be assigned here.
-
+  
   // console.log(feature)
-  return {icon: shipIcon}; 
+
+  var nr = Math.round(Math.random());
+  if (nr === 1){
+    return {icon: shipIcon};
+  } else {
+    return {icon: blueIcon};
+  }
 }
 
 var playbackOptions = {
@@ -51,7 +57,7 @@ var playbackOptions = {
     tracksLayer:            false,
     maxInterpolationTime:   46464646464646,
     marker:                 markerOptions
-  }, 
+};
 var data, playback; 
 var onDataCB = function () {
     if (ajax.readyState !== 4 || ajax.status !== 200) {
