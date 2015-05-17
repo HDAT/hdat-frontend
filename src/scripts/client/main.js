@@ -40,18 +40,19 @@ var markerOptions = function(feature){
   // You can decide which marker should be assigned here.
   
   // console.log(feature)
+  console.log(feature.voyagedetails.inventory == '1235');
 
   var nr = Math.round(Math.random());
-  if (nr === 1){
+  if (feature.voyagedetails.inventory == '1235'){
     return {
-      icon: shipIcon,
+      icon: blueIcon,
       getPopup: function(feature){
         return feature.voyagedetails.first_ship_name;
       }
     };
   } else {
     return {
-      icon: blueIcon,
+      icon: shipIcon,
       getPopup: function(feature){
         return feature.voyagedetails.first_ship_name;
       }
@@ -80,7 +81,7 @@ var onDataCB = function () {
 };
 
 var ajax = new XMLHttpRequest(); 
-ajax.open('GET', 'data/json/voyageshuygens.json', true);
+ajax.open('GET', 'data/json/voyages.json', true);
 ajax.onreadystatechange = onDataCB;
 ajax.send();
 
