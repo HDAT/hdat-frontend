@@ -35,6 +35,13 @@ var blueIcon = L.icon({
     iconAnchor:             [10, 10]   // icon center point
 });
 
+var orangeIcon = L.icon({
+    iconUrl:                'images/hdat-shipicon-orange.png',
+    className:              'hdat-shipicon',
+    iconSize:               [20, 20],   // size of the icon
+    iconAnchor:             [10, 10]   // icon center point
+});
+
 var markerOptions = function(feature){
   // do something. I broke this thing, works now though
   // You can decide which marker should be assigned here.
@@ -44,17 +51,30 @@ var markerOptions = function(feature){
 
   var nr = Math.round(Math.random());
 
-  var silverOnboard = false;
+  var firstProduct = false;
+  var secondProduct = false;
+  
   feature.voyagedetails.inventory.map(function(singleItem){
      if (singleItem == '1235'){
-        silverOnboard = true;
-        console.log('jaaa');
+        firstProduct = true;
      }
-  }) 
+  })
+  feature.voyagedetails.inventory.map(function(singleItem){
+     if (singleItem == '1048'){
+        secondProduct = true;
+     }
+  })
 
-  if (silverOnboard){
+  if (firstProduct){
     return {
       icon: blueIcon,
+      getPopup: function(feature){
+        return feature.voyagedetails.first_ship_name;
+      }
+    };
+  } else if (secondProduct) {
+    return {
+      icon: orangeIcon,
       getPopup: function(feature){
         return feature.voyagedetails.first_ship_name;
       }
