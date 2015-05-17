@@ -1,7 +1,5 @@
 (function(L){
 
-
-
 var southWest   = L.latLng(-75, 179),
     northEast   = L.latLng(75, -179),
     bounds      = L.latLngBounds(southWest, northEast);
@@ -53,15 +51,14 @@ var playbackOptions = {
     tracksLayer:            false,
     maxInterpolationTime:   46464646464646,
     marker:                 markerOptions
-};
-
-var data, playback;
+  }, 
+var data, playback; 
 var onDataCB = function () {
-  if (ajax.readyState !== 4 || ajax.status !== 200) {
-    return;
-  }
-  data = JSON.parse(ajax.responseText);
-  playback = new L.Playback(map, data, null, playbackOptions);
+    if (ajax.readyState !== 4 || ajax.status !== 200) {
+      return;
+    }
+    data = JSON.parse(ajax.responseText);
+    playback = new L.Playback(map, data, null, playbackOptions);
 };
 
 // Ajax shit 
