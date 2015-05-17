@@ -38,10 +38,11 @@ var customIcon = L.icon({
 // });
 
 var data;
-var ajax = new XMLHttpRequest(); 
-ajax.open('GET', 'data/json/voyageshuygens.json', true);
-ajax.onreadystatechange = function () {
-  if (ajax.readyState !== 4 || ajax.status !== 200) {return;}
+
+var onDataCB = function () {
+  if (ajax.readyState !== 4 || ajax.status !== 200) {
+    return;
+  }
 
   data = JSON.parse(ajax.responseText);
 
@@ -58,8 +59,11 @@ ajax.onreadystatechange = function () {
 
   new L.Playback(map, data, null, playbackOptions);
 };
+
+// Ajax shit 
+var ajax = new XMLHttpRequest(); 
+ajax.open('GET', 'data/json/voyageshuygens.json', true);
+ajax.onreadystatechange = onDataCB;
 ajax.send();
-
-
 
 })(L);

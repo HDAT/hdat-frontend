@@ -5,14 +5,13 @@ L.Playback.MoveableMarker = L.Marker.extend({
         var markerOptions = options.marker || {};
         this._feature =  feature;
         
-        if (typeof jQuery !== undefined){
+        if (typeof markerOptions === 'function'){
             markerOptions = markerOptions(feature);
         }
 
         L.Marker.prototype.initialize.call(this, startLatLng, markerOptions);
         
         this.popupContent = '';
-        this.popupContent = feature.voyagedetails.first_ship_name;
 
         if (markerOptions.getPopup){
             this.popupContent = markerOptions.getPopup(feature);            

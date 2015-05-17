@@ -7,7 +7,7 @@ L.Playback.TracksLayer = L.Class.extend({
     initialize : function (map, options, feature) {
         var layerOptions = options.layer || {};
         
-        if (typeof jQuery !== undefined) {
+        if (typeof layerOptions === 'function') {
             layerOptions = layerOptions(feature);
         }
 
