@@ -68,7 +68,9 @@ var playbackOptions = {
     maxInterpolationTime:   46464646464646,
     marker:                 markerOptions
 };
-var data, playback; 
+var data, playback;
+
+// Ajax shit 
 var onDataCB = function () {
     if (ajax.readyState !== 4 || ajax.status !== 200) {
       return;
@@ -77,7 +79,6 @@ var onDataCB = function () {
     playback = new L.Playback(map, data, null, playbackOptions);
 };
 
-// Ajax shit 
 var ajax = new XMLHttpRequest(); 
 ajax.open('GET', 'data/json/voyageshuygens.json', true);
 ajax.onreadystatechange = onDataCB;
