@@ -46,11 +46,12 @@ var markerOptions = function(feature){
 
   var silverOnboard = false;
   feature.voyagedetails.inventory.map(function(singleItem){
-     if (feature.voyagedetails.inventory == '1235'){
+     if (singleItem == '1235'){
         silverOnboard = true;
         console.log('jaaa');
      }
   }) 
+
   if (silverOnboard){
     return {
       icon: blueIcon,
