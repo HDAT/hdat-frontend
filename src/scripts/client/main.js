@@ -43,9 +43,19 @@ var markerOptions = function(feature){
 
   var nr = Math.round(Math.random());
   if (nr === 1){
-    return {icon: shipIcon};
+    return {
+      icon: shipIcon,
+      getPopup: function(feature){
+        return feature.voyagedetails.first_ship_name;
+      }
+    };
   } else {
-    return {icon: blueIcon};
+    return {
+      icon: blueIcon,
+      getPopup: function(feature){
+        return feature.voyagedetails.first_ship_name;
+      }
+    };
   }
 }
 
