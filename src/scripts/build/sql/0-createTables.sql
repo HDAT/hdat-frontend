@@ -2,10 +2,10 @@
 
 DROP TABLE IF EXISTS "amhPlaces";
 CREATE TABLE "amhPlaces" (
-	title varchar(255),
-	record_type varchar(255),
-	latitude varchar(255),
-	longitude varchar(255)
+	title 			varchar(255),
+	record_type 	varchar(255),
+	latitude 		varchar(255),
+	longitude 		varchar(255)
 );
 
 DROP TABLE IF EXISTS "routingMod";
@@ -23,3 +23,10 @@ CREATE TABLE "bgbRegioGeo" AS
 DROP TABLE IF EXISTS "bgbVoyageRoute";
 CREATE TABLE "bgbVoyageRoute" AS
   TABLE "bgbVoyage";
+
+DROP TABLE IF EXISTS "bgbCargoMod";
+CREATE TABLE "bgbCargoMod" (
+	id 				serial,
+	carvoyageid 	integer,
+	carinventory 	json
+);

@@ -62,7 +62,14 @@ echo ""
 echo "Running SQL 5"
 echo ""
 echo ""
-psql -d bgb -f 5-exportJSON.sql
+psql -d bgb -f 5-addDetails.sql
+
+echo ""
+echo ""
+echo "Running SQL 6"
+echo ""
+echo ""
+psql -d bgb -f 6-exportJSON.sql
 
 echo ""
 echo ""

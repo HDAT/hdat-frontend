@@ -10,6 +10,12 @@ L.Playback.MoveableMarker = L.Marker.extend({
         }
 
         L.Marker.prototype.initialize.call(this, startLatLng, markerOptions);
+
+        // if (feature.voyagedetails.first_ship_name == 'Blijdorp'){
+        //     var blue_icon = options.bluemarker || {};
+        //     blue_icon = blue_icon(feature);
+        //     L.Marker.prototype.initialize.call(this, startLatLng, blue_icon);
+        // }
         
         this.popupContent = '';
 
@@ -48,4 +54,3 @@ L.Playback.MoveableMarker = L.Marker.extend({
         // }    
     }
 });
-
