@@ -28,12 +28,10 @@ var shipIcon = L.icon({
     iconAnchor:             [10, 10]   // icon center point
 });
 
-var blueIcon = L.icon({
-    iconUrl:                'images/hdat-shipicon-blue.png',
-    className:              'hdat-shipicon',
-    iconSize:               [20, 20],   // size of the icon
-    iconAnchor:             [10, 10]   // icon center point
+var slider = document.querySelector('.selectspeed').addEventListener('input', function(e){
+    playback.setSpeed(e.target.value);
 });
+
 
 var markerOptions = function(feature){
   // do something. I broke this thing, works now though
@@ -41,22 +39,13 @@ var markerOptions = function(feature){
   
   // console.log(feature)
 
-  var nr = Math.round(Math.random());
-  if (nr === 1){
     return {
       icon: shipIcon,
       getPopup: function(feature){
         return feature.voyagedetails.first_ship_name;
       }
     };
-  } else {
-    return {
-      icon: blueIcon,
-      getPopup: function(feature){
-        return feature.voyagedetails.first_ship_name;
-      }
-    };
-  }
+  
 }
 
 var playbackOptions = {

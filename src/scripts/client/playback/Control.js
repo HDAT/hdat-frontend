@@ -69,7 +69,7 @@ L.Playback.DateControl = L.Control.extend({
         var datetime = L.DomUtil.create('div', '', this._container);
 
         // date time
-        this._season = L.DomUtil.create('p', '', datetime);
+        this._season = L.DomUtil.create('p', 'seasons', datetime);
 
         this._season.innerHTML = this.options.seasonFormatFn(time) + ' ' + this.options.yearFormatFn(time);
        
