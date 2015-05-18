@@ -21,6 +21,12 @@ var map = new L.Map('map', {
 
 L.Icon.Default.imagePath = 'images/leaflet';
 
+// var defaultIconSettings = function() { return {
+//     className:              'hdat-shipicon',
+//     iconSize:               [20, 20],   // size of the icon
+//     iconAnchor:             [10, 10]   // icon center point
+// }};
+
 var shipIcon = L.icon({
     iconUrl:                'images/hdat-shipicon.png',
     className:              'hdat-shipicon',
@@ -42,14 +48,17 @@ var orangeIcon = L.icon({
     iconAnchor:             [10, 10]   // icon center point
 });
 
+var pinkIcon = L.icon({
+    iconUrl:                'images/hdat-shipicon-pink.png',
+    className:              'hdat-shipicon',
+    iconSize:               [20, 20],   // size of the icon
+    iconAnchor:             [10, 10]   // icon center point
+});
+
 
 // Check URI and create object of the query
 var uri = new URI(window.location.href);
 var uriQuery = uri.search(true);
-
-console.log(uriQuery.firstCargo);
-console.log(uriQuery.secondCargo);
-
 
 var markerOptions = function(feature){
   // do something. I broke this thing, works now though
@@ -60,21 +69,22 @@ var markerOptions = function(feature){
 
   // Zilver 1235 Goud 1048
 
-  var nr = Math.round(Math.random());
-
-  var firstProduct = false;
-  var secondProduct = false;
+var firstProduct = false,
+    secondProduct = false,
+    thirdProduct = false;
   
-  feature.voyagedetails.inventory.map(function(singleItem){
-     if (singleItem == uriQuery.firstCargo){
+feature.voyagedetails.inventory.map(function(singleItem){
+    if (singleItem == uriQuery.firstCargo){
         firstProduct = true;
-     }
-  })
-  feature.voyagedetails.inventory.map(function(singleItem){
-     if (singleItem == uriQuery.secondCargo){
+    }
+    if (singleItem == uriQuery.secondCargo){
         secondProduct = true;
-     }
-  })
+    }
+    if (singleItem == uriQuery.thirdCargo){
+        thirdProduct = true;
+    }
+})
+
 
   if (firstProduct){
     return {
@@ -86,6 +96,13 @@ var markerOptions = function(feature){
   } else if (secondProduct) {
     return {
       icon: orangeIcon,
+      getPopup: function(feature){
+        return feature.voyagedetails.first_ship_name;
+      }
+    };
+  } else if (thirdProduct) {
+    return {
+      icon: pinkIcon,
       getPopup: function(feature){
         return feature.voyagedetails.first_ship_name;
       }
