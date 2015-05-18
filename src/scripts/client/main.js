@@ -28,9 +28,9 @@ var shipIcon = L.icon({
     iconAnchor:             [10, 10]   // icon center point
 });
 
-var slider = document.querySelector('.selectspeed').addEventListener('input', function(e){
-    playback.setSpeed(e.target.value);
-});
+// var slider = document.querySelector('.selectspeed').addEventListener('input', function(e){
+//     playback.setSpeed(e.target.value);
+// });
 
 
 var markerOptions = function(feature){
