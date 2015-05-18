@@ -20,7 +20,7 @@ var map = new L.Map('map', {
 });
 
 L.Icon.Default.imagePath = 'images/leaflet';
-  
+
 var shipIcon = L.icon({
     iconUrl:                'images/hdat-shipicon.png',
     className:              'hdat-shipicon',
@@ -42,6 +42,15 @@ var orangeIcon = L.icon({
     iconAnchor:             [10, 10]   // icon center point
 });
 
+
+// Check URI and create object of the query
+var uri = new URI(window.location.href);
+var uriQuery = uri.search(true);
+
+console.log(uriQuery.firstCargo);
+console.log(uriQuery.secondCargo);
+
+
 var markerOptions = function(feature){
   // do something. I broke this thing, works now though
   // You can decide which marker should be assigned here.
@@ -49,18 +58,20 @@ var markerOptions = function(feature){
   // console.log(feature)
   // console.log(feature.voyagedetails.inventory);
 
+  // Zilver 1235 Goud 1048
+
   var nr = Math.round(Math.random());
 
   var firstProduct = false;
   var secondProduct = false;
   
   feature.voyagedetails.inventory.map(function(singleItem){
-     if (singleItem == '1235'){
+     if (singleItem == uriQuery.firstCargo){
         firstProduct = true;
      }
   })
   feature.voyagedetails.inventory.map(function(singleItem){
-     if (singleItem == '1048'){
+     if (singleItem == uriQuery.secondCargo){
         secondProduct = true;
      }
   })

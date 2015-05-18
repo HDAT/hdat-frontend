@@ -9,6 +9,7 @@
   "author": "RJ Korteschiel",
   "license": "MIT",
   "devDependencies": {
+    "URIjs": "^1.15.1",
     "browser-sync": "^1.9.1",
     "del": "^1.1.1",
     "gulp": "^3.8.10",

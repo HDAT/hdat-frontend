@@ -45,7 +45,8 @@ gulp.task('scripts', function () {
 gulp.task('vendor', function () {
     exec("bower install", puts);
     return gulp.src([
-                'bower_components/leaflet/dist/leaflet.js'
+                'bower_components/leaflet/dist/leaflet.js',
+                'node_modules/URIjs/src/URI.min.js'
             ])
         .pipe($.concat('vendor.js'))
         .pipe(gulp.dest('dist/scripts/'))
