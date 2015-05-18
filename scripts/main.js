@@ -2,21 +2,21 @@
 
 // UMD initialization to work with CommonJS, AMD and basic browser script include
 (function (factory) {
-	// var L;
-	// if (typeof define === 'function' && define.amd) {
-	// 	// AMD
-	// 	define(['leaflet'], factory);
-	// } else if (typeof module === 'object' && typeof module.exports === 'object') {
-	// 	// Node/CommonJS
-	// 	L = require('leaflet');
-	// 	module.exports = factory(L);
-	// } else {
+	var L;
+	if (typeof define === 'function' && define.amd) {
+		// AMD
+		define(['leaflet'], factory);
+	} else if (typeof module === 'object' && typeof module.exports === 'object') {
+		// Node/CommonJS
+		L = require('leaflet');
+		module.exports = factory(L);
+	} else {
 		// Browser globals
 		if (typeof window.L === 'undefined'){
 			throw 'Leaflet must be loaded first';
 		}
 		factory(window.L);
-	// }
+	}
 }(function (L) {
 
 L.Playback = L.Playback || {};
@@ -72,14 +72,19 @@ L.Playback.MoveableMarker = L.Marker.extend({
         var markerOptions = options.marker || {};
         this._feature =  feature;
         
-        if (typeof jQuery !== undefined){
+        if (typeof markerOptions === 'function'){
             markerOptions = markerOptions(feature);
         }
 
         L.Marker.prototype.initialize.call(this, startLatLng, markerOptions);
+
+        // if (feature.voyagedetails.first_ship_name == 'Blijdorp'){
+        //     var blue_icon = options.bluemarker || {};
+        //     blue_icon = blue_icon(feature);
+        //     L.Marker.prototype.initialize.call(this, startLatLng, blue_icon);
+        // }
         
         this.popupContent = '';
-        this.popupContent = feature.voyagedetails.first_ship_name;
 
         if (markerOptions.getPopup){
             this.popupContent = markerOptions.getPopup(feature);            
@@ -116,7 +121,6 @@ L.Playback.MoveableMarker = L.Marker.extend({
         // }    
     }
 });
-
 
 L.Playback = L.Playback || {};
 
@@ -532,7 +536,7 @@ L.Playback.TracksLayer = L.Class.extend({
     initialize : function (map, options, feature) {
         var layerOptions = options.layer || {};
         
-        if (typeof jQuery !== undefined) {
+        if (typeof layerOptions === 'function') {
             layerOptions = layerOptions(feature);
         }
 
@@ -636,7 +640,7 @@ L.Playback.DateControl = L.Control.extend({
         var datetime = L.DomUtil.create('div', '', this._container);
 
         // date time
-        this._season = L.DomUtil.create('p', '', datetime);
+        this._season = L.DomUtil.create('p', 'seasons', datetime);
 
         this._season.innerHTML = this.options.seasonFormatFn(time) + ' ' + this.options.yearFormatFn(time);
        
@@ -897,43 +901,58 @@ var map = new L.Map('map', {
   layers:               [satellite, geography]
 });
 
-// L.Icon.Default.imagePath = 'images/leaflet/';
+L.Icon.Default.imagePath = 'images/leaflet';
   
-var customIcon = L.icon({
+var shipIcon = L.icon({
     iconUrl:                'images/hdat-shipicon.png',
     className:              'hdat-shipicon',
     iconSize:               [20, 20],   // size of the icon
     iconAnchor:             [10, 10]   // icon center point
 });
 
-// var blueIcon = L.icon({
-//     iconUrl:                'images/hdat-shipicon-blue.png',
-//     className:              'hdat-shipicon',
-//     iconSize:               [20, 20],   // size of the icon
-//     iconAnchor:             [10, 10]   // icon center point
+// var slider = document.querySelector('.selectspeed').addEventListener('input', function(e){
+//     playback.setSpeed(e.target.value);
 // });
 
-var data;
-var ajax = new XMLHttpRequest(); 
-ajax.open('GET', 'data/json/voyageshuygens.json', true);
-ajax.onreadystatechange = function () {
-  if (ajax.readyState !== 4 || ajax.status !== 200) {return;}
 
-  data = JSON.parse(ajax.responseText);
+var markerOptions = function(feature){
+  // do something. I broke this thing, works now though
+  // You can decide which marker should be assigned here.
+  
+  // console.log(feature)
 
-  var playbackOptions = {
+    return {
+      icon: shipIcon,
+      getPopup: function(feature){
+        return feature.voyagedetails.first_ship_name;
+      }
+    };
+  
+}
+
+var playbackOptions = {
     playControl:            true,
     dateControl:            true,
     sliderControl:          true,
     tickLen:                (3600*24),
     tracksLayer:            false,
     maxInterpolationTime:   46464646464646,
-    marker:                 function(){ return { icon: customIcon }; }  
-// ,bluemarker:             function(){ return { icon: blueIcon } }              
-  };
-
-  new L.Playback(map, data, null, playbackOptions);
+    marker:                 markerOptions
 };
+var data, playback;
+
+// Ajax shit 
+var onDataCB = function () {
+    if (ajax.readyState !== 4 || ajax.status !== 200) {
+      return;
+    }
+    data = JSON.parse(ajax.responseText);
+    playback = new L.Playback(map, data, null, playbackOptions);
+};
+
+var ajax = new XMLHttpRequest(); 
+ajax.open('GET', 'data/json/voyageshuygens.json', true);
+ajax.onreadystatechange = onDataCB;
 ajax.send();
 
 })(L);

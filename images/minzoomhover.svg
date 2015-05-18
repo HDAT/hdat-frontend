@@ -4,10 +4,10 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 34.1 39" enable-background="new 0 0 34.1 39" xml:space="preserve">
 <g>
-	<path fill="#C6C6C6" d="M19.5,39C8.7,39,0,30.3,0,19.5S8.7,0,19.5,0c5.6,0,10.9,2.4,14.6,6.6L32.6,8c-3.3-3.8-8.1-6-13.1-6
+	<path fill="#FFFFFF" d="M19.5,39C8.7,39,0,30.3,0,19.5S8.7,0,19.5,0c5.6,0,10.9,2.4,14.6,6.6L32.6,8c-3.3-3.8-8.1-6-13.1-6
 		C9.9,2,2,9.9,2,19.5S9.9,37,19.5,37c5,0,9.8-2.2,13.1-6l1.5,1.3C30.4,36.6,25.1,39,19.5,39z"/>
 </g>
 <g>
-	<rect x="12.7" y="18.8" fill="#C6C6C6" width="9.1" height="1.4"/>
+	<rect x="12.7" y="18.8" fill="#FFFFFF" width="9.1" height="1.4"/>
 </g>
 </svg>

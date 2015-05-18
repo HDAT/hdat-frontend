@@ -1,9 +1,9 @@
 /* vendor */
-/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
- * 2. Prevent iOS text size adjust after orientation change, without disabling
- *    user zoom.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
  */
 html {
   font-family: sans-serif;
@@ -65,7 +65,7 @@ audio:not([controls]) {
 
 /**
  * Address `[hidden]` styling not present in IE 8/9/10.
- * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+ * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
  */
 [hidden],
 template {
@@ -80,7 +80,8 @@ a {
   background-color: transparent; }
 
 /**
- * Improve readability when focused and also mouse hovered in all browsers.
+ * Improve readability of focused elements when they are also in an
+ * active/hover state.
  */
 a:active,
 a:hover {
@@ -291,14 +292,13 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /**
  * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
- * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
- *    (include `-moz` to future-proof).
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
  */
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  /* 2 */
-  box-sizing: content-box; }
+  box-sizing: content-box;
+  /* 2 */ }
 
 /**
  * Remove inner padding and search cancel button in Safari and Chrome on OS X.
@@ -791,6 +791,10 @@ th {
   font: 18px/1.5 "Arapey", serif;
   color: #b5b5b5; }
 
+.leaflet-top {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 100%);
+  /* W3C */ }
+
 .leaflet-bar {
   background-color: transparent;
   border: 0;
@@ -802,8 +806,8 @@ th {
 .leaflet-bar a:hover {
   background-color: transparent;
   border-bottom: 0;
-  width: 40px;
-  height: 40px;
+  width: 33px;
+  height: 33px;
   color: transparent; }
 
 .leaflet-bar a.leaflet-disabled {
@@ -818,26 +822,31 @@ th {
 .leaflet-left {
   width: 100%; }
 
+.leaflet-top .leaflet-control {
+  margin-top: 13px; }
+
 .leaflet-left .leaflet-control {
   margin-left: 0;
-  padding-left: 10px; }
+  padding-left: 13px; }
 
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out {
   float: right;
   opacity: 1;
-  transition: opacity 0.5s ease-in-out; }
+  transition: opacity 0.3s ease-in-out; }
 
 .leaflet-control-zoom-out {
-  background-image: url("../images/minzoom.svg"); }
+  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOC4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzQuMSAzOSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMzQuMSAzOSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8cGF0aCBmaWxsPSIjQzZDNkM2IiBkPSJNMTkuNSwzOUM4LjcsMzksMCwzMC4zLDAsMTkuNVM4LjcsMCwxOS41LDBjNS42LDAsMTAuOSwyLjQsMTQuNiw2LjZMMzIuNiw4Yy0zLjMtMy44LTguMS02LTEzLjEtNg0KCQlDOS45LDIsMiw5LjksMiwxOS41UzkuOSwzNywxOS41LDM3YzUsMCw5LjgtMi4yLDEzLjEtNmwxLjUsMS4zQzMwLjQsMzYuNiwyNS4xLDM5LDE5LjUsMzl6Ii8+DQo8L2c+DQo8Zz4NCgk8cmVjdCB4PSIxMi43IiB5PSIxOC44IiBmaWxsPSIjQzZDNkM2IiB3aWR0aD0iOS4xIiBoZWlnaHQ9IjEuNCIvPg0KPC9nPg0KPC9zdmc+DQo="); }
 
 .leaflet-control-zoom-in {
-  background-image: url("../images/pluszoom.svg");
+  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOC4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzkgMzkiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDM5IDM5IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxwYXRoIGZpbGw9IiNDNkM2QzYiIGQ9Ik0xOS41LDM5QzguNywzOSwwLDMwLjMsMCwxOS41UzguNywwLDE5LjUsMFMzOSw4LjcsMzksMTkuNVMzMC4zLDM5LDE5LjUsMzl6IE0xOS41LDJDOS45LDIsMiw5LjksMiwxOS41DQoJCVM5LjksMzcsMTkuNSwzN1MzNywyOS4xLDM3LDE5LjVTMjkuMSwyLDE5LjUsMnoiLz4NCjwvZz4NCjxnPg0KCTxwb2x5Z29uIGZpbGw9IiNDNkM2QzYiIHBvaW50cz0iMjQuNiwxOC44IDIwLjIsMTguOCAyMC4yLDE0LjQgMTguOCwxNC40IDE4LjgsMTguOCAxNC40LDE4LjggMTQuNCwyMC4yIDE4LjgsMjAuMiAxOC44LDI0LjYgDQoJCTIwLjIsMjQuNiAyMC4yLDIwLjIgMjQuNiwyMC4yIAkiLz4NCjwvZz4NCjwvc3ZnPg0K");
   margin-left: -6px; }
 
-.leaflet-control-zoom-out:hover,
+.leaflet-control-zoom-out:hover {
+  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOC4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzQuMSAzOSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMzQuMSAzOSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMTkuNSwzOUM4LjcsMzksMCwzMC4zLDAsMTkuNVM4LjcsMCwxOS41LDBjNS42LDAsMTAuOSwyLjQsMTQuNiw2LjZMMzIuNiw4Yy0zLjMtMy44LTguMS02LTEzLjEtNg0KCQlDOS45LDIsMiw5LjksMiwxOS41UzkuOSwzNywxOS41LDM3YzUsMCw5LjgtMi4yLDEzLjEtNmwxLjUsMS4zQzMwLjQsMzYuNiwyNS4xLDM5LDE5LjUsMzl6Ii8+DQo8L2c+DQo8Zz4NCgk8cmVjdCB4PSIxMi43IiB5PSIxOC44IiBmaWxsPSIjRkZGRkZGIiB3aWR0aD0iOS4xIiBoZWlnaHQ9IjEuNCIvPg0KPC9nPg0KPC9zdmc+DQo="); }
+
 .leaflet-control-zoom-in:hover {
-  opacity: 1; }
+  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE4LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAzOSAzOSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMzkgMzkiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0xOS41LDM5QzguNywzOSwwLDMwLjMsMCwxOS41UzguNywwLDE5LjUsMFMzOSw4LjcsMzksMTkuNVMzMC4zLDM5LDE5LjUsMzl6IE0xOS41LDJDOS45LDIsMiw5LjksMiwxOS41CgkJUzkuOSwzNywxOS41LDM3UzM3LDI5LjEsMzcsMTkuNVMyOS4xLDIsMTkuNSwyeiIvPgo8L2c+CjxnPgoJPHBvbHlnb24gZmlsbD0iI0ZGRkZGRiIgcG9pbnRzPSIyNC42LDE4LjggMjAuMiwxOC44IDIwLjIsMTQuNCAxOC44LDE0LjQgMTguOCwxOC44IDE0LjQsMTguOCAxNC40LDIwLjIgMTguOCwyMC4yIDE4LjgsMjQuNiAKCQkyMC4yLDI0LjYgMjAuMiwyMC4yIDI0LjYsMjAuMiAJIi8+CjwvZz4KPC9zdmc+Cg=="); }
 
 * {
   box-sizing: border-box; }
@@ -879,11 +888,16 @@ body {
 .hdat-control-season p {
   margin: 6px 0 0 10px; }
 
+/* kan later wrs weg */
+/*.seasons {
+    padding-left: 100px; 
+}*/
 .hdat-control-play {
   margin: 0;
-  width: 10%; }
+  width: 5%; }
 
 .hdat-control-play button {
+  margin-left: 9px;
   height: 40px;
   width: 40px;
   border: 0;
@@ -896,7 +910,8 @@ body {
 
 .hdat-control-timeline {
   width: 70%;
-  padding-right: 40px; }
+  padding-right: 40px;
+  float: right; }
 
 .hdat-control-timeline input {
   width: 100%; }
