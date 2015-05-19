@@ -52,12 +52,18 @@ body {
     margin: 6px 0 0 10px;
 }
 
+/* kan later wrs weg */
+/*.seasons {
+    padding-left: 100px; 
+}*/
+
 .hdat-control-play {
     margin: 0;
-    width: 10%;
+    width: 5%;
 }
 
 .hdat-control-play button {
+    margin-left: 9px; //tijdelijK!
     height: 40px;
     width: 40px;
     border: 0;
@@ -73,6 +79,7 @@ body {
 .hdat-control-timeline {
     width: 70%;
     padding-right: 40px;
+    float: right;
 }
 
 .hdat-control-timeline input {
