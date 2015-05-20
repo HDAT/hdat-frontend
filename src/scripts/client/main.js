@@ -34,10 +34,12 @@ var shipIcon = L.icon({
     iconAnchor:             [10, 10]   // icon center point
 });
 
-// var slider = document.querySelector('.selectspeed').addEventListener('input', function(e){
-//     playback.setSpeed(e.target.value);
-// });
-
+var blueIcon = L.icon({
+    iconUrl:                'images/hdat-shipicon-blue.png',
+    className:              'hdat-shipicon',
+    iconSize:               [20, 20],   // size of the icon
+    iconAnchor:             [10, 10]   // icon center point
+});
 
 var orangeIcon = L.icon({
     iconUrl:                'images/hdat-shipicon-orange.png',
@@ -52,6 +54,10 @@ var pinkIcon = L.icon({
     iconSize:               [20, 20],   // size of the icon
     iconAnchor:             [10, 10]   // icon center point
 });
+
+// var slider = document.querySelector('.selectspeed').addEventListener('input', function(e){
+//     playback.setSpeed(e.target.value);
+// });
 
 
 // Check URI and create object of the query
