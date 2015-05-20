@@ -63,7 +63,7 @@ var pinkIcon = L.icon({
 var geojsonFeature = [{
     "type": "Feature",
     "properties": {
-        "novoyages": "kut",
+        "novoyages": "2",
         "guldens": "30",
         "lichteguldens": "10"
     },
@@ -73,7 +73,7 @@ var geojsonFeature = [{
     }},{
     "type": "Feature",
     "properties": {
-        "novoyages": "superkut",
+        "novoyages": "10",
         "guldens": "30",
         "lichteguldens": "10"
     },
@@ -81,18 +81,16 @@ var geojsonFeature = [{
     }]
 ;
 
-var myStyle = {
-    "color": "#2fcdfc",
-    "opacity": 0.3
-};
+// var myStyle = {
+//     "color": "#2fcdfc",
+//     "opacity": 0.3
+// };
 
 L.geoJson(geojsonFeature, {
   style: function(feature) {
-        switch (feature.properties.novoyages) {
-            case "kut": return {weight: 5, "color": "#2fcdfc", opacity: 0.3};
-            case "superkut":   return {weight: 10, "color": "#2fcdfc", opacity: 0.3};
+        return {weight: feature.properties.novoyages, "color": "#2fcdfc", opacity: 0.3};
         }
-    }
+    
 }).addTo(map);
 
 
