@@ -3,13 +3,6 @@
 ALTER TABLE "bgbVoyageRoute" 
 	ADD COLUMN "type" varchar(255) DEFAULT 'Feature';
 
--- Create new table for JSON
-
-DROP TABLE IF EXISTS "bgbVoyageRouteJSON";
-CREATE TABLE "bgbVoyageRouteJSON" (
-	route 	json 
-);
-
 -- Fill route with json
 
 INSERT INTO "bgbVoyageRouteJSON" 

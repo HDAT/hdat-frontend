@@ -30,3 +30,10 @@ CREATE TABLE "bgbCargoMod" (
 	carvoyageid 	integer,
 	carinventory 	json
 );
+
+-- Export JSON
+DROP TABLE IF EXISTS "bgbVoyageRouteJSON";
+CREATE TABLE "bgbVoyageRouteJSON" (
+	route 	json 
+);
+
