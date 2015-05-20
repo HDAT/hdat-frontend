@@ -73,7 +73,7 @@ var geojsonFeature = [{
     }},{
     "type": "Feature",
     "properties": {
-        "novoyages": "10",
+        "novoyages": "6",
         "guldens": "30",
         "lichteguldens": "10"
     },
@@ -88,7 +88,7 @@ var geojsonFeature = [{
 
 L.geoJson(geojsonFeature, {
   style: function(feature) {
-        return {weight: feature.properties.novoyages, "color": "#2fcdfc", opacity: 0.3};
+        return {weight: feature.properties.novoyages, "color": "#2fcdfc", opacity: 0.2, lineJoin: "round"};
         }
     
 }).addTo(map);
