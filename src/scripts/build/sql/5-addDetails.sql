@@ -17,12 +17,12 @@
 
 -- Stuff for the Minard Diagram
 
-DROP TABLE IF EXISTS "bgbCargoMinard";
-CREATE TEMPORARY TABLE "bgbCargoMinard" AS
-  TABLE "bgbCargo";
+CREATE TEMPORARY TABLE "bgbCargoMinard" AS TABLE "bgbCargo";
 
 ALTER TABLE "bgbCargoMinard" 
 	ADD COLUMN "line" geometry(linestring, 4326);
+
+-- Add lines from another table
 
 UPDATE "bgbCargoMinard" SET 
 	"line"	= "route"
@@ -31,5 +31,11 @@ WHERE "voyId" = "carVoyageId";
 
 DROP TABLE IF EXISTS "bgbCargoMinardExport";
 CREATE TABLE "bgbCargoMinardExport" AS
-SELECT "carProductId", ST_AsGeoJSON("line"), count("carProductId") AS novoyages, sum("carValueGuldens") AS guldenstotaal, sum("carValueLichtGuldens") AS lichtguldenstotaal
-FROM "bgbCargoMinard" GROUP BY "carProductId", "line" ORDER BY "carProductId";
+	SELECT 	"carProductId", 
+			ST_AsGeoJSON("line") AS line, 
+			count("carProductId") AS novoyages, 
+			sum("carValueGuldens") AS guldenstotaal, 
+			sum("carValueLichtGuldens") AS lichtguldenstotaal
+	FROM "bgbCargoMinard" 
+		GROUP BY "carProductId", "line" 
+		ORDER BY "carProductId";
