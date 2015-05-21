@@ -36,6 +36,7 @@ CREATE TEMPORARY TABLE "bgbCargoMinardJSON" (
 
 INSERT INTO "bgbCargoMinardJSON" 
 		(SELECT "type", "carProductId", (SELECT row_to_json(d) FROM (SELECT "numberVoyages", "carProductId") d) AS properties, "geometry" 
+	  	-- FROM "bgbCargoMinardExport" LIMIT 200);
 	  	FROM "bgbCargoMinardExport");
 
 DROP TABLE IF EXISTS "bgbCargoMinardJSONExport";
