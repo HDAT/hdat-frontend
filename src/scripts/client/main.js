@@ -58,17 +58,17 @@ var pinkIcon = L.icon({
 // var slider = document.querySelector('.selectspeed').addEventListener('input', function(e){
 //     playback.setSpeed(e.target.value);
 // });
-var geojsonFeature = {};
+
 var onDataMinard = function () {
     if (ajaxtwee.readyState !== 4 || ajaxtwee.status !== 200) {
       return;
     }
-    geojsonFeature = JSON.parse(ajaxtwee.responseText);
-    console.log(geojsonFeature);
+    var geojsonFeature = JSON.parse(ajaxtwee.responseText);
+    // console.log(geojsonFeature[1].properties.numb);
 
     L.geoJson(geojsonFeature, {
       style: function(feature) {
-            return {  weight: feature.properties.novoyages, 
+            return {  weight: feature.properties.numberVoyages/3, 
                       "color": "#2fcdfc", 
                       opacity: 0.2, 
                       lineJoin: "round"}; 
@@ -77,17 +77,9 @@ var onDataMinard = function () {
 };
 
 var ajaxtwee = new XMLHttpRequest(); 
-ajaxtwee.open('GET', 'https://hdatminard.firebaseio.com/1000.json', true);
+ajaxtwee.open('GET', 'https://hdatminard.firebaseio.com/1235.json', true);
 ajaxtwee.onreadystatechange = onDataMinard;
 ajaxtwee.send();
-
-
-
-// var myStyle = {
-//     "color": "#2fcdfc",
-//     "opacity": 0.3
-// };
-
 
 
 
