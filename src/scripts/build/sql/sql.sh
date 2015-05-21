@@ -59,17 +59,17 @@ psql -d bgb -f 4-voyagesTime.sql
 
 echo ""
 echo ""
-echo "Running SQL 5"
+echo "Executing the Details shellscript"
 echo ""
 echo ""
-psql -d bgb -f 5-addDetails.sql
+sh details.sh
 
 echo ""
 echo ""
-echo "Running SQL 6"
+echo "Running SQL 5"
 echo ""
 echo ""
-psql -d bgb -f 6-exportJSON.sql
+psql -d bgb -f 5-exportJSON.sql
 
 echo ""
 echo ""
@@ -78,9 +78,3 @@ echo ""
 echo ""
 psql -d bgb -c "copy (SELECT array_to_json(array_agg(route::json)) from \"bgbVoyageRouteJSON\") to '/Users/$USER/Desktop/HDAT/src/data/json/voyages.json';"
 
-echo ""
-echo ""
-echo "Export Minard JSON"
-echo ""
-echo ""
-psql -d bgb -c "copy (select json from \"bgbCargoMinardJSONExport\") to '/Users/$USER/Desktop/HDAT/src/data/json/minard.json';"

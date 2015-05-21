@@ -49,13 +49,13 @@ WHERE "voyArrivalPlaceId" = placegeo.id OR "voyArrivalRegioId" = regiogeo.id;
 -- Blijkbaar geeft dat ergens bij de bovenstaande code niet goed
 -- Vandaar dus dit ding hieronder
 
--- UPDATE "bgbVoyageRoute"
--- SET "voyDepartureNode" = 123
--- WHERE "voyDeparturePlaceId" = 791;
+UPDATE "bgbVoyageRoute"
+SET "voyDepartureNode" = 123
+WHERE "voyDeparturePlaceId" = 791;
 
--- UPDATE "bgbVoyageRoute"
--- SET "voyArrivalNode" = 123
--- WHERE "voyArrivalPlaceId" = 791;
+UPDATE "bgbVoyageRoute"
+SET "voyArrivalNode" = 123
+WHERE "voyArrivalPlaceId" = 791;
 
 -- Attach route
 		
