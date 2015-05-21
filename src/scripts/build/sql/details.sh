@@ -1,6 +1,6 @@
 echo ""
 echo ""
-echo "Running SQL 1"
+echo "Running Details: SQL 1"
 echo ""
 echo ""
 
@@ -8,7 +8,7 @@ psql -d bgb -f details/1-colorCoding.sql
 
 echo ""
 echo ""
-echo "Running SQL 2"
+echo "Running Details: SQL 2"
 echo ""
 echo ""
 psql -d bgb -f details/2-minard.sql
