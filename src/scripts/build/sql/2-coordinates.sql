@@ -1,5 +1,7 @@
 ALTER TABLE "bgbPlaceGeo" 
 	ADD COLUMN "geom" geometry(geometry, 4326),
+	ADD COLUMN "type" varchar(255) DEFAULT 'Feature',
+	ADD COLUMN "geometry" text,
 	ADD COLUMN "node" int;
 
 -- Match places to AMHplaces
@@ -15,6 +17,12 @@ SET
 			)
 FROM "amhPlaces"
 WHERE naam = title;
+
+-- Get GeoJSON
+UPDATE "bgbPlaceGeo"
+SET geometry = ST_AsGeoJSON(geom);
+
+
 
 -- Connect the place to the nearest node in the route system. 
 

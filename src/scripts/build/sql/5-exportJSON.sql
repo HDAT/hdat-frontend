@@ -27,3 +27,17 @@ INSERT INTO "bgbVoyageRouteJSON"
 
 -- Remove temporary type column 
 ALTER TABLE "bgbVoyageRoute" DROP COLUMN "type";
+
+
+
+INSERT INTO "bgbPlaceGeoJSON" 
+	SELECT row_to_json(t) FROM 
+		(SELECT "type", "geometry",
+		    (
+		      SELECT row_to_json(d)
+		      FROM (
+		        SELECT naam
+		      ) d
+		    ) AS properties
+	  	FROM "bgbPlaceGeo" WHERE "geometry" IS NOT NULL) 
+	AS t;
