@@ -59,6 +59,10 @@ var pinkIcon = L.icon({
 //     playback.setSpeed(e.target.value);
 // });
 
+// Check URI and create object of the query
+var uri = new URI(window.location.href);
+var uriQuery = uri.search(true);
+
 var onDataMinard = function () {
     if (ajaxtwee.readyState !== 4 || ajaxtwee.status !== 200) {
       return;
@@ -68,7 +72,7 @@ var onDataMinard = function () {
 
     L.geoJson(geojsonFeature, {
       style: function(feature) {
-            return {  weight: feature.properties.numberVoyages/3, 
+            return {  weight: feature.properties.numberVoyages/2, 
                       "color": "#2fcdfc", 
                       opacity: 0.2, 
                       lineJoin: "round"}; 
@@ -77,15 +81,14 @@ var onDataMinard = function () {
 };
 
 var ajaxtwee = new XMLHttpRequest(); 
-ajaxtwee.open('GET', 'https://hdatminard.firebaseio.com/1235.json', true);
+var jsonURL = "https://hdatminard.firebaseio.com/" + uriQuery.firstCargoM + ".json";
+ajaxtwee.open('GET', jsonURL, true);
 ajaxtwee.onreadystatechange = onDataMinard;
 ajaxtwee.send();
 
 
 
-// Check URI and create object of the query
-var uri = new URI(window.location.href);
-var uriQuery = uri.search(true);
+
 
 var markerOptions = function(feature){
   // do something. I broke this thing, works now though
@@ -101,7 +104,7 @@ var firstProduct = false,
     thirdProduct = false;
   
 feature.voyagedetails.inventory.map(function(singleItem){
-    if (singleItem == uriQuery.firstCargo){
+    if (singleItem == uriQuery.firstCargo || singleItem == uriQuery.firstCargoM){
         firstProduct = true;
     }
     if (singleItem == uriQuery.secondCargo){
