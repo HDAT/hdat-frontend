@@ -18,6 +18,9 @@ SET
 FROM "amhPlaces"
 WHERE naam = title;
 
+
+
+
 -- Get GeoJSON
 UPDATE "bgbPlaceGeo"
 SET geometry = ST_AsGeoJSON(geom);
@@ -35,6 +38,7 @@ ALTER TABLE "bgbPlaceGeo"
 -- Connect the place to the nearest node in the route system. 
 
 UPDATE "bgbPlaceGeo" SET node = findNearestNode("geom");
+
 
 -- Doing the same stuff for the regio
 -- ...

@@ -6,6 +6,21 @@ var southWest   = L.latLng(-75, 179),
 
 var satellite   = L.tileLayer('images/tiles/baselayer/{z}/{x}/{y}.png', {id: 'satellite'}),
     geography   = L.tileLayer('images/tiles/overlay/{z}/{x}/{y}.png', {id: 'geography'});
+
+var places = {};
+var onDataPlacesCB = function () {
+    if (ajaxPlaces.readyState !== 4 || ajaxPlaces.status !== 200) {
+      return;
+    }
+    data = JSON.parse(ajaxPlaces.responseText);
+    var places      = L.geoJson(data).addTo(map);;
+    console.log(places);
+};
+
+var ajaxPlaces = new XMLHttpRequest(); 
+ajaxPlaces.open('GET', 'data/json/places.json', true);
+ajaxPlaces.onreadystatechange = onDataPlacesCB;
+ajaxPlaces.send();
   
 var map = new L.Map('map', {
   zoomControl:          true,
