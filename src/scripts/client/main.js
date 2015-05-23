@@ -13,14 +13,14 @@ var onDataPlacesCB = function () {
       return;
     }
     data = JSON.parse(ajaxPlaces.responseText);
-    var places      = L.geoJson(data,{
+    places      = L.geoJson(data,{
                           pointToLayer: function(feature, latlng) {
                               return new L.Marker(latlng, {icon: pinkIcon});
                           },
                           onEachFeature: function (feature, layer) {
                               layer.bindPopup(feature.properties.naam);
                           }
-                      }).addTo(map);
+                      });
     console.log(places);
 };
 
@@ -39,6 +39,12 @@ var map = new L.Map('map', {
   attributionControl:   false,
   inertia:              true,
   layers:               [satellite, geography]
+});
+
+// Removes or add places layer at certain zoom levels
+map.on('zoomend', function(e) {
+     if ( map.getZoom() < 4 ){ map.removeLayer(places)}
+     else if ( map.getZoom() >= 4 ){ map.addLayer(places)}
 });
 
 L.Icon.Default.imagePath = 'images/leaflet';
