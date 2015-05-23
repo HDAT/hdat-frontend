@@ -29,6 +29,7 @@ INSERT INTO "bgbVoyageRouteJSON"
 ALTER TABLE "bgbVoyageRoute" DROP COLUMN "type";
 
 
+-- Create a Javascript object for every place
 
 INSERT INTO "bgbPlaceGeoJSON" 
 	SELECT row_to_json(t) FROM 
@@ -41,3 +42,7 @@ INSERT INTO "bgbPlaceGeoJSON"
 		    ) AS properties
 	  	FROM "bgbPlaceGeo" WHERE "geometry" IS NOT NULL) 
 	AS t;
+
+-- Aggregrate those objects into one big array
+
+-- SELECT array_to_json(array_agg(json)) FROM "bgbPlaceGeoJSON";

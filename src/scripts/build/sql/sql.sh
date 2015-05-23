@@ -78,3 +78,10 @@ echo ""
 echo ""
 psql -d bgb -c "copy (SELECT array_to_json(array_agg(route::json)) from \"bgbVoyageRouteJSON\") to '/Users/$USER/Desktop/HDAT/src/data/json/voyages.json';"
 
+echo ""
+echo ""
+echo "Export Places"
+echo ""
+echo ""
+psql -d bgb -c "copy (SELECT concat('{ \"type\": \"FeatureCollection\", \"features\":', array_to_json(array_agg(json)), NULL, '}') FROM \"bgbPlaceGeoJSON\") to '/Users/$USER/Desktop/HDAT/src/data/json/places.json';"
+
