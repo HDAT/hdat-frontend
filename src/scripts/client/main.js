@@ -15,7 +15,14 @@ var onDataPlacesCB = function () {
     data = JSON.parse(ajaxPlaces.responseText);
     places      = L.geoJson(data,{
                           pointToLayer: function(feature, latlng) {
-                              return new L.Marker(latlng, {icon: pinkIcon});
+                              return new L.circleMarker(latlng, {
+                                 radius: 2.5,
+                                  fillColor: "#444",
+                                  // color: "#000",
+                                  weight: 0,
+                                  opacity: 1,
+                                  fillOpacity: 0.8
+                              });
                           },
                           onEachFeature: function (feature, layer) {
                               layer.bindPopup(feature.properties.naam);
