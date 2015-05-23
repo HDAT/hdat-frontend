@@ -22,6 +22,14 @@ WHERE naam = title;
 UPDATE "bgbPlaceGeo"
 SET geometry = ST_AsGeoJSON(geom);
 
+-- ST_AsGeoJSON doesn't support the data type json
+-- So therefore we still have to convert it to valid json
+
+ALTER TABLE "bgbPlaceGeo" 
+	-- http://baudehlo.com/2014/04/28/postgresql-converting-text-columns-to-json/
+	ALTER COLUMN geometry TYPE JSON USING geometry::JSON;
+
+
 
 
 -- Connect the place to the nearest node in the route system. 
