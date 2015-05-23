@@ -31,7 +31,7 @@ CREATE TABLE "bgbCargoMod" (
 	carinventory 	json
 );
 
--- Export JSON
+-- Tables that are needed for JSON export
 DROP TABLE IF EXISTS "bgbVoyageRouteJSON";
 CREATE TABLE "bgbVoyageRouteJSON" (
 	route 	json 

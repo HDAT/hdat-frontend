@@ -3,7 +3,7 @@
 ALTER TABLE "bgbVoyageRoute" 
 	ADD COLUMN "type" varchar(255) DEFAULT 'Feature';
 
--- Fill route with json
+-- Fill route with json (for voyages.json)
 
 INSERT INTO "bgbVoyageRouteJSON" 
 	SELECT row_to_json(t) FROM 
@@ -26,23 +26,5 @@ INSERT INTO "bgbVoyageRouteJSON"
 	AS t;
 
 -- Remove temporary type column 
+
 ALTER TABLE "bgbVoyageRoute" DROP COLUMN "type";
-
-
--- Create a Javascript object for every place
-
-INSERT INTO "bgbPlaceGeoJSON" 
-	SELECT row_to_json(t) FROM 
-		(SELECT "type", "geometry",
-		    (
-		      SELECT row_to_json(d)
-		      FROM (
-		        SELECT naam
-		      ) d
-		    ) AS properties
-	  	FROM "bgbPlaceGeo" WHERE "geometry" IS NOT NULL) 
-	AS t;
-
--- Aggregrate those objects into one big array
-
--- SELECT array_to_json(array_agg(json)) FROM "bgbPlaceGeoJSON";
