@@ -13,7 +13,14 @@ var onDataPlacesCB = function () {
       return;
     }
     data = JSON.parse(ajaxPlaces.responseText);
-    var places      = L.geoJson(data).addTo(map);;
+    var places      = L.geoJson(data,{
+                          pointToLayer: function(feature, latlng) {
+                              return new L.Marker(latlng, {icon: pinkIcon});
+                          },
+                          onEachFeature: function (feature, layer) {
+                              layer.bindPopup(feature.properties.naam);
+                          }
+                      }).addTo(map);
     console.log(places);
 };
 
