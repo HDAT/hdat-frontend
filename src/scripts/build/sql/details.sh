@@ -20,10 +20,10 @@ echo ""
 echo ""
 psql -d bgb -f details/3-places.sql
 
-echo ""
-echo "Importing CSV: Table 26 (Personnel)"
-psql -d bgb -c "COPY \"personnel\" FROM '/Users/$USER/Desktop/HDAT/src/data/tabela26.csv' DELIMITER ',' CSV;"
-echo ""
+# echo ""
+# echo "Importing CSV: Table 26 (Personnel)"
+# psql -d bgb -c "COPY \"personnel\" FROM '/Users/$USER/Desktop/HDAT/src/data/tabela26.csv' DELIMITER ',' CSV;"
+# echo ""
 
 echo ""
 echo ""
