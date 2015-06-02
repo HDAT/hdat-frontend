@@ -95,6 +95,9 @@ SET
 
 ALTER TABLE "bgbVoyageRoute" DROP COLUMN "routeTemp";
 
+UPDATE "bgbVoyageRoute"
+SET
+	"route" = ST_SnapToGrid(route, 0.001);
 
 -- Transform the route to valid GeoJSON
 
