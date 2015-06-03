@@ -80,6 +80,8 @@ ajax.onreadystatechange = onDataCB;
 ajax.send();
 
 // Other stuff
+
+// Feedback blink
 window.setTimeout(function(){
   document.querySelector('.form-button').classList.add('form-timer');
 }, 30000)
