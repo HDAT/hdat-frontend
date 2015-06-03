@@ -1,5 +1,7 @@
 (function(L){
 
+// Leaflet shit
+
 var southWest   = L.latLng(-75, 179),
     northEast   = L.latLng(75, -179),
     bounds      = L.latLngBounds(southWest, northEast);
@@ -31,6 +33,10 @@ var shipIcon = L.icon({
 // var slider = document.querySelector('.selectspeed').addEventListener('input', function(e){
 //     playback.setSpeed(e.target.value);
 // });
+
+
+
+// Leaflet playback configuration
 
 
 var markerOptions = function(feature){
@@ -72,5 +78,10 @@ var ajax = new XMLHttpRequest();
 ajax.open('GET', 'data/json/voyageshuygens.json', true);
 ajax.onreadystatechange = onDataCB;
 ajax.send();
+
+// Other stuff
+window.setTimeout(function(){
+  document.querySelector('.form-button').classList.add('form-timer');
+}, 30000)
 
 })(L);

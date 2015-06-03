@@ -25,10 +25,5 @@
     "mysql": "^2.5.5",
     "pg": "^4.3.0",
     "run-sequence": "^1.0.2"
-  },
-  "jshintConfig": {
-    "globals": {
-      "L": "false"
-    }
   }
 }
