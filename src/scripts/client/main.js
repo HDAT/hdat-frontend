@@ -40,18 +40,23 @@ var shipIcon = L.icon({
 
 
 var markerOptions = function(feature){
-  // do something. I broke this thing, works now though
-  // You can decide which marker should be assigned here.
-  
-  // console.log(feature)
-
     return {
       icon: shipIcon,
-      getPopup: function(feature){
-        return feature.voyagedetails.first_ship_name;
+      clickCB: function(feature, event){
+        // remove popup
+        if (document.querySelector('.popup')) {
+          document.querySelector('.popup').parentNode.removeChild(document.querySelector('.popup'));
+        }
+
+        // create popup
+        var popup = document.createElement('div');
+        popup.classList.add('popup');
+        popup.innerHTML = "<p>"+ feature.voyagedetails.first_ship_name + "</p>";
+
+        // append popup
+        document.querySelector('body').appendChild(popup);
       }
     };
-  
 };
 
 var playbackOptions = {
