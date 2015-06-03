@@ -8,6 +8,7 @@
 * {
     box-sizing: border-box;
     font: 18px/1.5 "Arapey", serif;
+    color: rgb(181, 181, 181);
 }
 
 body {
@@ -99,7 +100,6 @@ body {
     right: 13px;
     height: 33px;
     padding: 2px 30px 0 30px;
-    background:transparent;
     border: 1px solid rgb(181, 181, 181);
     border-radius: 20px;
     z-index: 999000000;
@@ -114,7 +114,7 @@ body {
     background: rgba(181, 181, 181, 0.05);
 }
 
-@-webkit-keyframes 'blink' {
+@-webkit-keyframes 'blink2' {
     0% {
         background:rgba(181, 181, 181, 0.1);
         color: lighten(rgb(181, 181, 181), 0%);
@@ -130,9 +130,25 @@ body {
 }
 
 .form-timer {
-    animation-name: blink;
+    animation-name: blink2;
     animation-direction: normal;
     animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;   
+}
+
+.popup {
+    position: absolute;
+    right: 13px;
+    top: 100px;
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    color: rgb(181, 181, 181);
+    border: 1px solid rgb(181, 181, 181);
+    border-radius: 20px;
+}
+
+.popup p {
+    margin: 0px;
 }
