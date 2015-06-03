@@ -139,14 +139,13 @@ body {
 
 .popup {
     position: absolute;
-    right: 13px;
+    right: -1px;
     top: 100px;
-    width: 200px;
-    height: 200px;
     padding: 10px;
     color: rgb(181, 181, 181);
     border: 1px solid rgb(181, 181, 181);
-    border-radius: 20px;
+    border-radius: 20px 0 0 20px;
+    transition: width 1s;
 }
 
 .popup p {

@@ -44,17 +44,18 @@ var markerOptions = function(feature){
       icon: shipIcon,
       clickCB: function(feature, event){
         // remove popup
-        if (document.querySelector('.popup')) {
-          document.querySelector('.popup').parentNode.removeChild(document.querySelector('.popup'));
-        }
+        // if (document.querySelector('.popup')) {
+        //   document.querySelector('.popup').parentNode.removeChild(document.querySelector('.popup'));
+        // }
 
+        var popup = document.querySelector('.popup');
         // create popup
-        var popup = document.createElement('div');
-        popup.classList.add('popup');
+        if (!popup) {
+          var popup = document.createElement('div');
+          popup.classList.add('popup');
+          document.querySelector('body').appendChild(popup);
+        }
         popup.innerHTML = "<p>"+ feature.voyagedetails.first_ship_name + "</p>";
-
-        // append popup
-        document.querySelector('body').appendChild(popup);
       }
     };
 };
