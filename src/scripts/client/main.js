@@ -48,6 +48,17 @@ var markerOptions = function(feature){
         //   document.querySelector('.popup').parentNode.removeChild(document.querySelector('.popup'));
         // }
 
+        var southWest = L.latLng(this._latlng.lat - 0.1, this._latlng.lng - 0.1),
+            northEast = L.latLng(this._latlng.lat + 0.1, this._latlng.lng + 0.1),
+            bounds = L.latLngBounds(southWest, northEast),
+            inBounds = [];
+
+        this._markerLayer.eachLayer(function(marker) {
+          if (bounds.contains(marker.getLatLng())) {
+              inBounds.push(marker._feature);
+          }
+        });
+
         var popup = document.querySelector('.popup');
         // create popup
         if (!popup) {
@@ -55,7 +66,14 @@ var markerOptions = function(feature){
           popup.classList.add('popup');
           document.querySelector('body').appendChild(popup);
         }
-        popup.innerHTML = "<p>"+ feature.voyagedetails.first_ship_name + "</p>";
+
+        popup.innerHTML = "";
+
+        inBounds.map(function(feature){
+          var featureP = document.createElement('p');
+          featureP.innerHTML = feature.voyagedetails.first_ship_name;
+          popup.appendChild(featureP);
+        });
       }
     };
 };

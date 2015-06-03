@@ -112,7 +112,8 @@ L.Playback = L.Playback.Clock.extend({
 
         // bad implementation
         addData : function (map, geoJSON, ms) {
-
+            this._markerLayer = L.featureGroup(L.marker([50.5, 30.5])).addTo(map);
+            
             // return if data not set
             if (!geoJSON) {
                 return;
@@ -121,7 +122,7 @@ L.Playback = L.Playback.Clock.extend({
             //? Loops over the GeoJSON and adds each single track in it. Don't really know (yet) why time is trown into addTrack() too.
             if (geoJSON instanceof Array) {
                 for (var i = 0, len = geoJSON.length; i < len; i++) {
-                    this._trackController.addTrack(new L.Playback.Track(map, geoJSON[i], this.options), ms);
+                    this._trackController.addTrack(new L.Playback.Track(map, geoJSON[i], this.options, this._markerLayer), ms);
                 }
             } else {
                 this._trackController.addTrack(new L.Playback.Track(map, geoJSON, this.options), ms);

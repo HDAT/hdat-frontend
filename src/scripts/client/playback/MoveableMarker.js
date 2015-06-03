@@ -1,9 +1,11 @@
 L.Playback = L.Playback || {};
 
 L.Playback.MoveableMarker = L.Marker.extend({    
-    initialize: function (startLatLng, options, feature) {    
+    initialize: function (startLatLng, options, feature, map, markerLayer) {    
         var markerOptions = options.marker || {};
         this._feature =  feature;
+        this._map = map;
+        this._markerLayer = markerLayer;
         
         if (typeof markerOptions === 'function'){
             markerOptions = markerOptions(feature);
