@@ -34,7 +34,13 @@ gulp.task('scripts', function () {
         .pipe($.jshint({
             globals: {
                 "L": false,
-                "define": false
+                "define": false,
+                "require": false,
+                "module": false,
+                "clearInterval": false,
+                "window": false,
+                "console": false,
+                "XMLHttpRequest": false
             }
         }))
         .pipe($.jshint.reporter('jshint-stylish'))

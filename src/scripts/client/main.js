@@ -46,7 +46,7 @@ var markerOptions = function(feature){
       }
     };
   
-}
+};
 
 var playbackOptions = {
     playControl:            true,
