@@ -30,3 +30,11 @@ SET textcount = '< 10'
 WHERE "count" <= 9;
 
 -- SELECT * FROM "bgbCargoGUI" WHERE name ILIKE 'a%' ORDER BY name ASC 
+
+
+-- SELECT row_to_json FROM (SELECT row_to_json(t) FROM 
+-- 	(SELECT "carProductId", "name", "textcount"
+-- 	 FROM "bgbCargoGUI" WHERE name ILIKE 'a%' ORDER BY name ASC) 
+-- AS t);
+
+-- psql -d bgb -c "copy (SELECT json_agg(row_to_json(t)) FROM (SELECT \"carProductId\", \"name\", \"textcount\" FROM \"bgbCargoGUI\" WHERE name ILIKE 'a%' ORDER BY name ASC) AS t) to '/Users/$USER/Desktop/HDAT/src/data/json/a.json';"
