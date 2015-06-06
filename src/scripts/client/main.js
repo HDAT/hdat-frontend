@@ -44,9 +44,9 @@ var markerOptions = function(feature){
       icon: shipIcon,
       clickCB: function(feature, event){
         // remove popup
-        // if (document.querySelector('.popup')) {
-        //   document.querySelector('.popup').parentNode.removeChild(document.querySelector('.popup'));
-        // }
+        if (document.querySelector('.popup')) {
+          document.querySelector('.popup').parentNode.removeChild(document.querySelector('.popup'));
+        }
 
         var southWest = L.latLng(this._latlng.lat - 0.1, this._latlng.lng - 0.1),
             northEast = L.latLng(this._latlng.lat + 0.1, this._latlng.lng + 0.1),
@@ -69,10 +69,12 @@ var markerOptions = function(feature){
 
         popup.innerHTML = "";
 
+        console.log(feature)
+
         inBounds.map(function(feature){
-          var featureP = document.createElement('p');
-          featureP.innerHTML = feature.voyagedetails.first_ship_name;
-          popup.appendChild(featureP);
+          var featureA = document.createElement('a');
+          featureA.innerHTML = feature.voyagedetails.first_ship_name;
+          popup.appendChild(featureA);
         });
       }
     };
@@ -99,7 +101,7 @@ var onDataCB = function () {
 };
 
 var ajax = new XMLHttpRequest(); 
-ajax.open('GET', 'data/json/voyageshuygens.json', true);
+ajax.open('GET', 'data/json/voyages.json', true);
 ajax.onreadystatechange = onDataCB;
 ajax.send();
 
