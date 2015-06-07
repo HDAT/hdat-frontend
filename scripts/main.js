@@ -68,29 +68,29 @@ L.Playback.Util = L.Class.extend({
 L.Playback = L.Playback || {};
 
 L.Playback.MoveableMarker = L.Marker.extend({    
-    initialize: function (startLatLng, options, feature) {    
+    initialize: function (startLatLng, options, feature, map, markerLayer) {    
         var markerOptions = options.marker || {};
         this._feature =  feature;
+        this._map = map;
+        this._markerLayer = markerLayer;
         
         if (typeof markerOptions === 'function'){
             markerOptions = markerOptions(feature);
         }
 
         L.Marker.prototype.initialize.call(this, startLatLng, markerOptions);
+        
+        if (markerOptions.clickCB){
+            this.on('click', markerOptions.clickCB.bind(this, feature));
+        }
 
-        // if (feature.voyagedetails.first_ship_name == 'Blijdorp'){
-        //     var blue_icon = options.bluemarker || {};
-        //     blue_icon = blue_icon(feature);
-        //     L.Marker.prototype.initialize.call(this, startLatLng, blue_icon);
+        // this.popupContent = '';
+
+        // if (markerOptions.getPopup){
+        //     this.popupContent = markerOptions.getPopup(feature);            
         // }
         
-        this.popupContent = '';
-
-        if (markerOptions.getPopup){
-            this.popupContent = markerOptions.getPopup(feature);            
-        }
-        
-        this.bindPopup(this.getPopupContent());
+        // this.bindPopup(this.getPopupContent());
         // this.bindPopup(this.getPopupContent() + startLatLng.toString());
     },
     
@@ -125,7 +125,7 @@ L.Playback.MoveableMarker = L.Marker.extend({
 L.Playback = L.Playback || {};
 
 L.Playback.Track = L.Class.extend({
-    initialize : function (map, geoJSON, options) {
+    initialize : function (map, geoJSON, options, markerLayer) {
         options = options || {};
         var tickLen = options.tickLen || 250;
         
@@ -134,6 +134,7 @@ L.Playback.Track = L.Class.extend({
         this._ticks = [];
         this._marker = null;
         this._map = map;
+        this._markerLayer = markerLayer;
 
         var sampleTimes = geoJSON.properties.time;
         var samples = geoJSON.geometry.coordinates;
@@ -249,12 +250,12 @@ L.Playback.Track = L.Class.extend({
 
         if (timestamp > this._endTime){
             timestamp = this._endTime;
-            this._map.removeLayer(this._marker);
+            this._markerLayer.removeLayer(this._marker);
         } else if (timestamp < this._startTime){
             timestamp = this._startTime;
-            this._map.removeLayer(this._marker);
+            this._markerLayer.removeLayer(this._marker);
         } else {
-            this._marker.addTo(this._map);   
+            this._marker.addTo(this._markerLayer);   
         }
 
         return this._ticks[timestamp];
@@ -273,7 +274,7 @@ L.Playback.Track = L.Class.extend({
     
         if (lngLat) {
             var latLng = new L.LatLng(lngLat[1], lngLat[0]);
-            this._marker = new L.Playback.MoveableMarker(latLng, options, this._geoJSON);                
+            this._marker = new L.Playback.MoveableMarker(latLng, options, this._geoJSON, this._map, this._markerLayer);                
         }
         
         return this._marker;
@@ -825,7 +826,8 @@ L.Playback = L.Playback.Clock.extend({
 
         // bad implementation
         addData : function (map, geoJSON, ms) {
-
+            this._markerLayer = L.featureGroup(L.marker([50.5, 30.5])).addTo(map);
+            
             // return if data not set
             if (!geoJSON) {
                 return;
@@ -834,7 +836,7 @@ L.Playback = L.Playback.Clock.extend({
             //? Loops over the GeoJSON and adds each single track in it. Don't really know (yet) why time is trown into addTrack() too.
             if (geoJSON instanceof Array) {
                 for (var i = 0, len = geoJSON.length; i < len; i++) {
-                    this._trackController.addTrack(new L.Playback.Track(map, geoJSON[i], this.options), ms);
+                    this._trackController.addTrack(new L.Playback.Track(map, geoJSON[i], this.options, this._markerLayer), ms);
                 }
             } else {
                 this._trackController.addTrack(new L.Playback.Track(map, geoJSON, this.options), ms);
@@ -882,6 +884,8 @@ return L.Playback;
 
 (function(L){
 
+// Leaflet shit
+
 var southWest   = L.latLng(-75, 179),
     northEast   = L.latLng(75, -179),
     bounds      = L.latLngBounds(southWest, northEast);
@@ -915,20 +919,51 @@ var shipIcon = L.icon({
 // });
 
 
-var markerOptions = function(feature){
-  // do something. I broke this thing, works now though
-  // You can decide which marker should be assigned here.
-  
-  // console.log(feature)
 
+// Leaflet playback configuration
+
+
+var markerOptions = function(feature){
     return {
       icon: shipIcon,
-      getPopup: function(feature){
-        return feature.voyagedetails.first_ship_name;
+      clickCB: function(feature, event){
+        // remove popup
+        if (document.querySelector('.popup')) {
+          document.querySelector('.popup').parentNode.removeChild(document.querySelector('.popup'));
+        }
+
+        var southWest = L.latLng(this._latlng.lat - 0.1, this._latlng.lng - 0.1),
+            northEast = L.latLng(this._latlng.lat + 0.1, this._latlng.lng + 0.1),
+            bounds = L.latLngBounds(southWest, northEast),
+            inBounds = [];
+
+        this._markerLayer.eachLayer(function(marker) {
+          if (bounds.contains(marker.getLatLng())) {
+              inBounds.push(marker._feature);
+          }
+        });
+
+        var popup = document.querySelector('.popup');
+        // create popup
+        if (!popup) {
+          var popup = document.createElement('div');
+          popup.classList.add('popup');
+          document.querySelector('body').appendChild(popup);
+        }
+
+        popup.innerHTML = "";
+
+        console.log(feature)
+
+        inBounds.map(function(feature){
+          var featureA = document.createElement('a');
+          featureA.innerHTML = feature.voyagedetails.first_ship_name;
+          featureA.href = "http://bgb.huygens.knaw.nl/bgb/voyage/" + feature.voyagedetails.voynumber;
+          popup.appendChild(featureA);
+        });
       }
     };
-  
-}
+};
 
 var playbackOptions = {
     playControl:            true,
@@ -951,8 +986,15 @@ var onDataCB = function () {
 };
 
 var ajax = new XMLHttpRequest(); 
-ajax.open('GET', 'data/json/voyageshuygens.json', true);
+ajax.open('GET', 'data/json/voyages.json', true);
 ajax.onreadystatechange = onDataCB;
 ajax.send();
+
+// Other stuff
+
+// Feedback blink
+window.setTimeout(function(){
+  document.querySelector('.form-button').classList.add('form-timer');
+}, 30000)
 
 })(L);

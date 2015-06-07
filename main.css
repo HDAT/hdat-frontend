@@ -1,9 +1,9 @@
 /* vendor */
-/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
- * 2. Prevent iOS and IE text size adjust after device orientation change,
- *    without disabling user zoom.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
  */
 html {
   font-family: sans-serif;
@@ -65,7 +65,7 @@ audio:not([controls]) {
 
 /**
  * Address `[hidden]` styling not present in IE 8/9/10.
- * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+ * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
  */
 [hidden],
 template {
@@ -80,8 +80,7 @@ a {
   background-color: transparent; }
 
 /**
- * Improve readability of focused elements when they are also in an
- * active/hover state.
+ * Improve readability when focused and also mouse hovered in all browsers.
  */
 a:active,
 a:hover {
@@ -292,13 +291,14 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /**
  * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
- * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+ *    (include `-moz` to future-proof).
  */
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  box-sizing: content-box;
-  /* 2 */ }
+  /* 2 */
+  box-sizing: content-box; }
 
 /**
  * Remove inner padding and search cancel button in Safari and Chrome on OS X.
@@ -849,7 +849,9 @@ th {
   background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE4LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAzOSAzOSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMzkgMzkiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0xOS41LDM5QzguNywzOSwwLDMwLjMsMCwxOS41UzguNywwLDE5LjUsMFMzOSw4LjcsMzksMTkuNVMzMC4zLDM5LDE5LjUsMzl6IE0xOS41LDJDOS45LDIsMiw5LjksMiwxOS41CgkJUzkuOSwzNywxOS41LDM3UzM3LDI5LjEsMzcsMTkuNVMyOS4xLDIsMTkuNSwyeiIvPgo8L2c+CjxnPgoJPHBvbHlnb24gZmlsbD0iI0ZGRkZGRiIgcG9pbnRzPSIyNC42LDE4LjggMjAuMiwxOC44IDIwLjIsMTQuNCAxOC44LDE0LjQgMTguOCwxOC44IDE0LjQsMTguOCAxNC40LDIwLjIgMTguOCwyMC4yIDE4LjgsMjQuNiAKCQkyMC4yLDI0LjYgMjAuMiwyMC4yIDI0LjYsMjAuMiAJIi8+CjwvZz4KPC9zdmc+Cg=="); }
 
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font: 18px/1.5 "Arapey", serif;
+  color: #b5b5b5; }
 
 body {
   width: 100%;
@@ -888,10 +890,6 @@ body {
 .hdat-control-season p {
   margin: 6px 0 0 10px; }
 
-/* kan later wrs weg */
-/*.seasons {
-    padding-left: 100px; 
-}*/
 .hdat-control-play {
   margin: 0;
   width: 5%; }
@@ -924,3 +922,61 @@ body {
 
 .hdat-control-timeline p:nth-child(2) {
   float: right; }
+
+.form-button {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  height: 33px;
+  padding: 2px 30px 0 30px;
+  border: 1px solid #b5b5b5;
+  border-radius: 20px;
+  z-index: 999000000;
+  color: #b5b5b5;
+  opacity: 1;
+  transition: opacity 2s;
+  text-decoration: none; }
+
+.form-button:hover {
+  border: 1px solid white;
+  background: rgba(181, 181, 181, 0.05); }
+
+@-webkit-keyframes 'blink2' {
+  0% {
+    background: rgba(181, 181, 181, 0.1);
+    color: #b5b5b5; }
+  50% {
+    background: rgba(181, 181, 181, 0);
+    color: white; }
+  100% {
+    background: rgba(181, 181, 181, 0.1);
+    color: #b5b5b5; } }
+
+.form-timer {
+  -webkit-animation-name: blink2;
+  animation-name: blink2;
+  -webkit-animation-direction: normal;
+  animation-direction: normal;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out; }
+
+.popup {
+  position: absolute;
+  right: 0px;
+  top: 100px;
+  padding: 10px;
+  color: #b5b5b5;
+  border: 1px solid #b5b5b5;
+  border-right: 0;
+  border-radius: 20px 0 0 20px;
+  transition: width 1s;
+  max-height: 70vh;
+  overflow: scroll; }
+
+.popup a {
+  display: block;
+  margin: 0px; }
