@@ -74,6 +74,7 @@ var markerOptions = function(feature){
         inBounds.map(function(feature){
           var featureA = document.createElement('a');
           featureA.innerHTML = feature.voyagedetails.first_ship_name;
+          featureA.href = "http://bgb.huygens.knaw.nl/bgb/voyage/" + feature.voyagedetails.voynumber;
           popup.appendChild(featureA);
         });
       }

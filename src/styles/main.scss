@@ -139,15 +139,19 @@ body {
 
 .popup {
     position: absolute;
-    right: -1px;
+    right: 0px;
     top: 100px;
     padding: 10px;
     color: rgb(181, 181, 181);
     border: 1px solid rgb(181, 181, 181);
+    border-right: 0;
     border-radius: 20px 0 0 20px;
     transition: width 1s;
+    max-height: 70vh;
+    overflow: scroll;
 }
 
-.popup p {
+.popup a {
+    display: block;
     margin: 0px;
 }
