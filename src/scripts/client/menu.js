@@ -1,6 +1,7 @@
 var wh = window.innerHeight;
 var hoverAnim = {},
 	fadeOutTimeLine = {},
+	fadeInTimeLine = {},
 	barAnimLine = {};
 
 // elementen
@@ -51,6 +52,19 @@ function fadeOutUI(){
 		opacity: 0,
 		ease: Expo.easeOut
 	}, "-=.25")
+};
+
+function fadeInUI(){
+	fadeInTimeLine = new TimelineMax();
+
+	fadeOutTimeLine.to(".leaflet-bottom", .25, {
+		opacity: 1,
+		delay: 4.5
+	})
+	.to(".leaflet-control-zoom", .25, {
+		opacity: 1,
+		ease: Expo.easeOut
+	})
 };
 
 // ANIMATION LEFT MENU
@@ -107,17 +121,19 @@ function tagHover(type){
 
 function minardInit(){
 	TweenMax.to("#minard", 1, {
-		delay: 1,
+		delay: 2,
 		opacity: 1,
 		display: "block",
 	})
 	TweenMax.from(".tabs-anim", .5, {
-		delay: 1,
+		display: "block",
+		delay: 2,
 		marginTop: -30,
 		ease: Expo.easeOut
 	})
 	TweenMax.to(".cargo-supercontainer", 1, {
-		delay: 1,
+		display: "block",
+		delay: 2,
 		width: '100%',
 		ease: Expo.easeOut
 	})
@@ -128,16 +144,26 @@ function destroyMinard(){
 		width: '100%',
 		ease: Expo.easeOut
 	})
-	// TweenMax.to(".tabs-anim", .5, {
-	// 	delay: 1,
-	// 	marginTop: 0,
-	// 	ease: Expo.easeOut
-	// })
-	// 	TweenMax.to(".cargo-supercontainer", 1, {
-	// 	delay: 1,
-	// 	width: '100%',
-	// 	ease: Expo.easeOut
-	// })
+	TweenMax.to(".cargo-supercontainer", 0, {
+		display: "none",
+		delay: .8
+	})
+		TweenMax.to(".tabs-anim", 0, {
+		display: "none",
+		delay: .8
+	})
+	TweenMax.to(".cover", 1, {
+		width: '0%',
+		marginLeft: '100%',
+		delay: .9,
+		ease: Expo.easeOut
+	})
+	TweenMax.to("#minard", 0.9, {
+		width: '0%',
+		marginLeft: '100%',
+		delay: 1,
+		ease: Expo.easeOut
+	})
 };
 
 
@@ -276,14 +302,14 @@ letterX.addEventListener("click", genCargo.bind(this, contextX), false);
 letterY.addEventListener("click", genCargo.bind(this, contextY), false);
 letterZ.addEventListener("click", genCargo.bind(this, contextZ), false);
 
-
+// CLOSE BUTTON CLICK
 closeButton.addEventListener("click", function(){
-	// cargoSuperContainer.remove();
-	barAnimLine.reverse();
-	fadeOutTimeLine.delay(10).reverse();
+	fadeInUI();
+	barAnimLine.timeScale(2).reverse();
 	destroyMinard();
 }, false);
 
+// MINARD ICON CLICK
 minardMode.addEventListener("click", function(){
 	fadeOutUI();
 	barAnimatie();
