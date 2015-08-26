@@ -1,5 +1,7 @@
 var wh = window.innerHeight;
-var hoverAnim = {};
+var hoverAnim = {},
+	fadeOutTimeLine = {},
+	barAnimLine = {};
 
 // elementen
 var storyMode = document.querySelector(".storymode-icon");
@@ -9,8 +11,7 @@ var cargoSuperContainer = document.querySelector("#minard");
 var cargoContainer = document.querySelector(".cargo-container");
 var closeButton = document.querySelector(".close");
 
-
-//
+// letters
 var letterA = document.querySelector(".letter-a");
 var letterB = document.querySelector(".letter-b");
 var letterC = document.querySelector(".letter-c");
@@ -38,36 +39,44 @@ var letterX = document.querySelector(".letter-x");
 var letterY = document.querySelector(".letter-y");
 var letterZ = document.querySelector(".letter-z");
 
+// ANIMATION REMOVE UI
+function fadeOutUI(){
+	fadeOutTimeLine = new TimelineMax();
 
-// basisanimatie
-function barAnimatie(){ 
-	TweenMax.to(".leaflet-control-zoom", .25, {
+	fadeOutTimeLine.to(".leaflet-bottom", .25, {
 		opacity: 0,
-		delay: .25, 
+		delay: .25
+	})
+	.to(".leaflet-control-zoom", .25, {
+		opacity: 0,
 		ease: Expo.easeOut
-	});
-	TweenMax.to(".overlay-bar", 1, {
-		delay: .5, 
+	}, "-=.25")
+};
+
+// ANIMATION LEFT MENU
+function barAnimatie(){ 
+	barAnimLine = new TimelineMax();
+
+	barAnimLine.to(".overlay-bar", 1, {
 		height: wh,
-		ease: Expo.easeOut
-	});
-	// Close
-	TweenMax.to(".close", 1, {
-		display: "block",
-		delay: .5
-	});
-	TweenMax.to("#close-icon", 1.5, {
+		ease: Expo.easeOut,
+		delay: 1
+	})
+	// Close button
+	.to(".close", 1, {
+		display: "block"
+	}, "-=1")
+	.to("#close-icon", 1.5, {
 		marginTop: 20,
 		opacity: 1,
-		delay: .5,
 		ease: Expo.easeOut
-	});
+	}, "-=.8")
 };
 
 function iconDisappear(type){
 	var speed = .25;
 	var properties = {
-		delay: .5,
+		delay: 1,
 		opacity: 0,
 	};
 	if (type == "story") {
@@ -113,6 +122,25 @@ function minardInit(){
 		ease: Expo.easeOut
 	})
 };
+
+function destroyMinard(){
+	TweenMax.to("#minard", 1, {
+		delay: 1,
+		marginTop: -1000,
+		display: "none"
+	})
+	TweenMax.to(".tabs-anim", .5, {
+		delay: 1,
+		marginTop: 0,
+		ease: Expo.easeOut
+	})
+		TweenMax.to(".cargo-supercontainer", 1, {
+		delay: 1,
+		width: '100%',
+		ease: Expo.easeOut
+	})
+};
+
 
 //	Story
 storyMode.addEventListener("click", function(){
@@ -193,7 +221,6 @@ function genCargo(innerContext){
 
 	var compiledHTML = template(rows);
 
-	console.log(compiledHTML);
 
 	var productsContainer = document.querySelector(".cargo-container");
 	productsContainer.insertAdjacentHTML('afterbegin', compiledHTML);
@@ -252,67 +279,17 @@ letterZ.addEventListener("click", genCargo.bind(this, contextZ), false);
 
 
 closeButton.addEventListener("click", function(){
-	cargoSuperContainer.remove();
+	// cargoSuperContainer.remove();
+	barAnimLine.reverse();
+	fadeOutTimeLine.delay(10).reverse();
+	destroyMinard();
 }, false);
 
 minardMode.addEventListener("click", function(){
+	fadeOutUI();
 	barAnimatie();
 	iconDisappear("minard");
 	minardInit();
 }, false);
 
 minardMode.addEventListener("click", genCargo.bind(this, contextA), false);
-
-
-// letterA.addEventListener("click", function(){
-// 	minardCall('a')
-// }, false);
-
-
-
-
-
-
-  // this.context=context; 
-  // this.rows=[];
-  // var step = 5;
-  // var iterator = 0;
-  // var lengte = context.length;
-  // step = lengte / 4;
-
-  // for (iterator = 0; iterator < lengte ; iterator+=step){
-  // 	// console.log(iterator);
-  // 	this.rows.push({"producten":this.context.slice(iterator,iterator+step)});
-
-  // };
-// console.log(rows);
-
-
-// var source   = document.querySelector("#entry-template").innerHTML;
-// var template = Handlebars.compile(source);
-
-// var compiledHTML = template(rows);
-
-// console.log(compiledHTML);
-
-// var productsContainer = document.querySelector(".cargo-container");
-// productsContainer.insertAdjacentHTML('afterbegin', compiledHTML);
-
-
-
-
-
-
-
-
-  // this.context=context; // previously set
-  // this.rows=[];
-  // var step=5;
-  // var iterator = 0;
-  // L=this.context.length;
-  // for(iterator = 0; iterator < L ; iterator+=step){
-  //   this.rows.push({blaat:this.context.slice(iterator,iterator+step)});
-  //   console.log(rows);
-  // };
-
-  // productsContainer.innerAdjacentHTML(this.template(this));

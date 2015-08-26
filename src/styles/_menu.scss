@@ -82,6 +82,10 @@ $svg-fill:		#aea8a2;
 	width: 60%;
 	text-align: center;
 	margin-top: 11px;
+	&:hover {
+		fill: $box-fill;
+		cursor: pointer;
+	}
 }
 
 /* Minard menu */
