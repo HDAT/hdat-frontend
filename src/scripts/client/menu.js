@@ -109,12 +109,12 @@ function tagHover(type){
 
 	hoverAnim.to(typeTag, .5, {
 		opacity: 1,
-		display: 'inline-block',
+		display: 'block',
 		ease: Expo.easeOut
 	})
 		.to(textTag, .5, {
 		opacity: 1,
-		display: 'inline-block',
+		display: 'block',
 		ease: Expo.easeOut
 	})
 };
