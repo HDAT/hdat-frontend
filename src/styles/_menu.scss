@@ -1,0 +1,183 @@
+$height-li:		45px;
+$width-li:		45px;
+
+$box-color:		#737373;
+$box-fill:		#c6c6c6;
+$svg-fill:		#aea8a2;
+
+
+#left-menu {
+	z-index: 99999;
+	padding: 0;
+	@include position(absolute, 125px auto auto 0);
+}
+
+#left-menu li {
+	list-style-type: none;
+	height: $height-li;
+	width: $width-li;
+}
+
+/* Basic template */
+.icon-base {
+	background: $box-color;
+	background-repeat: no-repeat;
+	background-size: 25px;
+	background-position: center;
+	margin-top: 3px;
+	cursor: pointer; 
+	cursor: hand;
+}
+.tag-base {
+	display: none;
+	margin-left: $width-li;
+	height: $height-li;
+	background-color: $box-fill;
+	opacity: 0;
+}
+.texttag-base {
+	display: none;
+	padding: 12px 14px 0 14px;
+	font: 14px/1.5 "EB Garamond", serif;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	color: $box-color;
+	white-space: nowrap;
+}
+
+/* Specific icons */
+.storymode-icon {
+	@extend .icon-base;
+	background-image: url(../images/icons/book.svg);
+}
+
+.storymode-tag { @extend .tag-base; }
+.storymode-text { @extend .texttag-base; }
+
+.minardmode-icon {
+	@extend .icon-base;
+	background-image: url(../images/icons/filter.svg);
+	background-size: 19px;
+}
+
+.minardmode-tag { @extend .tag-base; }
+.minardmode-text { @extend .texttag-base; }
+
+/* Animatie */
+.overlay-bar {
+	position: absolute;
+	z-index: 9999;
+	top: 0;
+	left: 0;
+	width: $width-li;
+	background-color: $box-color;
+}
+.close {
+	fill: $svg-fill;
+	text-align: center;
+	display: none;
+}
+#close-icon {
+	opacity: 0;
+	width: 60%;
+	text-align: center;
+	margin-top: 11px;
+}
+
+/* Minard menu */
+#minard {
+	height: 100%;
+ 	width: calc(100% - 45px);
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1000;
+ 	margin-left: $width-li;
+ 	@include position(absolute, 0 auto auto auto);
+ 	overflow: hidden;
+}
+
+.minard-tabs {
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+	display: -ms-flexbox;      /* TWEENER - IE 10 */
+	display: -webkit-flex;     /* NEW - Chrome */
+	display: flex;  
+	margin: 0 0 0 -40px;
+	background-color: #AEA8A2;
+	/* zelfde positie als onderkant */
+	width: 71em;
+    margin-right: auto;
+    margin-left: auto;
+	li {
+		list-style-type: none;
+		display: inline;
+		background-color: #AEA8A2;
+		padding-left: 10px;
+		padding-right: 10px;
+		min-width: 30px;
+		border-right: 1px solid #575757;
+	}
+	.letter {
+		font: 20px/1.5 "EB Garamond", serif;
+		text-transform: uppercase;
+		text-decoration: none;
+	}
+	a {
+		color: white;
+	}
+	a:visited {
+		color: white;
+	}
+
+}
+
+#minard {
+	display: none;
+	background: #AEA8A2;
+}
+
+.cargo-supercontainer {
+	@include position(absolute, 31px auto auto auto);
+	@include size(70% 100%);
+	background-color: #575757;
+	.gray-shadow {
+		width: 100%;
+		height: 250px;
+		@include position(absolute, auto auto 0 auto);
+		background: linear-gradient(to top, rgba(87,87,87,1) 0%,rgba(0,0,0,0) 100%);
+		pointer-events: none;
+	}
+}
+
+.cargo-container {
+	@include outer-container;
+	overflow: scroll;
+	max-height: 90%;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.cargo-list {
+	@include span-columns(3);
+	&:first-child {
+	margin-left: -20px;
+	}
+	a {
+		text-decoration: none !important;
+	}
+}
+.cargo {
+	list-style-type: none;
+	font-family: EB-Garamond;
+	color: $svg-fill;
+	border-bottom: 1px solid #696969;
+	padding: 4px 6px 4px 6px;
+	.number {
+		float: right;
+		text-transform: italic;
+	}
+	&:hover {
+		background-color: rgba(255,255,255,0.1);
+	}
+
+}

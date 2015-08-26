@@ -27,14 +27,19 @@ gulp.task('scripts', function () {
             // 'src/scripts/client/playback/DataStream.js',
             'src/scripts/client/playback/Playback.js',
             'src/scripts/client/playback/epilogue.js',
-            'src/scripts/client/main.js'
+            'src/scripts/client/main.js',
+            'src/scripts/client/menu.js'
         ])
         .pipe($.concat('main.js'))
         // .pipe($.babel())
         .pipe($.jshint({
             globals: {
                 "L": false,
-                "define": false
+                "define": false,
+                "URI": false,
+                "Expo": false,
+                "TweenMax": false,
+                "TimelineMax": false
             }
         }))
         .pipe($.jshint.reporter('jshint-stylish'))
@@ -46,6 +51,9 @@ gulp.task('vendor', function () {
     exec("bower install", puts);
     return gulp.src([
                 'bower_components/leaflet/dist/leaflet.js',
+                'bower_components/gsap/src/minified/TweenMax.min.js',
+                'bower_components/gsap/src/minified/TweenlineMax.min.js',
+                'bower_components/handlebars/handlebars.min.js',
                 'node_modules/URIjs/src/URI.min.js'
             ])
         .pipe($.concat('vendor.js'))

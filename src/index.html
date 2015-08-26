@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Historical Dutch-Asiatic Trading</title>
 	<!-- Beter gedownload -->
-	<link href='http://fonts.googleapis.com/css?family=Arapey' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="main.css">
+<!-- 	<link href='http://fonts.googleapis.com/css?family=Arapey' rel='stylesheet' type='text/css'>
+ -->	<link rel="stylesheet" href="main.css">
 </head>
 <body>
 	
@@ -17,6 +17,93 @@
 	  <option value="200">Speed 2x</option>
 	  <option value="400">Speed 4x</option>
 	</select> -->
+
+
+	<!-- Left menu -->
+	<div id="minard">
+
+		<div class="tabs-anim">
+		<ul class="minard-tabs">
+			<li><a class="letter letter-a" href="#">a</a></li>
+			<li><a class="letter letter-b" href="#">b</a></li>
+			<li><a class="letter letter-c" href="#">c</a></li>
+			<li><a class="letter letter-d" href="#">d</a></li>
+			<li><a class="letter letter-e" href="#">e</a></li>
+			<li><a class="letter letter-f" href="#">f</a></li>
+			<li><a class="letter letter-g" href="#">g</a></li>
+			<li><a class="letter letter-h" href="#">h</a></li>
+			<li><a class="letter letter-i" href="#">i</a></li>
+			<li><a class="letter letter-j" href="#">j</a></li>
+			<li><a class="letter letter-k" href="#">k</a></li>
+			<li><a class="letter letter-l" href="#">l</a></li>
+			<li><a class="letter letter-m" href="#">m</a></li>
+			<li><a class="letter letter-n" href="#">n</a></li>
+			<li><a class="letter letter-o" href="#">o</a></li>
+			<li><a class="letter letter-p" href="#">p</a></li>
+			<li><a class="letter letter-q" href="#">q</a></li>
+			<li><a class="letter letter-r" href="#">r</a></li>
+			<li><a class="letter letter-s" href="#">s</a></li>
+			<li><a class="letter letter-t" href="#">t</a></li>
+			<li><a class="letter letter-u" href="#">u</a></li>
+			<li><a class="letter letter-v" href="#">v</a></li>
+			<li><a class="letter letter-w" href="#">w</a></li>
+			<li><a class="letter letter-x" href="#">x</a></li>
+			<li><a class="letter letter-y" href="#">y</a></li>
+			<li><a class="letter letter-z" href="#">z</a></li>
+		</ul>
+		</div>
+		
+		<div class="cargo-supercontainer">
+			<div class="cargo-container"></div>
+			<div class="gray-shadow"></div>
+		</div>
+
+	</div>
+
+	<span class="overlay-bar">
+		<span class="close">
+			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="close-icon" x="0" y="0" viewBox="358 166.9 143.8 143.8" enable-background="new 358 166.9 143.8 143.8" xml:space="preserve">
+			  <g id="circle">
+			    <path d="M430 310.7c-39.7 0-71.9-32.3-71.9-71.9 0-39.6 32.3-71.9 71.9-71.9 39.6 0 71.9 32.3 71.9 71.9C501.9 278.5 469.6 310.7 430 310.7zM430 181.2c-31.8 0-57.6 25.8-57.6 57.6s25.8 57.6 57.6 57.6c31.8 0 57.6-25.8 57.6-57.6S461.7 181.2 430 181.2z"/>
+			  </g>
+			  <g id="firstdiag">
+			    <path d="M451 267c-1.8 0-3.7-0.7-5.1-2.1l-42-42c-2.8-2.8-2.8-7.3 0-10.1 2.8-2.8 7.3-2.8 10.1 0l42 42c2.8 2.8 2.8 7.3 0 10.1C454.7 266.3 452.8 267 451 267z"/>
+			  </g>
+			  <g id="seconddiag">
+			    <path d="M409 267c-1.8 0-3.7-0.7-5.1-2.1 -2.8-2.8-2.8-7.3 0-10.1l42-42c2.8-2.8 7.3-2.8 10.1 0 2.8 2.8 2.8 7.3 0 10.1l-42 42C412.7 266.3 410.9 267 409 267z"/>
+			  </g>
+			</svg>
+		</span>
+	</span>
+
+	<ul id="left-menu">
+		<li class="storymode-icon">
+			<span class="storymode-tag"><span class="storymode-text">Narratives</span></span>
+		</li>
+		<li class="minardmode-icon">
+			<span class="minardmode-tag"><span class="minardmode-text">Flow diagram</span></span>
+			<ul>
+<!-- 				<li>bla</li>
+ -->			</ul>
+		</li>
+	<ul>
+	<!-- /left menu -->
+
+			<script id="entry-template" type="text/x-handlebars-template">
+
+			{{#each this}}
+			<ul class="cargo-list">
+					{{#each producten}}
+					 	<a href="/?firstCargoM={{carProductId}}">
+					 		<li class="cargo">{{name}}
+					 			<span class="number">{{textcount}}</span>
+					 		</li>
+					 	</a>
+					{{/each}}
+			</ul>
+			{{/each}}
+	
+			</script>
 
 	<script src="scripts/vendor.js"></script>
 	<script src="scripts/main.js"></script>

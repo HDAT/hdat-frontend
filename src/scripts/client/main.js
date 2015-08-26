@@ -28,7 +28,7 @@ var onDataPlacesCB = function () {
                               layer.bindPopup(feature.properties.naam);
                           }
                       });
-    console.log(places);
+    // console.log(places);
 };
 
 var ajaxPlaces = new XMLHttpRequest(); 
@@ -55,12 +55,6 @@ map.on('zoomend', function(e) {
 });
 
 L.Icon.Default.imagePath = 'images/leaflet';
-
-// var defaultIconSettings = function() { return {
-//     className:              'hdat-shipicon',
-//     iconSize:               [20, 20],   // size of the icon
-//     iconAnchor:             [10, 10]   // icon center point
-// }};
 
 var shipIcon = L.icon({
     iconUrl:                'images/hdat-shipicon.png',
@@ -154,7 +148,7 @@ feature.voyagedetails.inventory.map(function(singleItem){
   if (firstProduct){
 
     return {
-      icon: blueIcon,
+      icon: pinkIcon,
       getPopup: function(feature){
         return feature.voyagedetails.first_ship_name;
       }
