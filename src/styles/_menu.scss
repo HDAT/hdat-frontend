@@ -49,6 +49,9 @@ $svg-fill:		#aea8a2;
 .storymode-icon {
 	@extend .icon-base;
 	background-image: url(../images/icons/book.svg);
+	&:hover {
+		background-image: url(../images/icons/bookhover.svg);
+	}
 }
 
 .storymode-tag { @extend .tag-base; }
@@ -56,8 +59,11 @@ $svg-fill:		#aea8a2;
 
 .minardmode-icon {
 	@extend .icon-base;
-	background-image: url(../images/icons/filter.svg);
+	background-image: url(../images/icons/filterthin.svg);
 	background-size: 19px;
+	&:hover {
+		background-image: url(../images/icons/filterthinhover.svg);
+	}
 }
 
 .minardmode-tag { @extend .tag-base; }

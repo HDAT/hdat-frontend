@@ -305,7 +305,7 @@ letterZ.addEventListener("click", genCargo.bind(this, contextZ), false);
 // CLOSE BUTTON CLICK
 closeButton.addEventListener("click", function(){
 	fadeInUI();
-	barAnimLine.timeScale(2).reverse();
+	barAnimLine.reverse();
 	destroyMinard();
 }, false);
 
