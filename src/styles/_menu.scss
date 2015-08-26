@@ -185,3 +185,12 @@ $svg-fill:		#aea8a2;
 	}
 
 }
+.cover {
+	position: absolute;
+	width: 0%;
+	height: 100%;
+	position: 0;
+	display: block;
+	background: $box-color;
+	z-index: 1000;
+}

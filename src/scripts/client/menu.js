@@ -124,21 +124,20 @@ function minardInit(){
 };
 
 function destroyMinard(){
-	TweenMax.to("#minard", 1, {
-		delay: 1,
-		marginTop: -1000,
-		display: "none"
-	})
-	TweenMax.to(".tabs-anim", .5, {
-		delay: 1,
-		marginTop: 0,
-		ease: Expo.easeOut
-	})
-		TweenMax.to(".cargo-supercontainer", 1, {
-		delay: 1,
+	TweenMax.to(".cover", 1, {
 		width: '100%',
 		ease: Expo.easeOut
 	})
+	// TweenMax.to(".tabs-anim", .5, {
+	// 	delay: 1,
+	// 	marginTop: 0,
+	// 	ease: Expo.easeOut
+	// })
+	// 	TweenMax.to(".cargo-supercontainer", 1, {
+	// 	delay: 1,
+	// 	width: '100%',
+	// 	ease: Expo.easeOut
+	// })
 };
 
 
