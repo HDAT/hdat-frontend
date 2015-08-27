@@ -39,7 +39,13 @@ gulp.task('scripts', function () {
                 "URI": false,
                 "Expo": false,
                 "TweenMax": false,
-                "TimelineMax": false
+                "TimelineMax": false,
+                "require": false,
+                "module": false,
+                "clearInterval": false,
+                "window": false,
+                "console": false,
+                "XMLHttpRequest": false
             }
         }))
         .pipe($.jshint.reporter('jshint-stylish'))
@@ -54,7 +60,8 @@ gulp.task('vendor', function () {
                 'bower_components/gsap/src/minified/TweenMax.min.js',
                 'bower_components/gsap/src/minified/TweenlineMax.min.js',
                 'bower_components/handlebars/handlebars.min.js',
-                'node_modules/URIjs/src/URI.min.js'
+                'node_modules/URIjs/src/URI.min.js',
+                'bower_components/gsap/src/minified/TweenMax.min.js'
             ])
         .pipe($.concat('vendor.js'))
         .pipe(gulp.dest('dist/scripts/'))

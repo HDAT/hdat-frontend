@@ -13,6 +13,7 @@
 
 * {
     box-sizing: border-box;
+    font: 18px/1.5 "Arapey", serif;
 }
 
 body {
@@ -58,11 +59,6 @@ body {
     margin: 6px 0 0 10px;
 }
 
-/* kan later wrs weg */
-/*.seasons {
-    padding-left: 100px; 
-}*/
-
 .hdat-control-play {
     margin: 0;
     width: 5%;
@@ -103,4 +99,46 @@ body {
     float: right;
 }
 
+.form-button {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    height: 33px;
+    padding: 2px 30px 0 30px;
+    background:transparent;
+    border: 1px solid rgb(181, 181, 181);
+    border-radius: 20px;
+    z-index: 999000000;
+    color: rgb(181, 181, 181);
+    opacity: 1;
+    transition: opacity 2s;
+    text-decoration: none;
+}
 
+.form-button:hover {
+    border: 1px solid white;
+    background: rgba(181, 181, 181, 0.05);
+}
+
+@-webkit-keyframes 'blink' {
+    0% {
+        background:rgba(181, 181, 181, 0.1);
+        color: lighten(rgb(181, 181, 181), 0%);
+    }
+    50% {
+        background:rgba(181, 181, 181, 0);
+        color: lighten(rgb(181, 181, 181), 40%);
+    }
+    100% {
+        background:rgba(181, 181, 181, 0.1);
+        color: lighten(rgb(181, 181, 181), 0%);
+    }
+}
+
+.form-timer {
+    animation-name: blink;
+    animation-direction: normal;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;   
+}

@@ -29,13 +29,13 @@ $svg-fill:		#aea8a2;
 	cursor: hand;
 }
 .tag-base {
-	display: none;
+	display: block;
 	margin-left: 55px;
 	height: 22px;
-	margin-top: 14px;
 	background-color: $box-fill;
-	opacity: 0;
+	opacity: 1;
 	position: absolute;
+	margin-top: 14px;
 }
 .texttag-base {
 	display: none;
@@ -81,8 +81,8 @@ $svg-fill:		#aea8a2;
 -moz-box-shadow: 0px 0px 8px 0px rgba(60,190,231,1);
 box-shadow: 0px 0px 8px 0px rgba(60,190,231,1);
 	&:hover {
-		background-color: red;
-	}
+/*		background-color: red;
+*/	}
 }
 
 /* Animatie */

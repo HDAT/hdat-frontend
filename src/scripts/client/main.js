@@ -1,5 +1,7 @@
 (function(L){
 
+// Leaflet shit
+// DIT IS HET
 var southWest   = L.latLng(-75, 179),
     northEast   = L.latLng(75, -179),
     bounds      = L.latLngBounds(southWest, northEast);
@@ -119,6 +121,10 @@ ajaxtwee.send();
 
 
 
+
+// Leaflet playback configuration
+
+
 var markerOptions = function(feature){
   // do something. I broke this thing, works now though
   // You can decide which marker should be assigned here.
@@ -178,6 +184,7 @@ feature.voyagedetails.inventory.map(function(singleItem){
   }
 }
 
+
 var playbackOptions = {
     playControl:            true,
     dateControl:            true,
@@ -202,5 +209,12 @@ var ajax = new XMLHttpRequest();
 ajax.open('GET', 'data/json/voyages.json', true);
 ajax.onreadystatechange = onDataCB;
 ajax.send();
+
+// Other stuff
+
+// Feedback blink
+window.setTimeout(function(){
+  document.querySelector('.form-button').classList.add('form-timer');
+}, 30000)
 
 })(L);

@@ -54,6 +54,7 @@ function fadeOutUI(){
 	}, "-=.25")
 };
 
+// ANIMATION ADD
 function fadeInUI(){
 	fadeInTimeLine = new TimelineMax();
 
@@ -108,8 +109,7 @@ function tagHover(type){
 	hoverAnim = new TimelineMax();
 
 	hoverAnim.to(typeTag, .5, {
-		opacity: 1,
-		display: 'block',
+		marginTop: 14,
 		ease: Expo.easeOut
 	})
 		.to(textTag, .5, {
