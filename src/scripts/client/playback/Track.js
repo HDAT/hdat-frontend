@@ -1,7 +1,7 @@
 L.Playback = L.Playback || {};
 
 L.Playback.Track = L.Class.extend({
-    initialize : function (map, geoJSON, options) {
+    initialize : function (map, geoJSON, options, markerLayer) {
         options = options || {};
         var tickLen = options.tickLen || 250;
         
@@ -10,6 +10,7 @@ L.Playback.Track = L.Class.extend({
         this._ticks = [];
         this._marker = null;
         this._map = map;
+        this._markerLayer = markerLayer;
 
         var sampleTimes = geoJSON.properties.time;
         var samples = geoJSON.geometry.coordinates;
@@ -125,12 +126,12 @@ L.Playback.Track = L.Class.extend({
 
         if (timestamp > this._endTime){
             timestamp = this._endTime;
-            this._map.removeLayer(this._marker);
+            this._markerLayer.removeLayer(this._marker);
         } else if (timestamp < this._startTime){
             timestamp = this._startTime;
-            this._map.removeLayer(this._marker);
+            this._markerLayer.removeLayer(this._marker);
         } else {
-            this._marker.addTo(this._map);   
+            this._marker.addTo(this._markerLayer);   
         }
 
         return this._ticks[timestamp];
@@ -149,7 +150,7 @@ L.Playback.Track = L.Class.extend({
     
         if (lngLat) {
             var latLng = new L.LatLng(lngLat[1], lngLat[0]);
-            this._marker = new L.Playback.MoveableMarker(latLng, options, this._geoJSON);                
+            this._marker = new L.Playback.MoveableMarker(latLng, options, this._geoJSON, this._map, this._markerLayer);                
         }
         
         return this._marker;

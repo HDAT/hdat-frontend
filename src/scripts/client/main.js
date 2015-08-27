@@ -1,7 +1,8 @@
 (function(L){
 
 // Leaflet shit
-// DIT IS HET
+// DIT IS HET bEGIN
+// NOG EEN KEER
 var southWest   = L.latLng(-75, 179),
     northEast   = L.latLng(75, -179),
     bounds      = L.latLngBounds(southWest, northEast);
@@ -174,12 +175,49 @@ feature.voyagedetails.inventory.map(function(singleItem){
       }
     };
 
-  } else {
+ } else {
     return {
       icon: shipIcon,
-      getPopup: function(feature){
-        return feature.voyagedetails.first_ship_name;
+      clickCB: function(feature, event){
+        // remove popup
+        if (document.querySelector('.popup')) {
+          document.querySelector('.popup').parentNode.removeChild(document.querySelector('.popup'));
+        }
+
+        var southWest = L.latLng(this._latlng.lat - 0.1, this._latlng.lng - 0.1),
+            northEast = L.latLng(this._latlng.lat + 0.1, this._latlng.lng + 0.1),
+            bounds = L.latLngBounds(southWest, northEast),
+            inBounds = [];
+
+        this._markerLayer.eachLayer(function(marker) {
+          if (bounds.contains(marker.getLatLng())) {
+              inBounds.push(marker._feature);
+          }
+        });
+
+        var popup = document.querySelector('.popup');
+        // create popup
+        if (!popup) {
+          var popup = document.createElement('div');
+          popup.classList.add('popup');
+          document.querySelector('body').appendChild(popup);
+        }
+
+        popup.innerHTML = "";
+
+        console.log(feature)
+
+        inBounds.map(function(feature){
+          var featureA = document.createElement('a');
+          featureA.innerHTML = feature.voyagedetails.first_ship_name;
+          featureA.href = "http://bgb.huygens.knaw.nl/bgb/voyage/" + feature.voyagedetails.voynumber;
+          popup.appendChild(featureA);
+        });
       }
+
+
+
+
     };
   }
 }
@@ -210,11 +248,5 @@ ajax.open('GET', 'data/json/voyages.json', true);
 ajax.onreadystatechange = onDataCB;
 ajax.send();
 
-// Other stuff
-
-// Feedback blink
-window.setTimeout(function(){
-  document.querySelector('.form-button').classList.add('form-timer');
-}, 30000)
 
 })(L);

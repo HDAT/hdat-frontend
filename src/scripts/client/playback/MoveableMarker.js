@@ -1,29 +1,29 @@
 L.Playback = L.Playback || {};
 
 L.Playback.MoveableMarker = L.Marker.extend({    
-    initialize: function (startLatLng, options, feature) {    
+    initialize: function (startLatLng, options, feature, map, markerLayer) {    
         var markerOptions = options.marker || {};
         this._feature =  feature;
+        this._map = map;
+        this._markerLayer = markerLayer;
         
         if (typeof markerOptions === 'function'){
             markerOptions = markerOptions(feature);
         }
 
         L.Marker.prototype.initialize.call(this, startLatLng, markerOptions);
+        
+        if (markerOptions.clickCB){
+            this.on('click', markerOptions.clickCB.bind(this, feature));
+        }
 
-        // if (feature.voyagedetails.first_ship_name == 'Blijdorp'){
-        //     var blue_icon = options.bluemarker || {};
-        //     blue_icon = blue_icon(feature);
-        //     L.Marker.prototype.initialize.call(this, startLatLng, blue_icon);
+        // this.popupContent = '';
+
+        // if (markerOptions.getPopup){
+        //     this.popupContent = markerOptions.getPopup(feature);            
         // }
         
-        this.popupContent = '';
-
-        if (markerOptions.getPopup){
-            this.popupContent = markerOptions.getPopup(feature);            
-        }
-        
-        this.bindPopup(this.getPopupContent());
+        // this.bindPopup(this.getPopupContent());
         // this.bindPopup(this.getPopupContent() + startLatLng.toString());
     },
     
