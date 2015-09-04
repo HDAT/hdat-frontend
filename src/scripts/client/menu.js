@@ -323,15 +323,15 @@ minardMode.addEventListener("click", genCargo.bind(this, contextA), false);
 
 /* DIT MOET IN EEN NIEUW BESTAND */
 function notification(){
-	notificationTimeLine = new TimelineMax({repeat: 3, repeatDelay:2});
+	notificationTimeLine = new TimelineMax({repeat: 3, repeatDelay: 1});
 
 	notificationTimeLine
-	.to("#redcircle", .5, {
+	.to("#redcircle", .8, {
 		opacity: 0,
 		transformOrigin: "center center",
 		scale: 3.5,
 		repeat: 2,
-		delay: .5
+		ease: Power3.easeOut
 	})
 };
 
