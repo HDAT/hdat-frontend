@@ -214,14 +214,9 @@ feature.voyagedetails.inventory.map(function(singleItem){
           popup.appendChild(featureA);
         });
       }
-
-
-
-
     };
   }
 }
-
 
 var playbackOptions = {
     playControl:            true,

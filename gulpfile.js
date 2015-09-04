@@ -70,13 +70,18 @@ gulp.task('vendor', function () {
 
 gulp.task('styles', function () {
     return gulp.src('src/styles/main.scss')
-        .pipe($.sass())
+        .pipe($.sass().on('error', $.sass.logError))
         .pipe($.autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
         }))
         .pipe(gulp.dest('dist/'))
         .pipe($.connect.reload());
+});
+
+gulp.task('copy', function() {  
+    return gulp.src(['src/CNAME'])
+        .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('json', function() {  
@@ -104,7 +109,7 @@ gulp.task('fonts', function() {
 });
 
 gulp.task('build', ['clean'], function(cb){
-    runSync(['scripts', 'vendor', 'styles', 'json', 'html', 'images', 'fonts'], cb)
+    runSync(['scripts', 'vendor', 'styles', 'json', 'copy', 'html', 'images', 'fonts'], cb)
 });
 
 gulp.task('serve', ['build'], function(){
@@ -133,10 +138,7 @@ gulp.task('deploy', ['build'], function() {
 
 gulp.task('production', ['build'], function() {
     return gulp.src('./dist/**/*')
-        .pipe($.ghPages({
-            remoteUrl: 'git@github.com:HDAT/HDAT.github.io.git',
-            branch: 'master'
-    }));
+        .pipe($.ghPages({}));
 });
 
 
