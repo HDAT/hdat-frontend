@@ -10,34 +10,7 @@ var southWest   = L.latLng(-75, 179),
 var satellite   = L.tileLayer('images/tiles/baselayer/{z}/{x}/{y}.png', {id: 'satellite'}),
     geography   = L.tileLayer('images/tiles/overlay/{z}/{x}/{y}.png', {id: 'geography'});
 
-var places = {};
-var onDataPlacesCB = function () {
-    if (ajaxPlaces.readyState !== 4 || ajaxPlaces.status !== 200) {
-      return;
-    }
-    data = JSON.parse(ajaxPlaces.responseText);
-    places      = L.geoJson(data,{
-                          pointToLayer: function(feature, latlng) {
-                              return new L.circleMarker(latlng, {
-                                 radius: 2.5,
-                                  fillColor: "#444",
-                                  // color: "#000",
-                                  weight: 0,
-                                  opacity: 1,
-                                  fillOpacity: 0.8
-                              });
-                          },
-                          onEachFeature: function (feature, layer) {
-                              layer.bindPopup(feature.properties.naam);
-                          }
-                      });
-    // console.log(places);
-};
 
-var ajaxPlaces = new XMLHttpRequest(); 
-ajaxPlaces.open('GET', 'data/json/places.json', true);
-ajaxPlaces.onreadystatechange = onDataPlacesCB;
-ajaxPlaces.send();
   
 var map = new L.Map('map', {
   zoomControl:          true,
@@ -51,11 +24,6 @@ var map = new L.Map('map', {
   layers:               [satellite, geography]
 });
 
-// Removes or add places layer at certain zoom levels
-map.on('zoomend', function(e) {
-     if ( map.getZoom() < 4 ){ map.removeLayer(places)}
-     else if ( map.getZoom() >= 4 ){ map.addLayer(places)}
-});
 
 L.Icon.Default.imagePath = 'images/leaflet';
 

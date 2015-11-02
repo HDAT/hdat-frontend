@@ -1,0 +1,20 @@
+.hdat-control-play {
+    margin: 0;
+    width: 5%;
+}
+
+.hdat-control-play button {
+    margin-left: 13px;
+    margin-top: 15px;
+    height: 42px;
+    width: 37px;
+    border: 0;
+    outline: 0; 
+    background-color: transparent;
+    background-image: url('../assets/images/icons/play.svg');
+    background-repeat: no-repeat;
+}
+
+.hdat-control-play .pause {
+    background-image: url('../assets/images/icons/pause.svg');
+}

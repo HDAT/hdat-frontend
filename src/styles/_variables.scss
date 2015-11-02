@@ -1,0 +1,48 @@
+$height-li:		45px;
+$width-li:		45px;
+
+$box-color:		#737373;
+$box-fill:		#c6c6c6;
+$svg-fill:		#aea8a2;
+
+$menu-background-color: #3a3a3a;
+
+$koppen-color: #313131;
+$p-color: #646464;
+
+@mixin calc($key, $value) {
+  #{$key}: -webkit-calc(#{$value});
+  #{$key}: -moz-calc(#{$value});
+  #{$key}: calc(#{$value});
+}
+
+@font-face {
+  font-family: 'GothamMedium';
+  src: url('../assets/fonts/gotham-medium-webfont.eot'); /* IE9 Compat Modes */
+  src: url('../assets/fonts/gotham-medium-webfont.eot?#iex') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/fonts/gotham-medium-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../assets/fonts/gotham-medium-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../assets/fonts/gotham-medium-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'GothamLight';
+  src: url('../assets/fonts/gotham-light-webfont.eot'); /* IE9 Compat Modes */
+  src: url('../assets/fonts/gotham-light-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/fonts/gotham-light-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../assets/fonts/gotham-light-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../assets/fonts/gotham-light-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+h2 {
+	font-family: GothamMedium;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: $koppen-color;
+}
+
+p {
+	font-family: GothamLight;
+	font-size: 12px;
+	color: $p-color;
+}

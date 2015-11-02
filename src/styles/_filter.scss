@@ -1,0 +1,48 @@
+@import 'variables';
+
+
+.filter-container {
+	margin-left: $width-li;
+	height: 100%;
+	@include calc("width", "100% - #{$width-li}");
+	background-color: $menu-background-color;
+	position: absolute;
+	z-index: 100000;
+	padding: 0 30px 0 30px;
+}
+.filters {
+	@include make-row();
+	padding-top: 40px;
+}
+.filterRow {
+	@include make-md-column(3);
+}
+nav {
+	@include make-row();
+	padding-left: 15px;
+}
+nav li {
+	list-style-type: none;
+	float: left;
+	width: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-left: 1px solid white;
+}
+
+.filter-item {
+	list-style-type: none;
+	font-family: GothamLight;
+	font-size: 12px;
+	line-height: 20px;
+	color: $svg-fill;
+	border-bottom: 1px solid #696969;
+	padding: 4px 6px 4px 6px;
+	.number {
+		float: right;
+		text-transform: italic;
+	}
+	&:hover {
+		background-color: rgba(255,255,255,0.1);
+	}
+}
