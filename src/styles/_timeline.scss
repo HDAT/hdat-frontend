@@ -38,6 +38,20 @@ $timeline-height: 120px;
 		background: none;
 	}
 }
+.extra-years {
+	background: url('../assets/images/icons/needle_thin.png'),
+				url('../assets/images/icons/needle_thin.png'),
+				url('../assets/images/icons/needle_thin.png'),
+				url('../assets/images/icons/needle_thin.png'),
+				url('../assets/images/icons/needle_thin.png'),
+				url('../assets/images/icons/needle_thin.png'),
+				url('../assets/images/icons/needle_thin.png'),
+				url('../assets/images/icons/needle_thin.png'),
+				url('../assets/images/icons/needle_thin.png'),
+				url('../assets/images/timedivider.svg'),;
+	background-position: 10% 0, 20% 0, 30% 0, 40% 0, 50% 0, 60% 0, 70% 0, 80% 0, 90% 0, 100% 0;
+	background-repeat: no-repeat;
+}
 .year span {
 	padding-right: 7px;
 	padding-top: 90px;
@@ -50,11 +64,11 @@ $timeline-height: 120px;
 
 /* Timeline hover dinges */
 .timeline-player {
+	margin-left: $width-li;
 	height: $timeline-height;
 	@include calc("width", "100% - #{$width-li}");
 	@include background(linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(45,43,54,.8) 100%));
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#2d2b36',GradientType=0 ); /* IE6-9 */
-	margin-left: $width-li;
 	z-index: 10000;
 }
 
