@@ -3,7 +3,7 @@
 
 .filter-container {
 	margin-left: $width-li;
-	height: 100%;
+	min-height: 100%;
 	@include calc("width", "100% - #{$width-li}");
 	background-color: $menu-background-color;
 	position: absolute;

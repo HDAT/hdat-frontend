@@ -28,14 +28,23 @@ class Filter extends React.Component{
 									return (<FilterItem FilterNaam={singleProduct.name} 
 											FilterId="1" 
 											FilterHits={singleProduct.textcount} />);
-								})}
-								
-						</ul>									
-					</div>
+								})}	
+							</ul>	
+							<ul className="filterRow">
+								{ this.state.supermarkt[1].producten.map((singleProduct, index)=>{
+									return (<FilterItem FilterNaam={singleProduct.name} 
+											FilterId="1" 
+											FilterHits={singleProduct.textcount} />);
+								})}	
+							</ul>									
+						</div>														
 				</div>
 			);
 		} else {
-			return (<div> Noooo, something went wrong! We're soo sorry! </div>); 
+			return (
+				<div className="filter-container">
+					<div>Loading</div>
+				</div>); 
 		}
 	}
 }

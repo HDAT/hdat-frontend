@@ -636,16 +636,17 @@ L.Playback.DateControl = L.Control.extend({
         var playback = this.playback;
         var time = playback.getTime();
 
-        var datetime = L.DomUtil.create('div', '', this._container);
-
         // date time
-        this._season = L.DomUtil.create('p', 'seasons', datetime);
+        this._season = L.DomUtil.create('p', 'seasons', this._container);
+        this._year = L.DomUtil.create('p', 'hdat-year', this._container);
 
-        this._season.innerHTML = this.options.seasonFormatFn(time) + ' ' + this.options.yearFormatFn(time);
+        this._season.innerHTML = this.options.seasonFormatFn(time);
+        this._year.innerHTML = this.options.yearFormatFn(time);
        
         // setup callback
         playback.addCallback(function (ms) {
-            self._season.innerHTML = self.options.seasonFormatFn(ms) + ' ' + self.options.yearFormatFn(ms);
+            self._season.innerHTML = self.options.seasonFormatFn(ms);
+            self._year.innerHTML = self.options.yearFormatFn(ms);
         });
 
         return this._container;
