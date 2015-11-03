@@ -1,9 +1,31 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ElementQueries from '../../../node_modules/css-element-queries/src/ElementQueries';
 import ResizeSensor from '../../../node_modules/css-element-queries/src/ResizeSensor';
 
 
 class Timeline extends React.Component{
+	timeSliderHover(){
+		var _this = this;
+
+		window.requestAnimationFrame(function(){
+			var node = ReactDOM.findDOMNode(_this);
+			if (node !== undefined) {
+				var timeline = document.querySelector('.timeline-player'),
+					timeSlider = document.querySelector('.time-slider');
+
+				timeSlider.addEventListener("mouseover", function(){
+					timeline.className = timeline.className + ' timeline-player-increased';
+				});
+				timeSlider.addEventListener("mouseout", function(){
+					timeline.className = 'timeline-player';
+				})
+			}
+		});
+	}
+	componentDidMount(){
+		this.timeSliderHover();
+	}
 	render() {
 		return(
 			<div className="timeline">

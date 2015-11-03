@@ -11,8 +11,6 @@ $timeline-height: 120px;
 .timeline {
 	height: $timeline-height;
 	width: 100%;
-	@include background(linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(45,43,54,.8) 100%));
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#2d2b36',GradientType=0 ); /* IE6-9 */
 	z-index: 1;
 	position: absolute;
 	bottom: 0;
@@ -50,9 +48,25 @@ $timeline-height: 120px;
 	letter-spacing: 1.2px;
 }
 
+/* Timeline hover dinges */
 .timeline-player {
 	height: $timeline-height;
 	@include calc("width", "100% - #{$width-li}");
+	@include background(linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(45,43,54,.8) 100%));
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#2d2b36',GradientType=0 ); /* IE6-9 */
 	margin-left: $width-li;
 	z-index: 10000;
+}
+
+input[type=range]:hover {
+	width: 200%;
+}
+
+.timeline-player-increased {
+	@include calc("width", "200% - #{$width-li}");
+}
+
+/* Timeline width increase */
+.leaflet-map-pane, .leaflet-top, .hdat-control-season, .hdat-control-play {
+	position: fixed;
 }

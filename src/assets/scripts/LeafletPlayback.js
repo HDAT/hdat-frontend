@@ -665,22 +665,24 @@ L.Playback.SliderControl = L.Control.extend({
 
     onAdd : function (map) {
         this._container = L.DomUtil.create('div', 'hdat-control-timeline');
+        this._timelineContainer = document.querySelector(".timeline-player");
 
         var self = this;
         var playback = this.playback;
 
         //timeline dates
-        this._sliderStartTime = L.DomUtil.create('p', '', this._container);
-        this._sliderStartTime.innerHTML = this.options.yearFormatFn(playback.getStartTime());
-        this._sliderEndTime = L.DomUtil.create('p', '', this._container);
-        this._sliderEndTime.innerHTML = this.options.yearFormatFn(playback.getEndTime());
+        // this._sliderStartTime = L.DomUtil.create('p', '', this._container);
+        // this._sliderStartTime.innerHTML = this.options.yearFormatFn(playback.getStartTime());
+        // this._sliderEndTime = L.DomUtil.create('p', '', this._container);
+        // this._sliderEndTime.innerHTML = this.options.yearFormatFn(playback.getEndTime());
 
         // slider
-        this._slider = L.DomUtil.create('input', '', this._container);
+        this._slider = L.DomUtil.create('input', 'time-slider', this._timelineContainer);
         this._slider.type = 'range';
         this._slider.min = playback.getStartTime();
         this._slider.max = playback.getEndTime();
         this._slider.value = playback.getTime();
+
 
         function onSliderChange(e) {
             var val = Number(e.target.value);

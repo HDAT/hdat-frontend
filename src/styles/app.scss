@@ -13,4 +13,10 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
 body {
 	margin: 0;
+	overflow-y:hidden;
+}
+
+/* Dit ook nog voor niet webkit */
+::-webkit-scrollbar { 
+    display: none; 
 }
