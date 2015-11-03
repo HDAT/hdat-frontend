@@ -21,7 +21,7 @@ class Timeline extends React.Component{
 				});
 				timeSlider.addEventListener("mouseout", function(){
 					timeline.className = 'timeline-player';
-					years.className = 'year';
+					year.className = 'year';
 				})
 			}
 		});
