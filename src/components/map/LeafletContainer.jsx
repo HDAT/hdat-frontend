@@ -3,6 +3,7 @@ import { Map, TileLayer } from 'react-leaflet';
 import voyages from '../../assets/data/voyages.json';
 import LeafletPlayback from '../../assets/scripts/LeafletPlayback.js';
 import MarkerIcon from '../../assets/images/icons/hdat-shipicon.png';
+import Leaflet from 'leaflet';
 
 var position = [10, 45];
 
@@ -17,28 +18,27 @@ var tilesOverlay = 'tiles/overlay/{z}/{x}/{y}.png';
 class LeafletPlaying extends Map{
 	componentDidMount(){
 		super.componentDidMount();
-		L = this.getLeafletElement();
-		console.log(L);
+		this.leafletMap = this.getLeafletElement();
 
-		// var shipIcon = L.icon({
-		//     iconUrl:                'images/hdat-shipicon.png',
-		//     className:              'hdat-shipicon',
-		//     iconSize:               [20, 20],   // size of the icon
-		//     iconAnchor:             [10, 10]   // icon center point
-		// });
+		var shipIcon = Leaflet.icon({
+		    iconUrl:                MarkerIcon,
+		    className:              'hdat-shipicon',
+		    iconSize:               [20, 20],   // size of the icon
+		    iconAnchor:             [10, 10]   // icon center point
+		});
 
 		var markerOptions = function(feature){
 			return {
-			      // icon: shipIcon,
+			      icon: shipIcon,
 			      clickCB: function(feature, event){
 			        // remove popup
 			        if (document.querySelector('.popup')) {
 			          document.querySelector('.popup').parentNode.removeChild(document.querySelector('.popup'));
 			        }
 
-			        var southWest = L.latLng(this._latlng.lat - 0.1, this._latlng.lng - 0.1),
-			            northEast = L.latLng(this._latlng.lat + 0.1, this._latlng.lng + 0.1),
-			            bounds = L.latLngBounds(southWest, northEast),
+			        var southWest = Leaflet.latLng(this._latlng.lat - 0.1, this._latlng.lng - 0.1),
+			            northEast = Leaflet.latLng(this._latlng.lat + 0.1, this._latlng.lng + 0.1),
+			            bounds = Leaflet.latLngBounds(southWest, northEast),
 			            inBounds = [];
 
 			        this._markerLayer.eachLayer(function(marker) {
@@ -72,12 +72,15 @@ class LeafletPlaying extends Map{
 		    dateControl:            true,
 		    sliderControl:          true,
 		    tickLen:                (3600*24),
+		    speed:                  1,
 		    tracksLayer:            false,
 		    maxInterpolationTime:   46464646464646,
 		    marker:                 markerOptions
 		};
 
-		var playback = new LeafletPlayback(this.leafletElement, voyages, null, playbackOptions);
+		console.log(playbackOptions);
+
+		var playback = new LeafletPlayback(this.leafletMap, voyages, null, playbackOptions);
 	}
 }
 

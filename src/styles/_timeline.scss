@@ -34,24 +34,11 @@ $timeline-height: 120px;
 	width: 10%; //belangrijk
 	float: left;
 	text-align: right;
-	&:last-child {
+/*	&:last-child {
 		background: none;
-	}
+	}*/
 }
-.extra-years {
-	background: url('../assets/images/icons/needle_thin.png'),
-				url('../assets/images/icons/needle_thin.png'),
-				url('../assets/images/icons/needle_thin.png'),
-				url('../assets/images/icons/needle_thin.png'),
-				url('../assets/images/icons/needle_thin.png'),
-				url('../assets/images/icons/needle_thin.png'),
-				url('../assets/images/icons/needle_thin.png'),
-				url('../assets/images/icons/needle_thin.png'),
-				url('../assets/images/icons/needle_thin.png'),
-				url('../assets/images/timedivider.svg'),;
-	background-position: 10% 0, 20% 0, 30% 0, 40% 0, 50% 0, 60% 0, 70% 0, 80% 0, 90% 0, 100% 0;
-	background-repeat: no-repeat;
-}
+
 .year span {
 	padding-right: 7px;
 	padding-top: 90px;
@@ -60,6 +47,65 @@ $timeline-height: 120px;
 	font-size: 10px;
 	color: #626262;
 	letter-spacing: 1.2px;
+}
+
+/* De Slider */
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+	@include calc("width", "100% - #{$width-li}");  /* Specific width is required for Firefox. */
+  background: none;
+/*  width: 100%;
+*/  position: absolute; /* Goed kijken of dit werkt! */
+  /*position: absolute;*/
+  bottom: 0;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent; /* Hides the slider so custom styles can be added */
+  border-color: transparent;
+  color: transparent;
+}
+
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-image: url('../assets/images/icons/needle.png');
+  background-size: 3px 110px;  
+  height: 110px;
+  width: 3px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+}
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+  background-image: url('../assets/images/icons/needle.png');
+  background-size: 3px 110px;  
+  height: 110px;
+  width: 3px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+  background-image: url('../assets/images/icons/needle.png');
+  background-size: 3px 110px;  
+  height: 110px;
+  width: 3px;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 /* Timeline hover dinges */
@@ -73,11 +119,28 @@ $timeline-height: 120px;
 }
 
 input[type=range]:hover {
-	width: 200%;
+	@include calc("width", "200% - #{$width-li}");
 }
 
 .timeline-player-increased {
 	@include calc("width", "200% - #{$width-li}");
+}
+
+.extra-years {
+	background: url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/timedivider.svg'),;
+	background-position: 10% 0, 20% 0, 30% 0, 40% 0, 50% 0, 60% 0, 70% 0, 80% 0, 90% 0, 100% 0;
+	background-repeat: no-repeat;
+
+	transition: background-image 1s cubic-bezier(0.550, 0.055, 0.675, 0.190);
 }
 
 /* Timeline width increase */

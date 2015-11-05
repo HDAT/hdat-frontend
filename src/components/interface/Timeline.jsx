@@ -13,15 +13,19 @@ class Timeline extends React.Component{
 			if (node !== undefined) {
 				var timeline = document.querySelector('.timeline-player'),
 					timeSlider = document.querySelector('.time-slider'),
-					year = document.querySelector('.year');
+					year = document.querySelectorAll('.year');
 
 				timeSlider.addEventListener("mouseover", function(){
 					timeline.className += ' timeline-player-increased';
-					year.className += ' extra-years';
+					for(let i=0; i < year.length; i++) {
+						year[i].className += ' extra-years';
+					}
 				});
 				timeSlider.addEventListener("mouseout", function(){
 					timeline.className = 'timeline-player';
-					year.className = 'year';
+					for(let i=0; i < year.length; i++) {
+						year[i].className = 'year';
+					}
 				})
 			}
 		});
