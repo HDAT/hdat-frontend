@@ -8,6 +8,7 @@ class Timeline extends React.Component{
 	timeSliderHover(){
 		var _this = this;
 
+
 		window.requestAnimationFrame(function(){
 			var node = ReactDOM.findDOMNode(_this);
 			if (node !== undefined) {
@@ -15,10 +16,17 @@ class Timeline extends React.Component{
 					timeSlider = document.querySelector('.time-slider'),
 					year = document.querySelectorAll('.year');
 
+
 				timeSlider.addEventListener("mouseover", function(){
 					timeline.className += ' timeline-player-increased';
 					for(let i=0; i < year.length; i++) {
-						year[i].className += ' extra-years';
+						function addClass(){
+							year[i].className += ' extra-years';
+						}
+						function addClassTimer() {
+				  			var blaat = window.setTimeout(addClass, 600);
+						}
+						addClassTimer();
 					}
 				});
 				timeSlider.addEventListener("mouseout", function(){

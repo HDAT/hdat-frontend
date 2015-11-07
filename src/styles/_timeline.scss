@@ -57,7 +57,11 @@ input[type=range] {
 /*  width: 100%;
 */  position: absolute; /* Goed kijken of dit werkt! */
   /*position: absolute;*/
-  bottom: 0;
+  	bottom: 0;
+	-webkit-transition: width .5s ease-in-out;
+	-moz-transition: width .5s ease-in-out;
+	-o-transition: width .5s ease-in-out;
+	transition: width .5s ease-in-out;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -116,14 +120,26 @@ input[type=range]::-ms-thumb {
 	@include background(linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(45,43,54,.8) 100%));
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#2d2b36',GradientType=0 ); /* IE6-9 */
 	z-index: 10000;
+	-webkit-transition: width .5s ease-in-out;
+	-moz-transition: width .5s ease-in-out;
+	-o-transition: width .5s ease-in-out;
+	transition: width .5s ease-in-out;
 }
 
 input[type=range]:hover {
 	@include calc("width", "200% - #{$width-li}");
+	-webkit-transition: width .5s ease-in-out;
+	-moz-transition: width .5s ease-in-out;
+	-o-transition: width .5s ease-in-out;
+	transition: width .5s ease-in-out;
 }
 
 .timeline-player-increased {
 	@include calc("width", "200% - #{$width-li}");
+	-webkit-transition: width .5s ease-in-out;
+	-moz-transition: width .5s ease-in-out;
+	-o-transition: width .5s ease-in-out;
+	transition: width .5s ease-in-out;
 }
 
 .extra-years {

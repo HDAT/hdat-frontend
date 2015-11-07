@@ -687,6 +687,10 @@ L.Playback.SliderControl = L.Control.extend({
         function onSliderChange(e) {
             var val = Number(e.target.value);
             playback.setCursor(val);
+            console.log(this._slider.value);
+            if (val > 9047469689 && val < 9057469689) {
+                console.log("Yihaaaa, i did it!");
+            }
         }
 
         playback.addCallback(function (ms) {
