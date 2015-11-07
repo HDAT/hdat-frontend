@@ -76,22 +76,23 @@ input[type=range] {
   /*position: absolute;*/
   	bottom: 0;
 	@include width-extend-animation;
+	cursor: ew-resize;
 }
 
 input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
+	-webkit-appearance: none;
 }
 
 input[type=range]:focus {
-  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+	outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
 }
 
 input[type=range]::-ms-track {
-  width: 100%;
-  cursor: pointer;
-  background: transparent; /* Hides the slider so custom styles can be added */
-  border-color: transparent;
-  color: transparent;
+	width: 100%;
+	cursor: pointer;
+	background: transparent; /* Hides the slider so custom styles can be added */
+	border-color: transparent;
+	color: transparent;
 }
 
 /* Special styling for WebKit/Blink */

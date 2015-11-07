@@ -8,14 +8,12 @@ class Timeline extends React.Component{
 	timeSliderHover(){
 		var _this = this;
 
-
 		window.requestAnimationFrame(function(){
 			var node = ReactDOM.findDOMNode(_this);
 			if (node !== undefined) {
 				var timeline = document.querySelector('.timeline-player'),
 					timeSlider = document.querySelector('.time-slider'),
 					year = document.querySelectorAll('.extra-years-container');
-
 
 				timeSlider.addEventListener("mouseover", function(){
 					timeline.className += ' timeline-player-increased';
