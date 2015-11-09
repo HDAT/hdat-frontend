@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import EventTag from './event/EventTag.jsx';
+import Event from './event/Event.jsx';
 // import { Router, Route, Link } from 'react-router';
 
-class Event extends React.Component{
+class EventHandler extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -22,12 +22,10 @@ class Event extends React.Component{
 
 				tSlider.addEventListener('input', function() {
 				    if (tSlider.value > 9047469689 && tSlider.value < 9057469689) {
-				    	console.log('Show');
 				    	// console.log(_this.state);
-				    	_this.setState({ showEvent: true });
+				    	_this.setState({ showEvent: true, anim: "event-anim-in" });
 				    } else {
-				    	console.log('Dont show');
-				    	_this.setState({ showEvent: false });
+				    	_this.setState({ showEvent: false, anim: "event-anim-remove" });
 				    }
 				});
 			}
@@ -38,9 +36,9 @@ class Event extends React.Component{
 	}
 	render() {
 		return(
-			this.state.showEvent ? <EventTag TagInnerText="Chinese occupation of Tibet" /> : null
+			this.state.showEvent ? <Event TagInnerText="Chinese occupation of Tibet" Anim={this.state.anim} /> : null
 		)
 	}
 }
 
-export default Event;
+export default EventHandler;

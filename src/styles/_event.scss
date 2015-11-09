@@ -1,29 +1,64 @@
 
 .event {
+	/* Temporary tot Leaflet het overneeemt */
 	z-index: 10000000;
 	left: 400px;
 	top: 400px;
 	position: absolute;
-
 }
 
-.pulse-container {
-	margin-top: 20px;
-	margin-left: 30px;
-	position: relative;
+/* Tag */
+@-webkit-keyframes tag-move {
+   from {
+     -webkit-transform: translateY(10%);
+     opacity: 0;
+   }
+   to { 
+     -webkit-transform: translateY(0);
+     opacity: 1;
+   }
 }
+
+@-webkit-keyframes tag-leave {
+   from {
+     -webkit-transform: translateY(0);
+     opacity: 1;
+   }
+   to { 
+     -webkit-transform: translateY(10%);
+     opacity: 0;
+   }
+}
+
+.event-anim-leave {
+  opacity: 1;
+}
+
+.event-anim-leave-active {
+  opacity: 0.01;
+      -webkit-animation-name: tag-leave;
+	-webkit-animation-duration: .8s;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-iteration-count: 1;
+}
+
 .tagtext-container {
 	max-width: 80px !important;
     font-family: GothamLight !important;
     font-size: 8px !important;
     text-transform: uppercase;
+    opacity: 1;
     color: wheat;
-/*  	color: white !important;
-*/    line-height: 15px;
+/*  color: white !important; */  
+	line-height: 15px;
     /* Positionering */
     position: absolute;
     left: 65px;
     top: -8px;
+    -webkit-animation-name: tag-move;
+	-webkit-animation-duration: .8s;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-iteration-count: 1;
 }
 .tagtext-wrap {
     box-shadow: -2px 0px 0px 3px #bc695b, 2px 0px 0px 3px #bc695b;
@@ -32,6 +67,13 @@
 .tagtext-inner {
     background: #bc695b;
     position: relative;
+}
+
+/* Pulse stuff */
+.pulse-container {
+	margin-top: 20px;
+	margin-left: 30px;
+	position: relative;
 }
 
 .pulse {
@@ -45,9 +87,8 @@
 }
 
 .dot {
-@include filter-gradient(#e57b9f, #d12929, horizontal); 
-@include background-image(radial-gradient(center, ellipse cover,  rgba(229,123,159,0) 2%,rgba(229,123,159,0.26) 27%,rgba(209,41,41,1) 100%));
-
+	@include filter-gradient(#e57b9f, #d12929, horizontal); 
+	@include background-image(radial-gradient(center, ellipse cover,  rgba(229,123,159,0) 2%,rgba(229,123,159,0.26) 27%,rgba(209,41,41,1) 100%));
 	-webkit-border-radius: 60px;
 	-moz-border-radius: 60px;
 	border-radius: 60px;
@@ -59,6 +100,7 @@
 	-webkit-animation-iteration-count: infinite;
 	-moz-animation-iteration-count: infinite;
 	animation-iteration-count: infinite;
+	animation-delay: -1s;
 	position: absolute;
 	top: -25px;
 	left: -25px;

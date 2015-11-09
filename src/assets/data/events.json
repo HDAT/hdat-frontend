@@ -1,0 +1,53 @@
+{
+  "Events" : [
+    {
+      "id" : 1,
+      "country" : "China",
+      "year" : 1730,
+      "lat" : "43.977138",
+      "lon" : "81.527454",
+      "tag" : "Chinese fights in West-Mongolia (Ili)",
+      "source" : "Jeremy Black",
+      "extended_desc" : ""
+    },
+    {
+      "id" : 2,
+      "country" : "China",
+      "year" : 1735,
+      "lat" : "43.977138",
+      "lon" : "81.527454",
+      "tag" : "Chinese victory in West-Mongolia (Ili)",
+      "source" : "",
+      "extended_desc" : ""
+    },
+    {
+      "id" : 3,
+      "country" : "China",
+      "year" : 1720,
+      "lat" : "29.646923",
+      "lon" : "91.117212",
+      "tag" : "Chinese suzeranity in Tibet",
+      "source" : "",
+      "extended_desc" : ""
+    },
+    {
+      "id" : 4,
+      "country" : "China",
+      "year" : 1758,
+      "lat" : "39.470400",
+      "lon" : "75.989755",
+      "tag" : "China conquers Kashgar",
+      "source" : "",
+      "extended_desc" : ""
+    },
+    {
+      "id" : 5,
+      "country" : "China",
+      "year" : 1765,
+      "lat" : "",
+      "lon" : "",
+      "tag" : "Start Sino-Burmese War",
+      "source" : "",
+      "extended_desc" : ""
+    }
+  ]}

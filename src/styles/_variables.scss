@@ -34,6 +34,21 @@ $p-color: #646464;
        url('../assets/fonts/gotham-light-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
 
+@font-face {
+  font-family: 'ChronicleDisRoman';
+  src: url('../assets/fonts/ChronicleDisplay-Roman.eot'); /* IE9 Compat Modes */
+  src: url('../assets/fonts/ChronicleDisplay-Roman.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/fonts/ChronicleDisplay-Roman.woff') format('woff'); /* Pretty Modern Browsers */
+}
+
+@font-face {
+  font-family: 'ChronicleDisSemi';
+  src: url('../assets/fonts/ChronicleDisplay-Semi.eot'); /* IE9 Compat Modes */
+  src: url('../assets/fonts/ChronicleDisplay-Semi.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/fonts/ChronicleDisplay-Semi.woff') format('woff'); /* Pretty Modern Browsers */
+
+}
+
 h2 {
 	font-family: GothamMedium;
 	text-transform: uppercase;

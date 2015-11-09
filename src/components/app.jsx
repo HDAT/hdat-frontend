@@ -6,7 +6,8 @@ import LeftMenu from "./interface/LeftMenu.jsx";
 	import Share from "./interface/Share.jsx";
 	import Filter from "./interface/Filter.jsx";
 import Timeline from "./interface/Timeline.jsx";
-import Event from "./interface/Event.jsx";
+import EventHandler from "./interface/EventHandler.jsx";
+import EventList from "./interface/event/EventList.jsx";
 
 import ReactDOM from 'react-dom';
 import "babel/polyfill";
@@ -19,7 +20,8 @@ const App = React.createClass({
         <div>
 	        <LeftMenu />
 	        {this.props.children || <Timeline />}
-          <Event />
+          <EventHandler />
+          {/*<EventList />*/} 
 	        <LeafletContainer />
         </div>
     )
