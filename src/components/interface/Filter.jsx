@@ -1,6 +1,6 @@
 import React from 'react';
 import { Router, Route, Link } from 'react-router';
-import cargoGui from '../../assets/data/filter/cargoGui.json';
+import cargoGui from '../../assets/data/cargoGui.json';
 
 import FilterItem from './filter/FilterItem.jsx';
 import FilterNav from './filter/FilterNav.jsx';
