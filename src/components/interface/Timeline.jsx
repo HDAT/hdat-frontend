@@ -5,58 +5,45 @@ import ResizeSensor from '../../../node_modules/css-element-queries/src/ResizeSe
 
 
 class Timeline extends React.Component{
-	timeSliderHover(){
-		var _this = this;
 
-		window.requestAnimationFrame(function(){
-			var node = ReactDOM.findDOMNode(_this);
-			if (node !== undefined) {
-				var timeline = document.querySelector('.timeline-player'),
-					timeSlider = document.querySelector('.time-slider'),
-					year = document.querySelectorAll('.extra-years-container');
+	timelineEnter() {
+		var timeline = document.querySelector('.timeline'),
+			timeSlider = document.querySelector('.time-slider'),
+			year = document.querySelectorAll('.decade-needles');
 
-				timeSlider.addEventListener("mouseover", function(){
-					timeline.className += ' timeline-player-increased';
-					for(let i=0; i < year.length; i++) {
-						function addClass(){
-							year[i].className += ' extra-years';
-						}
-						function addClassTimer() {
-				  			window.setTimeout(addClass, 300);
-						}
-						addClassTimer();
-					}
-				});
-				timeSlider.addEventListener("mouseout", function(){
-					timeline.className = 'timeline-player';
-					for(let i=0; i < year.length; i++) {
-						year[i].className = 'extra-years-container';
-					}
-				})
+		timeline.className += ' timeline-player-increased';
+		for(let i=0; i < year.length; i++) {
+			function addClass(){
+				year[i].className += ' extra-years';
 			}
-		});
+			function addClassTimer() {
+	  			window.setTimeout(addClass, 300);
+			}
+			addClassTimer();
+		}
 	}
-	componentDidMount(){
-		this.timeSliderHover();
+
+	timelineLeave(){
+		var timeline = document.querySelector('.timeline');
+		var	year = document.querySelectorAll('.decade-needles');
+
+		timeline.className = 'timeline';
+		for(let i=0; i < year.length; i++) {
+			year[i].className = 'decade-needles';
+		}
 	}
+
 	render() {
 		return(
-			<div className="timeline">
-				<div className="timeline-player">
-					<ul className="year-container">
-						<li className="year hide-narrow"><div className="extra-years-container"></div><span>1710</span></li>
-						<li className="year"><div className="extra-years-container"></div><span>1720</span></li>
-						<li className="year hide-narrow"><div className="extra-years-container"></div><span>1730</span></li>
-						<li className="year"><div className="extra-years-container"></div><span>1740</span></li>
-						<li className="year hide-narrow"><div className="extra-years-container"></div><span>1750</span></li>
-						<li className="year"><div className="extra-years-container"></div><span>1760</span></li>
-						<li className="year hide-narrow"><div className="extra-years-container"></div><span>1770</span></li>
-						<li className="year"><div className="extra-years-container"></div><span>1780</span></li>
-						<li className="year hide-narrow"><div className="extra-years-container"></div><span>1790</span></li>
-						<li className="year"><div className="extra-years-container"></div><span>1800</span></li>
-					</ul>
-				</div>
-			</div>
+			<ul className="timeline" onMouseEnter={this.timelineEnter} onMouseLeave={this.timelineLeave}>
+				{ [1710,1720,1730,1740,1750,1760,1770,1780,1790,1800].map(function(value, key){
+					return (
+						<li key={key} className="year">
+							<div className="decade-needles"></div>
+							<span>{value}</span>
+						</li>
+				)})}
+			</ul>
 		)
 	}
 }

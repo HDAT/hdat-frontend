@@ -665,7 +665,7 @@ L.Playback.SliderControl = L.Control.extend({
 
     onAdd : function (map) {
         this._container = L.DomUtil.create('div', 'hdat-control-timeline');
-        this._timelineContainer = document.querySelector(".timeline-player");
+        this._timelineContainer = document.querySelector(".timeline");
 
         var self = this;
         var playback = this.playback;
