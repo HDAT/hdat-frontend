@@ -2,35 +2,16 @@
 
 $timeline-height: 120px;
 
-@mixin calc($key, $value) {
-	#{$key}: -webkit-calc(#{$value});
-	#{$key}: -moz-calc(#{$value});
-	#{$key}: calc(#{$value});
-}
-
 @mixin width-extend-animation {
-	-webkit-transition: width .5s ease-in-out;
-	-moz-transition: width .5s ease-in-out;
-	-o-transition: width .5s ease-in-out;
 	transition: width .5s ease-in-out;
-}
-
-@-webkit-keyframes background-move {
-   from {
-     -webkit-transform: translateY(100%);
-   }
-   to { 
-     -webkit-transform: translateY(0);
-   }
 }
 
 .timeline {
 	position: absolute;
 	bottom: 0;
 	height: $timeline-height;
-	width: 100%;
-	padding: 0;
-	margin: 0 0 0 $width-li;
+	width: calc(100% - #{$width-li});
+	margin: 0 0 0 0;
 	z-index: 1;
 	background: linear-gradient(top, rgba(255,255,255,0) 0%, rgba(45,43,54,.8) 100%);
 	@include width-extend-animation;
@@ -52,9 +33,28 @@ $timeline-height: 120px;
 	width: 10%; //belangrijk
 	float: left;
 	text-align: right;
-/*	&:last-child {
-		background: none;
-	}*/
+}
+
+.timeline-triggered {
+	width: calc(200% - #{$width-li});
+	@include width-extend-animation;
+}
+
+.timeline-triggered	.year .decade-needles {
+	transition: transform .5s ease-in-out;
+	transition-delay: .3s;
+    transform: translateY(0);
+	background: url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png'),
+				url('../assets/images/icons/needle_thin2.png');
+	background-position: 10% 0, 20% 0, 30% 0, 40% 0, 50% 0, 60% 0, 70% 0, 80% 0, 90% 0;
+	background-repeat: no-repeat;
 }
 
 .year span {
@@ -70,13 +70,11 @@ $timeline-height: 120px;
 
 /* De Slider */
 input[type=range] {
-  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-/*	@include calc("width", "100% - #{$width-li}");*/  /* Specific width is required for Firefox. */
-  background: none;
-  width: 100%;
-  position: absolute; /* Goed kijken of dit werkt! */
-  /*position: absolute;*/
-  	bottom: 0;
+	-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+	width: calc(100% - #{$width-li});
+	background: none;
+	position: absolute; /* Goed kijken of dit werkt! */
+	bottom: 0;
 	@include width-extend-animation;
 	cursor: ew-resize;
 }
@@ -130,42 +128,16 @@ input[type=range]::-ms-thumb {
 }
 
 /* Timeline hover dinges */
-.timeline-player {
-
-}
-
 input[type=range]:hover {
-	width: 100%;
-/*	@include calc("width", "200% - #{$width-li}");
-*/	@include width-extend-animation;
-}
-
-.timeline-player-increased {
-	width: 200%;
-/*	@include calc("width", "200% - #{$width-li}");
-*/	@include width-extend-animation;
+	width: calc(200% - #{$width-li});
+	@include width-extend-animation;
 }
 
 .decade-needles {
 	width: 100%;
 	height: 100%;
+	transform: translateY(100%);
 }
-
-.extra-years {
-	background: url('../assets/images/icons/needle_thin2.png'),
-				url('../assets/images/icons/needle_thin2.png'),
-				url('../assets/images/icons/needle_thin2.png'),
-				url('../assets/images/icons/needle_thin2.png'),
-				url('../assets/images/icons/needle_thin2.png'),
-				url('../assets/images/icons/needle_thin2.png'),
-				url('../assets/images/icons/needle_thin2.png'),
-				url('../assets/images/icons/needle_thin2.png'),
-				url('../assets/images/icons/needle_thin2.png');
-	background-position: 10% 0, 20% 0, 30% 0, 40% 0, 50% 0, 60% 0, 70% 0, 80% 0, 90% 0;
-	background-repeat: no-repeat;
-	animation: background-move .8s ease-in-out 1;
-}
-
 
 /* Timeline width increase */
 .leaflet-map-pane, .leaflet-top, .hdat-control-season, .hdat-control-play {
