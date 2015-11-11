@@ -20,12 +20,12 @@ class LeftMenu extends React.Component{
 					<span className="storymode-tag"><span className="storymode-text">Narratives</span></span>
 				</li>
 				<Link to="/filterlink">
-				<li className="minardmode-icon">
-					<span className="minardmode-tag"><span className="minardmode-text">Flow diagram</span></span>
-					<ul className="legenda">
-						<li className="minardcolor-legenda"></li>
-					</ul>
-				</li>
+					<li className="minardmode-icon">
+						<span className="minardmode-tag"><span className="minardmode-text">Flow diagram</span></span>
+						<ul className="legenda">
+							<li className="minardcolor-legenda"></li>
+						</ul>
+					</li>
 				</Link>
 			</ul>
 		</div>

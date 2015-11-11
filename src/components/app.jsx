@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route, Link } from 'react-router';
+
 import LeafletContainer from "./map/LeafletContainer.jsx";
 import LeftMenu from "./interface/LeftMenu.jsx";
   import Narratives from "./interface/Narratives.jsx"
@@ -7,33 +7,18 @@ import LeftMenu from "./interface/LeftMenu.jsx";
 	import Filter from "./interface/Filter.jsx";
 import Timeline from "./interface/Timeline.jsx";
 import EventHandler from "./interface/EventHandler.jsx";
-import EventList from "./interface/event/EventList.jsx";
 
-import ReactDOM from 'react-dom';
-import "babel/polyfill";
-import "../styles/app.scss";
-
-
-const App = React.createClass({
+class App extends React.Component{
   render() {
     return (
-        <div>
-	        <LeftMenu />
-	        {this.props.children || <Timeline />}
-          <EventHandler />
-          {/*<EventList />*/} 
-	        <LeafletContainer />
-        </div>
+      <div>
+        <LeftMenu />
+        {this.props.children || <Timeline />}
+        <EventHandler />
+        <LeafletContainer />
+      </div>
     )
   }
-})
+}
 
-ReactDOM.render((
-  <Router>
-    <Route path="/" component={App}>
-    	  <Route path="narrativelink" component={Narratives} />
-        <Route path="sharelink" component={Share} />
-        <Route path="filterlink" component={Filter} />
-    </Route>
-  </Router>
-), document.body)
+export default App;

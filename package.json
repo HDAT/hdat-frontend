@@ -70,6 +70,7 @@
     "yaml-loader": "^0.1.0"
   },
   "dependencies": {
-    "react-addons-css-transition-group": "^0.14.2"
+    "react-addons-css-transition-group": "^0.14.2",
+    "react-draggable": "^1.0.2"
   }
 }

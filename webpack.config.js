@@ -6,7 +6,7 @@ var config = {
     app: [
       'webpack-dev-server/client?http://0.0.0.0:8080',
       'webpack/hot/only-dev-server',
-      './src/components/app.jsx'
+      './src/entry.jsx'
     ],
     vendor: [
       'react',

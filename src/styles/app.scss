@@ -6,6 +6,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import 'leafletPlayback';
 @import 'leftMenu';
 	@import 'narratives';
+		@import 'player';
 	@import 'share';
 	@import 'filter';
 @import 'timeline';

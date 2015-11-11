@@ -5,7 +5,9 @@ $box-color:		#737373;
 $box-fill:		#c6c6c6;
 $svg-fill:		#aea8a2;
 
-$menu-background-color: #3a3a3a;
+$menu-background-color: #3a3a3a; /* mogelijk niet meer in gebruik */
+$left-menu-bg:  #303030;
+$scheidingslijnen: #404040;
 
 $koppen-color: #313131;
 $p-color: #646464;
@@ -60,4 +62,8 @@ p {
 	font-family: GothamLight;
 	font-size: 12px;
 	color: $p-color;
+}
+
+@function optelsom($first-number, $second-number){
+  @return $first-number + $second-number
 }

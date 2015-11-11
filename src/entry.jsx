@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from 'react-dom';
+
 import "babel/polyfill";
 import "./styles/app.scss";
 
-import HDAT from "./components/app.jsx";
+import RouterComponent from "./components/router.jsx";
 
-ReactDOM.render(<HDAT />, document.body);
+ReactDOM.render(<RouterComponent />, document.body)

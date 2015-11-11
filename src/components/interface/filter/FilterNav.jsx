@@ -1,36 +1,48 @@
 import React from 'react';
 
 class FilterNav extends React.Component{
-	componentDidMount(){
+	handleClick(e){
+ 	   console.log('You clicked: ');
+        e.preventDefault();
+	}
+	render() {
 		var letterList = [
-			{"letter": "a"},
-			{"letter": "b"},
-			{"letter": "c"},
-			{"letter": "d"},
-			{"letter": "e"},
+			{"letter": "a", "url": "/minardGui/a"},
+			{"letter": "b", "url": "/minardGui/b"},
+			{"letter": "c", "url": "/minardGui/c"},
+			{"letter": "d", "url": "/minardGui/d"}
+
+		];
+
+		/* 			{"letter": "e"},
 			{"letter": "f"},
 			{"letter": "g"},
 			{"letter": "h"},
 			{"letter": "i"},
 			{"letter": "j"},
-			{"letter": "k"}
-		];
-		console.log(letterList);
-	}
-	handleClick(){
- 	   console.log('You clicked: ');
-	}
-	render() {
-
+			{"letter": "k"},
+			{"letter": "l"},
+			{"letter": "m"},
+			{"letter": "n"},
+			{"letter": "o"},
+			{"letter": "p"},
+			{"letter": "q"},
+			{"letter": "r"},
+			{"letter": "s"},
+			{"letter": "t"},
+			{"letter": "u"},
+			{"letter": "v"},
+			{"letter": "w"},
+			{"letter": "x"},
+			{"letter": "y"},
+			{"letter": "z"}
+			*/
 		return(
 			<nav>
-			 { /* this.state.letterList.map((singleLetter, index)=>{
-				return (<li>{singleLetter.letter}</li>);
-			})	*/
-	}
-				<li>C</li>
-				<li>D</li>
-				<li>E</li>
+
+			{ letterList.map((singleLetter)=>{
+				return (<a onClick={this.handleClick}><li>{singleLetter.letter}</li></a>);
+			})}	
 			</nav>
 		)
 	}

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Event from './event/Event.jsx';
+import EventsData from '../../assets/data/events.json';
 // import { Router, Route, Link } from 'react-router';
 
 class EventHandler extends React.Component{
@@ -22,10 +23,9 @@ class EventHandler extends React.Component{
 
 				tSlider.addEventListener('input', function() {
 				    if (tSlider.value > 9047469689 && tSlider.value < 9057469689) {
-				    	// console.log(_this.state);
-				    	_this.setState({ showEvent: true, anim: "event-anim-in" });
+				    	_this.setState({ showEvent: true});
 				    } else {
-				    	_this.setState({ showEvent: false, anim: "event-anim-remove" });
+				    	_this.setState({ showEvent: false});
 				    }
 				});
 			}
@@ -33,10 +33,11 @@ class EventHandler extends React.Component{
 	}
 	componentDidMount(){
 		this.timeSliderHover();
+		console.log(EventsData.Events[1].country);
 	}
 	render() {
 		return(
-			this.state.showEvent ? <Event TagInnerText="Chinese occupation of Tibet" Anim={this.state.anim} /> : null
+			this.state.showEvent ? <Event TagInnerText="Chinese occupation of Tibet" /> : null
 		)
 	}
 }
