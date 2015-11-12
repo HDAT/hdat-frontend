@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router';
+
+import letterList from '../../../assets/data/cargoGuiNav.json';
 
 class FilterNav extends React.Component{
 	handleClick(e){
@@ -6,42 +9,13 @@ class FilterNav extends React.Component{
         e.preventDefault();
 	}
 	render() {
-		var letterList = [
-			{"letter": "a", "url": "/minardGui/a"},
-			{"letter": "b", "url": "/minardGui/b"},
-			{"letter": "c", "url": "/minardGui/c"},
-			{"letter": "d", "url": "/minardGui/d"}
-
-		];
-
-		/* 			{"letter": "e"},
-			{"letter": "f"},
-			{"letter": "g"},
-			{"letter": "h"},
-			{"letter": "i"},
-			{"letter": "j"},
-			{"letter": "k"},
-			{"letter": "l"},
-			{"letter": "m"},
-			{"letter": "n"},
-			{"letter": "o"},
-			{"letter": "p"},
-			{"letter": "q"},
-			{"letter": "r"},
-			{"letter": "s"},
-			{"letter": "t"},
-			{"letter": "u"},
-			{"letter": "v"},
-			{"letter": "w"},
-			{"letter": "x"},
-			{"letter": "y"},
-			{"letter": "z"}
-			*/
 		return(
 			<nav>
 
-			{ letterList.map((singleLetter)=>{
-				return (<a onClick={this.handleClick}><li>{singleLetter.letter}</li></a>);
+			{ letterList.map((singleLetter, key)=>{
+				return (<Link to={"/filterlink/" + singleLetter.letter}>
+							<li key={key}>{singleLetter.letter}</li>
+						</Link>);
 			})}	
 			</nav>
 		)

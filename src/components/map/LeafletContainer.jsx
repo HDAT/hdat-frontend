@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
-import { Map, TileLayer } from 'react-leaflet';
-import voyages from '../../assets/data/voyages.json';
-import LeafletPlayback from '../../assets/scripts/LeafletPlayback.js';
-import MarkerIcon from '../../assets/images/icons/hdat-shipicon.png';
+import React from 'react';
 import Leaflet from 'leaflet';
+import { Map, TileLayer } from 'react-leaflet';
+import LeafletPlayback from '../../assets/scripts/LeafletPlayback.js';
+
+import EventMarkers from './EventMarkers.jsx';
+
+import voyages from '../../assets/data/voyages.json';
+import MarkerIcon from '../../assets/images/icons/hdat-shipicon.png';
 
 var position = [10, 45];
 
@@ -77,9 +80,6 @@ class LeafletPlaying extends Map{
 		    maxInterpolationTime:   46464646464646,
 		    marker:                 markerOptions
 		};
-
-		console.log(playbackOptions);
-
 		var playback = new LeafletPlayback(this.leafletMap, voyages, null, playbackOptions);
 	}
 }
@@ -88,18 +88,11 @@ class LeafletContainer extends React.Component{
     render() {
         return (
 	        <LeafletPlaying className="map-container" 
-	    		center={position} 
-	    		zoom={3} 
-	    		minZoom={3}
-	    		maxZoom={6}
-	    		maxBounds={bounds}
-	    		>
-	    		<TileLayer 
-	    			url={tiles}
-	    		/>
-	    		<TileLayer 
-	    			url={tilesOverlay}
-	    		/>
+	    		center={position} zoom={3} minZoom={3} maxZoom={6} maxBounds={bounds}>
+	    		<TileLayer url={tiles} />
+	    		<TileLayer url={tilesOverlay}/>
+				{ // <EventMarkers />
+				}
 	  		</LeafletPlaying>
   		);
     }

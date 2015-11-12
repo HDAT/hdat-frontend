@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import { Router, Route, Link } from 'react-router';
+import { Router, Route } from 'react-router';
 
 import "babel/polyfill";
 import "../styles/app.scss";
@@ -14,10 +14,14 @@ class RouterComponent extends React.Component{
 	render() {
 		return (
 		  	<Router>
-		    	<Route path="/" component={App}>
+		  		{/* https://github.com/rackt/react-router/issues/1531 */}
+		    	<Route path="/" component={App} >
 		    		<Route path="narrativelink" component={Narratives} />
 		        	<Route path="sharelink" component={Share} />
-		        	<Route path="filterlink" component={Filter} />
+		        	<Route path="filterlink/a" component={Filter} filter="a"/>
+		        		<Route path="filterlink/b" component={Filter} filter="b" />
+		        		<Route path="filterlink/c" component={Filter} filter="c" />
+		        	
 		    	</Route>
 		  	</Router>
 		)

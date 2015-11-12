@@ -19,11 +19,11 @@ class EventHandler extends React.Component{
 			if (node !== undefined) {
 
 				var tSlider = document.querySelector(".time-slider");
-				// console.log(L.DomEvent);
 
 				tSlider.addEventListener('input', function() {
 				    if (tSlider.value > 9047469689 && tSlider.value < 9057469689) {
 				    	_this.setState({ showEvent: true});
+				    	console.log("Yihaaa");
 				    } else {
 				    	_this.setState({ showEvent: false});
 				    }
@@ -33,11 +33,10 @@ class EventHandler extends React.Component{
 	}
 	componentDidMount(){
 		this.timeSliderHover();
-		console.log(EventsData.Events[1].country);
 	}
 	render() {
 		return(
-			this.state.showEvent ? <Event TagInnerText="Chinese occupation of Tibet" /> : null
+			this.state.showEvent ? <Event TagInnerText="Bla bla bla" /> : null
 		)
 	}
 }

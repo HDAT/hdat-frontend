@@ -6,15 +6,11 @@ import FilterItem from './filter/FilterItem.jsx';
 import FilterNav from './filter/FilterNav.jsx';
 
 class Filter extends React.Component{
-	changeTab() {
-        console.log('I am going to change the tab soon.');
-    }
-	handleClick(){
-		console.log('Werkt dit?');
-    }
-	componentDidMount(){ 
+	componentInitialMount(){ 
 		var data = [];
-		var currentLetter = cargoGui.a;
+		var thisLetter = this.props.route.filter;
+		/* Variables zijn niet beschikbaar via dot notation */
+		var currentLetter = cargoGui[thisLetter];
 		var lengte = currentLetter.length;
 		var step = lengte / 4;
 
@@ -22,6 +18,20 @@ class Filter extends React.Component{
 			data.push({"producten":currentLetter.slice(iterator,iterator+step)});
 		}
 		this.setState({supermarkt: data});
+	}
+	componentWillReceiveProps(){ 
+		var data = [];
+		var thisLetter = this.props.route.filter;
+		/* Variables zijn niet beschikbaar via dot notation */
+		var currentLetter = cargoGui[thisLetter];
+		var lengte = currentLetter.length;
+		var step = lengte / 4;
+
+		for (var iterator = 0; iterator < lengte ; iterator+=step){
+			data.push({"producten":currentLetter.slice(iterator,iterator+step)});
+		}
+		this.setState({supermarkt: data});
+
 	}
 
 	render() {
@@ -68,7 +78,7 @@ class Filter extends React.Component{
 		} else {
 			return (
 				<div className="filter-container">
-					<h1>Er is niets met de letter </h1>
+					<h1>Error </h1>
 					}
 				</div>); 
 		}
