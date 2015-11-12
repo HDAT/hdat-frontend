@@ -10,8 +10,8 @@ $timeline-height: 120px;
 	position: absolute;
 	bottom: 0;
 	height: $timeline-height;
-	width: calc(100% - #{$width-li});
-	margin: 0 0 0 0;
+	width: 100%;
+	margin: 0;
 	z-index: 1;
 	background: linear-gradient(top, rgba(255,255,255,0) 0%, rgba(45,43,54,.8) 100%);
 	@include width-extend-animation;
@@ -36,8 +36,9 @@ $timeline-height: 120px;
 }
 
 .timeline-triggered {
-	width: calc(200% - #{$width-li});
+/*	width: calc(200% - #{$width-li}); */	
 	@include width-extend-animation;
+	width: calc(200% - #{$width-li});
 }
 
 .timeline-triggered	.year .decade-needles {
@@ -72,6 +73,8 @@ $timeline-height: 120px;
 input[type=range] {
 	-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
 	width: calc(100% - #{$width-li});
+	
+
 	background: none;
 	position: absolute; /* Goed kijken of dit werkt! */
 	bottom: 0;
@@ -129,7 +132,7 @@ input[type=range]::-ms-thumb {
 
 /* Timeline hover dinges */
 input[type=range]:hover {
-	width: calc(200% - #{$width-li});
+	width: calc(100% - #{$width-li});
 	@include width-extend-animation;
 }
 
