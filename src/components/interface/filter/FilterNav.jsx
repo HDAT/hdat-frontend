@@ -4,10 +4,6 @@ import { Link } from 'react-router';
 import letterList from '../../../assets/data/cargoGuiNav.json';
 
 class FilterNav extends React.Component{
-	handleClick(e){
- 	   console.log('You clicked: ');
-        e.preventDefault();
-	}
 	render() {
 		return(
 			<nav>

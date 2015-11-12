@@ -4,6 +4,7 @@ import { Router, Route } from 'react-router';
 
 import "babel/polyfill";
 import "../styles/app.scss";
+import navGui from '../assets/data/cargoGuiNav.json';
 
 import App from "./app.jsx";
 import Narratives from "./interface/Narratives.jsx"
@@ -18,10 +19,10 @@ class RouterComponent extends React.Component{
 		    	<Route path="/" component={App} >
 		    		<Route path="narrativelink" component={Narratives} />
 		        	<Route path="sharelink" component={Share} />
-		        	<Route path="filterlink/a" component={Filter} filter="a"/>
-		        		<Route path="filterlink/b" component={Filter} filter="b" />
-		        		<Route path="filterlink/c" component={Filter} filter="c" />
-		        	
+		        	{ navGui.map(function(value, key){
+		        		return(<Route path={"filterlink/" + value.letter} component={Filter} filter={value.letter}/>)
+		        		}) 
+		        	}
 		    	</Route>
 		  	</Router>
 		)

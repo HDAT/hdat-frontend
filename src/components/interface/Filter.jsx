@@ -8,6 +8,7 @@ import FilterNav from './filter/FilterNav.jsx';
 class Filter extends React.Component{
 	componentInitialMount(){ 
 		var data = [];
+		console.log(this.props.route.filter);
 		var thisLetter = this.props.route.filter;
 		/* Variables zijn niet beschikbaar via dot notation */
 		var currentLetter = cargoGui[thisLetter];
@@ -20,6 +21,8 @@ class Filter extends React.Component{
 		this.setState({supermarkt: data});
 	}
 	componentWillReceiveProps(){ 
+		console.log(this.props.route.filter);
+
 		var data = [];
 		var thisLetter = this.props.route.filter;
 		/* Variables zijn niet beschikbaar via dot notation */
