@@ -9,17 +9,7 @@ import Share from "./interface/overlays/Share.jsx";
 import GoodsUI from "./interface/overlays/goods/goods-ui.jsx";
 
 class RouterComponent extends React.Component{
-	constructor(props){
-		super(props);
-		let alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
-		this.state = {
-			data: {
-				alphabet: alphabet
-			}
-		}
-	}
 	render() {
-		let alphabet = this.state.data.alphabet;
 		return (
 		  	<Router history={createBrowserHistory()}>
 		    	<Route path="/" component={App} appState={this.state}>
@@ -28,7 +18,7 @@ class RouterComponent extends React.Component{
 		        	<Route path="/goods/:letter" component={GoodsUI} />
 		    	</Route>
 		  	</Router>
-		)
+		);
 	}
 }
 
