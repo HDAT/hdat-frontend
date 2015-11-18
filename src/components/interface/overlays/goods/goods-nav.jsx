@@ -7,12 +7,11 @@ class GoodsNav extends React.Component{
 	render() {
 		return(
 			<nav>
-
-			{ letterList.map((singleLetter, key)=>{
-				return (<Link key={key} to={"/filterlink/" + singleLetter.letter}>
-							<li> {singleLetter.letter}</li>
-						</Link>);
-			})}	
+				{ letterList.map((singleLetter, key)=>{return (
+					<Link key={key} to={"/goods/" + singleLetter.letter}>
+						<li>{singleLetter.letter}</li>
+					</Link>
+				);})}	
 			</nav>
 		)
 	}
