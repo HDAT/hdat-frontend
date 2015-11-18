@@ -9,8 +9,8 @@ class FilterNav extends React.Component{
 			<nav>
 
 			{ letterList.map((singleLetter, key)=>{
-				return (<Link to={"/filterlink/" + singleLetter.letter}>
-							<li key={key}>{singleLetter.letter}</li>
+				return (<Link key={key} to={"/filterlink/" + singleLetter.letter}>
+							<li> {singleLetter.letter}</li>
 						</Link>);
 			})}	
 			</nav>

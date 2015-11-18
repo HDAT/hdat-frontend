@@ -35,7 +35,7 @@ class EventHandler extends React.Component{
 		this.timeSliderHover();
 	}
 	render() {
-		return(
+		return (
 			this.state.showEvent ? <Event TagInnerText="Chinese invasion of Tibet" /> : null
 		)
 	}

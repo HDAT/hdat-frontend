@@ -6,4 +6,4 @@ import "./styles/app.scss";
 
 import RouterComponent from "./components/router.jsx";
 
-ReactDOM.render(<RouterComponent />, document.body)
+ReactDOM.render(<RouterComponent />, document.querySelector('.react-container'));

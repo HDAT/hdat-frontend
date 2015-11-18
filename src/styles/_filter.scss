@@ -14,7 +14,7 @@
 	@include make-row();
 	padding-top: 40px;
 }
-.filterRow {
+.filterColumn {
 	@include make-md-column(3);
 }
 nav {
