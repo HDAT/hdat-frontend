@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ElementQueries from '../../../node_modules/css-element-queries/src/ElementQueries';
-import ResizeSensor from '../../../node_modules/css-element-queries/src/ResizeSensor';
 
 class Timeline extends React.Component{
 	timelineToggle() {
 		document.querySelector('.timeline').classList.toggle('timeline-triggered');
 	}
 	render() {
-		window.timelineEnter = this.timelineEnter;
 		return(
 			<ul className="timeline" onMouseEnter={this.timelineToggle} onMouseLeave={this.timelineToggle}>
 				{ [1710,1720,1730,1740,1750,1760,1770,1780,1790,1800].map(function(value, key){

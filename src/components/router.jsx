@@ -7,9 +7,9 @@ import "../styles/app.scss";
 import navGui from '../assets/data/cargoGuiNav.json';
 
 import App from "./app.jsx";
-import Narratives from "./interface/Narratives.jsx"
-import Share from "./interface/Share.jsx";
-import Filter from "./interface/Filter.jsx";
+import Narratives from "./interface/overlays/Narratives.jsx"
+import Share from "./interface/overlays/Share.jsx";
+import Filter from "./interface/overlays/Filter.jsx";
 
 class RouterComponent extends React.Component{
 	render() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Event from './event/Event.jsx';
-import EventsData from '../../assets/data/events.json';
+import Event from './Event.jsx';
+import EventsData from '../../../assets/data/events.json';
 // import { Router, Route, Link } from 'react-router';
 
 class EventHandler extends React.Component{
@@ -36,7 +36,7 @@ class EventHandler extends React.Component{
 	}
 	render() {
 		return(
-			this.state.showEvent ? <Event TagInnerText="Bla bla bla" /> : null
+			this.state.showEvent ? <Event TagInnerText="Chinese invasion of Tibet" /> : null
 		)
 	}
 }

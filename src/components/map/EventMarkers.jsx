@@ -5,7 +5,7 @@ class EventMarkers extends React.Component{
     render() {
         return (
         	<LayerGroup>
-        		<h1> I WANT TO BE SEEN</h1>
+	    		<Marker position={{lat: 51.505,lng: -0.09}}/>
         	</LayerGroup>
   		);
     }

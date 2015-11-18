@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import letterList from '../../../assets/data/cargoGuiNav.json';
+import letterList from '../../../../assets/data/cargoGuiNav.json';
 
 class FilterNav extends React.Component{
 	render() {

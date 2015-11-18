@@ -1,6 +1,6 @@
 import React from 'react';
 import Leaflet from 'leaflet';
-import { Map, TileLayer } from 'react-leaflet';
+import { Map, TileLayer, Marker, LayerGroup } from 'react-leaflet';
 import LeafletPlayback from '../../assets/scripts/LeafletPlayback.js';
 
 import EventMarkers from './EventMarkers.jsx';
@@ -91,8 +91,11 @@ class LeafletContainer extends React.Component{
 	    		center={position} zoom={3} minZoom={3} maxZoom={6} maxBounds={bounds}>
 	    		<TileLayer url={tiles} />
 	    		<TileLayer url={tilesOverlay}/>
-				{ // <EventMarkers />
-				}
+{				    // <LayerGroup>
+	    			// 	<Marker position={{lat: 51.505,lng: -0.09}}/>
+        // 			</LayerGroup>
+    }
+
 	  		</LeafletPlaying>
   		);
     }
