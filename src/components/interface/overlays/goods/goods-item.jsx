@@ -1,6 +1,6 @@
 import React from 'react';
 
-class FilterItem extends React.Component{
+class GoodsItem extends React.Component{
 	render() {
 		return(
 			<li className="filter-item">
@@ -11,4 +11,4 @@ class FilterItem extends React.Component{
 	}
 }
 
-export default FilterItem;
+export default GoodsItem;

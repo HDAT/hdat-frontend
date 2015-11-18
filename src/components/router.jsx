@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import { Router, Route } from 'react-router';
+import { Router, Route, IndexRoute} from 'react-router';
+import createBrowserHistory from 'history/lib/createBrowserHistory'
 
 import App from "./app.jsx";
 import Narratives from "./interface/overlays/Narratives.jsx"
 import Share from "./interface/overlays/Share.jsx";
-import Filter from "./interface/overlays/filter/Filter.jsx";
+import Goods from "./interface/overlays/goods/Goods.jsx";
 
 class RouterComponent extends React.Component{
 	constructor(props){
@@ -20,14 +21,12 @@ class RouterComponent extends React.Component{
 	render() {
 		let alphabet = this.state.data.alphabet;
 		return (
-		  	<Router>
+		  	<Router history={createBrowserHistory()}>
 		    	<Route path="/" component={App} appState={this.state}>
 		    		<Route path="narrativelink" component={Narratives} />
 		        	<Route path="sharelink" component={Share} />
-		        	<Route path="filterlink" component={Filter} >
-		        		{alphabet.map((letter, key)=>{
-		        			return <Route key="key" path={alphabet[letter]} filter={alphabet[letter]} />
-		        		})}
+		        	<Route path="goods">
+	        			<IndexRoute component={Goods} />
 		        	</Route>
 		    	</Route>
 		  	</Router>

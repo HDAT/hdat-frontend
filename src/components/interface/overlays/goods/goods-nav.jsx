@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 import letterList from '../../../../assets/data/cargoGuiNav.json';
 
-class FilterNav extends React.Component{
+class GoodsNav extends React.Component{
 	render() {
 		return(
 			<nav>
@@ -18,4 +18,4 @@ class FilterNav extends React.Component{
 	}
 }
 
-export default FilterNav;
+export default GoodsNav;

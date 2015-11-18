@@ -1,26 +1,21 @@
 @import 'variables';
 
 .filter-container {
-	margin-left: $width-li;
 	height: 100%;
+	margin-left: $width-li;
 	@include calc("width", "100% - #{$width-li}");
 	background-color: $menu-background-color;
 	position: absolute;
 	z-index: 100000;
-	padding: 0 40px 100px 40px;
 	overflow-y: scroll;
 }
-.filters {
-	@include make-row();
-	padding-top: 40px;
-}
-.filterColumn {
-	@include make-md-column(3);
-}
+
 nav {
-	@include make-row();
-	padding-left: 15px;
+	@include make-md-column(12);
+	margin-bottom: 20px;
+	margin-left: 35px;
 }
+
 nav li {
 	list-style-type: none;
 	float: left;
@@ -33,14 +28,22 @@ nav li {
 	text-transform: uppercase;
 }
 
-.filter-item {
+.filters {
+	padding-top: 40px;
+	margin: 0;
 	list-style-type: none;
+}
+
+.filter-item {
+	@include make-md-column(3);
 	font-family: GothamLight;
 	font-size: 12px;
 	line-height: 20px;
 	color: #AFAFAF;
 	border-bottom: 1px solid #404040;
-	padding: 4px 6px 4px 6px;
+	padding: 6px 15px;
+	/*padding: 4px 6px 4px 6px;*/
+
 	.number {
 		float: right;
 		text-transform: italic;
