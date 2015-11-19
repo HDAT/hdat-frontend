@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute} from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 import App from "./app.jsx";
-import Narratives from "./interface/overlays/Narratives.jsx"
+import Narratives from "./interface/overlays/narrative/narratives.jsx"
 import Share from "./interface/overlays/Share.jsx";
 import GoodsUI from "./interface/overlays/goods/goods-ui.jsx";
 
