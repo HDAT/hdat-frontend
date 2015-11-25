@@ -4,24 +4,20 @@ import { Link } from 'react-router';
 class LeftMenu extends React.Component{
 	render() {
 		return(
-		<div className="left-fixed-menu">
-			<ul id="left-menu">
+		<div className="menu left-fixed-menu">
+			<ul className="menu__icons left-menu">
 				<Link to="/narrativelink">
-					<li className="storymode-icon" activeClassName="menu-active">
-						<span className="storymode-tag"><span className="storymode-text">Narratives</span></span>
+					<li className="menu__icons__singleicon storymode-icon" activeClassName="menu-active">
 					</li>
 				</Link>
 				<Link to="/sharelink">
-					<li className="share-icon" activeClassName="menu-active">
-						<span className="storymode-tag"><span className="storymode-text">Narratives</span></span>
+					<li className="menu__icons__singleicon share-icon" activeClassName="menu-active">
 					</li>
 				</Link>
-				<li className="gear-icon" activeClassName="menu-active">
-					<span className="storymode-tag"><span className="storymode-text">Narratives</span></span>
+				<li className="menu__icons__singleicon gear-icon" activeClassName="menu-active">
 				</li>
 				<Link to="/goods/a" activeClassName="menu-active">
-					<li className="minardmode-icon">
-						<span className="minardmode-tag"><span className="minardmode-text">Flow diagram</span></span>
+					<li className="menu__icons__singleicon minardmode-icon">
 						<ul className="legenda">
 							<li className="minardcolor-legenda"></li>
 						</ul>

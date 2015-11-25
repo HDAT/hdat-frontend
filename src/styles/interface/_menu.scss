@@ -1,0 +1,75 @@
+@import '../essentials/variables';
+@import '../essentials/fonts';
+
+.menu {
+	background-color: $menu-bg-color;
+	height: 100%;
+	width: $li-width;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 99;
+}
+
+.menu__icons {
+	z-index: 100;
+	padding: 0;
+	position: absolute;
+	margin-top: 150px;
+	li {
+		list-style-type: none;
+		height: $li-height;
+		width: $li-width;
+	}
+}
+
+/* Basic template */
+.menu__icons__singleicon {
+	background-repeat: no-repeat;
+	background-size: 25px;
+	background-position: center;
+	cursor: pointer; 
+	border-top: 1px solid $division-line-color;
+}
+.menu__icons__singleicon.storymode-icon {
+	background-image: url(../assets/images/icons/book.svg);
+	&:hover {
+		background-image: url(../assets/images/icons/bookhover.svg);
+	}
+}
+.menu__icons__singleicon.minardmode-icon {
+	background-image: url(../assets/images/icons/filterthin.svg);
+	background-size: 19px;
+	&:hover {
+		background-image: url(../assets/images/icons/filterthinhover.svg);
+	}
+}
+
+.menu__icons__singleicon.gear-icon {
+	background-image: url(../assets/images/icons/gear.svg);
+	background-size: 19px;
+	&:hover {
+		background-image: url(../assets/images/icons/gearhover.svg);
+	}
+}
+.menu__icons__singleicon.share-icon {
+	background-image: url(../assets/images/icons/share.svg);
+	background-size: 19px;
+	&:hover {
+		background-image: url(../assets/images/icons/sharehover.svg);
+	}
+}
+
+.legenda {
+	padding: 45px 0 0 0;
+}
+.minardcolor-legenda {
+	height: 6px !important;
+	background-color: #3cbee7;
+	-webkit-box-shadow: 0px 0px 8px 0px rgba(60,190,231,1);
+	-moz-box-shadow: 0px 0px 8px 0px rgba(60,190,231,1);
+	box-shadow: 0px 0px 8px 0px rgba(60,190,231,1);
+	&:hover {
+/*		background-color: red;
+*/	}
+}

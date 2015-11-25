@@ -6,7 +6,7 @@ import LeftMenu from "./interface/left-menu.jsx";
 class App extends React.Component{
   render() {
     return (
-      <div>
+      <div className="app-container">
         <LeftMenu />
         {this.props.children || React.cloneElement(this.props.children, {appState: this.props.route.appState})}
         <LeafletContainer />  

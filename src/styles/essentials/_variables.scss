@@ -1,0 +1,28 @@
+$li-height:			45px;
+$li-width:			45px;
+$timeline-height: 	120px;
+
+
+$box-color:			#737373;
+$box-fill:			#c6c6c6;
+$svg-fill:			#aea8a2;
+
+$menu-background-color: #3a3a3a; /* mogelijk niet meer in gebruik */
+$menu-bg-color: #303030;
+$division-line-color: #404040;
+$filterdivision-line-color: white;
+
+$koppen-color: #313131;
+$p-color: #646464;
+$filternav-color: white;
+$filtertext-color: #AFAFAF;
+
+@mixin calc($key, $value) {
+  #{$key}: -webkit-calc(#{$value});
+  #{$key}: -moz-calc(#{$value});
+  #{$key}: calc(#{$value});
+}
+
+@function optelsom($first-number, $second-number){
+  @return $first-number + $second-number
+}

@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var config = {
   entry: {
@@ -9,9 +8,7 @@ var config = {
       './src/entry.jsx'
     ],
     vendor: [
-      'react',
-      'immutable',
-      'superagent'
+      'react'
     ]
   },
   output: {
@@ -22,10 +19,9 @@ var config = {
   devtool: 'eval-source-map',
   module: {
     loaders: [
-      { test: /\.(js|jsx)$/, loaders: ['react-hot', 'babel?experimental'], exclude: /node_modules/},
+      { test: /\.(js|jsx)$/, loaders: ['react-hot', 'babel-loader'], exclude: /node_modules/},
       { test: /\.json$/, loader: 'json' },
-      { test: /\.yml$/, loader: 'json!yaml' },
-      { test: /\.scss$/, loader: 'style!css!autoprefixer!sass' },
+      { test: /\.scss$/, loader: 'style!css!sass!autoprefixer-loader?browsers=last 2 versions' },
       { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
     ]
   },

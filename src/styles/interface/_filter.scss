@@ -1,0 +1,53 @@
+@import '../essentials/variables';
+@import '../essentials/fonts';
+
+.filter-container {
+	height: 100%;
+	margin-left: $li-width;
+	@include calc("width", "100% - #{$li-width}");
+	background-color: $menu-background-color;
+	position: absolute;
+	z-index: 100000;
+	overflow-y: scroll;
+}
+
+nav {
+	@include make-md-column(12);
+	margin-bottom: 20px;
+	margin-left: 35px;
+}
+
+nav li {
+	list-style-type: none;
+	float: left;
+	width: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-left: 1px solid $filterdivision-line-color;
+	font-family: ChronicleDisRoman;
+	color: $filternav-color;
+	text-transform: uppercase;
+}
+
+.filters {
+	padding-top: 40px;
+	margin: 0;
+	list-style-type: none;
+}
+
+.filter-item {
+	@include make-md-column(3);
+	font-family: GothamLight;
+	font-size: 12px;
+	line-height: 20px;
+	color: $filtertext-color;
+	border-bottom: 1px solid $division-line-color;
+	padding: 6px 15px;
+	.number {
+		float: right;
+		text-transform: italic;
+	}
+	&:hover {
+		background-color: rgba(255,255,255,0.1);
+	}
+}

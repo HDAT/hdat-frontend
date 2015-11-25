@@ -1,0 +1,13 @@
+@import '../essentials/variables';
+@import '../essentials/fonts';
+	@import 'wip/player';
+
+.narrative-container {
+	margin-left: $li-width;
+	height: 100%;
+	@include calc("width", "100% - #{$li-width}");
+	background-color: $menu-background-color;
+	position: absolute;
+	z-index: 1000;
+	padding: 0 30px 0 30px;
+}

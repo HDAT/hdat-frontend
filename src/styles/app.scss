@@ -2,16 +2,16 @@
 @import "../../node_modules/compass-mixins/lib/_compass";
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap';
-@import 'leafletChanges';
-@import 'leafletPlayback';
-@import 'leftMenu';
-	@import 'narratives';
-		@import 'player';
-	@import 'share';
-	@import 'filter';
-@import 'timeline';
-@import 'event';
-	@import 'eventList';
+@import 'map/leafletChanges';
+@import 'map/leafletPlayback';
+@import 'interface/menu';
+	@import 'interface/narratives';
+		@import 'interface/wip/player';
+	@import 'interface/share';
+	@import 'interface/filter';
+@import 'interface/timeline';
+@import 'interface/event';
+	@import 'interface/wip/eventList';
 
 
 body {
