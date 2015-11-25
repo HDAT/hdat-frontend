@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Link } from 'react-router';
+import { Link } from 'react-router';
 
 class Share extends React.Component{
 	render() {

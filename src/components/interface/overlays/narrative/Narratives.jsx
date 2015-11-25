@@ -1,5 +1,4 @@
 import React from 'react';
-import { Router, Route, Link } from 'react-router';
 
 class Narratives extends React.Component{
 	render() {

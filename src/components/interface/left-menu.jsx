@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 
 class LeftMenu extends React.Component{
 	render() {
-
 		return(
 		<div className="left-fixed-menu">
 			<ul id="left-menu">
