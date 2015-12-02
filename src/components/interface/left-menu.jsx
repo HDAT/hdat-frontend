@@ -6,7 +6,7 @@ class LeftMenu extends React.Component{
 		return(
 		<div className="menu left-fixed-menu">
 			<ul className="menu__icons left-menu">
-				<Link to="/narrativelink">
+				<Link to="/shipviewer">
 					<li className="menu__icons__singleicon storymode-icon" activeClassName="menu-active">
 					</li>
 				</Link>
