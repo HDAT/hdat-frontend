@@ -7,7 +7,6 @@ import Minard from './minard/minard.jsx';
 
 class MapElement extends React.Component{
     render() {
-    	console.log('mapElement: ', this.props.selectedProduct);
         return (
 	        <MapWithVoyages 
 	        	className="map-container" 
