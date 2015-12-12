@@ -21,7 +21,7 @@ class App extends React.Component{
       <div className="app-container">
         <LeftMenu />
         {this.props.children && React.cloneElement(this.props.children, {changeProduct: this.changeProduct.bind(this)})}
-        <MapElement selectedProduct="1000"/>  
+        <MapElement selectedProduct={this.state.selectedProduct} />  
       </div>
     )
   }

@@ -5,6 +5,7 @@ class GeoJsonFix extends GeoJson {
 	static propTypes() {
     return { data: React.PropTypes.object.isRequired || React.PropTypes.array.isRequired}
   };
+
 }
 
 class Minard extends React.Component{
@@ -15,14 +16,16 @@ class Minard extends React.Component{
 		}
 	}
 	componentWillReceiveProps(newProps){
-		var self = this; 
-		function xhrCb () {
-			self.setState({minardData: JSON.parse(this.responseText)});
+		if (this.props.selectedProduct !== newProps.selectedProduct){
+			var self = this; 
+			function xhrCb () {
+				self.setState({minardData: JSON.parse(this.responseText)});
+			}
+			var xhr = new XMLHttpRequest();
+			xhr.addEventListener('load', xhrCb);
+			xhr.open('GET', '/minard/product-id-' + newProps.selectedProduct + '.json');
+			xhr.send();
 		}
-		var xhr = new XMLHttpRequest();
-		xhr.addEventListener('load', xhrCb);
-		xhr.open('GET', '/minard/product-id-' + newProps.selectedProduct + '.json', true);
-		xhr.send();
 	}
 
 	render() {
