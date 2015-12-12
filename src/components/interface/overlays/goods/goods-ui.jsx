@@ -3,7 +3,7 @@ import React from 'react';
 import GoodsList from './goods-list.jsx';
 import GoodsNav from './goods-nav.jsx';
 
-import cargoGui from '../../../../assets/data/cargoGui.json';
+import cargoGui from '../../../../assets/data/interface/cargoGui.json';
 
 class GoodsUI extends React.Component{
 	componentWillMount(){

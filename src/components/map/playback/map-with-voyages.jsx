@@ -1,7 +1,7 @@
 import { Map } from 'react-leaflet';
 import LeafletPlayback from '../../../assets/scripts/LeafletPlayback.js';
 
-import voyages from '../../../assets/data/voyages.json';
+import voyages from '../../../assets/data/map/playback/voyages.json';
 import playbackOptions from './playback-config.js';
 
 class MapWithVoyages extends Map {
