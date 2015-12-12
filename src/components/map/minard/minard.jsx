@@ -1,18 +1,29 @@
 import React from 'react';
 import { GeoJson } from 'react-leaflet';
+import { geoJson } from 'leaflet';
 
 class GeoJsonFix extends GeoJson {
 	static propTypes() {
     return { data: React.PropTypes.object.isRequired || React.PropTypes.array.isRequired}
   };
-
+  componentWillUpdate(nextProps, nextState){
+  	console.log(this.props)
+  	// const { data, map, ...props } = nextProps;
+    this.leafletElement = geoJson(nextProps.data);
+  }
 }
 
 class Minard extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			minardData: 0
+			minardData: {
+		    "type": "Point",
+		    "coordinates": [
+		        -105.01621,
+		        39.57422
+		    ]
+			}
 		}
 	}
 	componentWillReceiveProps(newProps){
@@ -36,7 +47,7 @@ class Minard extends React.Component{
 				var _value = value;
 				var _map = this.props.map;
 				return <GeoJsonFix
-					data={this.state.minardData ? this.state.minardData : 0}
+					data={this.state.minardData}
 					map={_map}
 					key={key}
 					style={(feature, _value)=>{
