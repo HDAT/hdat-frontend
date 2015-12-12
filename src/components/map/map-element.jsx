@@ -1,19 +1,8 @@
 import React from 'react';
 import Leaflet from 'leaflet';
 import { Map, TileLayer, Marker, LayerGroup } from 'react-leaflet';
-import LeafletPlayback from '../../assets/scripts/LeafletPlayback.js';
 
-import voyages from '../../assets/data/voyages.json';
-import playbackOptions from './playback-config.js';
-import MarkerIcon from '../../assets/images/icons/hdat-shipicon.png';
-
-class MapWithVoyages extends Map {
-	componentDidMount(){
-		super.componentDidMount();
-		this.leafletMap = this.getLeafletElement();
-		var playback = new LeafletPlayback(this.leafletMap, voyages, null, playbackOptions);
-	}
-}
+import MapWithVoyages from './playback/map-with-voyages.jsx';
 
 class MapElement extends React.Component{
     render() {

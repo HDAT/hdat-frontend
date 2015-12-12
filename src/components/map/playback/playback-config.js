@@ -1,5 +1,5 @@
 import Leaflet from 'leaflet';
-import MarkerIcon from '../../assets/images/icons/hdat-shipicon.png';
+import MarkerIcon from '../../../assets/images/icons/hdat-shipicon.png';
 
 var shipIcon = Leaflet.icon({
     iconUrl:                MarkerIcon,
