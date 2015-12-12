@@ -14,6 +14,7 @@ class GeoJsonFix extends GeoJson {
 
 class MapElement extends React.Component{
     render() {
+    	var lineThickness = 40000;
         return (
 	        <MapWithVoyages 
 	        	className="map-container" 
@@ -22,18 +23,19 @@ class MapElement extends React.Component{
 	    		minZoom={3} 
 	    		maxZoom={6} 
 	    		maxBounds={[[-75, 179],[75, -179]]}>
-	    			<GeoJsonFix 
+	    		{[lineThickness, lineThickness * 1.5, lineThickness * 3, lineThickness * 6].map((value, key)=>{
+	    			var _value = value;
+	    			return <GeoJsonFix
+	    				key={key}
 	    				data={minardData} 
-	    				style={(feature, value)=>{
-	    					var value = 20000;
-	    					var key = 1;
+	    				style={(feature, _value)=>{
 			           		return {  
 				           		weight: feature.properties.cargovalues / value, 
 			                    color: '#2fcdfc', 
 			                    opacity: 0.2, 
-			                    lineJoin: 'round',
-			                    lineCap: 'butt' }; 
+			                }; 
 			          }}/>
+			    })}
 	    		<TileLayer url={'tiles/base/{z}/{x}/{y}.png'} />
 	    		<TileLayer url={'tiles/overlay/{z}/{x}/{y}.png'} />
 	  		</MapWithVoyages>
