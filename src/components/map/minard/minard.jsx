@@ -8,15 +8,23 @@ class GeoJsonFix extends GeoJson {
 }
 
 class Minard extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			minardData: 0
+		}
+	}
 	componentWillReceiveProps(newProps){
+		var self = this; 
 		function xhrCb () {
-			this.setState({minardData: JSON.parse(this.responseText)});
+			self.setState({minardData: JSON.parse(this.responseText)});
 		}
 		var xhr = new XMLHttpRequest();
 		xhr.addEventListener('load', xhrCb);
-		xhr.open('GET', './minard/product-id-' + newProps.selectedProduct + '.json');
+		xhr.open('GET', '/minard/product-id-' + newProps.selectedProduct + '.json', true);
 		xhr.send();
 	}
+
 	render() {
   	var lineThickness = 40000;
 		return (<div>
@@ -24,7 +32,7 @@ class Minard extends React.Component{
 				var _value = value;
 				var _map = this.props.map;
 				return <GeoJsonFix
-					data={this.state && this.state.hasOwnProperty('minardData') ? minardData : 0}
+					data={this.state.minardData ? this.state.minardData : 0}
 					map={_map}
 					key={key}
 					style={(feature, _value)=>{

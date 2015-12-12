@@ -12,14 +12,14 @@ import Timeline from "./interface/timeline/timeline.jsx";
 class RouterComponent extends React.Component{
 	render() {
 		return (
-		  	<Router history={createBrowserHistory()}>
-		    	<Route path="/" component={App} appState={this.state}>
-		    		<IndexRoute component={Timeline} />
-		    		<Route path="/shipviewer" component={ShipViewer} />
-		        	<Route path="/sharelink" component={Share} />
-		        	<Route path="/goods/:letter" component={GoodsUI} />
-		    	</Route>
-		  	</Router>
+	  	<Router history={createBrowserHistory()}>
+	    	<Route path="/" component={App} appState={this.state}>
+	    		<IndexRoute component={Timeline} />
+	    		<Route path="/shipviewer" component={ShipViewer} />
+	        <Route path="/sharelink" component={Share} />
+	        <Route path="/goods/:letter" component={GoodsUI} />
+	    	</Route>
+	  	</Router>
 		);
 	}
 }

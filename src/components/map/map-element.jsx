@@ -16,8 +16,8 @@ class MapElement extends React.Component{
 	    		maxZoom={6} 
 	    		maxBounds={[[-75, 179],[75, -179]]}>
 	    		{ this.props.selectedProduct && <Minard selectedProduct={this.props.selectedProduct} map={this.leafletElement}/>}
-	    		<TileLayer url={'tiles/base/{z}/{x}/{y}.png'} />
-	    		<TileLayer url={'tiles/overlay/{z}/{x}/{y}.png'} />
+	    		<TileLayer url={'/tiles/base/{z}/{x}/{y}.png'} />
+	    		<TileLayer url={'/tiles/overlay/{z}/{x}/{y}.png'} />
 	  		</MapWithVoyages>
   		);
     }

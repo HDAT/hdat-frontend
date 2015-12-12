@@ -6,8 +6,8 @@
   "author": "Erik van Zummeren, Robert-Jan Korteschiel",
   "license": "",
   "scripts": {
-    "prepare": "mkdir -p build/ build/tiles && cp index.html build/ && cp -r src/assets/tiles/ build/tiles && npm install ",
-    "dev": "webpack-dev-server --host 0.0.0.0 --hot --progress --colors --content-base build",
+    "prepare": "mkdir -p build/ build/tiles && cp src/index.html build/ && cp -r src/assets/tiles/ build/tiles && npm install ",
+    "dev": "webpack-dev-server --host 0.0.0.0 --progress --colors --content-base build",
     "deploy": "NODE_ENV=production webpack -p"
   },
   "devDependencies": {

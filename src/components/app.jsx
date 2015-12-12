@@ -12,14 +12,15 @@ class App extends React.Component{
 	}
 
 	changeProduct(selectedProduct){
+		console.log('changing product: ', selectedProduct);
 		this.setState({selectedProduct: selectedProduct});
 	}
 
   render() {
     return (
       <div className="app-container">
-        <LeftMenu productHandler={this.changeProduct} />
-        {this.props.children || React.cloneElement(this.props.children, {appState: this.props.route.appState})}
+        <LeftMenu />
+        {this.props.children && React.cloneElement(this.props.children, {changeProduct: this.changeProduct.bind(this)})}
         <MapElement selectedProduct="1000"/>  
       </div>
     )
