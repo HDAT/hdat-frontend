@@ -7,13 +7,13 @@ class App extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			selectedProduct: 0
+			selectedProduct: 1
 		}
 	}
 
 	changeProduct(selectedProduct){
 		console.log('changing product: ', selectedProduct);
-		this.setState({selectedProduct: selectedProduct});
+		this.setState({selectedProduct: selectedProduct}, this.props.history.pushState.bind(null, {}, '/'));
 	}
 
   render() {

@@ -17,6 +17,7 @@ class Minard extends React.Component{
 	}
 	componentWillReceiveProps(newProps){
 		if (this.props.selectedProduct !== newProps.selectedProduct){
+			console.log('starting XHR for: ', newProps.selectedProduct);
 			var self = this; 
 			function xhrCb () {
 				self.setState({minardData: JSON.parse(this.responseText)});
