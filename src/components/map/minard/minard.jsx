@@ -3,13 +3,19 @@ import { GeoJson } from 'react-leaflet';
 import { geoJson } from 'leaflet';
 
 class GeoJsonFix extends GeoJson {
+	
 	static propTypes() {
     return { data: React.PropTypes.object.isRequired || React.PropTypes.array.isRequired}
   };
-  componentWillUpdate(nextProps, nextState){
-  	console.log(this.props)
-  	// const { data, map, ...props } = nextProps;
-    this.leafletElement = geoJson(nextProps.data);
+  componentDidUpdate(prevProps){
+  	super.componentDidUpdate()
+  	// needs to be added somehow for styles to be available, although could be targetted manually
+    // const { data, map, ...props } = this.props;
+    // I feat looking up the prototype tree that there is no detaching unless unmounted.
+    // Either the current react element need to be destoyed on update or the current needs to be detached.
+  	// this.leafletElement.removeLayer(this.leafletElement);
+    this.leafletElement = geoJson(this.props.data);
+  	this.props.map.addLayer(this.leafletElement)
   }
 }
 
