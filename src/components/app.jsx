@@ -9,7 +9,7 @@ class App extends React.Component{
       <div className="app-container">
         <LeftMenu />
         {this.props.children || React.cloneElement(this.props.children, {appState: this.props.route.appState})}
-        <MapElement />  
+        <MapElement selectedProduct="1000"/>  
       </div>
     )
   }

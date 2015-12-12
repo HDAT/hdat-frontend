@@ -7,6 +7,7 @@ import Minard from './minard/minard.jsx';
 
 class MapElement extends React.Component{
     render() {
+    	console.log('mapElement: ', this.props.selectedProduct);
         return (
 	        <MapWithVoyages 
 	        	className="map-container" 
@@ -15,7 +16,7 @@ class MapElement extends React.Component{
 	    		minZoom={3} 
 	    		maxZoom={6} 
 	    		maxBounds={[[-75, 179],[75, -179]]}>
-	    		<Minard map={this.leafletElement}/>
+	    		{ this.props.selectedProduct && <Minard selectedProduct={this.props.selectedProduct} map={this.leafletElement}/>}
 	    		<TileLayer url={'tiles/base/{z}/{x}/{y}.png'} />
 	    		<TileLayer url={'tiles/overlay/{z}/{x}/{y}.png'} />
 	  		</MapWithVoyages>

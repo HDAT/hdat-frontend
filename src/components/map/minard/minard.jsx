@@ -12,14 +12,16 @@ class GeoJsonFix extends GeoJson {
 class Minard extends React.Component{
 	render() {
     	var lineThickness = 40000;
+		console.log('Minard: ', this.props.selectedProduct)
+
 		return (<div>
 			{[lineThickness, lineThickness * 1.5, lineThickness * 3, lineThickness * 6].map((value, key)=>{
 				var _value = value;
-				var map = this.props.map;
+				var _map = this.props.map;
 				return <GeoJsonFix
-					map={map}
+					data={minardData}
+					map={_map}
 					key={key}
-					data={minardData} 
 					style={(feature, _value)=>{
 		           		return {  
 			           		weight: feature.properties.cargovalues / value, 
