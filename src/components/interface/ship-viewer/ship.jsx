@@ -6,7 +6,9 @@ class ShipViewer extends React.Component{
 		return(
 			<div className="shipviewer__ship">
 				<h3>{ ship.name }</h3>
-				<p> </p>
+				<p> { ship.departure.date } -> { ship.arrival.date}</p>
+				<p> { ship.departure.location } -> { ship.arrival.location}</p>
+
 			</div>
 		)
 	}

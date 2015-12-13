@@ -1,6 +1,6 @@
 @import '../../node_modules/leaflet/dist/leaflet.css';
 @import "../../node_modules/compass-mixins/lib/_compass";
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import 'essentials/variables';
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap';
 @import 'map/leafletChanges';
 @import 'map/leafletPlayback';

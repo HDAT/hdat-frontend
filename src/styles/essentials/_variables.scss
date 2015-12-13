@@ -1,7 +1,40 @@
+@font-face {
+  font-family: 'GothamMedium';
+  src: url('../assets/fonts/gotham-medium-webfont.eot'); /* IE9 Compat Modes */
+  src: url('../assets/fonts/gotham-medium-webfont.eot?#iex') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/fonts/gotham-medium-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../assets/fonts/gotham-medium-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../assets/fonts/gotham-medium-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'GothamLight';
+  src: url('../assets/fonts/gotham-light-webfont.eot'); /* IE9 Compat Modes */
+  src: url('../assets/fonts/gotham-light-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/fonts/gotham-light-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../assets/fonts/gotham-light-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../assets/fonts/gotham-light-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'ChronicleDisRoman';
+  src: url('../assets/fonts/ChronicleDisplay-Roman.eot'); /* IE9 Compat Modes */
+  src: url('../assets/fonts/ChronicleDisplay-Roman.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/fonts/ChronicleDisplay-Roman.woff') format('woff'); /* Pretty Modern Browsers */
+}
+
+@font-face {
+  font-family: 'ChronicleDisSemi';
+  src: url('../assets/fonts/ChronicleDisplay-Semi.eot'); /* IE9 Compat Modes */
+  src: url('../assets/fonts/ChronicleDisplay-Semi.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/fonts/ChronicleDisplay-Semi.woff') format('woff'); /* Pretty Modern Browsers */
+}
+
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+
 $li-height:			45px;
 $li-width:			45px;
 $timeline-height: 	120px;
-
 
 $box-color:			#737373;
 $box-fill:			#c6c6c6;
@@ -12,10 +45,16 @@ $menu-bg-color: #303030;
 $division-line-color: #404040;
 $filterdivision-line-color: white;
 
-$koppen-color: #313131;
-$p-color: #646464;
+$koppen-color: lighten(#313131, 40%);
+$p-color: lighten(#646464, 20%);
 $filternav-color: white;
 $filtertext-color: #AFAFAF;
+
+$font-family-sans-serif: GothamMedium;
+$font-family-medium: GothamLight;
+$font-size-base: 10px;
+$text-color: $p-color;
+$headings-color: $koppen-color;
 
 @mixin calc($key, $value) {
   #{$key}: -webkit-calc(#{$value});
