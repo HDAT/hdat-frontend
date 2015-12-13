@@ -15,7 +15,7 @@
 	z-index: 100;
 	padding: 0;
 	position: absolute;
-	margin-top: 150px;
+	margin-top: 100px;
 	li {
 		list-style-type: none;
 		height: $li-height;
@@ -26,7 +26,7 @@
 /* Basic template */
 .menu__icons__singleicon {
 	background-repeat: no-repeat;
-	background-size: 25px;
+	background-size: 19px;
 	background-position: center;
 	cursor: pointer; 
 	border-top: 1px solid $division-line-color;
@@ -39,7 +39,6 @@
 }
 .menu__icons__singleicon.minardmode-icon {
 	background-image: url(../assets/images/icons/filterthin.svg);
-	background-size: 19px;
 	&:hover {
 		background-image: url(../assets/images/icons/filterthinhover.svg);
 	}
@@ -47,14 +46,12 @@
 
 .menu__icons__singleicon.gear-icon {
 	background-image: url(../assets/images/icons/gear.svg);
-	background-size: 19px;
 	&:hover {
 		background-image: url(../assets/images/icons/gearhover.svg);
 	}
 }
 .menu__icons__singleicon.share-icon {
 	background-image: url(../assets/images/icons/share.svg);
-	background-size: 19px;
 	&:hover {
 		background-image: url(../assets/images/icons/sharehover.svg);
 	}
@@ -63,6 +60,7 @@
 .legenda {
 	padding: 45px 0 0 0;
 }
+
 .minardcolor-legenda {
 	height: 6px !important;
 	background-color: #3cbee7;

@@ -13,9 +13,9 @@ class RouterComponent extends React.Component{
 	render() {
 		return (
 	  	<Router history={createBrowserHistory()}>
-	    	<Route path="/" component={App} appState={this.state}>
+	    	<Route path="/" component={App}>
 	    		<IndexRoute component={Timeline} />
-	    		<Route path="/shipviewer" component={ShipViewer} />
+	    		<Route path="/ships" component={ShipViewer} />
 	        <Route path="/sharelink" component={Share} />
 	        <Route path="/goods/:letter" component={GoodsUI} />
 	    	</Route>
