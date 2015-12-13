@@ -10,26 +10,20 @@ class GeoJsonFix extends GeoJson {
   componentDidUpdate(prevProps){
   	super.componentDidUpdate()
   	// needs to be added somehow for styles to be available, although could be targetted manually
-    // const { data, map, ...props } = this.props;
+    var { data, map, ...props} = this.props;
+  	map.removeLayer(this.leafletElement);
+    this.leafletElement = geoJson(data, props);
     // I feat looking up the prototype tree that there is no detaching unless unmounted.
     // Either the current react element need to be destoyed on update or the current needs to be detached.
-  	// this.leafletElement.removeLayer(this.leafletElement);
-    this.leafletElement = geoJson(this.props.data);
-  	this.props.map.addLayer(this.leafletElement)
+  	map.addLayer(this.leafletElement)
   }
-}
+}	
 
 class Minard extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			minardData: {
-		    "type": "Point",
-		    "coordinates": [
-		        -105.01621,
-		        39.57422
-		    ]
-			}
+			minardData: null
 		}
 	}
 	componentWillReceiveProps(newProps){

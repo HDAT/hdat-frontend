@@ -12,7 +12,6 @@ class App extends React.Component{
 	}
 
 	changeProduct(selectedProduct){
-		console.log('changing product: ', selectedProduct);
 		this.setState({selectedProduct: selectedProduct}, this.props.history.pushState.bind(null, {}, '/'));
 	}
 
