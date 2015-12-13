@@ -9,12 +9,9 @@ class GeoJsonFix extends GeoJson {
   };
   componentDidUpdate(prevProps){
   	super.componentDidUpdate()
-  	// needs to be added somehow for styles to be available, although could be targetted manually
-    var { data, map, ...props} = this.props;
+    const { data, map, ...props} = this.props;
   	map.removeLayer(this.leafletElement);
     this.leafletElement = geoJson(data, props);
-    // I feat looking up the prototype tree that there is no detaching unless unmounted.
-    // Either the current react element need to be destoyed on update or the current needs to be detached.
   	map.addLayer(this.leafletElement)
   }
 }	
