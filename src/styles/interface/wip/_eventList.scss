@@ -2,7 +2,7 @@
 @import '../../essentials/variables';
 @import '../../essentials/fonts';
 
-.event-list {
+/*.event-list {
 	// http://colorzilla.com/gradient-editor/#2e2e2e+0,2e2e2e+100&amp;0+0,0.65+100
 	@include background-image(linear-gradient(left,  rgba(46,46,46,0) 0%,rgba(46,46,46,1) 100%));
 	position: fixed;
@@ -13,10 +13,11 @@
 	z-index: 10000;
 	overflow: scroll;
 }
-
-.event-li {
-	/*@include filter-gradient(#2e2e2e, #a62e2e2e, vertical); // IE6-9
-	*/@include background-image(linear-gradient(top,  rgba(46,46,46,0.65) 0%,rgba(46,46,46,0) 50%,rgba(46,46,46,0.65) 100%));
+*/
+/*.event-li {
+	@include filter-gradient(#2e2e2e, #a62e2e2e, vertical); // IE6-9
+	
+	@include background-image(linear-gradient(top,  rgba(46,46,46,0.65) 0%,rgba(46,46,46,0) 50%,rgba(46,46,46,0.65) 100%));
 	padding: 40px 30px 40px 30px;
 	list-style-type: none;
 }
@@ -45,4 +46,4 @@ h5 {
 
 .unactive {
 	background-color: black;
-}
+}*/

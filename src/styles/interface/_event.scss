@@ -88,8 +88,9 @@
 
 .dot {
 	@include filter-gradient(#e57b9f, #d12929, horizontal); 
-	@include background-image(radial-gradient(center, ellipse cover,  rgba(229,123,159,0) 2%,rgba(229,123,159,0.26) 27%,rgba(209,41,41,1) 100%));
-	-webkit-border-radius: 60px;
+	@include background(radial-gradient(center, ellipse cover, rgba(229,123,159,0) 2%, rgba(229,123,159,0.26) 27%, #d12929 100%));
+/*	@include background-image(radial-gradient(center, ellipse cover,  rgba(229,123,159,0) 2%,rgba(229,123,159,0.26) 27%,rgba(209,41,41,1) 100%));
+*/	-webkit-border-radius: 60px;
 	-moz-border-radius: 60px;
 	border-radius: 60px;
 	height: 50px;

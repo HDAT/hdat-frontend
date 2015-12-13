@@ -32,7 +32,7 @@ class Minard extends React.Component{
 			}
 			var xhr = new XMLHttpRequest();
 			xhr.addEventListener('load', xhrCb);
-			xhr.open('GET', '/minard/product-id-' + newProps.selectedProduct + '.json');
+			xhr.open('GET', '/minard/' + newProps.selectedProduct + '.json');
 			xhr.send();
 		}
 	}
