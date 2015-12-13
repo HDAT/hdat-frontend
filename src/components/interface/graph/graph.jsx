@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Line from 'react-chartjs';
-// import chartData from '';
 
-
-class GoodsGraph extends React.Component{
+class Graph extends React.Component{
 	render() {
 		return(
-			<div>
-				<LineChart data={chartData} options={chartOptions} width="600" height="250"/>
+			<div className="menu-layer">
+				<h2>Graph Choices</h2>
 			</div>
 		)
 	}
 }
 
-export default GoodsGraph;
+export default Graph;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-class Events extends React.Component{
+class MinardInfo extends React.Component{
 	render() {
 		return(
-			<div className="menu-layer">
-				<h2>Events</h2>
+			<div className="share">
+				<h2>Minard</h2>
 				<p>Bladiebladiebla</p>
 				<Link to="/"><p>Close</p></Link>
 			</div>
@@ -13,4 +13,4 @@ class Events extends React.Component{
 	}
 }
 
-export default Events;
+export default MinardInfo;
