@@ -688,11 +688,31 @@ L.Playback.SliderControl = L.Control.extend({
             var val = Number(e.target.value);
             playback.setCursor(val);
             // console.log(this._slider.value);
-            if (val > 9047469689 && val < 9057469689) {
-                console.log("Yihaaaa, i did it!");
+            if (val > 9802771200 && val < (9802771200+259200)) {
+                alert("20 dec 1780 Oorlogsverklaring:  Engeland > Republiek");
+            }
+            if (val > 9814176000 && val <(9814176000+259200)) {
+                alert("mei 1781 Oorlogsverklaring: Republiek > Engeland");
+            }
+            if (val > 9812880000 && val <(9812880000+259200)) {
+                alert("16 april: Slag bij Porto Praya");
+            }
+            if (val > 9823593600 && val <(9823593600+259200)) {
+                alert("Kapitulatie van Heemskerk > Alle vestigingen Westkust Sumatra afgestaan aan de Engelsen");
+            }
+            if (val > 9816854400 && val <(9816854400+259200)) {
+                alert("juni 1781: Engelse aanvallen posten op Koromandel");
+            }
+            if (val > 9831456000 && val <(9831456000+259200)) {
+                alert("12 november 1781: Val van Nagapatnam");
+            }
+            if (val > 9835689600 && val <(9835689600+259200)) {
+                alert("5 januari 1782: Engelsen nemen Trincomalee in");
+            }
+            if (val > 9888048000 && val <(9888048000+259200)) {
+                alert("3 september 1783: Vrede van Parijs");
             }
         }
-
         playback.addCallback(function (ms) {
             self._slider.value = ms;
         });

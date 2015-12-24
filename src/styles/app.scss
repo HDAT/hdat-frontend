@@ -1,6 +1,8 @@
+
 @import '../../node_modules/leaflet/dist/leaflet.css';
-@import "../../node_modules/compass-mixins/lib/_compass";
+@import '../../node_modules/compass-mixins/lib/_compass';
 @import 'essentials/variables';
+@import 'essentials/fonts';
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap';
 @import 'map/leafletChanges';
 @import 'map/leafletPlayback';

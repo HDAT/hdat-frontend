@@ -7,7 +7,7 @@ class LeftMenu extends React.Component{
 		<div className="menu left-fixed-menu">
 			<ul className="menu__icons left-menu">
 				<Link to="/ships">
-					<li className="menu__icons__singleicon storymode-icon" activeClassName="menu-active">
+					<li className="menu__icons__singleicon shipviewer-icon" activeClassName="menu-active">
 					</li>
 				</Link>
 				<Link to="/goods/a" activeClassName="menu-active">
@@ -22,11 +22,11 @@ class LeftMenu extends React.Component{
 					</li>
 				</Link>
 				<Link to="/graph">
-					<li className="menu__icons__singleicon share-icon" activeClassName="menu-active">
+					<li className="menu__icons__singleicon graph-icon" activeClassName="menu-active">
 					</li>
 				</Link>
 				<Link to="/events">
-					<li className="menu__icons__singleicon share-icon" activeClassName="menu-active">
+					<li className="menu__icons__singleicon events-icon" activeClassName="menu-active">
 					</li>
 				</Link>
 				<Link to="/share">
