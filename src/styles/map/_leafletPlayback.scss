@@ -5,11 +5,11 @@
   margin: 0;
   width: 5%;
   margin-top: -100px;
-  z-index: 10000;
 }
 
 .hdat-control-play button {
   position: absolute;
+  z-index: 100000;
   margin-left: 13px;
   margin-top: 36px;
   height: 42px;
