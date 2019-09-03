@@ -75,6 +75,7 @@ input[type='range'] {
   width: calc(100% - #{$li-width});
   background: none;
   position: absolute; /* Goed kijken of dit werkt! */
+  z-index: 1000;
   bottom: 0;
   @include width-extend-animation;
   cursor: ew-resize;
