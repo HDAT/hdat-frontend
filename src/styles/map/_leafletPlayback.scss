@@ -2,45 +2,45 @@
 @import 'essentials/fonts';
 
 .hdat-control-play {
-    margin: 0;
-    width: 5%;
-    margin-top: -100px;
+  margin: 0;
+  width: 5%;
+  margin-top: -100px;
+  z-index: 10000;
 }
 
 .hdat-control-play button {
-	position: absolute;
-    margin-left: 13px;
-    margin-top: 36px;
-    height: 42px;
-    width: 37px;
-    border: 0;
-    outline: 0; 
-    background-color: transparent;
-    background-image: url('../assets/images/icons/play.svg');
-    background-repeat: no-repeat;
+  position: absolute;
+  margin-left: 13px;
+  margin-top: 36px;
+  height: 42px;
+  width: 37px;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  background-image: url('../assets/images/icons/play.svg');
+  background-repeat: no-repeat;
 }
 
 .hdat-control-play .pause {
-    background-image: url('../assets/images/icons/pause.svg');
+  background-image: url('../assets/images/icons/pause.svg');
 }
 
 .hdat-control-season {
-	position: absolute;
-	transform: rotate(-90deg);
-	bottom: 140px;
-	left: -17px;
+  position: absolute;
+  transform: rotate(-90deg);
+  bottom: 140px;
+  left: -17px;
 }
 
 .seasons {
-	font-family: GothamLight;
-	text-transform: uppercase;
-	float: left;
+  font-family: GothamLight;
+  text-transform: uppercase;
+  float: left;
 }
 .hdat-year {
-	font-family: GothamMedium;
-	float: left;
+  font-family: GothamMedium;
+  float: left;
 }
 .hdat-control-timeline {
   margin-bottom: 0 !important;
 }
-
