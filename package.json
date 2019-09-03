@@ -8,7 +8,7 @@
   "scripts": {
     "prepare": "mkdir -p build/ build/tiles && cp src/index.html build/ && cp -r src/assets/tiles/ build/tiles && cp -r src/assets/data/map/minard/minardlines/ build/minard && npm install ",
     "dev": "webpack-dev-server --host 0.0.0.0 --progress --colors --content-base build",
-    "deploy": "NODE_ENV=production webpack -p"
+    "deploy": "npm run prepare && NODE_ENV=production webpack -p"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",
